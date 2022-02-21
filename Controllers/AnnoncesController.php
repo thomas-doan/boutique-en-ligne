@@ -8,6 +8,7 @@ class AnnoncesController extends Controller
 {
     public function index()
     {
+        $title = "Annonces";
         //On instancie le modele correspondant à la table 'annonces'
         $annoncesModel = new AnnoncesModel;
 
@@ -15,11 +16,12 @@ class AnnoncesController extends Controller
         $annonces = $annoncesModel->findBy(['actif' => 1]);
 
         // On génére la vue
-        $this->render('annonces/index', compact('annonces'));
+        $this->render('annonces/index', compact('annonces','title'));
     }
 
     public function lire(int $id)
     {
+        $title = "Annonce | Lire";
         // on inscancie le model
         $annoncesModel = new AnnoncesModel;
 
@@ -27,6 +29,6 @@ class AnnoncesController extends Controller
         $annonce = $annoncesModel->find($id);
 
         // On envoie à la vue
-        $this->render('annonces/lire', compact('annonce'));
+        $this->render('annonces/lire', compact('annonce','title'));
     }
 }

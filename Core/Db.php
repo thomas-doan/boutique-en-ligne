@@ -16,7 +16,7 @@ class Db extends PDO
     private const DBHOST = 'localhost';
     private const DBUSER = 'root';
     private const DBPASS = '';
-    private const DBNAME = 'kawa';
+    private const DBNAME = 'demo_poo';
 
     // Design Pattern Singleton - Un constructeur privé que l'on ne peut instancier.
     private function __construct()

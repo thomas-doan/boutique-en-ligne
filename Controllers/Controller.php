@@ -17,4 +17,15 @@ abstract class Controller
         
         require('../Views/template/layout.html.php');
     }
+
+    public static function secureHTML($chaine)
+    {
+        //première protection  contre injection sql.
+        $resultat  = strip_tags($chaine);
+        $resultat = htmlentities($resultat);
+        $resultat = htmlspecialchars($resultat);
+
+        return $resultat;
+    }
+
 }

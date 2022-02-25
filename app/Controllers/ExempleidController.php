@@ -11,9 +11,6 @@ class ExempleidController extends Controller
 
         $test = $id;
 
-<<<<<<< HEAD
-        return $this->view('shop.exempleid', compact('test'));
-=======
 
         /*  $toto = test($id); */
 
@@ -30,6 +27,5 @@ class ExempleidController extends Controller
         $resultat = 3 + $arg;
 
         return $resultat;
->>>>>>> prod
     }
 }

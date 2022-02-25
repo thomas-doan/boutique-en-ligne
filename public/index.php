@@ -10,13 +10,13 @@ define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 define('DB_NAME', 'kawa');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PWD', 'azerty');
+define('DB_PWD', '');
 
 $router = new Router($_GET['url']);
 
 
 $router->get('/', 'App\Controllers\MainController@index');
-$router->get('/exemple', 'App\Controllers\ExempleController@index');
+$router->get('/exemple', 'App\Controllers\SecurityController@index');
 
 /* passage d'un parametre a recupérer en argument de methode */
 

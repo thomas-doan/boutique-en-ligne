@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Components\Components;
 
 class ExempleidController extends Controller
 {
@@ -10,22 +11,14 @@ class ExempleidController extends Controller
     {
 
         $test = $id;
-
+        $resultat = Components::test($id);
 
         /*  $toto = test($id); */
 
         $heredoc = <<<php
-        <p> <u>toto et {$this->test(4)} </u></p>
+        <p> <u>toto et {$resultat} </u></p>
         php;
 
         return $this->view('shop.exempleid', compact('test', 'heredoc'));
-    }
-
-
-    public function test($arg)
-    {
-        $resultat = 3 + $arg;
-
-        return $resultat;
     }
 }

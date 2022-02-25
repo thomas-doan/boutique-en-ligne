@@ -1,10 +1,12 @@
+<?php  var_dump($_GET);
+echo $_SERVER['REQUEST_URI'];
+$str = 'blablablapourquoiblabla';
+$array = explode('pourquoi',$str);
+var_dump($array);
+?>
 <h1>Voici toutes nos annonces</h1>
-<?php foreach ($annonces as $annonce) : ?>
-    <article>
-        <!-- Fetch OBJ -->
 
-        <h2><a href="annonces/lire/<?= $annonce->id ?>"><?= $annonce->titre ?></a></h2>
-        <p><?= $annonce->description ?></p>
-
-    </article>
-<?php endforeach; ?>
+<form action="" method="get">
+<input type="text" name="recherche"?>
+<input type="submit" value="rechercher">
+</form>

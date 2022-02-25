@@ -32,9 +32,9 @@ class Model extends Db
     }
 
     // READ
-    public function find(int $id)
+    public function findById(?string $colonne= '*',int $id)
     {
-        return $this->requete("SELECT * FROM $this->table WHERE id = $id")->fetch();
+        return $this->requete("SELECT $colonne FROM $this->table WHERE id = $id")->fetch();
     }
 
     /**
@@ -71,6 +71,12 @@ class Model extends Db
     }
 
     // CREATE
+    /**
+     * Insertion à partir des attribue
+     * @param array Model envoie directement le model et ses attributs.
+     * @return requête  
+     */
+    
     public function create(Model $model)
     {
         // Récupére l'index
@@ -144,5 +150,18 @@ class Model extends Db
     public function delete(int $id)
     {
         return $this->requete("DELETE FROM {$this->table} WHERE id = ?", [$id]);
+    }
+
+        /**
+     * Récupère tout les colonnes dans un tableau
+     * @param string le nom de la table
+     * @return array Retourn un tableau comprennant toute les informations concernant la table
+     */
+    protected function show_column($table)
+    {
+        $result = $this->requete("SHOW COLUMNS FROM `$table`");
+        $result->fetchAll();
+        
+        return $result;
     }
 }

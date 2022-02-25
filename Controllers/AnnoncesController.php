@@ -13,10 +13,10 @@ class AnnoncesController extends Controller
         $annoncesModel = new AnnoncesModel;
 
         // On va chercher les annonces selon la methode
-        $annonces = $annoncesModel->findBy(['actif' => 1]);
+        // $annonces = $annoncesModel->findBy(['actif' => 1]);
 
         // On génére la vue
-        $this->render('annonces/index', compact('annonces','title'));
+        $this->render('annonces/index', compact('title'));
     }
 
     public function lire(int $id)
@@ -24,7 +24,7 @@ class AnnoncesController extends Controller
         $title = "Annonce | Lire";
         // on inscancie le model
         $annoncesModel = new AnnoncesModel;
-
+        
         // On va chercher une annonce
         $annonce = $annoncesModel->find($id);
 

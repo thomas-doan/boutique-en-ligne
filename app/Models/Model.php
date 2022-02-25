@@ -2,39 +2,48 @@
 
 namespace App\Models;
 
-use App\Core\Db;
 
-class Model extends Db
+
+use Database\DBConnection;
+use PDO;
+
+abstract class Model
 {
-    //Propriété contenant la Table de la BDD
-    protected $table;
 
-    // Propriété contenant l'instance de Db
-    private $db;
+    protected $db;
+    protected $table;
+    protected $id;
+
+
+
+    public function __construct(DBConnection $db)
+    {
+        $this->db = $db;
+    }
+
+
 
     // $sql comptient toute la requête et $attributs comptient autant d'attributs qu'il y a de point d'interrogation
     // Methode qui permet de faire une requete prepare ou non, en fonction
     public function requete(string $sql, array $attributs = null)
     {
-        // On récupère l'instance de Db
-        $this->db = Db::getInstance();
 
         // On vérifie si on a des attributs
         if ($attributs !== null) {
             //Requête préparée
-            $query = $this->db->prepare($sql);
+            $query = $this->db->getPDO()->prepare($sql);
             $query->execute($attributs);
             return $query;
         } else {
             // Requête simple
-            return $this->db->query($sql);
+            return $this->db->getPDO()->query($sql);
         }
     }
 
     // READ
     public function find(int $id)
     {
-        return $this->requete("SELECT * FROM $this->table WHERE id = $id")->fetch();
+        return $this->requete("SELECT * FROM {$this->table} WHERE {$this->id} = $id")->fetch();
     }
 
     /**
@@ -44,7 +53,7 @@ class Model extends Db
      */
     public function findAll()
     {
-        $query = $this->requete('SELECT * FROM ' . $this->table);
+        $query = $this->requete("SELECT * FROM  {$this->table} ");
         return $query->fetchAll();
     }
 
@@ -137,12 +146,12 @@ class Model extends Db
         $liste_champs = implode(', ', $champs);
 
         // On exécute la requête 
-        return $this->requete('UPDATE ' . $this->table . ' SET ' . $liste_champs . 'WHERE id = ?', $valeurs);
+        return $this->requete("UPDATE  $this->table SET  $liste_champs WHERE {$this->id} = ?", $valeurs);
     }
 
     // DELETE
     public function delete(int $id)
     {
-        return $this->requete("DELETE FROM {$this->table} WHERE id = ?", [$id]);
+        return $this->requete("DELETE FROM {$this->table} WHERE {$this->id} = ?", [$id]);
     }
 }

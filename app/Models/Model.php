@@ -54,7 +54,7 @@ abstract class Model
      */
 
     // Permet de récupperer un ou plusieur enregistrement en fonction de criteres
-    public function find(array $criteres, array $donnees, array $selection = Null)
+    public function find(array $criteres, array $donnees, ?array $selection = Null)
     {
 
         // Récupére la valeur
@@ -119,59 +119,81 @@ abstract class Model
 
 
     // CREATE
-    public function create(Model $model)
+    /**
+     * La fonction prend deux params :
+     * les deux premiers sont obligatoires.
+     * 1er param '$model' = il faut hydrater les setter que nous souhaitons :  exemple    
+     *  $model = new ExempleModel($this->getDB());
+            $model_Article = $model
+            ->setId_article($id_article)
+             ->setTitre_article($titre_article);
+             ...
+     * 2eme param '$donnees' = envoyer dans un compact 1 ou plusieurs noms de colonnes : cela permet de modifier les champs.
+     */
+    public function create(Model $model, array $donnees)
     {
         // Récupére l'index
         $champs = [];
         // liste des points d'intérogation pour la requête aussi long que la listre des champs
         $inter = [];
-        // Récupére la valeur
-        $valeurs = [];
+
 
         // On boucle pour éclater le tableau
         foreach ($model as $champ => $valeur) {
-            if ($valeur != null && $champ != 'db' && $champ != 'table') {
+            if ($valeur !== null && $champ != 'db' && $champ != 'table' && $champ != 'id' && $champ != "$this->id") {
                 // Champ = index
                 $champs[] = $champ;
-                $inter[] = "?";
-                // valeur = valeur associé à l'index
-                $valeurs[] = $valeur;
+                $inter[] = ":$champ";
             }
         }
         // On transforme le tableau champs en string
         $liste_champs = implode(', ', $champs);
         $liste_inter = implode(', ', $inter);
 
+
+        $req = 'INSERT INTO ' . $this->table . ' (' . $liste_champs . ') VALUES (' . $liste_inter . ')';
+        var_dump($req);
         // On exécute la requête 
-        return $this->requete('INSERT INTO ' . $this->table . ' (' . $liste_champs . ')VALUES(' . $liste_inter . ')', $valeurs);
+        return $this->requete($req, $donnees);
     }
+
+
 
     // UPDATE
     /**
      * La fonction prend deux params :
      * les deux premiers sont obligatoires.
-     * 1er param '$criteres' = un tableau contenant 1 ou plusieurs noms de colonnes à update.
+     * 1er param '$model' = il faut hydrater les setter que nous souhaitons :  exemple    
+     *  $model = new ExempleModel($this->getDB());
+            $model_Article = $model
+            ->setId_article($id_article)
+             ->setTitre_article($titre_article);
      * 2eme param '$donnees' = envoyer dans un compact 1 ou plusieurs noms de colonnes : cela permet de modifier les champs.
      */
 
 
-    public function update(array $criteres, array $donnees)
+    public function update(model $model, array $donnees)
     {
-        // Récupére la valeur
+
+        // Récupére l'index
         $champs = [];
 
+
         // On boucle pour éclater le tableau
-        foreach ($criteres as $nom) {
-
-            $champs[] = "$nom = :$nom";
-            // valeur = valeur associé à l'index
-
+        foreach ($model as $champ => $valeur) {
+            if ($valeur !== null && $champ != 'db' && $champ != 'table' && $champ != 'id' && $champ != "$this->id") {
+                // Champ = index
+                $champs[] = " $champ = :$champ";
+            }
         }
-        // On transforme le tableau champs en une string
+
+        // On transforme le tableau champs en string
         $liste_champs = implode(',', $champs);
 
+
         // On exécute la requête 
-        $req = "UPDATE  $this->table SET  $liste_champs WHERE {$this->id} = :{$this->id}";
+        $req = "UPDATE  $this->table SET $liste_champs WHERE {$this->id} = :{$this->id}";
+
         return $this->requete($req, $donnees);
     }
 

@@ -23,20 +23,4 @@ class MainController extends Controller
         /*  return $this->view('shop.index', compact('title')); */
         return $this->view('shop.index', compact('title', 'find'));
     }
-
-    public function updateArticle()
-    {
-
-
-
-        if (isset($_POST['titre_article'])) {
-            $titre_article = $_POST['titre_article'];
-            $id_article = $_POST['id_article'];
-
-            $criteres = ["titre_article"];
-            $model = new ExempleModel($this->getDB());
-
-            $execute = $model->update($criteres, compact('titre_article', 'id_article'));
-        }
-    }
 }

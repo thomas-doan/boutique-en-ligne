@@ -12,14 +12,14 @@ class ExempleModel extends Model
     protected $table = 'articles';
     protected $id = 'id_article';
     protected $id_article;
-    private $titre;
-    private $presentation_article;
-    private $description_article;
-    private $prix_article;
-    private $image_article;
-    private $sku;
-    private $fournisseur;
-    private $conditionnement;
+    protected $titre_article;
+    protected $presentation_article;
+    protected $description_article;
+    protected $prix_article;
+    protected $image_article;
+    protected $sku;
+    protected $fournisseur;
+    protected $conditionnement;
 
     /**
      * Get the value of id_article
@@ -43,24 +43,26 @@ class ExempleModel extends Model
 
 
     /**
-     * Get the value of titre
+     * Get the value of titre_article
      */
-    public function getTitre()
+    public function getTitre_article()
     {
-        return $this->titre;
+        return $this->titre_article;
     }
 
     /**
-     * Set the value of titre
+     * Set the value of titre_article
      *
      * @return  self
      */
-    public function setTitre($titre)
+    public function setTitre_article($titre_article)
     {
-        $this->titre = $titre;
+        $this->titre_article = $titre_article;
 
         return $this;
     }
+
+
 
     /**
      * Get the value of presentation_article

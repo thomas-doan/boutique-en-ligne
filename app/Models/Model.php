@@ -155,7 +155,7 @@ abstract class Model
      */
 
 
-    public function update(Model $criteres, array $donnees)
+    public function update(array $criteres, array $donnees)
     {
         // Récupére la valeur
         $champs = [];

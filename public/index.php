@@ -10,9 +10,24 @@ define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 define('DB_NAME', 'kawa');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PWD', 'azerty');
+define('DB_PWD', '');
 
 $router = new Router($_GET['url']);
+
+// Profil
+$router->get('/profil', 'App\Controllers\UserController@index');
+
+$router->get('/profil/modifierProfil', 'App\Controllers\UserController@modifierProfil');
+$router->post('/profil/modifierProfil', 'App\Controllers\UserController@modifierProfilPost');
+$router->get('/profil/modifierMotdePasse', 'App\Controllers\UserController@modifierMotdePasse');
+$router->post('/profil/modifierMotdePasse', 'App\Controllers\UserController@modifierMotdePassePost');
+$router->get('/profil/adresse', 'App\Controllers\UserController@adresse');
+$router->get('/profil/historique', 'App\Controllers\UserController@historique');
+$router->get('/inscription', 'App\Controllers\UserController@inscription');
+$router->post('/inscription', 'App\Controllers\UserController@inscriptionPost');
+$router->get('/connexion', 'App\Controllers\UserController@connexion');
+$router->post('/connexion', 'App\Controllers\UserController@connexionPost');
+$router->get('/logout', 'App\Controllers\UserController@deconnexion');
 
 
 $router->get('/', 'App\Controllers\MainController@index');

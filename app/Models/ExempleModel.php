@@ -32,7 +32,7 @@ SELECT `art1`.id_article, `art1`.titre_article, `art1`.presentation_article, `ar
             INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article`
             INNER JOIN categories AS `cat1` ON articles_categories_filtre.fk_id_cat_categorie = `cat1`.id_categorie
             INNER JOIN categories AS `cat2` ON articles_categories_filtre.id_parent = `cat2`.id_categorie
-    WHERE  MATCH (`art1`.titre_article) AGAINST (:titre_article ) OR MATCH(`art1`.presentation_article) AGAINST (:presentation_article)
+    WHERE  MATCH (`art1`.titre_article  ) AGAINST (:titre_article ) OR MATCH(`art1`.presentation_article) AGAINST (:presentation_article)
 
 UNION ALL
 

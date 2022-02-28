@@ -25,7 +25,7 @@ abstract class Model
 
     // $sql comptient toute la requête et $attributs comptient autant d'attributs qu'il y a de point d'interrogation
     // Methode qui permet de faire une requete prepare ou non, en fonction
-    public function requete(string $sql, array $attributs = null)
+    public function requete(string $sql,  $attributs = null)
     {
 
         // On vérifie si on a des attributs
@@ -41,10 +41,12 @@ abstract class Model
     }
 
     // READ
-    public function find(int $id)
+    /*     public function find(array  $donnees = Null)
+
     {
-        return $this->requete("SELECT * FROM {$this->table} WHERE {$this->id} = $id")->fetch();
-    }
+        $req = "SELECT * FROM {$this->table} WHERE {$this->id} = :{$this->id}";
+        return $this->requete($req, $donnees)->fetch();
+    } */
 
     /**
      * Methode qui permet de récupérer tout les enregistrements d'une table
@@ -53,30 +55,55 @@ abstract class Model
      */
     public function findAll()
     {
-        $query = $this->requete("SELECT * FROM  {$this->table} ");
+        $req = "SELECT * FROM  {$this->table}";
+        $query = $this->requete($req);
         return $query->fetchAll();
     }
 
     // Permet de récupperer un ou plusieur enregistrement en fonction de criteres
-    public function findBy(array $criteres)
+    public function find(array $criteres, array $donnees, array $selection = Null)
     {
-        // Récupére l'index
-        $champs = [];
+
         // Récupére la valeur
-        $valeurs = [];
+        $champs = [];
 
         // On boucle pour éclater le tableau
-        foreach ($criteres as $champ => $valeur) {
-            // Champ = index
-            $champs[] = "$champ = ?";
+        foreach ($criteres as $valeur) {
+
+            $champs[] = "$valeur = :$valeur";
             // valeur = valeur associé à l'index
-            $valeurs[] = $valeur;
+
         }
         // On transforme le tableau champs en une string
         $liste_champs = implode(' AND ', $champs);
 
-        // On exécute la requête 
-        return $this->requete('SELECT * FROM ' . $this->table . ' WHERE ' . $liste_champs, $valeurs)->fetchAll();
+        if ($selection == Null) {
+
+            $req = "SELECT * FROM $this->table WHERE $liste_champs";
+
+            var_dump($req);
+            // On exécute la requête 
+            return $this->requete($req, $donnees)->fetchAll();
+        } else {
+
+            $selections = [];
+
+            // On boucle pour éclater le tableau
+            foreach ($selection as $valeur) {
+
+                $selections[] = "$valeur = :$valeur";
+                // valeur = valeur associé à l'index
+
+                // On transforme le tableau champs en une string
+                $liste_selections = implode(',', $selections);
+            }
+
+            $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
+
+            var_dump($req);
+            // On exécute la requête 
+            return $this->requete($req, $donnees)->fetchAll();
+        }
     }
 
     // CREATE
@@ -146,12 +173,14 @@ abstract class Model
         $liste_champs = implode(', ', $champs);
 
         // On exécute la requête 
-        return $this->requete("UPDATE  $this->table SET  $liste_champs WHERE {$this->id} = ?", $valeurs);
+        $req = "UPDATE  $this->table SET  $liste_champs WHERE {$this->id} = ?";
+        return $this->requete($req, $valeurs);
     }
 
     // DELETE
-    public function delete(int $id)
+    public function delete(array $donnees = Null)
     {
-        return $this->requete("DELETE FROM {$this->table} WHERE {$this->id} = ?", [$id]);
+        $req = "DELETE FROM {$this->table} WHERE {$this->id} =:{$this->id}";
+        return $this->requete($req, $donnees);
     }
 }

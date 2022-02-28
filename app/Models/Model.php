@@ -61,7 +61,7 @@ abstract class Model
     }
 
     // Permet de récupperer un ou plusieur enregistrement en fonction de criteres
-    public function find(array $criteres, array $donnees, array $selection = Null)
+    public function find(array $criteres, array $donnees, ?array $selection = Null)
     {
 
         // Récupére la valeur

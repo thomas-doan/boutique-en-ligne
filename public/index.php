@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 use Router\Router;
 use App\Exceptions\NotFoundException;
@@ -11,16 +11,22 @@ define('DB_NAME', 'kawa');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PWD', '');
+define('LINK_PICTURE', 'http://localhost/New_kawa/public/assets/pictures/');
 
 $router = new Router($_GET['url']);
 
 
 $router->get('/', 'App\Controllers\MainController@index');
-$router->get('/exemple', 'App\Controllers\SecurityController@index');
+$router->get('/exemple', 'App\Controllers\ExempleController@index');
 
 /* passage d'un parametre a recupérer en argument de methode */
 
 $router->get('/exempleid/:id', 'App\Controllers\ExempleidController@index');
+
+/*Administrateur Routeur*/
+$router->get('/administrator', 'App\Controllers\AdministratorController@index');
+$router->get('/administrator/creerarticle/:param', 'App\Controllers\AdministratorController@CreatProduct');
+$router->post('/administrator/creerarticle/:param', 'App\Controllers\AdministratorController@CreatProduct');
 
 
 /* $router->get('/posts', 'App\Controllers\BlogController@index');

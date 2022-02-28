@@ -41,6 +41,17 @@ abstract class Model
     }
 
     // READ
+    /** 
+     * Modification de la requete findBy en attente de version de Thomas
+     * @param string Specification d'une colonne à retourner, par default vaut *
+     * @param int id
+     * @return array||string sir la requête est soumise à une seul colonne
+     */
+    public function findById(?string $colonne= '*',int $id)
+    {
+        return $this->requete("SELECT $colonne FROM $this->table WHERE id = $id")->fetch();
+    }
+
     public function find(int $id)
     {
         return $this->requete("SELECT * FROM {$this->table} WHERE {$this->id} = $id")->fetch();
@@ -153,5 +164,19 @@ abstract class Model
     public function delete(int $id)
     {
         return $this->requete("DELETE FROM {$this->table} WHERE {$this->id} = ?", [$id]);
+    }
+
+    //MORE
+    /**
+     * Retoune l'integralité des informations de colonnes d'une table donné
+     * @param string nom de la table
+     * @return array retourne les information sous la forme d'un tableau
+     */
+    protected function show_column($table)
+    {
+        $result = $this->requete("SHOW COLUMNS FROM `$table`");
+        $result->fetchAll();
+        
+        return $result;
     }
 }

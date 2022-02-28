@@ -11,6 +11,197 @@ class ExempleModel extends Model
 
     protected $table = 'articles';
     protected $id = 'id_article';
+    protected $id_article;
+    private $titre;
+    private $presentation_article;
+    private $description_article;
+    private $prix_article;
+    private $image_article;
+    private $sku;
+    private $fournisseur;
+    private $conditionnement;
+
+    /**
+     * Get the value of id_article
+     */
+    public function getId_article()
+    {
+        return $this->id_article;
+    }
+
+    /**
+     * Set the value of id_article
+     *
+     * @return  self
+     */
+    public function setId_article($id_article)
+    {
+        $this->id_article = $id_article;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of titre
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set the value of titre
+     *
+     * @return  self
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of presentation_article
+     */
+    public function getPresentation_article()
+    {
+        return $this->presentation_article;
+    }
+
+    /**
+     * Set the value of presentation_article
+     *
+     * @return  self
+     */
+    public function setPresentation_article($presentation_article)
+    {
+        $this->presentation_article = $presentation_article;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of description_article
+     */
+    public function getDescription_article()
+    {
+        return $this->description_article;
+    }
+
+    /**
+     * Set the value of description_article
+     *
+     * @return  self
+     */
+    public function setDescription_article($description_article)
+    {
+        $this->description_article = $description_article;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of prix_article
+     */
+    public function getPrix_article()
+    {
+        return $this->prix_article;
+    }
+
+    /**
+     * Set the value of prix_article
+     *
+     * @return  self
+     */
+    public function setPrix_article($prix_article)
+    {
+        $this->prix_article = $prix_article;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image_article
+     */
+    public function getImage_article()
+    {
+        return $this->image_article;
+    }
+
+    /**
+     * Set the value of image_article
+     *
+     * @return  self
+     */
+    public function setImage_article($image_article)
+    {
+        $this->image_article = $image_article;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sku
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * Set the value of sku
+     *
+     * @return  self
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of fournisseur
+     */
+    public function getFournisseur()
+    {
+        return $this->fournisseur;
+    }
+
+    /**
+     * Set the value of fournisseur
+     *
+     * @return  self
+     */
+    public function setFournisseur($fournisseur)
+    {
+        $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of conditionnement
+     */
+    public function getConditionnement()
+    {
+        return $this->conditionnement;
+    }
+
+    /**
+     * Set the value of conditionnement
+     *
+     * @return  self
+     */
+    public function setConditionnement($conditionnement)
+    {
+        $this->conditionnement = $conditionnement;
+
+        return $this;
+    }
+
 
     public function find_article($sql)
     {

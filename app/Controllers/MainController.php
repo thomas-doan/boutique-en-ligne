@@ -14,13 +14,29 @@ class MainController extends Controller
 
         $model = new ExempleModel($this->getDB());
 
-        $titre_article = "toto";
-        $prix_article = "2";
-        $criteres = ["titre_article", "prix_article"];
-        $selection = [];
-        $find = $model->find($criteres, compact('titre_article', 'prix_article'), $selection);
+        $id_article = "1";
+
+        $criteres = ["id_article"];
+
+        $find = $model->find($criteres, compact('id_article'));
 
         /*  return $this->view('shop.index', compact('title')); */
         return $this->view('shop.index', compact('title', 'find'));
+    }
+
+    public function updateArticle()
+    {
+
+
+
+        if (isset($_POST['titre_article'])) {
+            $titre_article = $_POST['titre_article'];
+            $id_article = $_POST['id_article'];
+
+            $criteres = ["titre_article"];
+            $model = new ExempleModel($this->getDB());
+
+            $execute = $model->update($criteres, compact('titre_article', 'id_article'));
+        }
     }
 }

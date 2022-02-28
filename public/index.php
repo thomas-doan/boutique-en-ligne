@@ -16,6 +16,7 @@ $router = new Router($_GET['url']);
 
 
 $router->get('/', 'App\Controllers\MainController@index');
+$router->post('/', 'App\Controllers\MainController@updateArticle');
 $router->get('/exemple', 'App\Controllers\ExempleController@index');
 
 /* passage d'un parametre a recupérer en argument de methode */

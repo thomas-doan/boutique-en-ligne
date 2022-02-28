@@ -40,25 +40,18 @@ abstract class Model
         }
     }
 
-    // READ
-    /*     public function find(array  $donnees = Null)
 
-    {
-        $req = "SELECT * FROM {$this->table} WHERE {$this->id} = :{$this->id}";
-        return $this->requete($req, $donnees)->fetch();
-    } */
 
     /**
-     * Methode qui permet de récupérer tout les enregistrements d'une table
-     *
-     * @return array
+     * La fonction prend trois params :
+     * les deux premiers sont obligatoires, le troisième est optionnel.
+     * 1er param '$criteres' = un tableau contenant 1 ou plusieurs noms de colonnes pour selectionner dans le WHERE.
+     * 2eme param '$donnees' = envoyer dans un compact 1 ou plusieurs noms de colonnes : cela permet de faire la recherche en fonction de/des valeurs choisis dans le Where.
+     * 
+     * 3eme param optionnel '$selection' = tableau contenant 1 ou plusieurs colonnes permettant de filtrer le resultat de la requete.
+     * 
+     * Si le 3eme param n'est pas envoyé, la selection est sur l'ensemble des champs.
      */
-    public function findAll()
-    {
-        $req = "SELECT * FROM  {$this->table}";
-        $query = $this->requete($req);
-        return $query->fetchAll();
-    }
 
     // Permet de récupperer un ou plusieur enregistrement en fonction de criteres
     public function find(array $criteres, array $donnees, array $selection = Null)
@@ -106,6 +99,25 @@ abstract class Model
         }
     }
 
+
+
+    // HYDRATATION
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à la clé(key)
+            // titre -> setTitre
+            $setter = 'set' . ucfirst($key);
+            // On vérifie si le setter existe
+            if (method_exists($this, $setter)) {
+                // On appelle le setter
+                $this->$setter($value);
+            }
+        }
+        return $this;
+    }
+
+
     // CREATE
     public function create(Model $model)
     {
@@ -134,47 +146,33 @@ abstract class Model
         return $this->requete('INSERT INTO ' . $this->table . ' (' . $liste_champs . ')VALUES(' . $liste_inter . ')', $valeurs);
     }
 
-    // HYDRATATION
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value) {
-            // On récupère le nom du setter correspondant à la clé(key)
-            // titre -> setTitre
-            $setter = 'set' . ucfirst($key);
-            // On vérifie si le setter existe
-            if (method_exists($this, $setter)) {
-                // On appelle le setter
-                $this->$setter($value);
-            }
-        }
-        return $this;
-    }
-
     // UPDATE
-    public function update(int $id, Model $model)
+    /**
+     * La fonction prend deux params :
+     * les deux premiers sont obligatoires.
+     * 1er param '$criteres' = un tableau contenant 1 ou plusieurs noms de colonnes à update.
+     * 2eme param '$donnees' = envoyer dans un compact 1 ou plusieurs noms de colonnes : cela permet de modifier les champs.
+     */
+
+
+    public function update(Model $criteres, array $donnees)
     {
-        // Récupére l'index
+        // Récupére la valeur
         $champs = [];
 
-        // Récupére la valeur
-        $valeurs = [];
-
         // On boucle pour éclater le tableau
-        foreach ($model as $champ => $valeur) {
-            if ($valeur !== null && $champ != 'db' && $champ != 'table') {
-                // Champ = index
-                $champs[] = "$champ = ?";
-                // valeur = valeur associé à l'index
-                $valeurs[] = $valeur;
-            }
+        foreach ($criteres as $nom) {
+
+            $champs[] = "$nom = :$nom";
+            // valeur = valeur associé à l'index
+
         }
-        $valeurs[] = $id;
-        // On transforme le tableau champs en string
-        $liste_champs = implode(', ', $champs);
+        // On transforme le tableau champs en une string
+        $liste_champs = implode(',', $champs);
 
         // On exécute la requête 
-        $req = "UPDATE  $this->table SET  $liste_champs WHERE {$this->id} = ?";
-        return $this->requete($req, $valeurs);
+        $req = "UPDATE  $this->table SET  $liste_champs WHERE {$this->id} = :{$this->id}";
+        return $this->requete($req, $donnees);
     }
 
     // DELETE

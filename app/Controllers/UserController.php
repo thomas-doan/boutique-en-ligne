@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\AdresseModel;
 
 class UserController extends Controller
 {
@@ -227,12 +228,44 @@ class UserController extends Controller
     public function adresse()
     {
         $title = "Adresse de livraison";
+        $userAdresse = $this->getAdresse();
+        var_dump($userAdresse);
+        return $this->view('profil.adresse', compact('title', 'userAdresse'));
+    }
+
+    public function adressePost()
+    {
+        $title = "Adresse de livraison";
+        $model = new AdresseModel($this->getDB());
+
+        if (isset($_POST['submit'])) {
+            $nomAdresse = $_POST['nomAdresse'];
+            $ville = $_POST['ville'];
+            $pays = $_POST['pays'];
+            $voie = $_POST['libelle'];
+            $voieSup = $_POST['voieSup'];
+            $codePostal = $_POST['codePostal'];
+            $telephone = $_POST['telephone'];
+
+            $adresse = $model
+                ->setNom_adresse($nomAdresse)
+                ->setVille($ville)
+                ->setPays($pays)
+                ->setVoie($voie)
+                ->setCode_postal($codePostal)
+                ->setTelephone($telephone)
+                ->setFk_id_utilisateur($_SESSION['id_utilisateur']);
+            $model->create($adresse);
+            // var_dump($adresse);
+        }
         return $this->view('profil.adresse', compact('title'));
     }
 
-    public function adressePost(){
-        $title = "Modifier mot de Passe";
-        $model = new UserModel($this->getDB());
+    public function getAdresse()
+    {
+        $model = new AdresseModel($this->getDB());
+        $userAdress = $model->findby(['fk_id_utilisateur' => $_SESSION['id_utilisateur']]);
+        return $userAdress;
     }
 
     public function historique()

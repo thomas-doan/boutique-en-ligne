@@ -1,4 +1,5 @@
 <?php
+// session_start();
 
 use Router\Router;
 use App\Exceptions\NotFoundException;
@@ -14,6 +15,9 @@ define('DB_PWD', '');
 
 $router = new Router($_GET['url']);
 
+
+
+
 // Profil
 $router->get('/profil', 'App\Controllers\UserController@index');
 
@@ -22,6 +26,7 @@ $router->post('/profil/modifierProfil', 'App\Controllers\UserController@modifier
 $router->get('/profil/modifierMotdePasse', 'App\Controllers\UserController@modifierMotdePasse');
 $router->post('/profil/modifierMotdePasse', 'App\Controllers\UserController@modifierMotdePassePost');
 $router->get('/profil/adresse', 'App\Controllers\UserController@adresse');
+$router->post('/profil/adresse', 'App\Controllers\UserController@adressePost');
 $router->get('/profil/historique', 'App\Controllers\UserController@historique');
 $router->get('/inscription', 'App\Controllers\UserController@inscription');
 $router->post('/inscription', 'App\Controllers\UserController@inscriptionPost');
@@ -55,6 +60,7 @@ $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@upd
  */
 try {
     $router->run();
+    var_dump($_SESSION);
 } catch (NotFoundException $e) {
     return $e->error404();
 }

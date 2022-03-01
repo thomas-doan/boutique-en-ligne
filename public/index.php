@@ -25,8 +25,13 @@ $router->get('/profil/modifierProfil', 'App\Controllers\UserController@modifierP
 $router->post('/profil/modifierProfil', 'App\Controllers\UserController@modifierProfilPost');
 $router->get('/profil/modifierMotdePasse', 'App\Controllers\UserController@modifierMotdePasse');
 $router->post('/profil/modifierMotdePasse', 'App\Controllers\UserController@modifierMotdePassePost');
+
 $router->get('/profil/adresse', 'App\Controllers\UserController@adresse');
 $router->post('/profil/adresse', 'App\Controllers\UserController@adressePost');
+
+$router->get('/profil/adresse/modifierAdresse/:id', 'App\Controllers\UserController@modifierAdresse');
+$router->post('/profil/adresse/modifierAdresse', 'App\Controllers\UserController@modifierAdressePost');
+
 $router->get('/profil/historique', 'App\Controllers\UserController@historique');
 $router->get('/inscription', 'App\Controllers\UserController@inscription');
 $router->post('/inscription', 'App\Controllers\UserController@inscriptionPost');

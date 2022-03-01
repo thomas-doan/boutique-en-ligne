@@ -252,11 +252,13 @@ class UserController extends Controller
                 ->setVille($ville)
                 ->setPays($pays)
                 ->setVoie($voie)
+                ->setVoie_sup($voieSup)
                 ->setCode_postal($codePostal)
                 ->setTelephone($telephone)
                 ->setFk_id_utilisateur($_SESSION['id_utilisateur']);
             $model->create($adresse);
             // var_dump($adresse);
+            header('Location: ./adresse');
         }
         return $this->view('profil.adresse', compact('title'));
     }
@@ -266,6 +268,30 @@ class UserController extends Controller
         $model = new AdresseModel($this->getDB());
         $userAdress = $model->findby(['fk_id_utilisateur' => $_SESSION['id_utilisateur']]);
         return $userAdress;
+    }
+
+    public function getAdressebyId($id)
+    {
+        $model = new AdresseModel($this->getDB());
+        $adress = $model->findby(['id_adresse' => $id]);
+        return $adress;
+    }
+
+    public function modifierAdresse($id)
+    {
+        $title = "Modifier Adresse";
+        $model = new AdresseModel($this->getDB());
+        $idAdresse = $id;
+        $allInfoById = $this->getAdressebyId($idAdresse);
+
+        return $this->view('profil.modifierAdresse', compact('title', 'idAdresse', 'allInfoById'));
+    }
+
+    public function modifierAdressePost()
+    {
+        $title = "Modifier Adresse";
+        $model = new AdresseModel($this->getDB());
+        return $this->view('profil.modifierAdresse', compact('title'));
     }
 
     public function historique()

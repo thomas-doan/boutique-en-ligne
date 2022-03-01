@@ -1,6 +1,3 @@
-<?php
-var_dump($_SESSION)
-?>
 <article>
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>

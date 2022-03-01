@@ -74,7 +74,7 @@ abstract class Model
 
             $req = "SELECT * FROM $this->table WHERE $liste_champs";
 
-            var_dump($req);
+
             // On exécute la requête 
             return $this->requete($req, $donnees)->fetchAll();
         } else {
@@ -93,13 +93,23 @@ abstract class Model
 
             $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
 
-            var_dump($req);
+
             // On exécute la requête 
             return $this->requete($req, $donnees)->fetchAll();
         }
     }
 
-
+    /**
+     * Methode qui permet de récupérer tout les enregistrements d'une table
+     *
+     * @return array
+     */
+    public function findAll()
+    {
+        $req = "SELECT * FROM  {$this->table}";
+        $query = $this->requete($req);
+        return $query->fetchAll();
+    }
 
     // HYDRATATION
     public function hydrate(array $donnees)
@@ -152,7 +162,7 @@ abstract class Model
 
 
         $req = 'INSERT INTO ' . $this->table . ' (' . $liste_champs . ') VALUES (' . $liste_inter . ')';
-        var_dump($req);
+
         // On exécute la requête 
         return $this->requete($req, $donnees);
     }

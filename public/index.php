@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use Router\Router;
 use App\Exceptions\NotFoundException;
@@ -16,9 +17,10 @@ $router = new Router($_GET['url']);
 
 
 $router->get('/', 'App\Controllers\MainController@index');
-$router->get('/creer', 'App\Controllers\ExemplecreateController@index');
-$router->post('/creer', 'App\Controllers\ExemplecreateController@createArticle');
 $router->get('/search', 'App\Controllers\SearchController@index');
+
+$router->get('/panier', 'App\Controllers\PanierController@index');
+$router->post('/panier', 'App\Controllers\PanierController@index');
 
 /* passage d'un parametre a recupérer en argument de methode */
 

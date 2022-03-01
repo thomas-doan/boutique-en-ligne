@@ -16,8 +16,8 @@
    <br>
    <?php
 
-    var_dump($_POST['id_article']);
-    var_dump($_SESSION['quantite']);
+
+
     foreach ($articles as $key => $article) {
 
     ?>

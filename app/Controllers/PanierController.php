@@ -14,7 +14,8 @@ class PanierController extends Controller
 
         $model = new Articles($this->getDB());
         $articles = $model->findAll();
-        return $this->view('shop.panier', compact('articles'));
+        $title = "panier";
+        return $this->view('shop.panier', compact('articles', 'title'));
     }
 
 
@@ -27,20 +28,31 @@ class PanierController extends Controller
 
 
             $_SESSION['quantite'][$_POST['id_article']] = $_SESSION['quantite'][$_POST['id_article']] + $_POST['augmenter'];
+
+            header('location : ./panier');
         }
     }
 
-    public function diminuer()
+    public function change_valeur()
     {
 
         if (isset($_POST['diminuer'])) {
 
             $diminuer = (int) $_POST['diminuer'];
 
-            var_dump($_POST['diminuer']);
+            $_SESSION['quantite'][$_POST['id_article']] = $_SESSION['quantite'][$_POST['id_article']] - $diminuer;
+
+            header('location: ./panier');
+        }
+
+        if (isset($_POST['augmenter'])) {
+
+            $augmenter = (int) $_POST['augmenter'];
 
 
-            $_SESSION['quantite'][$_POST['id_article']] = $_SESSION['quantite'][$_POST['id_article']] - $_POST['diminuer'];
+            $_SESSION['quantite'][$_POST['id_article']] = $_SESSION['quantite'][$_POST['id_article']] + $augmenter;
+
+            header('location: ./panier');
         }
     }
 }

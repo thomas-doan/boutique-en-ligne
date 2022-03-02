@@ -19,6 +19,7 @@ abstract class Model
     public function __construct(DBConnection $db)
     {
         $this->db = $db;
+        echo $db;
     }
 
 
@@ -31,6 +32,8 @@ abstract class Model
         // On vérifie si on a des attributs
         if ($attributs !== null) {
             //Requête préparée
+            
+            var_dump($this->db);
             $query = $this->db->getPDO()->prepare($sql);
             $query->execute($attributs);
             return $query;
@@ -47,7 +50,7 @@ abstract class Model
      * @param int id
      * @return array||string sir la requête est soumise à une seul colonne
      */
-    public function findById(?string $colonne= '*',int $id)
+    public function findById(int $id, ?string $colonne= '*')
     {
         return $this->requete("SELECT $colonne FROM $this->table WHERE id = $id")->fetch();
     }

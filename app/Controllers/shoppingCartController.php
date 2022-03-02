@@ -72,9 +72,18 @@ class shoppingCartController extends Controller
         }
     }
 
+    public function deleteProduct()
+    {
+        if (isset($_POST['deleteProduct'])) {
+            unset($_SESSION['quantite'][$_POST['id_article']]);
+            unset($_SESSION['prix'][$_POST['id_article']]);
+            header('location: ./panier');
+        }
+    }
+
     public function totalPrice()
     {
-
+        $toto = "toto";
         if (isset($_SESSION['quantite'])) {
             $_SESSION['totalPrice'] = [];
 

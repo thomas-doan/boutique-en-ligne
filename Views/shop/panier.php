@@ -27,29 +27,42 @@
    <br>
    <?php
 
-    foreach ($articles as $key => $article) {
-
-    ?>
-       <?php var_dump($_SESSION['quantite'][$article['id_article']])  ?>
-       <form action="" method="post">
-           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-           <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
-           <button name="add" type="submit"> creer </button>
-       </form>
+    foreach ($articles as $article) { ?>
 
 
-       <form action="" method="post">
-           <p> <?= $article['titre_article'] ?> </p>
-
-           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
 
 
-           <button name="upQuantity" value="1" type="submit"> + </button>
-           <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
-               <button name="downQuantity" value="1" type="submit"> - </button>
+       <?php
+        if (isset($_SESSION['quantite'])) { ?>
+           <form action="" method="post">
+
+               <p> <?= $article['titre_article'] ?> </p>
+               <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+               <button name="upQuantity" value="1" type="submit"> + </button>
            <?php } ?>
 
+           <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
+               <button name="downQuantity" value="1" type="submit"> - </button>
+           </form>
+       <?php } ?>
+
+
+
+       <form action="" method="post">
+           <button name="add" type="submit"> creer </button>
+           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+           <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
+
        </form>
+
+       <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
+
+           <form action="" method="post">
+               <button name="deleteProduct" type="submit"> supprimer article </button>
+               <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+           </form>
+
+       <?php } ?>
 
 
    <?php }
@@ -61,4 +74,4 @@
 
    <p> nombre total d'articles : <?= $resultat ?> </p>
 
-   <p>Prix total : <?= ($_SESSION['totalPrice'])  ?> </p>
+   <p>Prix total : <?php var_dump($_SESSION['totalPrice'])  ?> </p>

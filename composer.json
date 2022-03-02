@@ -1,17 +1,16 @@
 {
-    "name": "33642/myapp",
-    "authors": [
-        {
-            "name": "John Smith",
-            "email": "john@example.com"
-        }
-    ],
+    "name": "boutique/boutique",
+    "authors": [{
+        "name": "thomas",
+        "email": "thomas.doan@laplateforme.io"
+    }],
     "autoload": {
         "psr-4": {
-            "Router\\": "routes/",
-            "App\\": "app/",
-            "Database\\": "database/"
+            "Database\\": "Database",
+            "App\\": "app/"
         }
     },
-    "require": {}
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    }
 }

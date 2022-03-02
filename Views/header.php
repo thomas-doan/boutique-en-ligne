@@ -10,7 +10,7 @@
     <?php
 
     ?>
-    <form action="./exemple" method="GET">
+    <form action="./search" method="GET">
         <label for="site-search">Search the site:</label>
         <input type="search" name="recherche" aria-label="Search through site content">
         <button>Search</button>

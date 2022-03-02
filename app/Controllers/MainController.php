@@ -2,22 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\ExempleModel;
+use App\Models\Articles;
+
 
 class MainController extends Controller
 {
 
     public function index()
     {
+        $title = "accueil - kawa";
 
-        $title = "super titre";
-
-        $model = new ExempleModel($this->getDB());
-
-
-        $find = $model->findId();
-
-        /*  return $this->view('shop.index', compact('title')); */
-        return $this->view('shop.index', compact('title', 'find'));
+        return $this->view('shop.index', compact('title'));
     }
 }

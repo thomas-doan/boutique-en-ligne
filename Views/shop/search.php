@@ -6,7 +6,7 @@
 echo "<pre>";
 
 
-echo $_GET['recherche'];
+/* echo $_GET['recherche']; */
 echo "<br>";
 
 var_dump($resultat);

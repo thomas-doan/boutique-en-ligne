@@ -4,7 +4,7 @@ namespace App\Models;
 
 
 
-class ExempleModel extends Model
+class Search extends Model
 
 {
 
@@ -15,7 +15,7 @@ class ExempleModel extends Model
     public function find_article($sql)
     {
 
-        $query = $this->db->getPDO()->prepare("
+        $query = $this->db->prepare("
 
      SELECT articles.id_article, articles.titre_article, articles.presentation_article, articles.prix_article, articles.image_article, `cat1`.nom_categorie AS 'sous cat', `cat2`.`nom_categorie` AS 'cat parent', 'categorie' AS 'type'
             FROM articles
@@ -32,7 +32,7 @@ SELECT `art1`.id_article, `art1`.titre_article, `art1`.presentation_article, `ar
             INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article`
             INNER JOIN categories AS `cat1` ON articles_categories_filtre.fk_id_cat_categorie = `cat1`.id_categorie
             INNER JOIN categories AS `cat2` ON articles_categories_filtre.id_parent = `cat2`.id_categorie
-    WHERE  MATCH (`art1`.titre_article) AGAINST (:titre_article ) OR MATCH(`art1`.presentation_article) AGAINST (:presentation_article)
+    WHERE  MATCH (`art1`.titre_article  ) AGAINST (:titre_article ) OR MATCH(`art1`.presentation_article) AGAINST (:presentation_article)
 
 UNION ALL
 
@@ -57,11 +57,5 @@ SELECT articles.id_article, articles.titre_article, articles.presentation_articl
         $article = $query->fetchall();
 
         return $article;
-    }
-
-    public function findId()
-    {
-        $query = $this->requete("SELECT id_article FROM  {$this->table} ");
-        return $query->fetchAll();
     }
 }

@@ -8,7 +8,7 @@ require('vendor/autoload.php');
 
 
 $router = new AltoRouter();
-$router->setBasePath('/final');
+$router->setBasePath('/boutique-en-ligne');
 $router->map('GET|POST', '/', function () {
     $controller = new App\Controllers\MainController();
     $controller->index();
@@ -30,7 +30,7 @@ $router->map(
     'GET',
     '/panier',
     function () {
-        $controller = new App\Controllers\PanierController();
+        $controller = new App\Controllers\shoppingCartController();
         $controller->index();
     },
     'panier'
@@ -40,14 +40,23 @@ $router->map(
     'POST',
     '/panier',
     function () {
-        $controller = new App\Controllers\PanierController();
+        $controller = new App\Controllers\shoppingCartController();
         $controller->upValue();
         $controller->downValue();
+        $controller->shoppingBag();
     },
     'panier post'
 );
 
+$router->map(
+    'GET',
+    '/exempleid/[i:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\ExempleidController();
+        $controller->index($id_article);
+    },
 
+);
 
 
 $match = $router->match();

@@ -7,11 +7,11 @@ use App\Controllers\Components\Components;
 class ExempleidController extends Controller
 {
 
-    public function index($id)
+    public function index($id_article)
     {
 
-        $test = $id;
-        $resultat = Components::test($id);
+        $test = $id_article;
+        $resultat = Components::test($id_article);
 
         /*  $toto = test($id); */
 

@@ -1,13 +1,18 @@
    <?php
 
-    if (!isset($_SESSION['quantite'])) {
+    /*     if (!isset($_SESSION['quantite'])) {
         $_SESSION['quantite']['1'] = 1;
         $_SESSION['quantite']['2'] = 1;
         $_SESSION['quantite']['3'] = 1;
         $_SESSION['quantite']['4'] = 1;
-    }
+    } */
 
     $resultat = 0;
+
+    echo "<br>";
+
+    var_dump($_SESSION['quantite']);
+    echo "<br>";
     ?>
 
 
@@ -16,27 +21,29 @@
    <br>
    <?php
 
-
-
     foreach ($articles as $key => $article) {
 
     ?>
        <?php var_dump($_SESSION['quantite'][$article['id_article']])  ?>
+       <form action="" method="post">
+           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
 
-       <div class="panier">
-           <form action="" method="post">
-               <p> <?= $article['titre_article'] ?> </p>
+           <button name="add" type="submit"> creer </button>
+       </form>
 
-               <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
 
-               <button name="augmenter" value="1" type="submit"> + </button>
-               <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
-                   <button name="diminuer" value="1" type="submit"> - </button>
-               <?php } ?>
+       <form action="" method="post">
+           <p> <?= $article['titre_article'] ?> </p>
 
-           </form>
+           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
 
-       </div>
+           <button name="upQuantity" value="1" type="submit"> + </button>
+           <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
+               <button name="downQuantity" value="1" type="submit"> - </button>
+           <?php } ?>
+
+       </form>
+
 
    <?php }
 

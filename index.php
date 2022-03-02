@@ -44,6 +44,7 @@ $router->map(
         $controller->upValue();
         $controller->downValue();
         $controller->shoppingBag();
+        $controller->totalPrice();
     },
     'panier post'
 );

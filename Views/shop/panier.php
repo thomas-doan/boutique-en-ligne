@@ -7,11 +7,17 @@
         $_SESSION['quantite']['4'] = 1;
     } */
 
-    $resultat = 0;
+
+
+    echo "<br>";
+    echo "quantite";
+    echo "<br>";
+    var_dump($_SESSION['quantite']);
+    echo "<br>";
 
     echo "<br>";
 
-    var_dump($_SESSION['quantite']);
+    var_dump($_SESSION['prix']);
     echo "<br>";
     ?>
 
@@ -27,7 +33,7 @@
        <?php var_dump($_SESSION['quantite'][$article['id_article']])  ?>
        <form action="" method="post">
            <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-
+           <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
            <button name="add" type="submit"> creer </button>
        </form>
 
@@ -36,6 +42,7 @@
            <p> <?= $article['titre_article'] ?> </p>
 
            <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+
 
            <button name="upQuantity" value="1" type="submit"> + </button>
            <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
@@ -46,10 +53,12 @@
 
 
    <?php }
-
+    $resultat = 0;
     foreach ($_SESSION['quantite'] as $quantite) {
         $resultat = $resultat + $quantite;
     }
     ?>
 
-   <p> <?= $resultat ?> </p>
+   <p> nombre total d'articles : <?= $resultat ?> </p>
+
+   <p>Prix total : <?= ($_SESSION['totalPrice'])  ?> </p>

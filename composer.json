@@ -1,0 +1,16 @@
+{
+    "name": "boutique/boutique",
+    "authors": [{
+        "name": "thomas",
+        "email": "thomas.doan@laplateforme.io"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Database\\": "Database",
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    }
+}

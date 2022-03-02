@@ -84,7 +84,7 @@ abstract class Model
             // On boucle pour éclater le tableau
             foreach ($selection as $valeur) {
 
-                $selections[] = "$valeur = :$valeur";
+                $selections[] = "$valeur";
                 // valeur = valeur associé à l'index
 
                 // On transforme le tableau champs en une string

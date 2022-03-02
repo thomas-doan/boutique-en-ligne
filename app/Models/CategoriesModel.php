@@ -15,7 +15,7 @@ class CategoriesModel extends Model
     public function __construct()
     {
         $this->table = 'categories';
-        $this->db = New DBConnection('kawa','localhost','root','');
+        $this->db = DBConnection::getPDO();
     }
 
     /**
@@ -23,36 +23,23 @@ class CategoriesModel extends Model
      * @param string Nom de la section sellectionner
      * @return array 
      */
-    public function get_categorie(array $criteres): array
+    public function get_categorie(array $criteres, array $data, ?array $filters = null): array
     {
-        $item = $this->findBy($criteres);
-        // $query = $this->model->pdo->prepare("SELECT * FROM `categories` WHERE `section`='$section'");
-        // $query->execute();
-        // $item = $query->fetchAll(\PDO::FETCH_ASSOC);
+        
+        $item = $this->find($criteres, compact('titre_article', 'prix_article'));
+
         return $item;
     }
 
-    protected function insert_categorie(string $section,string $value)
+    public function insertInterTableCategorieProduct($id_product,$id_cat_categorie,$id_cat_parent )
     {
-        $New_cat = new CategoriesModel;
-        $New_cat->section = $section;
-        $New_cat->nom_categorie = $value;
-         $item = $this->create($New_cat);
-        // $query = $this->pdo->prepare("INSERT INTO `categories`(`nom_categorie`, `section`) VALUES ('$value','$section')");
-        // $query->execute();
-        return $item;
-    }
+        $req = "INSERT INTO `articles_categories_filtre`(`fk_id_article`, `fk_id_cat_categorie`, `id_parent`) VALUES (:fk_id_article,:fk_id_cat_categorie,:id_parent)";
+        $fk_id_article = (int) $id_product;
+        $fk_id_cat_categorie = (int) $id_cat_categorie;
+        $id_parent = (int)$id_cat_parent;
+        // On exécute la requête 
+        return $this->requete($req, compact('fk_id_article','fk_id_cat_categorie','id_parent'));
 
-    /**
-     * Selection la catégorie correspondant à l'idée
-     */
-    protected function get_name_by_id($id)
-    {
-        $item = $this->findById(`nom_categorie`,$id);
-        // $query = $this->model->pdo->prepare("SELECT `nom_categorie` FROM `categories` WHERE `id_categorie`='$id'");
-        // $query->execute();
-        // $item = $query->fetch();
-        return $item->nom_categorie;
     }
 }
 ?>

@@ -2,13 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Models\ArticleModel;
 use App\Controllers\ProductController;
+use App\Controllers\CategoriesController;
 
 class AdministratorController extends Controller
 {
     public $error = array();
-
     protected $Product;
     protected $Categories;
 
@@ -17,8 +16,8 @@ class AdministratorController extends Controller
         $this->Product = New ProductController;
         $this->Categories = new CategoriesController;
     }
-    //METHODE D'APPEL ADMIN
 
+    //METHODE D'APPEL ADMIN
     public function index()
     {
         $title = 'Admin';
@@ -32,38 +31,64 @@ class AdministratorController extends Controller
      */
     public function CreatProduct(string $param)
     {
+        //$param et défini selon la redirection du formulaire
         $error = $this->return_error();
         $title = 'Admin | Nouvel Article';
-        $this->recover();
-        // var_dump($this->Product->select_col_table('articles'));
+        $this->recover(); //Enregistre les valeurs du formulaire en variable de section
+        $this->less_part();//Passe à l'étape suivante selon les conditions d'acceptations
 
-        if($param == 'partie1')
+        if($param == 'partie1')//Première partie du formulaire ___ Information dédier à la Table Article
         {
-            $url_action = $this->call_step_one();
-            $Admin_function = new AdministratorController;
-            $compact = compact('param','url_action','Admin_function','title','error');
+            $Admin_function = array(
+                'titre_article' => $this->coverup_form('titre_article'),
+                'prix_article' => $this->coverup_form('prix_article'),
+                'presentation_article' => $this->coverup_form('presentation_article'),
+                'description_article' => $this->->coverup_form('description_article'),
+                
+            )
+            $compact = compact('param','Admin_function','title','error');
         }
         elseif($param == 'partie2')
         {
             // $retour = $this->call_step_two();
-            $this->Categories->when_insert_categorie('ajouter_SAVEUR');
-            $this->Categories->when_insert_categorie('ajouter_PROVENENCE');
+
+            $this->Categories->wheneInsertCategories('ajouter_SAVEUR');
+            $this->Categories->wheneInsertCategories('ajouter_PROVENENCE');
             $result_request = array(
-            'variete' => $this->Categories->get_categorie(['section'=>'VARIÉTÉ']),
-            'specificite' => $this->Categories->get_categorie(['section'=>'SPÉCIFICITÉ']),
-            'flavor' => $this->Categories->get_categorie(['section'=>'SAVEUR']),
-            'strong' => $this->Categories->get_categorie(['section'=>'FORCE']),
-            'origin' => $this->Categories->get_categorie(['section' => 'PROVENENCE'])
+            'principale'=>$this->Categories->chooseCategoriesBySection(['section'],'PRINCIPALE'),
+            'variete' => $this->Categories->chooseCategoriesBySection(['section'],'VARIÉTÉ'),
+            'specificite' => $this->Categories->chooseCategoriesBySection(['section'],'SPÉCIFICITÉ'),
+            'flavor' => $this->Categories->chooseCategoriesBySection(['section'],'SAVEUR'),
+            'strong' => $this->Categories->chooseCategoriesBySection(['section'],'FORCE'),
+            'origin' => $this->Categories->chooseCategoriesBySection(['section'], 'PROVENENCE')
             );
             $compact = compact('param','result_request','title','error');
         }
         elseif($param == 'rendu')
         {
-            $retour = $this->call_step_visibility();
+            $compact = compact('param','title','error');
         }
         elseif($param == 'upload')
-        {
-            $retour = 'Construire l\'envoie';
+        {   if(
+            ($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
+            && !empty($_SESSION['nouvelarticle']['etape2']['PRINCIPALE'])
+            && !empty($_SESSION['nouvelarticle']['etape2']['VARIÉTÉ'])
+            && !empty($_SESSION['nouvelarticle']['etape2']['FORCE'])
+            && !empty($_SESSION['nouvelarticle']['etape2']['PROVENENCE'])
+            && !empty($_SESSION['nouvelarticle']['etape2']['SAVEUR'])
+            )
+            {
+                $this->Product->createProduct($_SESSION['nouvelarticle']);
+                $this->Categories->insertAllCat(
+                    $_SESSION['nouvelarticle']['etape2'],
+                    $this->Product->useLastId(),
+                    $_SESSION['nouvelarticle']['etape2']['PRINCIPALE'],
+                );
+                unset($_SESSION['nouvelarticle']);
+                $message = 'Félicitation ! Votre article est à présent en ligne';
+            }
+            $message = 'Félicitation ! Votre article est à présent en ligne';
+            $compact = compact('param','message','title','error');
         }
         else $retour = 'Pas de paramettre à effectué';
 
@@ -81,7 +106,7 @@ class AdministratorController extends Controller
      * @param string chemin vers l'image
      * @param string nom de l'image
      */
-    public function upload_image(?string $chemin = '/New_kawa/public/test/assets/pictures/pictures_product/', string $name_file)
+    public function upload_image(?string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/', string $name_file)
     {
         $this->Product->verify_upload($name_file);
         $this->Product->stock_picture($chemin);
@@ -91,7 +116,7 @@ class AdministratorController extends Controller
         }
         if(isset($_SESSION['nouvelarticle']['image_article']))
         {
-        $this->Product->screen_result('/New_kawa/public/test/assets/pictures/pictures_product/', $_SESSION['nouvelarticle']['image_article']);
+        $this->Product->screen_result('/boutique-en-ligne/public/assets/pictures/pictures_product/', $_SESSION['nouvelarticle']['image_article']);
         }
         else $this->Product->screen_result();
     }
@@ -105,19 +130,27 @@ class AdministratorController extends Controller
         if(!empty($_FILES['image_article']['tpm_name'])&&($_FILES['image_article']['error']==0))
         {
             $_SESSION['nouvelarticle']['image_article'] = $this->image_article;
+            
         }
         if(!empty(@$_POST['etape1'] || @$_POST['titre_article']))
         {
-
             $_SESSION['nouvelarticle']['etape1'] = $_POST;
+            unset($_SESSION['nouvelarticle']['etape1']['etape1']);
         }
         elseif(!empty($_POST['etape2']))
         {
             $_SESSION['nouvelarticle']['etape2'] = $_POST;
+            unset($_SESSION['nouvelarticle']['etape2']['etape2']);
+            unset($_SESSION['nouvelarticle']['etape2']['nom_PROVENENCE']);
+            unset($_SESSION['nouvelarticle']['etape2']['nom_SAVEUR']);
         }
         
     }
 
+    /**
+     * En Attente d'implementation
+     * Permet de renvoyer un message d'erreur à l'utilisateur
+     */
     public function return_error()
     {
         if(!empty($this->error))
@@ -133,7 +166,7 @@ class AdministratorController extends Controller
         }
     }
     /**
-     * Retourne la valeur disponnible dans la variable de session dans l'input associé
+     * Retourne les valeurs enregistrer dans la variable de session à selon l'emplacement des value input
      */
     public function coverup_form(string $name)
     {
@@ -145,7 +178,7 @@ class AdministratorController extends Controller
 
     /**
      * Verfie si toute les information son renseigner dans le champs
-     * @param array retour de la method POST
+     * @param array retour de la methode POST|SECTION
      */
     public function verify_input($array)
     {
@@ -159,92 +192,25 @@ class AdministratorController extends Controller
         return true;
     }
     /**
-     * Redirige si toutes les information sont justes
+     * Redirige l'utilisateur si toutes les conditions sont respecté
      * @param array retour de la method POST
      */
     public function less_part()
     {
         if(!empty($_SESSION['nouvelarticle']['etape1']) && $this->verify_input($_SESSION['nouvelarticle']['etape1'])===true && !empty($_POST['etape1']))
         {
-            header('location: /administrator/Partie2');
+            header('location: ./partie2');
         }
-        elseif(!empty($_SESSION['nouvelarticle']['etape1']) && !empty($_POST['etape2']))
+        elseif(($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
+        && !empty($_SESSION['nouvelarticle']['etape2']['PRINCIPALE'])
+        && !empty($_SESSION['nouvelarticle']['etape2']['VARIÉTÉ'])
+        && !empty($_SESSION['nouvelarticle']['etape2']['FORCE'])
+        && !empty($_SESSION['nouvelarticle']['etape2']['PROVENENCE'])
+        && !empty($_SESSION['nouvelarticle']['etape2']['SAVEUR'])
+        && !empty($_POST['etape2']))
         {
-            header('location: /administrator/Rendu');
+            header('location: ./rendu');
         }
     }
 
-    /**
-     * Affiche le formulaire si le GET correpsond à cette étape
-     * 
-     */
-    public function call_step_one()
-    {
-            $url_action ="./partie1";
-
-            if(!empty($_POST['etape1']))
-            {
-                if($this->verify_input($_POST)===false)
-                {
-                    $this->error = array('Etape 1' => 'Oups ! Tout les champs doivent être remplis');
-                    $url_action ="./partie1";
-                }
-                else $url_action ="./partie2";
-            }
-            
-        return $url_action;
-    }
-
-    /**
-     * Appelle l'étape 2
-     */
-    public function call_step_two()
-    {
-            ?>
-            <form action="./administrator/partie2" method="post">
-            <?php
-                $this->Categories->choose_primary_categories();
-                $this->Categories->choose_variety();
-                $this->Categories->choose_strong();
-                $this->Categories->choose_flavor();
-                $this->Categories->choose_provence();
-                $this->Categories->when_insert_categorie('ajouter_SAVEUR');
-                $this->Categories->when_insert_categorie('ajouter_PROVENENCE');
-            ?>
-                <input type="submit" name="etape2" value="Visualiser le résultat">
-            </form>
-            <?php
-    }
-
-    /**
-     * Appel l'étape de visualisation
-     */
-    public function call_step_visibility()
-    {
-        if($_GET['nouvelarticle']== 'Rendu')
-        {
-        
-        ?>
-            <article>
-                <div>
-                    <h3><?=$_SESSION['nouvelarticle']['etape1']['titre_article']?></h3>
-                    <p><?=$_SESSION['nouvelarticle']['etape1']['prix_article']?>€</p>
-                </div>
-                <div>
-                    <img src="LINK_PICTURE/pictures_product/<?=$_SESSION['nouvelarticle']['image_article']?>" alt="image de l'article">
-                    <div>
-                        <h4><?=$_SESSION['nouvelarticle']['etape1']['presentation_article']?></h4>
-                        <p><?=$_SESSION['nouvelarticle']['etape1']['description_article']?></p>
-                        <?=$this->Categories->print_all_cat($_SESSION['nouvelarticle']['etape2'])?>
-                    </div>
-                </div>
-            </article>
-            <div>
-                <a href="./administrator/partie1">Modifier les informations principales</a>
-                <a href="./administrator/partie2">Modifier les attribues de catégories</a>
-                <a href="./administrator/Upload">Mettre l'article en ligne</a>
-            </div>
-        <?php
-        }
-    }
 }

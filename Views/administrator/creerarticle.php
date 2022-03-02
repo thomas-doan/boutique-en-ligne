@@ -2,12 +2,13 @@
 var_dump($_POST);
 var_dump($_SESSION);
 var_dump($error);
+echo 'Result request';
 
 ?>
     <p><?=$error?></p>
 <?php if($param == 'partie1') :?>
 
-    <form action="<?=$url_action?>" method="post" name="info_article_pincipal" enctype="multipart/form-data">
+    <form action="./partie1" method="post" name="info_article_pincipal" enctype="multipart/form-data">
         <fieldset>
             <legend>Informations sur l'article</legend>
             <label for="titre_article"> Nom de l'articles:</label>
@@ -15,20 +16,15 @@ var_dump($error);
             <label for="prix_article"> Prix unitaire:</label>
             <input number="text" step="0.01" name="prix_article" id="prix_article" value="<?= $Admin_function->coverup_form('prix_article')?>">
             <label for="presentation_article">Présentation de l'article :</label>
-            <textarea id="presentation_article" name="presentation_article">
-                <?= $Admin_function->coverup_form('presentation_article')?>
-            </textarea>
+            <textarea id="presentation_article" name="presentation_article"><?= $Admin_function->coverup_form('presentation_article')?></textarea>
             <label for="description_article">Description de l'article:</label>
-            <textarea id="description_article" name="description_article">
-                <?= $Admin_function->coverup_form('description_article')?>
-            </textarea>
+            <textarea id="description_article" name="description_article"><?= $Admin_function->coverup_form('description_article')?></textarea>
         </fieldset>
         <fieldset>
             <legend>Ajouter une image</legend>
-            <?php $Admin_function->upload_image('../public/assets/images/', 'image_article');?>
+            <?php $Admin_function->upload_image('public/assets/pictures/pictures_product/', 'image_article');?>
             <label for="image_article">Télécharger une image:</label>
             <input type="file" name="image_article">
-            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" title="Permitted bytes per file." />
             <input type="submit" name="upload_image" value="télécharger">
         </fieldset>
         <fieldset>
@@ -45,8 +41,21 @@ var_dump($error);
 <?php endif ; ?>
 
 <?php if($param == 'partie2') :?>
-    <form action="./administrator/partie2" method="post">
-    <fieldset>
+    <form action="./partie2" method="post">
+        <fieldset>
+            <legend>Catégories d'article</legend>
+            <label for="PRINCIPALE">Choisir une categorie :</label>
+        <?php
+        foreach($result_request['principale'] as $value)
+        {
+            ?>
+            <input type="radio" name="PRINCIPALE" id="<?=$value['id_categorie']?>" value="<?=$value['id_categorie']?>">
+            <label for="<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></label>
+            <?php
+        }
+        ?>      
+        </fieldset>
+        <fieldset>
             <legend>Variétés & Spécificités</legend>
             <p>Choisir la variété du café et renseigner ses spécificités</p>
             <label for="VARIÉTÉ">Choisir une variété :</label>
@@ -127,5 +136,28 @@ var_dump($error);
         <input type="submit" name="etape2" value="Visualiser le résultat">
         </form>
          
-
+<?php endif ; ?>
+<?php if($param == 'rendu') :?>
+        <article>
+            <div>
+                <h3><?=$_SESSION['nouvelarticle']['etape1']['titre_article']?></h3>
+                <p><?=$_SESSION['nouvelarticle']['etape1']['prix_article']?>€</p>
+            </div>
+            <div>
+                <img src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$_SESSION['nouvelarticle']['image_article']?>" alt="image de l'article">
+                <div>
+                    <h4><?=$_SESSION['nouvelarticle']['etape1']['presentation_article']?></h4>
+                    <p><?=$_SESSION['nouvelarticle']['etape1']['description_article']?></p>
+                    <?=$this->Categories->printAllCategories($_SESSION['nouvelarticle']['etape2'])?>
+                </div>
+            </div>
+        </article>
+        <div>
+            <a href="./partie1">Modifier les informations principales</a>
+            <a href="./partie2">Modifier les attribues de catégories</a>
+            <a href="./upload">Mettre l'article en ligne</a>
+        </div>
+<?php endif ; ?>
+<?php if($param == 'upload') :?>
+    <h3><?=$message?></h3>
 <?php endif ; ?>

@@ -6,159 +6,58 @@ use App\Models\CategoriesModel;
 
 class CategoriesController extends CategoriesModel
 {
+    /**
+     * Renvoie l'ensemble des données selon le nom de la section
+     * @param array Ensemble des critères à chercher
+     * @param string La valeurs de la section
+     * @param array|null Les différentes colonne à récupérer
+     */
+    public function chooseCategoriesBySection(array $criteres, $data, ?array $filters = null): array
+    {
+        $section = $data;
+        $item = $this->find($criteres, compact('section'));
+        return $item;
+    }
 
     /**
-     * Retourne les catégories principal sous forme de radio
+     * Récupère le nom d'une catégorie par son Id
+     * @param array Ensemble des critère à chercher
+     * @param string l'id en question
+     * @param array|null Les différentes colonnes a récupéré
      */
-    public function choose_primary_categories()
+    public function getNameById(array $criteres, $data, ?array $filters = null): string
     {
-        $result_request =$this->get_categorie(['section'=>'PRINCIPALE']);
-        ?>
-            <fieldset>
-            <legend>Catégories princpales</legend>
-            <p>A quelle catégories principale cette article est-il associés ?</p>
-        <?php
-        foreach($result_request as $value)
-        {
-            ?>
-            
-            <input type="radio" name="PRINCIPALE" id="<?=$value['id_categorie']?>" value="<?=$value['id_categorie']?>">
-            <label for="<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></label>
-            <?php
-        }
-        ?>
-        </fieldset>
-        
-        <?php
+        $id_categorie = $data;
+        $column = ['nom_categorie'];
+        $item = $this->find($criteres, compact('id_categorie'),$column);
+        return $item[0]['nom_categorie'];
     }
-
-    public function choose_variety()
-    {
-        
-        $result_request_variete =$this->get_categorie(['section'=>'VARIÉTÉ']);
-        $result_request_specificite =$this->get_categorie(['section'=>'SPÉCIFICITÉ']);
-        ?>
-            <fieldset>
-            <legend>Variétés & Spécificités</legend>
-            <p>Choisir la variété du café et renseigner ses spécificités</p>
-            <label for="VARIÉTÉ">Choisir une variété :</label>
-        <?php
-        foreach($result_request_variete as $value)
-        {
-            ?>
-            
-            <input type="radio" name="VARIÉTÉ" id="<?=$value['id_categorie']?>" value="<?=$value['id_categorie']?>">
-            <label for="<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></label>
-            <?php
-        }
-        ?>
-            <label for="SPÉCIFICITÉ">Choisir les spécificités :</label>
-        <?php
-        foreach($result_request_specificite as $value)
-        {
-            ?>
-            
-            <input type="checkbox" name="SPÉCIFICITÉ[]" id="<?=$value['id_categorie']?>" value="<?=$value['id_categorie']?>">
-            <label for="<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></label>
-            <?php
-        }
-        ?>
-        </fieldset>
-        
-        <?php
-    }
-
-    public function choose_flavor()
-    {
-        $result_request_flavor =$this->get_categorie(['section'=>'SAVEUR']);
-        ?>
-            <fieldset>
-            <legend>Saveur associé</legend>
-            <p>Définissez les différentes saveurs de votre article</p>
-
-            <label for="nouvelle_saveur">Ajouter une nouvelle saveur</label>
-            <input type="text" name="SAVEUR" id="nouvelle_saveur">
-            <input type="submit" name="ajouter_SAVEUR" value="Ajouter la saveur">
-        <?php
-        foreach($result_request_flavor as $value)
-        {
-            ?>
-            
-            <input type="checkbox" name="SAVEUR[]" id="<?=$value['id_categorie']?>" value="<?=$value['id_categorie']?>">
-            <label for="<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></label>
-            <?php
-        }
-        ?>
-        </fieldset>
-        
-        <?php
-    }
-
-    public function choose_strong()
-    {
-        $result_request =$this->get_categorie(['section'=>'FORCE']);
-        ?>
-            <fieldset>
-            <legend>Force</legend>
-            <p>Noter la force du café</p>
-        <?php
-        foreach($result_request as $value)
-        {
-            ?>
-            <input type="radio" name="FORCE" id="<?=$value['id_categorie']?>" value="<?=$value['id_categorie']?>">
-            <label for="<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></label>
-            <?php
-        }
-        ?>
-        </fieldset>
-        
-        <?php
-    }
-
-    public function choose_provence()
-    {
-        $result_request = $this->get_categorie(['section' => 'PROVENENCE']);
-        ?>
-            <fieldset>
-            <legend>Provenence</legend>
-            <p>Définir la région originaire du café</p>
-
-            <label for="liste_provenence">Liste des provenences :</label>
-            <input list="all_provenence" name="PROVENENCE" id="liste_provenence">
-            <datalist id="all_provenence">
-            
-        <?php
-        foreach($result_request as $value)
-        {
-            ?>
-                <option value = "<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></option>
-            <?php
-        }
-        ?>
-        </datalist>
-
-        <label for="nouvelle_PROVENENCE">Ajouter une nouvelle provenence</label>
-        <input type="text" name="PROVENENCE" id="nouvelle_PROVENENCE">
-        <input type="submit" name="ajouter_PROVENENCE" value="Ajouter la provenece">
-
-        </fieldset>
-        
-        <?php
-    }
-
-    public function when_insert_categorie(string $name_submit)
+    
+    /**
+     * Prépare la requête à l'insertion des données de nouvelles catégorie
+     * @param string nom de la valeur du POST (Par Default, les post permetant l'insertion se nom 'nom_'+'nom de la section')
+     */
+    public function wheneInsertCategories(string $name_submit)
     {
         if(!empty($_POST[$name_submit])){
-            $section = explode('_',$name_submit)[1];
-            if(!empty($_POST['nom_'.$section]))
+            $sections = explode('_',$name_submit)[1];
+            if(!empty($_POST['nom_'.$sections]))
             {
-            $value = $_POST['nom_'.$section];
-            $this->insert_categorie($section,$value);
+            $value = $_POST['nom_'.$sections];
+            $New_cat = new CategoriesModel;
+            $New_cat->section = $sections;
+            $New_cat->nom_categorie = $value;
+
+            $section = $sections;
+            $nom_categorie = $value;
+
+         $item = $this->create($New_cat,compact('section','nom_categorie'));
             }
         }
     }
 
-    public function print_all_cat($array)
+
+    public function printAllCategories($array)
     {
         foreach($array as $key => $value)
         {
@@ -166,7 +65,7 @@ class CategoriesController extends CategoriesModel
                 {
                     $i = 1;
                     $result = '';
-                    while($i <= $this->get_name_by_id($value))
+                    while($i <= $this->getNameById(['id_categorie'],$value))
                     {
                         $result .='&#x272D ';
                         $i++;
@@ -180,7 +79,7 @@ class CategoriesController extends CategoriesModel
                     $list_argument = '';
                     for($i = 0; $i < count($value); ++$i)
                     {
-                        $list_argument .= " {$this->get_name_by_id($value[$i])},";
+                        $list_argument .= " {$this->getNameById(['id_categorie'],$value[$i])},";
                     }
                     $list_argument[-1] = ' ';
                     ?>
@@ -194,11 +93,44 @@ class CategoriesController extends CategoriesModel
                 else
                 {
                 ?>
-                <p><?php echo "{$key}";?>:<?=$this->get_name_by_id($value)?></p>
+                <p><?php echo "{$key}";?>:<?=$this->getNameById(['id_categorie'],$value)?></p>
                 <?php
                 }
             
         }
+    }
+    /**
+     * Parcoure et récupère tout les ID en Variable de section
+     */
+    public function insertAllCat(array $array, $constIdProduct, $constIdCatPrincipal)
+    {
+        foreach($array as $key =>$value)
+        {
+            if($key != 'PRINCIPALE')
+            {
+                if(is_array($value))
+                {
+                    $i = 0;
+                    while(isset($value[$i]))
+                    {
+                        $this->insertInterTableCategorieProduct(
+                            $constIdProduct,
+                            $value[$i],
+                            $constIdCatPrincipal);
+                        
+                        $i++;
+                    }
+                }
+                else
+                {
+                    $this->insertInterTableCategorieProduct(
+                        $constIdProduct,
+                        $value,
+                        $constIdCatPrincipal);
+                }
+            }
+        }
+        
     }
 }
 ?>

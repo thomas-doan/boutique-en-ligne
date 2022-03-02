@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 use Exceptions\NotFoundException;
 
@@ -23,7 +23,6 @@ $router->map(
     'search'
 );
 
-
 $router->map(
     'GET',
     '/panier',
@@ -46,7 +45,17 @@ $router->map(
 );
 
 
+//ADMIN
+$router->map(
+    'GET|POST',
+    '/creerarticle/[*:param]',
+    function ($param) {
+        $controller = new App\Controllers\AdministratorController();
+        $controller->CreatProduct($param);
 
+    },
+    'creat product'
+);
 
 $match = $router->match();
 if (is_array($match)) {
@@ -54,6 +63,7 @@ if (is_array($match)) {
         call_user_func_array($match['target'], $match['params']);
     }
 }
+
 
 
 try {

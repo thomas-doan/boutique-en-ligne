@@ -2,13 +2,20 @@
 
 namespace App\Controllers;
 
+use Database\DBConnection;
 use App\Models\ProductModel;
 
 class ProductController extends ProductModel
 {
-    public $image_article;
+    protected $model;
     public $error= [];
 
+    public function __construct()
+    {
+
+        $this->model = new ProductModel();
+       
+    }
     /**
     * Verifie la taille du fichier télécharger
     * Verifie si le téléchargement a bien était effectuée
@@ -35,7 +42,7 @@ class ProductController extends ProductModel
      * Modifie le nom de l'image
      * @param string chemin d'enregistrement
      */
-    public function stock_picture(?string $chemin = '/New_kawa/public/assets/pictures/pictures_product/')
+    public function stock_picture(?string $chemin = '/boutique-en-lignepublic/assets/pictures/pictures_product/')
     {
         if($this->verify_upload('image_article')==true)
         {
@@ -84,7 +91,7 @@ class ProductController extends ProductModel
      * @param string lein vers l'image
      * @param string Nome de l'image selectionner
      */
-    public function screen_result(?string $chemin = '/New_kawa/public/assets/pictures/pictures_product/',?string $nom_image = 'no_pict_product.jpg')
+    public function screen_result(?string $chemin = '/boutique-en-lignepublic/assets/pictures/pictures_product/',?string $nom_image = 'no_pict_product.jpg')
     {
         ?>
             <img style="width: 200px;height: 200px;" src="<?=$chemin.$nom_image?>" alt="votre nouvelle image d'article'">
@@ -93,15 +100,50 @@ class ProductController extends ProductModel
       
     }
 
-    public function select_col_table($table)
-    {     
-        $result = $this->return_col($table);
-        $column = [];
-        foreach($result as $key)
+    // public function select_col_table($table)
+    // {     
+    //     $result = $this->return_col($table);
+    //     $column = [];
+    //     foreach($result as $key)
+    //     {
+    //         $keyCol = $key['Field'];
+    //         $column[] = $keyCol;
+    //     }
+    //     return $column;
+    // }
+
+    /**
+     * Insetion des données pour un nouvelle articles
+     * @param array récupère la variable de session ayant enregistrer toute les information
+     * 
+     */
+    public function createProduct(array $array)
+    {
+        $this->db = DBConnection::getPDO();
+        $this->table = 'articles';
+        
+        $this->model->image_article = $array['image_article'];
+        foreach($array['etape1'] as $key => $value)
         {
-            $keyCol = $key['Field'];
-            $column[] = $keyCol;
+            $this->model->$key = $value;
         }
-        return $column;
+
+            $NewArticle = $this->model;
+            $image_article = $this->model->image_article;
+            $titre_article = $this->model->titre_article;
+            $presentation_article = $this->model->presentation_article;
+            $description_article = $this->model->description_article;
+            $prix_article = (float)$this->model->prix_article;
+            $sku = (int)$this->model->sku;
+            $fournisseur = $this->model->fournisseur;
+            $conditionnement = $this->model->conditionnement;
+
+         $item = $this->create($NewArticle,compact('image_article','titre_article','presentation_article','description_article','prix_article','sku','fournisseur','conditionnement'));
+          
+
+    }
+    public function useLastId()
+    {
+        return $this->db->lastInsertId();
     }
 }

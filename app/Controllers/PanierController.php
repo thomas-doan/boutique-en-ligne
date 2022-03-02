@@ -19,23 +19,8 @@ class PanierController extends Controller
     }
 
 
-    public function augmenter()
+    public function upValue()
     {
-
-        if (isset($_POST['augmenter'])) {
-
-            $augmenter = (int) $_POST['augmenter'];
-
-
-            $_SESSION['quantite'][$_POST['id_article']] = $_SESSION['quantite'][$_POST['id_article']] + $_POST['augmenter'];
-
-            header('location : ./panier');
-        }
-    }
-
-    public function change_valeur()
-    {
-
         if (isset($_POST['diminuer'])) {
 
             $diminuer = (int) $_POST['diminuer'];
@@ -44,7 +29,10 @@ class PanierController extends Controller
 
             header('location: ./panier');
         }
+    }
 
+    public function downValue()
+    {
         if (isset($_POST['augmenter'])) {
 
             $augmenter = (int) $_POST['augmenter'];

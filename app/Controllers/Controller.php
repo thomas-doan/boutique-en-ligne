@@ -9,22 +9,23 @@ abstract class Controller
 
     protected $db;
 
-    public function __construct(DBConnection $db)
+    public function __construct()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $this->db = $db;
+        /* $this->db = DBConnection::getPDO(); */
     }
 
     protected function view(string $path, array $params = [])
     {
+
         extract($params);
         ob_start();
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
-        require VIEWS . $path . '.php';
+        require('Views/' . $path . '.php');
         $pageContent = ob_get_clean();
-        require VIEWS . 'layout.php';
+        require('Views/layout.php');
     }
 
     protected function getDB()

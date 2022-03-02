@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Articles;
 
 
 class MainController extends Controller
@@ -9,9 +10,7 @@ class MainController extends Controller
 
     public function index()
     {
-
-        $title = "accueil du site kawa";
-
+        $title = "accueil - kawa";
 
         return $this->view('shop.index', compact('title'));
     }

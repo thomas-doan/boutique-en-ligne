@@ -15,7 +15,7 @@ class Search extends Model
     public function find_article($sql)
     {
 
-        $query = $this->db->getPDO()->prepare("
+        $query = $this->db->prepare("
 
      SELECT articles.id_article, articles.titre_article, articles.presentation_article, articles.prix_article, articles.image_article, `cat1`.nom_categorie AS 'sous cat', `cat2`.`nom_categorie` AS 'cat parent', 'categorie' AS 'type'
             FROM articles

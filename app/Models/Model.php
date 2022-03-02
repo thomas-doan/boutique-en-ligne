@@ -16,9 +16,9 @@ abstract class Model
 
 
 
-    public function __construct(DBConnection $db)
+    public function __construct()
     {
-        $this->db = $db;
+        $this->db = DBConnection::getPDO();
     }
 
 
@@ -31,12 +31,12 @@ abstract class Model
         // On vérifie si on a des attributs
         if ($attributs !== null) {
             //Requête préparée
-            $query = $this->db->getPDO()->prepare($sql);
+            $query = $this->db->prepare($sql);
             $query->execute($attributs);
             return $query;
         } else {
             // Requête simple
-            return $this->db->getPDO()->query($sql);
+            return $this->db->query($sql);
         }
     }
 

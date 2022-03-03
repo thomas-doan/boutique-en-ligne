@@ -28,7 +28,7 @@ $router->map(
     'GET',
     '/panier',
     function () {
-        $controller = new App\Controllers\PanierController();
+        $controller = new App\Controllers\shoppingCartController();
         $controller->index();
     },
     'panier'
@@ -38,14 +38,15 @@ $router->map(
     'POST',
     '/panier',
     function () {
-        $controller = new App\Controllers\PanierController();
+        $controller = new App\Controllers\shoppingCartController();
         $controller->upValue();
         $controller->downValue();
+        $controller->shoppingBag();
+        $controller->deleteProduct();
+        $controller->totalPrice();
     },
     'panier post'
 );
-
-
 
 
 $match = $router->match();

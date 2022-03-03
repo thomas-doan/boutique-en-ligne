@@ -37,13 +37,6 @@ $router->map(
     'creat product'
 );
 
-$match = $router->match();
-if (is_array($match)) {
-    if (is_callable($match['target'])) {
-        call_user_func_array($match['target'], $match['params']);
-    }
-}
-
 //PANIER
 $router->map(
     'GET',

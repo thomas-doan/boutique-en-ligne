@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Controllers;
 
 
@@ -20,11 +21,12 @@ class shoppingCartController extends Controller
 
     public function shoppingBag()
     {
+      
         if (isset($_POST['add'])) {
             if (isset($_SESSION['quantite'])) {
                 // assignation valeur
-                $id_article = (int) $_POST['id_article'];
-                $prix_article = (int) $_POST['prix_article'];
+                $id_article =  (int) $_POST['id_article'];
+                $prix_article =  (float) $_POST['prix_article'];
 
                 $_SESSION['quantite'][$id_article] = 1;
                 $_SESSION['prix'][$id_article] = $prix_article;
@@ -35,8 +37,8 @@ class shoppingCartController extends Controller
 
                 // assignation valeur
 
-                $prix_article = (int) $_POST['prix_article'];
-                $id_article = (int) $_POST['id_article'];
+                $prix_article =  (float) $_POST['prix_article'];
+                $id_article =  (int) $_POST['id_article'];
                 $_SESSION['quantite'][$id_article] = 1;
                 $_SESSION['prix'][$id_article] = $prix_article;
             }
@@ -49,8 +51,8 @@ class shoppingCartController extends Controller
     {
         if (isset($_POST['upQuantity'])) {
 
-            $up = (int) $_POST['upQuantity'];
-            $id_article = (int) $_POST['id_article'];
+            $up =  $_POST['upQuantity'];
+            $id_article =  (int) $_POST['id_article'];
 
             $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] + $up;
 
@@ -63,8 +65,8 @@ class shoppingCartController extends Controller
         var_dump($_SESSION);
         if (isset($_POST['downQuantity'])) {
 
-            $down = (int) $_POST['downQuantity'];
-            $id_article = (int) $_POST['id_article'];
+            $down =  $_POST['downQuantity'];
+            $id_article =  (int) $_POST['id_article'];
 
             $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] - $down;
 
@@ -75,8 +77,8 @@ class shoppingCartController extends Controller
     public function deleteProduct()
     {
         if (isset($_POST['deleteProduct'])) {
-            unset($_SESSION['quantite'][$_POST['id_article']]);
-            unset($_SESSION['prix'][$_POST['id_article']]);
+            unset($_SESSION['quantite'][(int) $_POST['id_article']]);
+            unset($_SESSION['prix'][(int) $_POST['id_article']]);
             header('location: ./panier');
         }
     }

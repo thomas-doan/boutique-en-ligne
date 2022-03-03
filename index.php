@@ -5,8 +5,6 @@ use Exceptions\NotFoundException;
 require('vendor/autoload.php');
 
 
-
-
 $router = new AltoRouter();
 $router->setBasePath('/boutique-en-ligne');
 $router->map('GET|POST', '/', function () {
@@ -48,16 +46,6 @@ $router->map(
         $controller->totalPrice();
     },
     'panier post'
-);
-
-$router->map(
-    'GET',
-    '/exempleid/[i:id_article]',
-    function ($id_article) {
-        $controller = new App\Controllers\ExempleidController();
-        $controller->index($id_article);
-    },
-
 );
 
 

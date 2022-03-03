@@ -83,7 +83,7 @@ class shoppingCartController extends Controller
 
     public function totalPrice()
     {
-        $toto = "toto";
+
         if (isset($_SESSION['quantite'])) {
             $_SESSION['totalPrice'] = [];
 

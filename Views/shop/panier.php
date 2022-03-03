@@ -74,4 +74,4 @@
 
    <p> nombre total d'articles : <?= $resultat ?> </p>
 
-   <p>Prix total : <?php var_dump($_SESSION['totalPrice'])  ?> </p>
+   <p>Prix total : <?= $_SESSION['totalPrice']  ?> </p>

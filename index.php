@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 use Exceptions\NotFoundException;
 
@@ -24,6 +24,20 @@ $router->map(
 );
 
 
+
+//ADMIN
+$router->map(
+    'GET|POST',
+    '/creerarticle/[*:param]',
+    function ($param) {
+        $controller = new App\Controllers\AdminCreateProductController();
+        $controller->CreatProduct($param);
+
+    },
+    'creat product'
+);
+
+//PANIER
 $router->map(
     'GET',
     '/panier',

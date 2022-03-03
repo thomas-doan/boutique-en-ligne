@@ -13,6 +13,77 @@ $router->map('GET|POST', '/', function () {
 }, 'home');
 
 
+// User
+$router->map(
+    'GET|POST',
+    '/inscription',
+    function () {
+        $controller = new App\Controllers\InscriptionController();
+        $controller->index();
+        $controller->SignUp();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/connexion',
+    function () {
+        $controller = new App\Controllers\ConnexionController();
+        $controller->index();
+        $controller->login();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil',
+    function () {
+        $controller = new App\Controllers\ProfilController();
+        $controller->index();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/modifierMotdePasse',
+    function () {
+        $controller = new App\Controllers\ModifierPasswordController();
+        $controller->index();
+        $controller->updatePassword();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/modifierProfil',
+    function () {
+        $controller = new App\Controllers\ModifierProfilController();
+        $controller->index();
+        $controller->updateProfil();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/adresse',
+    function () {
+        $controller = new App\Controllers\AdresseController();
+        $controller->index();
+        $controller->getAdresse();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/adresse/modifierAdresse/[i:id_adresse]',
+    function ($id_adresse) {
+        $controller = new App\Controllers\ModifierAdresseController();
+        $controller->index($id_adresse);
+        $controller->getAdressebyId($id_adresse);
+        $controller->updateAdresse($id_adresse);
+    },
+);
+
 $router->map(
     'GET',
     '/search',

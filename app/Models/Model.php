@@ -84,7 +84,7 @@ abstract class Model
             // On boucle pour éclater le tableau
             foreach ($selection as $valeur) {
 
-                $selections[] = "$valeur = :$valeur";
+                $selections[] = "$valeur";
                 // valeur = valeur associé à l'index
 
                 // On transforme le tableau champs en une string
@@ -203,7 +203,6 @@ abstract class Model
 
         // On exécute la requête 
         $req = "UPDATE  $this->table SET $liste_champs WHERE {$this->id} = :{$this->id}";
-
         return $this->requete($req, $donnees);
     }
 

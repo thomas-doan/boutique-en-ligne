@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\ExempleModel;
+use App\Models\Search;
 
-class ExempleController extends Controller
+class SearchController extends Controller
 {
 
 
@@ -13,14 +13,14 @@ class ExempleController extends Controller
         $titre_article = $_GET['recherche'];
 
 
-        $model = new ExempleModel($this->getDB());
+        $model = new Search($this->getDB());
 
         $resultat = $model->find_article($titre_article);
 
-        $title = "test vue 2";
+        $title = "Kawa - Search";
 
         /*   $this->view('shop.recherche', compact('resultat')); */
 
-        return $this->view('shop.exemple', compact('title', 'resultat'));
+        return $this->view('shop.search', compact('title', 'resultat'));
     }
 }

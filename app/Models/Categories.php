@@ -6,7 +6,7 @@ use App\Models\Model;
 use Database\DBConnection;
 
 
-class CategoriesModel extends Model
+class Categories extends Model
 {
     protected $id_categorie;
     protected $nom_categorie;

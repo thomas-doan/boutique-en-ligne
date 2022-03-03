@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Controllers\ProductController;
-use App\Controllers\CategoriesController;
+use App\Controllers\Components\ProductComponent;
+use App\Controllers\Components\CategoriesComponent;
 
-class AdministratorController extends Controller
+class AdminCreateProductController extends Controller
 {
     public $error = array();
     protected $Product;
@@ -13,8 +13,8 @@ class AdministratorController extends Controller
 
     public function __construct()
     {
-        $this->Product = New ProductController;
-        $this->Categories = new CategoriesController;
+        $this->Product = New ProductComponent;
+        $this->Categories = new CategoriesComponent;
     }
 
     //METHODE D'APPEL ADMIN
@@ -39,19 +39,11 @@ class AdministratorController extends Controller
 
         if($param == 'partie1')//Première partie du formulaire ___ Information dédier à la Table Article
         {
-            $Admin_function = array(
-                'titre_article' => $this->coverup_form('titre_article'),
-                'prix_article' => $this->coverup_form('prix_article'),
-                'presentation_article' => $this->coverup_form('presentation_article'),
-                'description_article' => $this->->coverup_form('description_article'),
-                
-            )
+            $Admin_function = new AdminCreateProductController;
             $compact = compact('param','Admin_function','title','error');
         }
         elseif($param == 'partie2')
         {
-            // $retour = $this->call_step_two();
-
             $this->Categories->wheneInsertCategories('ajouter_SAVEUR');
             $this->Categories->wheneInsertCategories('ajouter_PROVENENCE');
             $result_request = array(
@@ -70,7 +62,8 @@ class AdministratorController extends Controller
         }
         elseif($param == 'upload')
         {   if(
-            ($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
+            isset($_SESSION['nouvelarticle']['etape1'])
+            && ($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
             && !empty($_SESSION['nouvelarticle']['etape2']['PRINCIPALE'])
             && !empty($_SESSION['nouvelarticle']['etape2']['VARIÉTÉ'])
             && !empty($_SESSION['nouvelarticle']['etape2']['FORCE'])
@@ -96,7 +89,6 @@ class AdministratorController extends Controller
         $this->view('administrator.creerarticle', $compact);
     }
 
-
     //METHODE DE CONSTRUCTION
     
      /**
@@ -106,7 +98,7 @@ class AdministratorController extends Controller
      * @param string chemin vers l'image
      * @param string nom de l'image
      */
-    public function upload_image(?string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/', string $name_file)
+    public function upload_image(string $name_file, string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/')
     {
         $this->Product->verify_upload($name_file);
         $this->Product->stock_picture($chemin);
@@ -116,11 +108,10 @@ class AdministratorController extends Controller
         }
         if(isset($_SESSION['nouvelarticle']['image_article']))
         {
-        $this->Product->screen_result('/boutique-en-ligne/public/assets/pictures/pictures_product/', $_SESSION['nouvelarticle']['image_article']);
+        $this->Product->screen_result($_SESSION['nouvelarticle']['image_article'],'/boutique-en-ligne/public/assets/pictures/pictures_product/');
         }
         else $this->Product->screen_result();
     }
-
 
     /**
      * Enregistrer les information du formulaire dans un variable de session
@@ -201,7 +192,7 @@ class AdministratorController extends Controller
         {
             header('location: ./partie2');
         }
-        elseif(($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
+        elseif(isset($_SESSION['nouvelarticle']) && ($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
         && !empty($_SESSION['nouvelarticle']['etape2']['PRINCIPALE'])
         && !empty($_SESSION['nouvelarticle']['etape2']['VARIÉTÉ'])
         && !empty($_SESSION['nouvelarticle']['etape2']['FORCE'])

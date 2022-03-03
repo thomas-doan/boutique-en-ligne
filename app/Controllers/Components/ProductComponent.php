@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Components;
 
 use Database\DBConnection;
-use App\Models\ProductModel;
+use App\Models\Product;
 
-class ProductController extends ProductModel
+class ProductComponent extends Product
 {
     protected $model;
     public $error= [];
@@ -13,7 +13,7 @@ class ProductController extends ProductModel
     public function __construct()
     {
 
-        $this->model = new ProductModel();
+        $this->model = new Product();
        
     }
     /**
@@ -42,7 +42,7 @@ class ProductController extends ProductModel
      * Modifie le nom de l'image
      * @param string chemin d'enregistrement
      */
-    public function stock_picture(?string $chemin = '/boutique-en-lignepublic/assets/pictures/pictures_product/')
+    public function stock_picture(string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/')
     {
         if($this->verify_upload('image_article')==true)
         {
@@ -91,7 +91,7 @@ class ProductController extends ProductModel
      * @param string lein vers l'image
      * @param string Nome de l'image selectionner
      */
-    public function screen_result(?string $chemin = '/boutique-en-lignepublic/assets/pictures/pictures_product/',?string $nom_image = 'no_pict_product.jpg')
+    public function screen_result(string $nom_image = 'no_pict_product.jpg',string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/',)
     {
         ?>
             <img style="width: 200px;height: 200px;" src="<?=$chemin.$nom_image?>" alt="votre nouvelle image d'article'">

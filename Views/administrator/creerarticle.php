@@ -1,10 +1,13 @@
-<?php
-var_dump($_POST);
-var_dump($_SESSION);
-var_dump($error);
-echo 'Result request';
-
-?>
+<section>
+    <h3>Admin</h3>
+    <ul>
+        <li><a href="">Creer un Article ></a></li>
+        <li><a href="">Modifier un articles ></a></li>
+        <li><a href="">Gestion des stocks ></a></li>
+        <li><a href="">Historique de commande ></a></li>
+        <li><a href="">Gestion de livraison ></a></li>
+    </ul>
+</section>
     <p><?=$error?></p>
 <?php if($param == 'partie1') :?>
 
@@ -22,7 +25,7 @@ echo 'Result request';
         </fieldset>
         <fieldset>
             <legend>Ajouter une image</legend>
-            <?php $Admin_function->upload_image('public/assets/pictures/pictures_product/', 'image_article');?>
+            <?php $Admin_function->upload_image('image_article','public/assets/pictures/pictures_product/');?>
             <label for="image_article">Télécharger une image:</label>
             <input type="file" name="image_article">
             <input type="submit" name="upload_image" value="télécharger">

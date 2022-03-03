@@ -50,7 +50,7 @@ $router->map(
     'GET|POST',
     '/creerarticle/[*:param]',
     function ($param) {
-        $controller = new App\Controllers\AdministratorController();
+        $controller = new App\Controllers\AdminCreateProductController();
         $controller->CreatProduct($param);
 
     },

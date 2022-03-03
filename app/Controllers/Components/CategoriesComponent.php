@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Components;
 
-use App\Models\CategoriesModel;
+use App\Models\Categories;
 
-class CategoriesController extends CategoriesModel
+class CategoriesComponent extends Categories
 {
     /**
      * Renvoie l'ensemble des données selon le nom de la section
@@ -44,7 +44,7 @@ class CategoriesController extends CategoriesModel
             if(!empty($_POST['nom_'.$sections]))
             {
             $value = $_POST['nom_'.$sections];
-            $New_cat = new CategoriesModel;
+            $New_cat = new Categories;
             $New_cat->section = $sections;
             $New_cat->nom_categorie = $value;
 
@@ -56,12 +56,14 @@ class CategoriesController extends CategoriesModel
         }
     }
 
-
+    /**
+     * 
+     */
     public function printAllCategories($array)
     {
         foreach($array as $key => $value)
         {
-                if($key == 'FORCE'|| $key == 'fORCE')
+                if($key == 'FORCE')
                 {
                     $i = 1;
                     $result = '';

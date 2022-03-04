@@ -13,7 +13,7 @@ class shoppingCartController extends Controller
     public function index()
     {
 
-        $model = new Articles($this->getDB());
+        $model = new Articles();
         $articles = $model->findAll();
         $title = "panier";
         return $this->view('shop.panier', compact('articles', 'title'));
@@ -21,7 +21,7 @@ class shoppingCartController extends Controller
 
     public function shoppingBag()
     {
-      
+
         if (isset($_POST['add'])) {
             if (isset($_SESSION['quantite'])) {
                 // assignation valeur

@@ -32,10 +32,35 @@ $router->map(
     function ($param) {
         $controller = new App\Controllers\AdminCreateProductController();
         $controller->CreatProduct($param);
-
     },
     'creat product'
 );
+
+
+// CRUD Category
+$router->map(
+    'GET',
+    '/admin/categorie',
+    function () {
+        $controller = new App\Controllers\AdminCategoryController();
+        $controller->index();
+    },
+
+);
+
+$router->map(
+    'POST',
+    '/admin/categorie',
+    function () {
+        $controller = new App\Controllers\AdminCategoryController();
+        $controller->update();
+        $controller->create();
+        $controller->delete();
+    },
+
+);
+
+
 
 //PANIER
 $router->map(

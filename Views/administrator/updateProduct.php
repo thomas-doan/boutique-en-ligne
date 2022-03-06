@@ -1,6 +1,4 @@
-<?php var_dump($_POST);
- var_dump($_FILES);?>
-
+<a href="./liste">Revenir à la liste</a>
 <h3>Modification d'articles</h3>
 
 <?php if($param == 'liste'):?>

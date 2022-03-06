@@ -41,6 +41,11 @@ class AdminUpdateProductController extends Controller
         {
 
             $product = $this->Product->find(['id_article'],[':id_article'=>$id_article])[0];
+            if($product == null)
+            {
+                header('location: ./liste');
+                exit;
+            }
 
             $namPicture = explode('.',$product['image_article'])[0];
             $this->modifyPicture('image_article',$namPicture,'public/assets/pictures/pictures_product/');

@@ -12,7 +12,7 @@ class ProductComponent extends Product
 
     public function __construct()
     {
-
+        parent::__construct();
         $this->model = new Product();
        
     }
@@ -41,8 +41,9 @@ class ProductComponent extends Product
      * Traite l'image et l'ajoute dans un dossier donnée
      * Modifie le nom de l'image
      * @param string chemin d'enregistrement
+     * @param string Nom du fichier
      */
-    public function stock_picture(string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/')
+    public function stock_picture(string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/',?string $lastName = null)
     {
         if($this->verify_upload('image_article')==true)
         {
@@ -60,7 +61,11 @@ class ProductComponent extends Product
             if($approuve==true)
             {
             //si approuver, traitement du fichier
+                if(empty($lastName))
+                {
                 $explode_file[0] = uniqid(); //Renomage du fichier avec une string unique
+                }
+                else $explode_file[0] = $lastName; //Sinon on garde le nom choisi en param
                 $explode_file[1] = ".$explode_file[1]";//Ajout du dote avant concatenation
                 $_FILES['image_article']['name'] = $explode_file[0].$explode_file[1];//Concataination du nom et de l'exention
                 $im_miniature = $_FILES['image_article']['name'];
@@ -145,5 +150,87 @@ class ProductComponent extends Product
     public function useLastId()
     {
         return $this->db->lastInsertId();
+    }
+
+    /**
+     * Permet de selectionner l'ensemble des tableau correspondant à la valeur d'une clef donnée
+     * @param array Tableau sur lequel on va triller
+     * @param string Nom de la clef rechercher
+     * @param mixed (string|float|int) valeur à selectionner
+     * $obj = représente le tableau La table principale 
+     */
+    public function selectArrayByValue(array $array,?string $paramKey = null, mixed $paramValue = null)
+    {
+        if($paramValue==null)
+        {
+            return $array;
+        }
+        if(is_array($array[0]))
+        {
+            $result = [];
+            
+            $i = 0;
+            while(isset($array[$i]))
+            {
+                foreach($array[$i] as $key => $value)
+                {
+                    if($key==$paramKey && $value==$paramValue)
+                    {
+                        $result[] = $array[$i];
+                    }
+                }
+                $i++;
+            }
+
+            return $result;
+        }
+        else
+        {
+            foreach($array as $key => $value)
+                {
+                    if($key==$paramKey && $value==$paramValue)
+                    {
+                        return $array;
+                    }
+                }
+            return null;
+        }
+    }
+    
+    /**
+     * Permet de modifier les informations de l'article
+     * @param array Tableau venant d'un formulaire
+     * @param ,l'id du produit;
+     * @param string [Optionnel]Si l'image est traité dans un autre formulaire
+     * permet de l'envoyer indépendamment du traitement;
+     */
+    public function updateProduct(array $form,$idProduct, ?string $pictureFileName)
+    {   
+        $this->model->id = 'id_article';
+        $this->model->id_article = $idProduct;
+        if(!empty($pictureFileName))
+        {
+            $this->model->image_article = $pictureFileName;
+        }
+
+        $lastKey = array_key_last($form);
+        unset($form[$lastKey]);
+        foreach($form as $key => $value)
+        {
+            $this->model->$key = $value;
+        }
+
+        $NewArticle = $this->model;
+        $image_article = $this->model->image_article;
+        $titre_article = $this->model->titre_article;
+        $presentation_article = $this->model->presentation_article;
+        $description_article = $this->model->description_article;
+        $prix_article = (float)$this->model->prix_article;
+        $sku = (int)$this->model->sku;
+        $fournisseur = $this->model->fournisseur;
+        $conditionnement = $this->model->conditionnement;
+        $id_article = $idProduct;
+
+        $item = $this->update($NewArticle,compact('id_article','image_article','titre_article','presentation_article','description_article','prix_article','sku','fournisseur','conditionnement'));
     }
 }

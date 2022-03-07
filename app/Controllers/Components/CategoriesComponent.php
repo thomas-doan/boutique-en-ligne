@@ -6,6 +6,10 @@ use App\Models\Categories;
 
 class CategoriesComponent extends Categories
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
     /**
      * Renvoie l'ensemble des données selon le nom de la section
      * @param array Ensemble des critères à chercher
@@ -18,6 +22,8 @@ class CategoriesComponent extends Categories
         $item = $this->find($criteres, compact('section'));
         return $item;
     }
+
+    
 
     /**
      * Récupère le nom d'une catégorie par son Id

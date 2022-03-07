@@ -131,15 +131,43 @@ $router->map(
 //ADMIN
 $router->map(
     'GET|POST',
-    '/creerarticle/[*:param]',
+    '/admin/creerArticle/[*:param]',
     function ($param) {
         $controller = new App\Controllers\AdminCreateProductController();
         $controller->CreatProduct($param);
-
     },
     'creat product'
 );
 
+$router->map(
+    'GET|POST',
+    '/admin',
+    function () {
+        $controller = new App\Controllers\AdminCreateProductController();
+        $controller->index();
+    },
+    'Admin index'
+); 
+
+$router->map(
+    'GET|POST',
+    '/admin/modifierArticle/[*:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\AdminUpdateProductController();
+        $controller->index($id_article);
+    },
+    'update product'
+);
+
+$route->map(
+    'POST',
+    '/admin/restocker',
+    function (){
+        $controller = new App\Controllers\AdminUpdateSkuController();
+        $controller->index();
+    }
+);
+    
 //PANIER
 $router->map(
     'GET',

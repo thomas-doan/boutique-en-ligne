@@ -1,3 +1,4 @@
+<?php var_dump($order); ?>
 <article>
     <section>
         <h1>Commande N°<?= $order[0]['num_commande'] ?></h1>

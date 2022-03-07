@@ -55,6 +55,15 @@ $router->map(
     },
     'update product'
 );
+
+$route->map(
+    'POST',
+    '/admin/restocker',
+    function (){
+        $controller = new App\Controllers\AdminUpdateSkuController();
+        $controller->index();
+    }
+);
     
 //PANIER
 $router->map(

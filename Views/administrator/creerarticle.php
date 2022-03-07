@@ -1,3 +1,4 @@
+<?php var_dump($_SESSION);?>
 <section>
     <h3>Admin</h3>
     <ul>

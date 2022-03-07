@@ -79,10 +79,8 @@ abstract class Model
             return $this->requete($req, $donnees)->fetchAll();
         } else {
 
-            $selections = [];
+            $liste_selections = implode(', ', $selection);
 
-            // On boucle pour éclater le tableau
-            foreach ($selection as $valeur) {
 
                 $selections[] = "$valeur";
                 // valeur = valeur associé à l'index
@@ -92,7 +90,6 @@ abstract class Model
             }
 
             $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
-
 
             // On exécute la requête 
             return $this->requete($req, $donnees)->fetchAll();

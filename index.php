@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 
 use Exceptions\NotFoundException;
 
@@ -128,11 +127,25 @@ $router->map(
 );
 
 
+
+//ADMIN
+$router->map(
+    'GET|POST',
+    '/creerarticle/[*:param]',
+    function ($param) {
+        $controller = new App\Controllers\AdminCreateProductController();
+        $controller->CreatProduct($param);
+
+    },
+    'creat product'
+);
+
+//PANIER
 $router->map(
     'GET',
     '/panier',
     function () {
-        $controller = new App\Controllers\PanierController();
+        $controller = new App\Controllers\shoppingCartController();
         $controller->index();
     },
     'panier'
@@ -142,14 +155,15 @@ $router->map(
     'POST',
     '/panier',
     function () {
-        $controller = new App\Controllers\PanierController();
+        $controller = new App\Controllers\shoppingCartController();
         $controller->upValue();
         $controller->downValue();
+        $controller->shoppingBag();
+        $controller->deleteProduct();
+        $controller->totalPrice();
     },
     'panier post'
 );
-
-
 
 
 $match = $router->match();

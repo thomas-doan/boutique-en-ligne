@@ -1,5 +1,13 @@
-<!-- <?= $recup ?> -->
-<?php var_dump($allInfoById); ?>
+<!-- <?php var_dump($allInfoById); ?> -->
+<?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+    <?php endif; ?>
 <article>
     <form action="" method="post">
         <label for="nomAdresse">Nom de l'enregistrement : </label>
@@ -33,7 +41,7 @@
         <label for="telephone">Telephone : </label>
         <input type="tel" id="telephone" name="telephone" aria-required="true" value="<?= $allInfoById[0]['telephone'] ?>">
 
-        <input type="submit" name="mod" value="mod">
+        <input type="submit" name="modifier" value="modifier">
         <input type="submit" name="supprimer" value="supprimer">
     </form>
 </article>

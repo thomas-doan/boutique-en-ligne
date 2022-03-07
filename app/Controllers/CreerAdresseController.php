@@ -4,15 +4,19 @@ namespace App\Controllers;
 
 use App\Models\Adresses;
 
-class AdresseController extends Controller
+class CreerAdresseController extends Controller
 {
     protected $model;
 
     public function index()
     {
+        $title = "Créer Adresse";
+        return $this->view('profil.creerAdresse', compact('title'));
+    }
+
+    public function createAdresse()
+    {
         $model = new Adresses();
-        $title = "Adresse de livraison";
-        $userAdress = $this->getAdress();
 
         if (isset($_POST['submit'])) {
             $nom_adresse = $_POST['nomAdresse'];
@@ -41,15 +45,5 @@ class AdresseController extends Controller
                 header('Location: ./adresse');
             }
         }
-        return $this->view('profil.Adresse', compact('title', 'userAdress'));
-    }
-
-    public function getAdress()
-    {
-        $model = new Adresses();
-        $argument = ['fk_id_utilisateur'];
-        $fk_id_utilisateur = $_SESSION['id_utilisateur'];
-        $userAdress = $model->find($argument, compact('fk_id_utilisateur'));
-        return $userAdress;
     }
 }

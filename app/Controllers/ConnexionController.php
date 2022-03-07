@@ -27,8 +27,8 @@ class ConnexionController extends Controller
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez remplir tout les champs";
             } else {
 
-                $criteres = ['email'];
-                $checkUser = $model->find($criteres, compact('email'));
+                $argument = ['email'];
+                $checkUser = $model->find($argument, compact('email'));
                 if (password_verify(@$mdp, @$checkUser[0]['password'])) {
                     $user = $model
                         ->setId_utilisateur((int)$checkUser[0]['id_utilisateur'])
@@ -50,6 +50,7 @@ class ConnexionController extends Controller
                 } else {
 
                     $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est inccorecte";
+                    header('Location: ./connexion');
                 }
             }
         }

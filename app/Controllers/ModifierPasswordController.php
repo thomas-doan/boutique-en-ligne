@@ -25,8 +25,8 @@ class ModifierPasswordController extends Controller
             $confirmMdp = $_POST['confirmMdp'];
             $id_utilisateur =  $_SESSION['id_utilisateur'];
 
-            $criteres = ['id_utilisateur'];
-            $checkUser = $model->find($criteres, compact('id_utilisateur'));
+            $argument = ['id_utilisateur'];
+            $checkUser = $model->find($argument, compact('id_utilisateur'));
 
             if (empty($ancienMdp) || empty($nouveauMdp) || empty($confirmMdp)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez renseigner tout les champs !";

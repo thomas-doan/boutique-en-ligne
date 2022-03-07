@@ -8,8 +8,6 @@
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <!-- <?php session_destroy(); ?> -->
-
     <?php if (isset($_SESSION['flash'])) :  ?>
         <?php unset($_SESSION['flash']) ?>
     <?php endif; ?>

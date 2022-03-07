@@ -1,21 +1,29 @@
 <?php var_dump($_SESSION); ?>
 <article>
     <h1>Adresse de Livraison</h1>
+    <?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
+    <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+    <?php endif; ?>
     <section>
 
         <?php for ($i = 0; $i <= 2; $i++) : ?>
-            <?php if (isset($userAdresse[$i])) : ?>
-                <p><?= $userAdresse[$i]['nom_adresse'] ?></p>
-                <button><a href="./adresse/modifierAdresse/<?= $userAdresse[$i]['id_adresse'] ?>">Modifier</a></button><br>
+            <?php if (isset($userAdress[$i])) : ?>
+                <p><?= $userAdress[$i]['nom_adresse'] ?></p>
+                <button><a href="./adresse/modifierAdresse/<?= $userAdress[$i]['id_adresse'] ?>">Modifier</a></button><br>
             <?php else : ?>
-                <a href="">Nouvelle adresse</a>
+                <a href="./adresse/creerAdresse">Nouvelle adresse</a>
             <?php endif; ?>
         <?php endfor; ?>
 
     </section>
 
-    <?php if (count($userAdresse) < 3) : ?>
+    <?php if (count($userAdress) < 3) : ?>
         <form action="" method="post">
             <label for="nomAdresse">Nom de l'enregistrement : </label>
             <input type="text" id="nomAdresse" name="nomAdresse" aria-required="true">

@@ -40,8 +40,8 @@ class InscriptionController extends Controller
                     $erreur = true;
                 }
             }
-            $criteres = ['email'];
-            $checkEmail = $model->find($criteres, compact('email'));
+            $argument = ['email'];
+            $checkEmail = $model->find($argument, compact('email'));
 
             if ($checkEmail == TRUE) {
                 $_SESSION['flash']['erreur'] = "Oups ! L'email n'est pas disponible";

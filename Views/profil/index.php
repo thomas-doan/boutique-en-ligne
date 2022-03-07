@@ -19,7 +19,7 @@
             <li><a href="profil/modifierProfil">Modifier mon profil</a></li>
             <li><a href="profil/modifierMotdePasse">Modifier mon mot de passe</a></li>
             <li><a href="profil/adresse">Adresse de livraison</a></li>
-            <li><a href="profil/historique">Historique de commande</a></li>
+            <li><a href="profil/historiqueCommande">Historique de commande</a></li>
         </ul>
     </section>
     <hr>

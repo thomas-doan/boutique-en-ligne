@@ -34,8 +34,8 @@ class ModifierProfilController extends Controller
             if (empty($email)) {
                 $user->setEmail($_SESSION['email']);
             } else {
-                $criteres = ['email'];
-                $checkEmail = $model->find($criteres, compact('email'));
+                $argument = ['email'];
+                $checkEmail = $model->find($argument, compact('email'));
                 if ($checkEmail == TRUE) {
                     $_SESSION['flash']['erreur'] = "Oups ! L'email n'est pas disponible";
                     $user->setEmail($_SESSION['email']);

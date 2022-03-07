@@ -69,7 +69,7 @@ $router->map(
     function () {
         $controller = new App\Controllers\AdresseController();
         $controller->index();
-        $controller->getAdresse();
+        $controller->getAdress();
     },
 );
 
@@ -79,8 +79,40 @@ $router->map(
     function ($id_adresse) {
         $controller = new App\Controllers\ModifierAdresseController();
         $controller->index($id_adresse);
-        $controller->getAdressebyId($id_adresse);
         $controller->updateAdresse($id_adresse);
+        $controller->getAdressebyId($id_adresse);
+        $controller->deleteAdresse($id_adresse);
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/adresse/creerAdresse',
+    function () {
+        $controller = new App\Controllers\CreerAdresseController();
+        $controller->index();
+        $controller->createAdresse();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/historiqueCommande',
+    function () {
+        $controller = new App\Controllers\HistoriqueController();
+        $controller->index();
+        // $controller->getCommande();
+    },
+);
+
+$router->map(
+    'GET|POST',
+    '/profil/historiqueCommande/commande/[i:id_commande]',
+    function ($id_commande) {
+        $controller = new App\Controllers\CommandeController();
+        $controller->index($id_commande);
+
+        // $controller->getCommandebyId($id_commande);
     },
 );
 

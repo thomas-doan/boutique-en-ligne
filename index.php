@@ -159,13 +159,14 @@ $router->map(
     'update product'
 );
 
-$route->map(
-    'POST',
-    '/admin/restocker',
+$router->map(
+    'GET|POST',
+    '/admin/gestiondestock',
     function (){
         $controller = new App\Controllers\AdminUpdateSkuController();
         $controller->index();
-    }
+    },
+    'gestion de stock'
 );
     
 //PANIER

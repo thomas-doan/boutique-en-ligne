@@ -206,7 +206,7 @@ class ProductComponent extends Product
      */
     public function updateProduct(array $form,$idProduct, ?string $pictureFileName)
     {   
-        $this->model->id = 'id_article';
+        
         $this->model->id_article = $idProduct;
         if(!empty($pictureFileName))
         {
@@ -232,5 +232,19 @@ class ProductComponent extends Product
         $id_article = $idProduct;
 
         $item = $this->update($NewArticle,compact('id_article','image_article','titre_article','presentation_article','description_article','prix_article','sku','fournisseur','conditionnement'));
+    }
+
+    /**
+     * Permet d'Update le nombre d'unité en stocke
+     * @param array fomrulaire de reception
+     */
+    public function updateSku(array $form)
+    {
+        if(!empty($form['sku'])&& !empty($form['id_article']))
+        {
+            $req="UPDATE `articles` SET `sku`= :sku WHERE `id_article`= :id_article;";
+
+            $this->requete($req, $form);
+        }
     }
 }

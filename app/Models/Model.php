@@ -82,12 +82,19 @@ abstract class Model
             $liste_selections = implode(', ', $selection);
 
 
+                // $selections[] = "$valeur";
+                // valeur = valeur associé à l'index
+
+                // On transforme le tableau champs en une string
+                // $liste_selections = implode(',', $selections);
+            }
+
             $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
 
             // On exécute la requête 
             return $this->requete($req, $donnees)->fetchAll();
-        }
     }
+    
 
     /**
      * Methode qui permet de récupérer tout les enregistrements d'une table
@@ -193,7 +200,6 @@ abstract class Model
 
         // On exécute la requête 
         $req = "UPDATE  $this->table SET $liste_champs WHERE {$this->id} = :{$this->id}";
-
         return $this->requete($req, $donnees);
     }
 

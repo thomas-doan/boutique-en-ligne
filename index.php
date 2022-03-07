@@ -67,25 +67,47 @@ $router->map(
     'GET',
     '/panier',
     function () {
-        $controller = new App\Controllers\shoppingCartController();
+        $controller = new App\Controllers\ShoppingCartController();
         $controller->index();
     },
     'panier'
 );
 
+
+//Commande
+$router->map(
+    'GET/POST',
+    '/commande/[i:id]',
+    function ($id) {
+        $controller = new App\Controllers\OrderController();
+        $controller->index($id);
+    },
+    'commande'
+);
+
+
+//PANIER
+
+
 $router->map(
     'POST',
     '/panier',
     function () {
-        $controller = new App\Controllers\shoppingCartController();
+        $controller = new App\Controllers\ShoppingCartController();
         $controller->upValue();
         $controller->downValue();
         $controller->shoppingBag();
         $controller->deleteProduct();
+        $controller->singlePrice();
         $controller->totalPrice();
     },
     'panier post'
 );
+
+
+
+
+
 
 
 $match = $router->match();

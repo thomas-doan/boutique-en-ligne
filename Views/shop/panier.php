@@ -1,11 +1,8 @@
    <?php
 
-    /*     if (!isset($_SESSION['quantite'])) {
-        $_SESSION['quantite']['1'] = 1;
-        $_SESSION['quantite']['2'] = 1;
-        $_SESSION['quantite']['3'] = 1;
-        $_SESSION['quantite']['4'] = 1;
-    } */
+    if (!isset($_SESSION['fk_id_utilisateur'])) {
+        $_SESSION['fk_id_utilisateur'] = 1;
+    }
 
 
 
@@ -19,6 +16,9 @@
 
     var_dump($_SESSION['prix']);
     echo "<br>";
+
+
+    var_dump($_SESSION['singlePrice']);
     ?>
 
 
@@ -64,6 +64,10 @@
 
        <?php } ?>
 
+       <p>prix : <?php if (isset($_SESSION['singlePrice'][$article['id_article']])) {
+                        echo $_SESSION['singlePrice'][$article['id_article']];
+                    }  ?></p>
+
 
    <?php }
     $resultat = 0;
@@ -75,3 +79,8 @@
    <p> nombre total d'articles : <?= $resultat ?> </p>
 
    <p>Prix total : <?= $_SESSION['totalPrice']  ?> </p>
+
+   <form action="./commande/<?= $_SESSION['fk_id_utilisateur'] ?>" method="post">
+       <input name="fk_id_utilisateur" value="$_SESSION['fk_id_utilisateur']" type="hidden">
+       <input name="checkout" value="commandé" type="submit">
+   </form>

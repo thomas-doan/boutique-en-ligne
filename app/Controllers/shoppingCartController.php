@@ -7,7 +7,7 @@ namespace App\Controllers;
 use App\Models\Articles;
 
 
-class shoppingCartController extends Controller
+class ShoppingCartController extends Controller
 {
 
     public function index()
@@ -82,6 +82,30 @@ class shoppingCartController extends Controller
             header('location: ./panier');
         }
     }
+
+
+    public function singlePrice()
+    {
+
+        if (isset($_SESSION['quantite'])) {
+            $_SESSION['singlePrice'] = [];
+
+            $result = 0;
+            foreach ($_SESSION['quantite'] as $key1 => $value1) {
+                foreach ($_SESSION['prix'] as $key2 => $value2) {
+                    if ($key1 == $key2) {
+
+                        $result = $value1 * $value2;
+
+
+                        $_SESSION['singlePrice'][$key1]  = $result;
+                    }
+                }
+            }
+        }
+    }
+
+
 
     public function totalPrice()
     {

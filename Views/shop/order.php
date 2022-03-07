@@ -1,0 +1,1 @@
+<p> c'est la commande de : <?= $info_user[0]['prenom'] ?></p>

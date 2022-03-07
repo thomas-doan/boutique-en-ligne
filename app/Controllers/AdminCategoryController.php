@@ -57,6 +57,7 @@ class AdminCategoryController extends Controller
         }
     }
 
+
     public function create()
     {
         if (isset($_POST['create_cat'])) {

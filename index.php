@@ -159,7 +159,7 @@ $router->map(
     'update product'
 );
 
-$route->map(
+$router->map(
     'POST',
     '/admin/restocker',
     function (){
@@ -193,6 +193,15 @@ $router->map(
     'panier post'
 );
 
+//SHOP
+$router->map(
+    'GET|POST',
+    '/boutique/[*:param]',
+    function ($param){
+        $controller = new App\Controllers\BoutiqueSearchController();
+        $controller->index($param);
+    }
+);
 
 $match = $router->match();
 if (is_array($match)) {

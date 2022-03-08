@@ -1,4 +1,4 @@
-<a href="./liste">Revenir à la liste</a>
+
 <h3>Modification d'articles</h3>
 
 <?php if($param == 'liste'):?>
@@ -44,6 +44,7 @@
 <?php endif;?>
 
 <?php if($param !== 'liste'):?>
+    <a href="./liste">Revenir à la liste</a>
     <form action="./<?=$param?>" method="post" name="info_article_pincipal" enctype="multipart/form-data">
         <fieldset>
             <legend>Modifier l'image</legend>

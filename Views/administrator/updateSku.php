@@ -17,11 +17,11 @@
             <td><?=$value['sku']?></td>
             <td>
                 <form action="#<?=$value['id_article']?>" method="POST">
-                    <?php if(empty($_POST['enterForm'.$value['id_article']])):?>
-                        <button type="submit" name="enterForm<?=$value['id_article']?>" value="<?=$value['id_article']?>">Restocker</button>
+                    <?php if(empty($_POST['enterFormNow'.$value['id_article']])):?>
+                        <button type="submit" name="enterFormNow<?=$value['id_article']?>">Restocker</button>
                     <?php else :?>
                         <input type="text" name="sku" value="<?=$value['sku']?>">
-                        <button type="submit" name="id_article" value="<?=$value['id_article']?>">Valider</button>
+                        <button type="submit" name="id_article" value="<?=$value['id_article']?>">Ajouter au Stock</button>
                     <?php endif;?>
                 </form>
             </td>
@@ -70,8 +70,8 @@
                     <?php if(empty($_POST['enterForm'.$value['id_article']])):?>
                         <button type="submit" name="enterForm<?=$value['id_article']?>" value="<?=$value['id_article']?>">Restocker</button>
                     <?php else :?>
-                        <input type="text" name="sku" value="<?=$value['sku']?>">
-                        <button type="submit" name="id_article" value="<?=$value['id_article']?>">Valider</button>
+                        <input type="text" name="sku">
+                        <button type="submit" name="id_article" value="<?=$value['id_article']?>">Ajouter au Stock</button>
                     <?php endif;?>
                 </form>
             </td>

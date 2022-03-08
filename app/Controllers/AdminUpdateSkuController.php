@@ -23,7 +23,7 @@ class AdminUpdateSkuController extends Controller
     {
         $title = 'Admin | Gestion de Stock';
         $this->Product->updateSku($_POST);
-        $urgentStock = $this->stockNow();
+        $urgentStock = $this->Product->stockNow();
 
         $titre_article = $_GET['recherche'];
         $urlRedirect = $this->modifLinkget('&PRINCIPALE');
@@ -62,22 +62,5 @@ class AdminUpdateSkuController extends Controller
         return $result;
     }
 
-    public function stockNow()
-    {
-        $allsTock = $this->Product->getAllProductForUpdate(['ASC'=>'sku']);
-        $arrayStockNow = [];
-        $i = 0;
-            while(isset($allsTock[$i]))
-            {
-                foreach($allsTock[$i] as $key => $value)
-                {
-                    if($key=='sku' && $value<=10)
-                    {
-                        $arrayStockNow[] = $allsTock[$i];
-                    }
-                }
-                $i++;
-            }
-        return $arrayStockNow;
-    }
+
 }

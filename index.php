@@ -159,7 +159,7 @@ $router->map(
     'update product'
 );
 
-$route->map(
+$router->map(
     'POST',
     '/admin/restocker',
     function (){
@@ -167,6 +167,20 @@ $route->map(
         $controller->index();
     }
 );
+
+$router->map(
+    'GET|POST',
+    '/admin/gestionUtilisateur/[*:param]',
+    function ($param){
+        $controller = new App\Controllers\AdminUpdateUserController();
+        $controller->index($param);
+        $controller->getUser($param);
+        $controller->deleteUser($param);
+        $controller->UpdateUser($param);
+    }
+);
+
+
     
 //PANIER
 $router->map(

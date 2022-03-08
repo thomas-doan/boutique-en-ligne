@@ -8,7 +8,8 @@ use Database\DBConnection;
 class Articles extends Model
 
 {
-
+    protected $table = 'articles';
+    protected $id = 'id_article';
     public function test()
     {
 
@@ -22,6 +23,24 @@ class Articles extends Model
     }
 
 
-    protected $table = 'articles';
-    protected $id = 'id_article';
+    public function upValue($id, $augmenter)
+    {
+        $req = "UPDATE articles SET sku = sku + :augmenter  WHERE id_article = :id_article";
+        $stmt = $this->pdo->prepare($req);
+        $stmt->execute(array(
+            ":id_article" => $id,
+            ":augmenter" => $augmenter
+        ));
+    }
+
+
+    public function downValue($id, $diminuer)
+    {
+        $req = "UPDATE articles SET sku = sku - :diminuer WHERE id_article =:id_article";
+        $stmt = $this->pdo->prepare($req);
+        $stmt->execute(array(
+            ":id_article" => $id,
+            ":diminuer" => $diminuer
+        ));
+    }
 }

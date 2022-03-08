@@ -76,7 +76,7 @@ abstract class Model
 
 
             // On exécute la requête 
-            return $this->requete($req, $donnees)->fetchAll();
+            return $this->requete($req, $donnees)->fetch();
         } else {
 
             $liste_selections = implode(', ', $selection);
@@ -85,7 +85,7 @@ abstract class Model
             $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
 
             // On exécute la requête 
-            return $this->requete($req, $donnees)->fetchAll();
+            return $this->requete($req, $donnees)->fetch();
         }
     }
 

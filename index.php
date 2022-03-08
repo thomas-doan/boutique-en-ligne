@@ -81,6 +81,7 @@ $router->map(
     function ($id) {
         $controller = new App\Controllers\OrderController();
         $controller->index($id);
+        $controller->orderResume();
     },
     'commande'
 );

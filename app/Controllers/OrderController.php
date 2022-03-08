@@ -16,6 +16,7 @@ class OrderController extends Controller
 
 
         $this->model = new Utilisateurs();
+        $this->modelArticle = new Articles();
     }
 
 
@@ -23,10 +24,13 @@ class OrderController extends Controller
     {
 
         $info_user = $this->getUser($id);
+        $orderCheck = $this->orderResume();
 
-
+        echo "<pre>";
+        var_dump($orderCheck);
+        echo "</pre>";
         $title = "Commande - Kawa";
-        return $this->view('shop.order', compact('title', 'info_user'));
+        return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
     }
 
     public function getUser($id)
@@ -41,6 +45,21 @@ class OrderController extends Controller
     }
 
 
+    public function orderResume()
+    {
+        $checkQuantity = [];
+
+        $argument = ['id_article'];
+        foreach ($_SESSION['quantite'] as $id_article => $value) {
+            $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'));
+            /*        foreach ($_SESSION['quantite'] as $key2 => $value2) {
+            } */
+        }
+
+
+
+        return $checkQuantity;
+    }
 
 
     /*    public function totalPrice()

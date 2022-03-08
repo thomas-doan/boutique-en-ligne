@@ -10,11 +10,17 @@ use App\Models\Articles;
 class ShoppingCartController extends Controller
 {
 
+    public function __construct()
+    {
+
+        $this->modelArticle = new Articles();
+    }
+
     public function index()
     {
 
-        $model = new Articles();
-        $articles = $model->findAll();
+
+        $articles = $this->modelArticle->findAll();
         $title = "panier";
         return $this->view('shop.panier', compact('articles', 'title'));
     }
@@ -53,8 +59,18 @@ class ShoppingCartController extends Controller
 
             $up =  $_POST['upQuantity'];
             $id_article =  (int) $_POST['id_article'];
+            $argument = ['id_article'];
 
-            $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] + $up;
+            $checkQuantity = [];
+
+            $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'));
+
+
+            if (($_SESSION['quantite'][$id_article] + $up)  <= $checkQuantity[$id_article]['sku']) {
+                $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] + $up;
+            } else {
+                $_SESSION['flash']['quantity'] = "Le stock est vide !";
+            }
 
             header('location: ./panier');
         }

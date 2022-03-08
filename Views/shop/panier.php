@@ -24,6 +24,12 @@
 
    <p> c'est le panier </p>
 
+   <?php if (isset($_SESSION['flash'])) : ?>
+       <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+           <div><?= $message; ?></div>
+       <?php endforeach; ?>
+   <?php endif; ?>
+
    <br>
    <?php
 
@@ -45,7 +51,7 @@
                <button name="downQuantity" value="1" type="submit"> - </button>
            </form>
        <?php } ?>
-
+       <p>Nombre : <?= $_SESSION['quantite'][$article['id_article']]  ?></p>
 
 
        <form action="" method="post">
@@ -78,7 +84,7 @@
 
    <p> nombre total d'articles : <?= $resultat ?> </p>
 
-   <p>Prix total : <?= $_SESSION['totalPrice']  ?> </p>
+   <p>Prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
 
    <form action="./commande/<?= $_SESSION['fk_id_utilisateur'] ?>" method="post">
        <input name="fk_id_utilisateur" value="$_SESSION['fk_id_utilisateur']" type="hidden">

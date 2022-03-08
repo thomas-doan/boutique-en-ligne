@@ -82,6 +82,8 @@ $router->map(
         $controller = new App\Controllers\OrderController();
         $controller->index($id);
         $controller->orderResume();
+        $controller->adressCheck();
+        $controller->getAdress($id);
     },
     'commande'
 );

@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Models\Articles;
 use App\Models\Utilisateurs;
+use App\Models\Adresses;
 
 
 class OrderController extends Controller
@@ -17,6 +18,7 @@ class OrderController extends Controller
 
         $this->model = new Utilisateurs();
         $this->modelArticle = new Articles();
+        $this->modelAdresses = new Adresses();
     }
 
 
@@ -25,10 +27,14 @@ class OrderController extends Controller
 
         $info_user = $this->getUser($id);
         $orderCheck = $this->orderResume();
-
-
         $title = "Commande - Kawa";
-        return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
+
+        if ($this->adressCheck()) {
+            $adress = $this->adressCheck();
+            return $this->view('shop.order', compact('title', 'info_user', 'orderCheck', 'adress'));
+        } else {
+            return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
+        };
     }
 
     public function getUser($id)
@@ -61,10 +67,30 @@ class OrderController extends Controller
     public function adressCheck()
     {
 
-        $fk_id_utilisateur =
-            $argument = ['fk_id_utilisateur'];
-        $resultat = $this->model->find($argument, compact('fk_id_utilisateur'));
+        $fk_id_utilisateur = $_SESSION['id_utilisateur'];
+        $argument = ['fk_id_utilisateur'];
+        $adresse = $this->modelAdresses->find($argument, compact('fk_id_utilisateur'));
+
+        foreach ($adresse as $key => $value) {
+            $resultat[$value['id_adresse']] = $value;
+        }
+
+
+
+        return $resultat;
     }
+
+    public function getAdress($id)
+    {
+        $id_user = $id;
+        if (isset($_POST['id_adresse'])) {
+            $_SESSION['select_adress'] = $_POST['id_adresse'];
+
+            header("location: ./$id_user");
+        }
+    }
+
+
 
     /*    public function totalPrice()
     {

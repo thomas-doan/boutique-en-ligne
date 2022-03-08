@@ -1,7 +1,7 @@
    <?php
 
-    if (!isset($_SESSION['fk_id_utilisateur'])) {
-        $_SESSION['fk_id_utilisateur'] = 1;
+    if (!isset($_SESSION['id_utilisateur'])) {
+        $_SESSION['id_utilisateur'] = 1;
     }
 
 
@@ -84,7 +84,7 @@
 
    <p>Prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
 
-   <form action="./commande/<?= $_SESSION['fk_id_utilisateur'] ?>" method="post">
-       <input name="fk_id_utilisateur" value="$_SESSION['fk_id_utilisateur']" type="hidden">
+   <form action="./commande/<?= $_SESSION['id_utilisateur'] ?>" method="post">
+       <input name="fk_id_utilisateur" value="$_SESSION['id_utilisateur']" type="hidden">
        <input name="checkout" value="commandé" type="submit">
    </form>

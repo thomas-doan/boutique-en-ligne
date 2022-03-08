@@ -1,12 +1,25 @@
-<p> c'est la commande de : <?= $info_user['prenom'] ?></p>
+<p> c'est la commande de : <?= $info_user[0]['prenom'] ?></p>
 <p> Vos informations : </p>
 
 
-
-
-
-
 <form action="" method="post">
+
+    <?php
+
+    if (isset($adress)) {
+
+    ?>
+        <label> Vos adresses : </label>
+
+
+        <?php foreach ($adress as $value) { ?>
+
+            <button type="submit" name="id_adresse" value="<?= $value['id_adresse'] ?>"><?= $value['nom_adresse'] ?></button>
+
+        <?php } ?>
+
+    <?php } ?>
+
 
     <H3> Contact </H3>
 
@@ -21,25 +34,44 @@
 
     <H3> Adresse </H3>
 
+
     <label> Personnaliser votre adresse : </label>
-    <input name="nom_adresse" value="" type="text">
+    <input name="nom_adresse" value="<?php if (isset($_SESSION['select_adress'])) {
+                                            $id  = $_SESSION['select_adress'];
+                                            echo $adress[$id]['nom_adresse'];
+                                        } ?>" type="text">
 
     <label> Adresse : </label>
-    <input name="voie" value="" type="text">
+    <input name="voie" value="<?php if (isset($_SESSION['select_adress'])) {
+                                    $id  = $_SESSION['select_adress'];
+                                    echo $adress[$id]['voie'];
+                                } ?>" type="text">
 
     <label> Complement : </label>
-    <input name="voie_sup" value="" type="text">
+    <input name="voie_sup" value="<?php if (isset($_SESSION['select_adress'])) {
+                                        $id  = $_SESSION['select_adress'];
+                                        echo $adress[$id]['voie_sup'];
+                                    } ?>" type="text">
 
     <label> Code Postal : </label>
-    <input name="code_postale" value="" type="text">
+    <input name="code_postal" value="<?php if (isset($_SESSION['select_adress'])) {
+                                            $id  = $_SESSION['select_adress'];
+                                            echo $adress[$id]['code_postal'];
+                                        } ?>" type="text">
 
     <label> Ville : </label>
-    <input name="ville" value="" type="text">
+    <input name="ville" value="<?php if (isset($_SESSION['select_adress'])) {
+                                    $id  = $_SESSION['select_adress'];
+                                    echo $adress[$id]['ville'];
+                                } ?>" type="text">
 
     <label> Pays : </label>
-    <input name="pays" value="" type="text">
+    <input name="pays" value="<?php if (isset($_SESSION['select_adress'])) {
+                                    $id  = $_SESSION['select_adress'];
+                                    echo $adress[$id]['pays'];
+                                } ?>" type="text">
 
-    <button name="delete_cat" type="submit"> Suppr categorie </button>
+    <button name="submit" type="submit"> Enregistrer et continuer </button>
 </form>
 
 
@@ -47,7 +79,7 @@
 <?php foreach ($orderCheck as $key1 => $value1) {
     foreach ($_SESSION['quantite'] as $key2 => $value2) {
         if ($key1 == $key2) { ?>
-            Article <?= $value1['titre_article'] ?>, <?= $_SESSION['quantite'][$key1]  ?> Qte = <?php echo $_SESSION['singlePrice'][$key1] ?>euro ;
+            Article <?= $value1[0]['titre_article'] ?>, <?= $_SESSION['quantite'][$key1]  ?> Qte = <?php echo $_SESSION['singlePrice'][$key1] ?>euro ;
 
 <?php
         }

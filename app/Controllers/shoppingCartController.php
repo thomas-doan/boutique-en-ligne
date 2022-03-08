@@ -66,7 +66,7 @@ class ShoppingCartController extends Controller
             $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'));
 
 
-            if (($_SESSION['quantite'][$id_article] + $up)  <= $checkQuantity[$id_article]['sku']) {
+            if (($_SESSION['quantite'][$id_article] + $up)  <= $checkQuantity[$id_article][0]['sku']) {
                 $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] + $up;
             } else {
                 $_SESSION['flash']['quantity'] = "Le stock est vide !";

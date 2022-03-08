@@ -36,8 +36,6 @@
     foreach ($articles as $article) { ?>
 
 
-
-
        <?php
         if (isset($_SESSION['quantite'])) { ?>
            <form action="" method="post">

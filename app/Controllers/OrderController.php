@@ -26,9 +26,7 @@ class OrderController extends Controller
         $info_user = $this->getUser($id);
         $orderCheck = $this->orderResume();
 
-        echo "<pre>";
-        var_dump($orderCheck);
-        echo "</pre>";
+
         $title = "Commande - Kawa";
         return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
     }
@@ -56,11 +54,17 @@ class OrderController extends Controller
             } */
         }
 
-
-
         return $checkQuantity;
     }
 
+
+    public function adressCheck()
+    {
+
+        $fk_id_utilisateur =
+            $argument = ['fk_id_utilisateur'];
+        $resultat = $this->model->find($argument, compact('fk_id_utilisateur'));
+    }
 
     /*    public function totalPrice()
     {

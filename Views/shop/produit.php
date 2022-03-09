@@ -2,11 +2,17 @@
 <!-- <?php var_dump($categories);?> -->
 <!-- <?php var_dump($comments);?> -->
 <!-- <?php var_dump($CatOfProduct); ?> -->
+<!-- <?php var_dump($likes);?> -->
 <?php var_dump($_SESSION);?>
 <article>
     <h1><?= $product[0]['titre_article']?></h1>
-    <img src="public/assets/pictures/pictures_product/621f4a016ac50.jpg" alt="Image du produit">
-    <p>Nb like</p>
+    <img src="../public/assets/pictures/pictures_product/<?=$product[0]['image_article']?>" alt="Image du produit">
+    <div>
+        <form action="" method="post">
+            <button type="submit" name="like"><img src="../public/img/Icon_Like-test.png" alt="Icon like"></button>
+        </form>
+        <p><?=$likes?></p>
+    </div>
     <p><?= $product[0]['prix_article']?>€</p>
     <ul>
         <li>Provenence : <?=$CatOfProduct['origin'][0]['nom_categorie'] ?></li>

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Categories;
 use App\Models\Product;
 use App\Models\Commentaires;
+use App\Models\Like;
 
 class ProductController extends Controller
 {
@@ -14,6 +15,7 @@ class ProductController extends Controller
         $this->Comments = new Commentaires;
         $this->Product = New Product;
         $this->Categories = New Categories;
+        $this->Like = new Like;
     }
 
     public function index($id_article)
@@ -21,6 +23,7 @@ class ProductController extends Controller
         $title = "Produit";
         $comments = $this->Comments->getCommentbyId($id_article);
         $product = $this->getProductById($id_article);
+        $likes = $this->getLike($id_article);
         // $categories = $this->getCatByIdProduct($id_article);
         $CatOfProduct = array(
             'variete' => $this->Categories->getSectionCatByIdProduct($id_article,'VARIÉTÉ'),
@@ -31,7 +34,7 @@ class ProductController extends Controller
             );
         $this->addComment($id_article);
 
-        return $this->view('shop.produit', compact('title', 'comments', 'product', 'CatOfProduct'));
+        return $this->view('shop.produit', compact('title', 'comments', 'product', 'CatOfProduct', 'likes'));
     }
 
     public function getProductById($id_article){
@@ -56,6 +59,31 @@ class ProductController extends Controller
                 $this->Comments->insertComment($content, $author,$id_article);
                 header("Refresh:0");
                 exit();
+            }
+        }
+    }
+
+    public function getLike($id_article)
+    {
+        $result = $this->Like->getLikeByArticle($id_article);
+        return $result;
+    }
+
+    public function Like($id_article)
+    {
+        $argument = ['id_utilisateur'];
+        $fk_id_utilisateur = $_SESSION['id_utilisateur'];
+        $fk_id_article = $id_article;
+        // $checkLike = $this->Like->find($argument, compact('fk_id_utilisateur'));
+        $checkLike = $this->Like->getLike($fk_id_utilisateur);
+        
+        if(isset($_POST['like']))
+        {
+            if($checkLike == false)
+            {
+                $this->Like->insertLike($id_article, $fk_id_utilisateur);   
+            } else {
+                $this->Like->deleteLike($id_article, $fk_id_utilisateur);   
             }
         }
     }

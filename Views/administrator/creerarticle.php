@@ -84,6 +84,29 @@
         ?>
         </fieldset>
         <fieldset>
+            <legend>Provenence</legend>
+            <p>Définir la région originaire du café</p>
+
+            <label for="liste_provenence">Liste des provenences :</label>
+            <input list="all_provenence" name="PROVENENCE" id="liste_provenence">
+            <datalist id="all_provenence">
+            
+        <?php
+        foreach($result_request['origin'] as $value)
+        {
+            ?>
+                <option value = "<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></option>
+            <?php
+        }
+        ?>
+        </datalist>
+
+        <label for="nouvelle_PROVENENCE">Ajouter une nouvelle provenence</label>
+        <input type="text" name="nom_PROVENENCE" id="nouvelle_PROVENENCE">
+        <input type="submit" name="ajouter_PROVENENCE" value="Ajouter la provenece">
+
+        </fieldset>
+        <fieldset>
             <legend>Saveur associé</legend>
             <p>Définissez les différentes saveurs de votre article</p>
 
@@ -112,29 +135,6 @@
             <?php
         }
         ?>
-        </fieldset>
-        <fieldset>
-            <legend>Provenence</legend>
-            <p>Définir la région originaire du café</p>
-
-            <label for="liste_provenence">Liste des provenences :</label>
-            <input list="all_provenence" name="PROVENENCE" id="liste_provenence">
-            <datalist id="all_provenence">
-            
-        <?php
-        foreach($result_request['origin'] as $value)
-        {
-            ?>
-                <option value = "<?=$value['id_categorie']?>"><?=$value['nom_categorie']?></option>
-            <?php
-        }
-        ?>
-        </datalist>
-
-        <label for="nouvelle_PROVENENCE">Ajouter une nouvelle provenence</label>
-        <input type="text" name="nom_PROVENENCE" id="nouvelle_PROVENENCE">
-        <input type="submit" name="ajouter_PROVENENCE" value="Ajouter la provenece">
-
         </fieldset>
 
         <input type="submit" name="etape2" value="Visualiser le résultat">

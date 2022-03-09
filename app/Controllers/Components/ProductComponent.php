@@ -174,10 +174,18 @@ class ProductComponent extends Product
             {
                 foreach($array[$i] as $key => $value)
                 {
-                    if($key==$paramKey && $value==$paramValue)
+                    if(is_array($value)==true)
+                    {
+                        if(in_array($paramValue,$value)==true)
+                        {
+                            $result[] = $array[$i];
+                        }
+                    }
+                    elseif($key==$paramKey && $value==$paramValue)
                     {
                         $result[] = $array[$i];
                     }
+                    
                 }
                 $i++;
             }
@@ -233,4 +241,6 @@ class ProductComponent extends Product
 
         $item = $this->update($NewArticle,compact('id_article','image_article','titre_article','presentation_article','description_article','prix_article','sku','fournisseur','conditionnement'));
     }
+
+    
 }

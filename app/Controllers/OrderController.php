@@ -70,12 +70,7 @@ class OrderController extends Controller
         $fk_id_utilisateur = $_SESSION['id_utilisateur'];
         $argument = ['fk_id_utilisateur'];
         $adresse = $this->modelAdresses->find($argument, compact('fk_id_utilisateur'));
-        /* 
-        echo "<pre>";
-        var_dump($adresse);
-        echo "</pre>";
 
-        die(); */
         foreach ($adresse as $key => $value) {
             $resultat[$value['id_adresse']] = $value;
         }
@@ -92,27 +87,4 @@ class OrderController extends Controller
             header("location: ./commande");
         }
     }
-
-
-
-    /*    public function totalPrice()
-    {
-
-        if (isset($_SESSION['quantite'])) {
-            $_SESSION['totalPrice'] = [];
-
-            $result = 0;
-            foreach ($_SESSION['quantite'] as $key1 => $value1) {
-                foreach ($_SESSION['prix'] as $key2 => $value2) {
-                    if ($key1 == $key2) {
-
-                        $resultSinglePrice = $value1 * $value2;
-                        $result += $resultSinglePrice;
-
-                        $_SESSION['totalPrice'] = $result;
-                    }
-                }
-            }
-        }
-    } */
 }

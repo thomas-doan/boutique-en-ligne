@@ -177,9 +177,7 @@ class PaymentComponent extends Controller
 
                         $db->commit();
                     } else {
-                        $test = "dead";
-                        var_dump($test);
-                        die();
+                        $_SESSION['productOutStock'] = $this->checkQuantity();
                     }
                 } catch (Exception $e) {
                     $db->rollBack();

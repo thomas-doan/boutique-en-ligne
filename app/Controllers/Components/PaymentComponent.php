@@ -30,22 +30,47 @@ class PaymentComponent extends Controller
     {
 
         $checkQuantity = [];
-        $productAvailable = [];
+        $_SESSION['quantityPayment'] = [];
+        $_SESSION['halfQuantityPayment'] = [];
+        $_SESSION['noStock'] = [];
 
         foreach ($_SESSION['quantite'] as $key => $value) {
             $id_article = $key;
             $argument = ['id_article'];
-            $selection = ['sku'];
+            $selection = ['sku', 'titre_article', 'prix_article'];
             $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'), $selection);
 
+            echo "<pre>";
+
+
+
             if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
-                $productAvailable[$key] = "available";
-            } else {
-                $productAvailable[$key] = "unavailable";
+
+                $titre_article = $checkQuantity[$key][0]["titre_article"];
+
+                $prix_article = $checkQuantity[$key][0]["prix_article"];
+                $_SESSION['quantityPayment'][$id_article][0] = $value;
+                $_SESSION['quantityPayment'][$id_article][1] = $titre_article;
+                $_SESSION['quantityPayment'][$id_article][2] = $prix_article;
+            }
+
+            if (($checkQuantity[$key][0]["sku"] - $value) < 0) {
+
+                $titre_article = $checkQuantity[$key][0]["titre_article"];
+                $prix_article = $checkQuantity[$key][0]["prix_article"];
+
+                $newCalcul = $value - $checkQuantity[$key][0]["sku"];
+                $_SESSION['quantite'][$key] = $newCalcul;
+                $_SESSION['halfQuantityPayment'][$id_article][0] = $newCalcul;
+                $_SESSION['halfQuantityPayment'][$id_article][1] = $titre_article;
+                $_SESSION['halfQuantityPayment'][$id_article][2] = $prix_article;
+            }
+
+            if ($checkQuantity[$key][0]["sku"] == 0) {
+                unset($_SESSION['quantite'][$id_article]);
+                unset($_SESSION['prix'][$id_article]);
             }
         }
-
-        return $productAvailable;
     }
 
     public function updateQuantity($db)
@@ -99,8 +124,7 @@ class PaymentComponent extends Controller
             $code_postal = Security::control($_POST['code_postal']);
             $telephone = Security::control($_POST['telephone']);
 
-            /*             if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
- */
+
             $modelHydrate = $this->modelLivraison
                 ->setFk_id_num_commande($fk_id_num_commande)
                 ->setEmail($email)
@@ -115,11 +139,8 @@ class PaymentComponent extends Controller
                 ->setTelephone($telephone);
 
             $this->modelLivraison->create($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone'));
-            /*     } */
-        }/* else {
-                $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
-            } */
-        /*  } */
+        }
+        header('location: ./commande');
     }
 
     public function insertCommandes($idNumC)
@@ -169,16 +190,14 @@ class PaymentComponent extends Controller
             if ($this->fieldCheck() == 1) {
                 try {
                     $db->beginTransaction();
-                    if (!in_array("unavailable", $this->checkQuantity())) {
-                        $getIdNumCommande = $this->insertNumCommande($db);
-                        $this->updateQuantity($db);
-                        $this->insertLivraison($getIdNumCommande);
-                        $this->insertCommandes($getIdNumCommande);
+                    //modifie les quantités en fonction du stock
+                    $this->checkQuantity();
+                    $getIdNumCommande = $this->insertNumCommande($db);
+                    $this->updateQuantity($db);
+                    $this->insertLivraison($getIdNumCommande);
+                    $this->insertCommandes($getIdNumCommande);
 
-                        $db->commit();
-                    } else {
-                        $_SESSION['productOutStock'] = $this->checkQuantity();
-                    }
+                    $db->commit();
                 } catch (Exception $e) {
                     $db->rollBack();
                     echo "Failed: " . $e->getMessage();

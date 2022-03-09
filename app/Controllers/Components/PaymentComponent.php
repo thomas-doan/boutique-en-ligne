@@ -60,6 +60,29 @@ class PaymentComponent extends Controller
     {
     } */
 
+    public function fieldCheck()
+    {
+        if (isset($_POST['submit'])) {
+            $email = Security::control($_POST['email']);
+            $nom = Security::control($_POST['nom']);
+            $prenom = Security::control($_POST['prenom']);
+            $nom_adresse = Security::control($_POST['nom_adresse']);
+            $ville = Security::control($_POST['ville']);
+            $pays = Security::control($_POST['pays']);
+            $voie = Security::control($_POST['voie']);
+            $voie_sup = Security::control($_POST['voie_sup']);
+            $code_postal = Security::control($_POST['code_postal']);
+            $telephone = Security::control($_POST['telephone']);
+
+            if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
+                $validation = 1;
+                return $validation;
+            } else {
+                $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
+                header('location: ./commande');
+            }
+        }
+    }
 
     public function insertLivraison($idNumC)
     {
@@ -76,7 +99,8 @@ class PaymentComponent extends Controller
             $code_postal = Security::control($_POST['code_postal']);
             $telephone = Security::control($_POST['telephone']);
 
-
+            /*             if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
+ */
             $modelHydrate = $this->modelLivraison
                 ->setFk_id_num_commande($fk_id_num_commande)
                 ->setEmail($email)
@@ -91,7 +115,11 @@ class PaymentComponent extends Controller
                 ->setTelephone($telephone);
 
             $this->modelLivraison->create($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone'));
-        }
+            /*     } */
+        }/* else {
+                $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
+            } */
+        /*  } */
     }
 
     public function insertCommandes($idNumC)
@@ -117,40 +145,46 @@ class PaymentComponent extends Controller
         }
     }
 
+    public function insertNumCommande($db)
+    {
+        (int) $secureIdUser = Security::control($_SESSION['id_utilisateur']);
+        (int) $secureTotalProduit = Security::control($_SESSION['totalQuantity']);
+        (float) $secureWithoutTvaPrice = Security::control($_SESSION['totalPrice']);
+
+        // variable init envoyer dans le model Num Commande
+        $fk_id_utilisateurs = $secureIdUser;
+        $total_produit = $secureTotalProduit;
+        $prix_sans_tva = $secureWithoutTvaPrice;
+        $prix_avec_tva = $secureWithoutTvaPrice * 1.055;
+        $resultat =  $this->modelNumCommande->orderInsert($db, compact('fk_id_utilisateurs', 'total_produit', 'prix_sans_tva', 'prix_avec_tva'));
+        return $resultat;
+    }
+
+
     public function payment()
     {
         if (isset($_POST['submit'])) {
-            //secure info
-            (int) $secureIdUser = Security::control($_SESSION['id_utilisateur']);
-            (int) $secureTotalProduit = Security::control($_SESSION['totalQuantity']);
-            (float) $secureWithoutTvaPrice = Security::control($_SESSION['totalPrice']);
-
-            // variable init envoyer dans le model Num Commande
-            $fk_id_utilisateurs = $secureIdUser;
-            $total_produit = $secureTotalProduit;
-            $prix_sans_tva = $secureWithoutTvaPrice;
-            $prix_avec_tva = $secureWithoutTvaPrice * 1.055;
-
-
             $db = DBConnection::getPDO();
 
-            try {
-                $db->beginTransaction();
-                if (!in_array("unavailable", $this->checkQuantity())) {
-                    $getIdNumCommande = $this->modelNumCommande->orderInsert($db, compact('fk_id_utilisateurs', 'total_produit', 'prix_sans_tva', 'prix_avec_tva'));
-                    $this->updateQuantity($db);
-                    $this->insertLivraison($getIdNumCommande);
-                    $this->insertCommandes($getIdNumCommande);
+            if ($this->fieldCheck() == 1) {
+                try {
+                    $db->beginTransaction();
+                    if (!in_array("unavailable", $this->checkQuantity())) {
+                        $getIdNumCommande = $this->insertNumCommande($db);
+                        $this->updateQuantity($db);
+                        $this->insertLivraison($getIdNumCommande);
+                        $this->insertCommandes($getIdNumCommande);
 
-                    $db->commit();
-                } else {
-                    $test = "dead";
-                    var_dump($test);
-                    die();
+                        $db->commit();
+                    } else {
+                        $test = "dead";
+                        var_dump($test);
+                        die();
+                    }
+                } catch (Exception $e) {
+                    $db->rollBack();
+                    echo "Failed: " . $e->getMessage();
                 }
-            } catch (Exception $e) {
-                $db->rollBack();
-                echo "Failed: " . $e->getMessage();
             }
         }
     }

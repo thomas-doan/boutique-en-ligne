@@ -29,8 +29,11 @@
            <div><?= $message; ?></div>
        <?php endforeach; ?>
    <?php endif; ?>
+   <?php if (isset($_SESSION['flash'])) :  ?>
+       <?php unset($_SESSION['flash']) ?>
+   <?php endif; ?>
 
-   <br>
+
    <?php
 
     foreach ($articles as $article) { ?>

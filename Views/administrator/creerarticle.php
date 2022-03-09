@@ -9,7 +9,9 @@
         <li><a href="">Gestion de livraison ></a></li>
     </ul>
 </section>
-    <p><?=$error?></p>
+<?php if(!empty($erreur)):?>
+    <p><?=$erreur?></p>
+<?php endif;?>
 <?php if($param == 'partie1') :?>
 
     <form action="./partie1" method="post" name="info_article_pincipal" enctype="multipart/form-data">

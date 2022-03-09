@@ -1,11 +1,14 @@
 <?php var_dump($_POST)?>
 <section>
     <ul>
-        <li><a href="./dosette">Dosette</a></li>
-        <li><a href="./moulu">Moulu</a></li>
-        <li><a href="./grain">Grain</a></li>
+        <li><a href="./Dosette">Dosette</a></li>
+        <li><a href="./Moulu">Moulu</a></li>
+        <li><a href="./Grain">Grain</a></li>
     </ul>
 </section>
+<?php if(!empty($erreur)):?>
+<h4><?=$erreur?></h4>
+<?php endif;?>
 
 <?php if(isset($resultFilter)):?>
 <section>

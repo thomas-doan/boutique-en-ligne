@@ -14,6 +14,7 @@ class Commandes extends Model
     protected $fk_id_num_commande;
     protected $fk_id_article;
     protected $nb_article;
+    protected $prix_article;
     protected $prix_commande;
 
 
@@ -113,6 +114,26 @@ class Commandes extends Model
     public function setPrix_commande($prix_commande)
     {
         $this->prix_commande = $prix_commande;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of prix_article
+     */
+    public function getPrix_article()
+    {
+        return $this->prix_article;
+    }
+
+    /**
+     * Set the value of prix_article
+     *
+     * @return  self
+     */
+    public function setPrix_article($prix_article)
+    {
+        $this->prix_article = $prix_article;
 
         return $this;
     }

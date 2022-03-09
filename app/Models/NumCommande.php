@@ -24,12 +24,14 @@ class NumCommande extends Model
     public function orderInsert($db, $donnees)
     {
 
-        $req = "
-                INSERT INTO num_commande (fk_id_utilisateurs, date, total_produit, prix_sans_tva, prix_avec_tva) VALUE (:fk_id_utilisateurs, NOW(), :total_produit, :prix_sans_tva, :prix_avec_tva)";
+        $req = "INSERT INTO num_commande (fk_id_utilisateurs, date, total_produit, prix_sans_tva, prix_avec_tva) VALUE (:fk_id_utilisateurs, NOW(), :total_produit, :prix_sans_tva, :prix_avec_tva)";
         $stmt = $db->prepare($req);
         $stmt->execute(
             $donnees
         );
+
+        $resultat = $db->lastInsertId();
+        return $resultat;
     }
 
     public function test($db)

@@ -159,7 +159,7 @@ $router->map(
     'update product'
 );
 
-$route->map(
+$router->map(
     'POST',
     '/admin/restocker',
     function (){
@@ -191,6 +191,17 @@ $router->map(
         $controller->totalPrice();
     },
     'panier post'
+);
+
+// PRODUIT
+$router->map(
+    'GET|POST',
+    '/produit/[*:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\ProductController();
+        $controller->index($id_article);
+        $controller->addComment($id_article);
+    },
 );
 
 

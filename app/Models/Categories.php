@@ -59,7 +59,7 @@ class Categories extends Model
             $compact = compact('fk_id_article');
         }
 
-        $req ="SELECT `categories`.`nom_categorie`, `categories`.`id_categorie`
+        $req ="SELECT `categories`.`nom_categorie`, `categories`.`id_categorie`, `categories`.`section`
         FROM `articles_categories_filtre` AS `intermediaire`
         INNER JOIN `categories` ON `intermediaire`.`fk_id_cat_categorie` = `categories`.`id_categorie`
         WHERE `intermediaire`.`fk_id_article`= :fk_id_article

@@ -100,9 +100,21 @@
 </section>
 
 <section class="boutique">
-    <?php foreach($result as $key)
-    {
-        $card->printCard($key);
-    }?>
+    <?php for ($firstProduct; $firstProduct < $lastProduct ; ++$firstProduct)
+    { 
+        if(isset($result[$firstProduct]))
+        {
+        $card->printCard($result[$firstProduct]);
+        }
+    }
+?>
+<form action="" method="get">
+    <?php if($firstProduct > 8):?>
+    <button type="submit" name="page" value="<?=(($firstProduct-8)-8) ?>"><< Page Précédente </button>
+    <?php endif;
+    if(isset($result[$firstProduct])):?>
+    <button type="submit" name="page" value="<?=($firstProduct) ?>">Page suivante >></button>
+    <?php endif;?>
+</form>
 
 </section>

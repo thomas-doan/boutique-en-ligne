@@ -45,13 +45,14 @@ class BoutiqueSearchController extends Controller
         else header('location: ./all');
 
 
-        $result = $this->mergeCattoProduct();
-        if($param !== 'all')
+        $result = $this->mergeCattoProduct();//On merge les tables produit avec la tables catégorie
+
+        if($param !== 'all')//Si une ategorie autre que all a était selectionner on trie le tableau selon la categorie principale
         {
             $result = $this->Product->selectArrayByValue($result,'cat parent', $param);
         }
         
-        if(!empty($_POST['deletFilter']))
+        if(!empty($_POST['deletFilter']))//Si le Post delet est utiliser on unset la valeur ciblé de notre varaible de section
         {
             $deleteValue = explode('-',$_POST['deletFilter']);
             if(count($deleteValue)==3)
@@ -60,23 +61,25 @@ class BoutiqueSearchController extends Controller
             }
             else unset($_SESSION['filter'][$deleteValue[0]]);
         }
-        if(!empty($_POST['filtre']))
+        if(!empty($_POST['filtre']))//Si un nouveau formulaire de recherche avancé est soumis alors on ecrase ou on créer une vriable de section
         {
             $_SESSION['filter']=$_POST;
             unset($_SESSION['filter']['filtre']);
             $resultFilter = $_SESSION['filter'];
             $result = $this->gestionFilter($result);
         }
-        elseif(!empty($_SESSION['filter']))
+        elseif(!empty($_SESSION['filter']))//Si la vraible de section existe déjà alors on fait une nouvelle recherche selon les changement
         {
             $resultFilter = $_SESSION['filter'];
             $result = $this->gestionFilter($result);
         }
-        else $resultFilter = null;
+        else $resultFilter = null;//Si rien est effectuer on assigne nul à la variable de section pour eviter les erreurs
 
-        $card = new CardCompenent();
+        $card = new CardCompenent();//On instancie nos card pour l'envoyer dans le render
 
-        
+        /**
+         * On récupère toute les catégories pour soumettre le formulaire à l'utilisateur
+         */
         $result_request = array(
             'principale'=>$this->Categories->chooseCategoriesBySection(['section'],'PRINCIPALE'),
             'variete' => $this->Categories->chooseCategoriesBySection(['section'],'VARIÉTÉ'),
@@ -87,8 +90,16 @@ class BoutiqueSearchController extends Controller
             );
 
             $erreur = $this->error;
-
-        $compact = compact('title','result_request','resultFilter','erreur','result','card'); 
+        /**
+         * On prépare les condition de pagination
+         */
+        if(empty($_GET['page']))
+        {
+            $_GET['page']=0;
+        }
+        $firstProduct = (int)$_GET['page'];
+        $lastProduct = ((int)$_GET['page']+8);
+        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct'); 
         $this->view('shop.boutique', $compact );
     }
 

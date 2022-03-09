@@ -74,17 +74,17 @@
 
 
    <?php }
-    $resultat = 0;
+    $_SESSION['total_article'] = 0;
     foreach ($_SESSION['quantite'] as $quantite) {
-        $resultat = $resultat + $quantite;
+        $_SESSION['total_article'] = $_SESSION['total_article'] + $quantite;
     }
     ?>
 
-   <p> nombre total d'articles : <?= $resultat ?> </p>
+   <p> nombre total d'articles : <?= $_SESSION['total_article']  ?> </p>
 
    <p>Prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
 
-   <form action="./commande/<?= $_SESSION['id_utilisateur'] ?>" method="post">
-       <input name="fk_id_utilisateur" value="$_SESSION['id_utilisateur']" type="hidden">
+   <form action="./commande" method="post">
+
        <input name="checkout" value="commandé" type="submit">
    </form>

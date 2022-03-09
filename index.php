@@ -77,13 +77,13 @@ $router->map(
 //Commande
 $router->map(
     'GET/POST',
-    '/commande/[i:id]',
-    function ($id) {
+    '/commande',
+    function () {
         $controller = new App\Controllers\OrderController();
-        $controller->index($id);
+        $controller->index();
         $controller->orderResume();
         $controller->adressCheck();
-        $controller->getAdress($id);
+        $controller->getAdress();
         $PaymentComponent = new App\Controllers\Components\PaymentComponent();
         $PaymentComponent->getPaymentInfo();
     },

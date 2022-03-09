@@ -89,6 +89,6 @@
 
 
 
-    <input name="fk_id_utilisateur" value="$_SESSION['fk_id_utilisateur']" type="hidden">
+    <input name="fk_id_utilisateur" value="<?= $_SESSION['id_utilisateur'] ?>" type="hidden">
     <input name="submit" type="submit" value="payer">
 </form>

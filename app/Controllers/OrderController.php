@@ -22,9 +22,9 @@ class OrderController extends Controller
     }
 
 
-    public function index($id)
+    public function index()
     {
-
+        $id = $_SESSION['id_utilisateur'];
         $info_user = $this->getUser($id);
         $orderCheck = $this->orderResume();
         $title = "Commande - Kawa";
@@ -83,13 +83,13 @@ class OrderController extends Controller
         return $resultat;
     }
 
-    public function getAdress($id)
+    public function getAdress()
     {
-        $id_user = $id;
+
         if (isset($_POST['id_adresse'])) {
             $_SESSION['select_adress'] = $_POST['id_adresse'];
 
-            header("location: ./$id_user");
+            header("location: ./");
         }
     }
 

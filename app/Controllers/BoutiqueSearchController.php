@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Search;
 use Database\DBConnection;
+use App\Controllers\Components\CardCompenent;
 use App\Controllers\Components\ProductComponent;
 use App\Controllers\Components\CategoriesComponent;
 
@@ -73,8 +74,7 @@ class BoutiqueSearchController extends Controller
         }
         else $resultFilter = null;
 
-        
-        var_dump($result);
+        $card = new CardCompenent();
 
         
         $result_request = array(
@@ -88,7 +88,7 @@ class BoutiqueSearchController extends Controller
 
             $erreur = $this->error;
 
-        $compact = compact('title','result_request','resultFilter','erreur'); 
+        $compact = compact('title','result_request','resultFilter','erreur','result','card'); 
         $this->view('shop.boutique', $compact );
     }
 

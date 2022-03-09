@@ -98,3 +98,11 @@
         <input type="submit" name="filtre" value="Filtrer">
         </form>
 </section>
+
+<section class="boutique">
+    <?php foreach($result as $key)
+    {
+        $card->printCard($key);
+    }?>
+
+</section>

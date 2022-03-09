@@ -84,6 +84,8 @@ $router->map(
         $controller->orderResume();
         $controller->adressCheck();
         $controller->getAdress($id);
+        $PaymentComponent = new App\Controllers\Components\PaymentComponent();
+        $PaymentComponent->getPaymentInfo();
     },
     'commande'
 );

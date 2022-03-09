@@ -1,4 +1,17 @@
 <p> c'est la commande de : <?= $info_user[0]['prenom'] ?></p>
+
+<?php foreach ($orderCheck as $key1 => $value1) {
+    foreach ($_SESSION['quantite'] as $key2 => $value2) {
+        if ($key1 == $key2) { ?>
+            Article <?= $value1[0]['titre_article'] ?>, <?= $_SESSION['quantite'][$key1]  ?> Qte = <?php echo $_SESSION['singlePrice'][$key1] ?>euro ;
+
+<?php
+        }
+    }
+} ?>
+<p> prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
+
+
 <p> Vos informations : </p>
 
 
@@ -31,6 +44,9 @@
 
     <label> Numero de telephone : </label>
     <input name="telephone" value="" type="text">
+
+    <label> Email : </label>
+    <input name="email" value="" type="text">
 
     <H3> Adresse </H3>
 
@@ -71,23 +87,8 @@
                                     echo $adress[$id]['pays'];
                                 } ?>" type="text">
 
-    <button name="submit" type="submit"> Enregistrer et continuer </button>
-</form>
 
 
-
-<?php foreach ($orderCheck as $key1 => $value1) {
-    foreach ($_SESSION['quantite'] as $key2 => $value2) {
-        if ($key1 == $key2) { ?>
-            Article <?= $value1[0]['titre_article'] ?>, <?= $_SESSION['quantite'][$key1]  ?> Qte = <?php echo $_SESSION['singlePrice'][$key1] ?>euro ;
-
-<?php
-        }
-    }
-} ?>
-<p> prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
-
-<form action="" method="post">
     <input name="fk_id_utilisateur" value="$_SESSION['fk_id_utilisateur']" type="hidden">
-    <input name="order" type="submit" value="payer">
+    <input name="submit" type="submit" value="payer">
 </form>

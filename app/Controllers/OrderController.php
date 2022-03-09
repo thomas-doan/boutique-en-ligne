@@ -70,12 +70,15 @@ class OrderController extends Controller
         $fk_id_utilisateur = $_SESSION['id_utilisateur'];
         $argument = ['fk_id_utilisateur'];
         $adresse = $this->modelAdresses->find($argument, compact('fk_id_utilisateur'));
+        /* 
+        echo "<pre>";
+        var_dump($adresse);
+        echo "</pre>";
 
+        die(); */
         foreach ($adresse as $key => $value) {
             $resultat[$value['id_adresse']] = $value;
         }
-
-
 
         return $resultat;
     }
@@ -89,8 +92,6 @@ class OrderController extends Controller
             header("location: ./$id_user");
         }
     }
-
-
 
     /*    public function totalPrice()
     {

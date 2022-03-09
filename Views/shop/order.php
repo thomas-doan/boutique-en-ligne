@@ -1,6 +1,6 @@
 <p> c'est la commande de : <?= $info_user[0]['prenom'] ?></p>
 
-<?php var_dump($_SESSION['quantite']);
+<?php
 foreach ($orderCheck as $key1 => $value1) {
     foreach ($_SESSION['quantite'] as $key2 => $value2) {
 

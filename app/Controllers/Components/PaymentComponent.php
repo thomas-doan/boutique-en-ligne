@@ -45,9 +45,17 @@ class PaymentComponent extends Controller
             }
         }
 
-
         return $productAvailable;
     }
+
+    public function updateQuantity($db)
+    {
+        foreach ($_SESSION['quantite'] as $key => $value) {
+
+            $this->modelArticle->updateLock($db, $key, $value);
+        }
+    }
+
 
     public function payment()
     {
@@ -70,6 +78,7 @@ class PaymentComponent extends Controller
                 $db->beginTransaction();
                 if (!in_array("unavailable", $this->checkQuantity())) {
                     $this->modelNumCommande->orderInsert($db, compact('fk_id_utilisateurs', 'total_produit', 'prix_sans_tva', 'prix_avec_tva'));
+                    $this->updateQuantity($db);
                     $db->commit();
                 } else {
                     $test = "dead";

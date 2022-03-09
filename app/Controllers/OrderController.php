@@ -89,9 +89,11 @@ class OrderController extends Controller
         if (isset($_POST['id_adresse'])) {
             $_SESSION['select_adress'] = $_POST['id_adresse'];
 
-            header("location: ./");
+            header("location: ./commande");
         }
     }
+
+
 
     /*    public function totalPrice()
     {

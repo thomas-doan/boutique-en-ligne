@@ -1,7 +1,9 @@
 <p> c'est la commande de : <?= $info_user[0]['prenom'] ?></p>
 
-<?php foreach ($orderCheck as $key1 => $value1) {
+<?php var_dump($_SESSION['quantite']);
+foreach ($orderCheck as $key1 => $value1) {
     foreach ($_SESSION['quantite'] as $key2 => $value2) {
+
         if ($key1 == $key2) { ?>
             Article <?= $value1[0]['titre_article'] ?>, <?= $_SESSION['quantite'][$key1]  ?> Qte = <?php echo $_SESSION['singlePrice'][$key1] ?>euro ;
 
@@ -9,6 +11,7 @@
         }
     }
 } ?>
+<p> nombre d'article total : <?php echo $_SESSION['totalQuantity']  ?> </p>
 <p> prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
 
 

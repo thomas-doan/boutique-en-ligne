@@ -74,13 +74,13 @@
 
 
    <?php }
-    $_SESSION['total_article'] = 0;
+    (float)$_SESSION['totalQuantity'] = 0;
     foreach ($_SESSION['quantite'] as $quantite) {
-        $_SESSION['total_article'] = $_SESSION['total_article'] + $quantite;
+        $_SESSION['totalQuantity'] = $_SESSION['totalQuantity'] + $quantite;
     }
     ?>
 
-   <p> nombre total d'articles : <?= $_SESSION['total_article']  ?> </p>
+   <p> nombre total d'articles : <?= $_SESSION['totalQuantity']  ?> </p>
 
    <p>Prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
 

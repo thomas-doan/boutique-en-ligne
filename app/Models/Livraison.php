@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-
-
-
 class Livraison extends Model
 
 {

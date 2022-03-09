@@ -5,7 +5,7 @@ namespace App\Models;
 
 
 
-class Num_commande extends Model
+class NumCommande extends Model
 
 {
     protected $table = 'num_commande';
@@ -13,13 +13,10 @@ class Num_commande extends Model
     protected $id_num_commande;
     protected $fk_id_utilisateurs;
     protected $date;
-    protected $fk_id_livraison;
     protected $total_produit;
     protected $tva;
     protected $prix_sans_tva;
     protected $prix_avec_tva;
-
-
 
 
     /**
@@ -78,26 +75,6 @@ class Num_commande extends Model
     public function setDate($date)
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of fk_id_livraison
-     */
-    public function getFk_id_livraison()
-    {
-        return $this->fk_id_livraison;
-    }
-
-    /**
-     * Set the value of fk_id_livraison
-     *
-     * @return  self
-     */
-    public function setFk_id_livraison($fk_id_livraison)
-    {
-        $this->fk_id_livraison = $fk_id_livraison;
 
         return $this;
     }

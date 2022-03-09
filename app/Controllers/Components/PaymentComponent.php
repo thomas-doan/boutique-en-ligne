@@ -4,9 +4,9 @@
 namespace App\Controllers\Components;
 
 
-use App\Models\Articles;
-use App\Models\Utilisateurs;
-use App\Models\Adresses;
+use App\Models\NumCommande;
+use App\Models\Commandes;
+use App\Models\Livraison;
 
 use App\Controllers\Controller;
 
@@ -16,9 +16,9 @@ class PaymentComponent extends Controller
 
     public function __construct()
     {
-        $this->model = new Utilisateurs();
-        $this->modelArticle = new Articles();
-        $this->modelAdresses = new Adresses();
+        $this->modelNumCommande = new NumCommande();
+        $this->modelCommandes = new Commandes();
+        $this->modelLivraison = new Livraison();
     }
 
     public function getPaymentInfo()

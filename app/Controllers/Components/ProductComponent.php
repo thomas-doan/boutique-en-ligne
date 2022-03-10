@@ -174,10 +174,18 @@ class ProductComponent extends Product
             {
                 foreach($array[$i] as $key => $value)
                 {
-                    if($key==$paramKey && $value==$paramValue)
+                    if(is_array($value)==true)
+                    {
+                        if(in_array($paramValue,$value)==true)
+                        {
+                            $result[] = $array[$i];
+                        }
+                    }
+                    elseif($key==$paramKey && $value==$paramValue)
                     {
                         $result[] = $array[$i];
                     }
+                    
                 }
                 $i++;
             }

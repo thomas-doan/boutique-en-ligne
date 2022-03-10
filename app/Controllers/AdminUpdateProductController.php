@@ -108,6 +108,10 @@ class AdminUpdateProductController extends Controller
         return $newUrl;
     }
 
+    /**
+     * Compte le nombre d'article disponnibles selon se filtre
+     * @param string Nom de la categorie à rechercher
+     */
     public function countSearch($nameCategories)
     {
         if(!empty($_GET['recherche'])){$result = $this->Product->find_article($_GET['recherche']);} 

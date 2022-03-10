@@ -91,6 +91,18 @@ Class Product extends Model
         return $query->fetchAll();
     }
 
+    public function getAllProductForCard()
+    {
+        $req ="
+        SELECT `art1`.id_article, `art1`.sku, `art1`.titre_article, `art1`.prix_article, `art1`.description_article, `art1`.presentation_article, `art1`.image_article,`cat2`.`nom_categorie` AS 'cat parent'
+        FROM articles_categories_filtre 
+        INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article` 
+        INNER JOIN categories AS `cat2` ON articles_categories_filtre.id_parent = `cat2`.id_categorie 
+        GROUP BY `art1`.`id_article`;";
+        $query = $this->requete($req);
+        return $query->fetchAll();
+    }
+
 }
 
 ?>

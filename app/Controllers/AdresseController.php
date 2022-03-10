@@ -22,7 +22,7 @@ class AdresseController extends Controller
             $code_postal = $_POST['codePostal'];
             $telephone = $_POST['telephone'];
             $pays = $_POST['pays'];
-            $fk_id_utilisateur = $_SESSION[['user']['id_utilisateur'];
+            $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
             if (empty($nom_adresse) || empty($ville) || empty($voie) || empty($code_postal) || empty($telephone) || empty($pays)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Vous devez remplir tout les champs !";
                 header('Location: ./adresse');
@@ -36,7 +36,7 @@ class AdresseController extends Controller
                     ->setCode_postal($code_postal)
                     ->setTelephone($telephone)
                     ->setPays($pays)
-                    ->setFk_id_utilisateur($_SESSION[['user']['id_utilisateur']);
+                    ->setFk_id_utilisateur($_SESSION['user']['id_utilisateur']);
                 $model->create($adress, compact('nom_adresse', 'ville', 'voie', 'voie_sup', 'code_postal', 'telephone', 'pays', 'fk_id_utilisateur'));
                 header('Location: ./adresse');
             }
@@ -48,7 +48,7 @@ class AdresseController extends Controller
     {
         $model = new Adresses();
         $argument = ['fk_id_utilisateur'];
-        $fk_id_utilisateur = $_SESSION[['user']['id_utilisateur'];
+        $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
         $userAdress = $model->find($argument, compact('fk_id_utilisateur'));
         return $userAdress;
     }

@@ -38,12 +38,12 @@ class ConnexionController extends Controller
                         ->setPassword($checkUser[0]['password'])
                         ->setRole($checkUser[0]['role']);
 
-                    $_SESSION[['user']['id_utilisateur'] = (int)$user->getId_utilisateur();
-                    $_SESSION[['user']['prenom'] = $user->getPrenom();
-                    $_SESSION[['user']['nom'] = $user->getNom();
-                    $_SESSION[['user']['email'] = $user->getEmail();
-                    $_SESSION[['user']['password'] = $user->getPassword();
-                    $_SESSION[['user']['role'] = $user->getRole();
+                    $_SESSION['user']['id_utilisateur'] = (int)$user->getId_utilisateur();
+                    $_SESSION['user']['prenom'] = $user->getPrenom();
+                    $_SESSION['user']['nom'] = $user->getNom();
+                    $_SESSION['user']['email'] = $user->getEmail();
+                    $_SESSION['user']['password'] = $user->getPassword();
+                    $_SESSION['user']['role'] = $user->getRole();
                     // var_dump($user);
                     header('Location: ./profil');
                     exit();

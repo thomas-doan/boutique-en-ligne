@@ -20,7 +20,7 @@ class HistoriqueController extends Controller
     {
         $model = new Commandes();
         $argument = ['fk_id_utilisateur'];
-        $fk_id_utilisateur = $_SESSION[['user']['id_utilisateur'];
+        $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
         $order = $model->find($argument, compact('fk_id_utilisateur'));
         return $order;
     }

@@ -25,6 +25,8 @@ class ProductController extends Controller
         $numberOfComment = $this->NumberComment($id_article);
         $product = $this->getProductById($id_article);
         $likes = $this->getLike($id_article);
+        $this->Like($id_article);
+        $this->addComment($id_article);
         $CatOfProduct = array(
             'variete' => $this->Categories->getSectionCatByIdProduct($id_article,'VARIÉTÉ'),
             'specificite' => $this->Categories->getSectionCatByIdProduct($id_article,'SPÉCIFICITÉ'),
@@ -33,6 +35,8 @@ class ProductController extends Controller
             'origin' => $this->Categories->getSectionCatByIdProduct($id_article, 'PROVENENCE')
             );
         $this->addComment($id_article);
+        $prix_article = $product[0]['prix_article'];
+        $this->shoppingBag($id_article, $prix_article);
 
         return $this->view('shop.produit', compact('title', 'comments', 'product', 'CatOfProduct', 'likes', 'numberOfComment'));
     }
@@ -91,6 +95,43 @@ class ProductController extends Controller
                 $this->Like->deleteLike($id_article, $fk_id_utilisateur);
                 header("Refresh:0");   
             }
+        }
+    }
+
+    public function shoppingBag($id, $prix)
+    {
+      
+        if (isset($_POST['add'])) {
+            if (isset($_SESSION['quantite'])) {
+                // assignation valeur
+                $id_article =  (int) $id;
+                $prix_article =  (float) $prix;
+
+                $_SESSION['quantite'][$id_article] = 1;
+                $_SESSION['prix'][$id_article] = $prix_article;
+            } else {
+                //init session
+                $_SESSION['quantite'] = [];
+                $_SESSION['prix'] = [];
+
+                // assignation valeur
+
+                $_SESSION['panier'] = [];
+
+                foreach($_SESSION['panier'] as $key => $value){
+                    array_push($_SESSION['panier'])
+                    
+
+                }
+
+
+
+                $id_article =  (int) $id;
+                $prix_article =  (float) $prix;
+                $_SESSION['quantite'][$id_article] = 1;
+                $_SESSION['prix'][$id_article] = $prix_article;
+            }
+            header('location: ../panier');
         }
     }
 

@@ -13,38 +13,37 @@ class shoppingCartController extends Controller
     public function index()
     {
 
-        $model = new Articles($this->getDB());
-        $articles = $model->findAll();
+   
         $title = "panier";
-        return $this->view('shop.panier', compact('articles', 'title'));
+        return $this->view('shop.panier', compact('title'));
     }
 
-    public function shoppingBag()
-    {
+    // public function shoppingBag()
+    // {
       
-        if (isset($_POST['add'])) {
-            if (isset($_SESSION['quantite'])) {
-                // assignation valeur
-                $id_article =  (int) $_POST['id_article'];
-                $prix_article =  (float) $_POST['prix_article'];
+    //     if (isset($_POST['add'])) {
+    //         if (isset($_SESSION['quantite'])) {
+    //             // assignation valeur
+    //             $id_article =  (int) $_POST['id_article'];
+    //             $prix_article =  (float) $_POST['prix_article'];
 
-                $_SESSION['quantite'][$id_article] = 1;
-                $_SESSION['prix'][$id_article] = $prix_article;
-            } else {
-                //init session
-                $_SESSION['quantite'] = [];
-                $_SESSION['prix'] = [];
+    //             $_SESSION['quantite'][$id_article] = 1;
+    //             $_SESSION['prix'][$id_article] = $prix_article;
+    //         } else {
+    //             //init session
+    //             $_SESSION['quantite'] = [];
+    //             $_SESSION['prix'] = [];
 
-                // assignation valeur
+    //             // assignation valeur
 
-                $prix_article =  (float) $_POST['prix_article'];
-                $id_article =  (int) $_POST['id_article'];
-                $_SESSION['quantite'][$id_article] = 1;
-                $_SESSION['prix'][$id_article] = $prix_article;
-            }
-            header('location: ./panier');
-        }
-    }
+    //             $prix_article =  (float) $_POST['prix_article'];
+    //             $id_article =  (int) $_POST['id_article'];
+    //             $_SESSION['quantite'][$id_article] = 1;
+    //             $_SESSION['prix'][$id_article] = $prix_article;
+    //         }
+    //         header('location: ./panier');
+    //     }
+    // }
 
 
     public function upValue()

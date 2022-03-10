@@ -30,7 +30,7 @@
         <a href="#comment">Voir les commentaires</a>
         <form action="" method="post">
             <label for="addBasket"></label>
-            <input type="submit" id="addBasket" name="addBasket" value="AJOUTER AU PANIER >">
+            <input type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >">
         </form>
     </section>
 </article>

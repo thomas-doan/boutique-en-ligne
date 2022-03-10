@@ -50,10 +50,10 @@
 
 
 <?php if($param !== "liste") :?>
-    <!-- <?php var_dump($_POST) ?> -->
+    <?php var_dump($_POST) ?>
     <h1>Données de l'user</h1>
     <form action="" method="post">
-        <?php foreach($userInfos as $key => $userInfo): ?>
+        <?php foreach($userInfos[0] as $key => $userInfo): ?>
             <?php if($key == 'role') : ?>
                 <label for="role">Choisissez votre role</label>
                 <select name="<?=$key?>" id="role">
@@ -62,8 +62,8 @@
                 </select>
             <?php elseif($key == 'id_utilisateur'): ?>
                 <input type="hidden">
-            <?php elseif($key == 'password'): ?>
-                <input type="password" value="<?=$userInfo?>">
+            <?php elseif($key == 'password'):?>
+                <input type="text" name="<?=$key?>">
             <?php else: ?>
                 <input type="text" value="<?=$userInfo?>" name="<?=$key?>">
             <?php endif;?>

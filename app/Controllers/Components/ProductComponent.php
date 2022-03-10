@@ -27,11 +27,15 @@ class ProductComponent extends Product
    {
        if(@$_FILES[$name_file]['size']>$size)
        {
-           $this->error['image'] = 'Le fichier télécharger est trop volumineux, taille maximum 1Mo';
+        $_SESSION['flash']['imageTaille'] = 'Le fichier télécharger est trop volumineux, taille maximum 1Mo';
            return false;
        }
        elseif(empty($_FILES[$name_file]['tmp_name'])){
-           $this->error['image'] = 'Le téléchargement de l\'image n\'a pas été effectué';
+           if(!empty($_SESSION['nouvelarticle']['image_article']))
+           {
+            $_SESSION['flash']['imageProbleme'] = 'Le téléchargement de l\'image n\'a pas été effectué';
+           }
+        
            return false;
        }
        else return true;
@@ -50,12 +54,16 @@ class ProductComponent extends Product
         //Verification de l'extention du fichier reçu
         $explode_file = explode(".",$_FILES['image_article']['name']);
         $extention = ['jpeg','jpg','JPEG','JPG'];
-
+        $approuve = false;
             foreach($extention as $value)
             {
                 if($value == $explode_file[1]){
                     $approuve = true;
                 }
+            }
+            if($approuve == false)
+            {
+                $_SESSION['flash']['format'] ="L'image doit être en jpeg";
             }
 
             if($approuve==true)

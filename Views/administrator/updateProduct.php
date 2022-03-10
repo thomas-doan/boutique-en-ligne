@@ -1,4 +1,4 @@
-<h3>Modification d'articles</h3>
+<?php var_dump($_POST)?>
 <section>
     <h3>Admin</h3>
     <ul>
@@ -10,6 +10,22 @@
         <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
     </ul>
 </section>
+
+    <h3>Modification d'articles</h3>
+
+    <?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+    <?php endif; ?>
+    <?php if(!empty($erreur)):?>
+    <p><?=$erreur?></p>
+    <?php endif;?>
+
 <?php if($param == 'liste'):?>
 <form action="" method="GET">
     <fieldset>
@@ -54,7 +70,7 @@
 
 <?php if($param !== 'liste'):?>
     <a href="./liste">Revenir à la liste</a>
-    <form action="./<?=$param?>" method="post" name="info_article_pincipal" enctype="multipart/form-data">
+    <form action="#formProduct" method="post" name="info_article_pincipal" enctype="multipart/form-data">
         <fieldset>
             <legend>Modifier l'image</legend>
             <img src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$product['image_article']?>" alt="image du produit">
@@ -63,7 +79,7 @@
             <input type="submit" name="modifimage" value="Modifier l'image">
         </fieldset>
         <fieldset>
-            <legend>Informations sur l'article</legend>
+            <legend id="formProduct">Informations sur l'article</legend>
             <label for="titre_article"> Nom de l'articles:</label>
             <input type="text" name="titre_article" id="titre_article" value="<?=$product['titre_article']?>">
             <label for="prix_article"> Prix unitaire:</label>
@@ -101,13 +117,10 @@
                     <button type="submit" name="FORCE" value="<?=$value['id_categorie']?>">&#10010; <?=$value['nom_categorie']?></button>
                 <?php endforeach;?>
             
-            <br><label for="delet-fk_id_categorie">Quelle variété souhaitez-vous supprimer de l'artcle ?</label>
-                <?php foreach($CatOfProduct['variete'] as $value):?>
-                    <button type="submit" name="delet-fk_id_categorie" value="<?=$value['id_categorie']?>">&#10006; <?=$value['nom_categorie']?></button>
-                <?php endforeach;?> 
-            <br><label for="add-fk_id_categorie">Quelle variété souhaitez-vous ajouter de l'artcle ?</label>
+            <br><p>La variété actuelle du produit est : <b><?=$CatOfProduct['variete'][0]['nom_categorie']?></b></p>
+            <br><label for="VARIÉTÉ">Modifier sa variété :</label>
                 <?php foreach($AllCat['variete'] as $value) :?>
-                    <button type="submit" name="add-fk_id_categorie" value="<?=$value['id_categorie']?>">&#10010; <?=$value['nom_categorie']?></button>
+                    <button type="submit" name="VARIÉTÉ" value="<?=$value['id_categorie']?>">&#10010; <?=$value['nom_categorie']?></button>
                 <?php endforeach;?>
             
             <br><label for="delet-fk_id_categorie">Quelle spécifité souhaitez-vous supprimer de l'artcle ?</label>

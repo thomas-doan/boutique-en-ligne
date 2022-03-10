@@ -126,6 +126,16 @@ $router->map(
     'search'
 );
 
+$router->map(
+    'GET|POST',
+    '/profil/deconnexion',
+    function () {
+        $controller = new App\Controllers\DeconnexionController();
+        $controller->index();
+    },
+    'deconnexion'
+);
+
 
 
 //ADMIN

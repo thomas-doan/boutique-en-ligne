@@ -7,7 +7,6 @@ use App\Controllers\Components\CategoriesComponent;
 
 class AdminCreateProductController extends Controller
 {
-    public $error = array();
     protected $Product;
     protected $Categories;
 
@@ -38,15 +37,14 @@ class AdminCreateProductController extends Controller
     public function CreatProduct(string $param)
     {
         //$param et défini selon la redirection du formulaire
-        $error = $this->return_error();
         $title = 'Admin | Nouvel Article';
         $this->recover(); //Enregistre les valeurs du formulaire en variable de section
-        $this->less_part();//Passe à l'étape suivante selon les conditions d'acceptations
+        $this->less_part($param);//Passe à l'étape suivante selon les conditions d'acceptations
 
         if($param == 'partie1')//Première partie du formulaire ___ Information dédier à la Table Article
         {
             $Admin_function = new AdminCreateProductController;
-            $compact = compact('param','Admin_function','title','error');
+            $compact = compact('param','Admin_function','title');
         }
         elseif($param == 'partie2')
         {
@@ -60,11 +58,11 @@ class AdminCreateProductController extends Controller
             'strong' => $this->Categories->chooseCategoriesBySection(['section'],'FORCE'),
             'origin' => $this->Categories->chooseCategoriesBySection(['section'], 'PROVENENCE')
             );
-            $compact = compact('param','result_request','title','error');
+            $compact = compact('param','result_request','title');
         }
         elseif($param == 'rendu')
         {
-            $compact = compact('param','title','error');
+            $compact = compact('param','title');
         }
         elseif($param == 'upload')
         {   if(
@@ -87,7 +85,7 @@ class AdminCreateProductController extends Controller
                 $message = 'Félicitation ! Votre article est à présent en ligne';
             }
             $message = 'Félicitation ! Votre article est à présent en ligne';
-            $compact = compact('param','message','title','error');
+            $compact = compact('param','message','title');
         }
         else $retour = 'Pas de paramettre à effectué';
 
@@ -112,6 +110,7 @@ class AdminCreateProductController extends Controller
         {
         $_SESSION['nouvelarticle']['image_article'] = $this->Product->image_article;
         }
+        
         if(isset($_SESSION['nouvelarticle']['image_article']))
         {
         $this->Product->screen_result($_SESSION['nouvelarticle']['image_article'],'/boutique-en-ligne/public/assets/pictures/pictures_product/');
@@ -145,24 +144,6 @@ class AdminCreateProductController extends Controller
     }
 
     /**
-     * En Attente d'implementation
-     * Permet de renvoyer un message d'erreur à l'utilisateur
-     */
-    public function return_error()
-    {
-        if(!empty($this->error))
-        {
-            foreach($this->error as $catch)
-            {
-                if($catch != null)
-                {
-                    return $catch;
-                }
-            }
-            return null;
-        }
-    }
-    /**
      * Retourne les valeurs enregistrer dans la variable de session à selon l'emplacement des value input
      */
     public function coverup_form(string $name)
@@ -179,9 +160,10 @@ class AdminCreateProductController extends Controller
      */
     public function verify_input($array)
     {
-        foreach($array as $value)
+        foreach($array as $key => $value)
         {
             if($value == null){
+                $_SESSION['flash']['form'] = "Veuillez remplir tout les champs";
                 return false;
             }
         }
@@ -192,11 +174,37 @@ class AdminCreateProductController extends Controller
      * Redirige l'utilisateur si toutes les conditions sont respecté
      * @param array retour de la method POST
      */
-    public function less_part()
+    public function less_part($param)
     {
-        if(!empty($_SESSION['nouvelarticle']['etape1']) && $this->verify_input($_SESSION['nouvelarticle']['etape1'])===true && !empty($_POST['etape1']))
+        if(@$_SESSION['nouvelarticle']['image_article']==false && $param!=='upload')
+        {
+            $_SESSION['flash']['image'] = "Pensez à télécharger une image";
+            // header('Refresh: 0');
+            // exit();
+        }
+        elseif(!empty($_SESSION['nouvelarticle']['etape1']) && $this->verify_input($_SESSION['nouvelarticle']['etape1'])===true && !empty($_POST['etape1']))
         {
             header('location: ./partie2');
+        }
+        elseif(isset($_POST['etape2'])&& empty($_POST['PRINCIPALE']))
+        {
+            $_SESSION['flash']['categorie'] = "Votre article doit obligatoirement avoir un catégorie Principale";
+        }
+        elseif(isset($_POST['etape2'])&& empty($_POST['VARIÉTÉ']))
+        {
+            $_SESSION['flash']['categorie'] = "Votre article doit obligatoirement avoir une variété";
+        }
+        elseif(isset($_POST['etape2'])&& empty($_POST['FORCE']))
+        {
+            $_SESSION['flash']['categorie'] = "Votre article doit obligatoirement avoir une force d'évaluer";
+        }
+        elseif(isset($_POST['etape2'])&& empty($_POST['PROVENENCE']))
+        {
+            $_SESSION['flash']['categorie'] = "Votre article doit obligatoirement avoir une provenence d'évaluer";
+        }
+        elseif(isset($_POST['etape2'])&& empty($_POST['SAVEUR']))
+        {
+            $_SESSION['flash']['categorie'] = "Votre article doit avoir au moins une saveur";
         }
         elseif(isset($_SESSION['nouvelarticle']) && ($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
         && !empty($_SESSION['nouvelarticle']['etape2']['PRINCIPALE'])

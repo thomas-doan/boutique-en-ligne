@@ -1,4 +1,4 @@
-<h3>Creer un Article</h3>
+
 <section>
     <h3>Admin</h3>
     <ul>
@@ -10,6 +10,16 @@
         <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
     </ul>
 </section>
+<h3>Creer un Article</h3>
+<?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+    <?php endif; ?>
 <?php if(!empty($erreur)):?>
     <p><?=$erreur?></p>
 <?php endif;?>
@@ -30,6 +40,20 @@
         <fieldset>
             <legend>Ajouter une image</legend>
             <?php $Admin_function->upload_image('image_article','public/assets/pictures/pictures_product/');?>
+
+            <?php if (isset($_SESSION['flash'])) : ?>
+            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+            <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['flash'])) :  ?>
+            <?php unset($_SESSION['flash']) ?>
+            <?php endif; ?>
+            <?php if(!empty($erreur)):?>
+            <p><?=$erreur?></p>
+            <?php endif;?>
+
             <label for="image_article">Télécharger une image:</label>
             <input type="file" name="image_article">
             <input type="submit" name="upload_image" value="télécharger">

@@ -9,7 +9,7 @@
         <?php unset($_SESSION['flash']) ?>
     <?php endif; ?>
     <section>
-        <h1><?= ucfirst(@$_SESSION['prenom']) . ' ' . ucfirst(@$_SESSION['nom']); ?></h1>
+        <h1><?= ucfirst(@$_SESSION['user']['prenom']) . ' ' . ucfirst(@$_SESSION['user']['nom']); ?></h1>
         <p><?= @$_SESSION['email'] ?></p>
     </section>
     <section>
@@ -20,7 +20,15 @@
             <li><a href="profil/modifierMotdePasse">Modifier mon mot de passe</a></li>
             <li><a href="profil/adresse">Adresse de livraison</a></li>
             <li><a href="profil/historiqueCommande">Historique de commande</a></li>
+            <li><a href="profil/deconnexion">Se deconnecter</a></li>
         </ul>
     </section>
     <hr>
+    <?php if($notifAdresse !== null):?>
+    <section>
+        <p><?=$notifAdresse?></p>
+        <a href="profil/adresse">Enregistrer une adresse ></a>
+    </section>
+    <?php endif;?>
+
 </article>

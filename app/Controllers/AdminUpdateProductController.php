@@ -58,9 +58,23 @@ class AdminUpdateProductController extends Controller
 
             if(!empty($_POST['modifInformations']))
             {
-                $this->Product->updateProduct($_POST,$id_article,$product['image_article']);
+                $error=false;
+                foreach($_POST as $value)
+                {
+                    if($value==null)
+                    {
+                        $error = true;
+                    }
+                }
+                if($error == true)
+                {
+                    $_SESSION['flash']['form']= "Tout les champs du formulaires doivent être remplis";
+                }
+                else $this->Product->updateProduct($_POST,$id_article,$product['image_article']);
             }
             if(!empty($_POST['id_parent'])){$this->Categories->updateMainCatOfProduct($id_article, $_POST['id_parent']);}
+
+            $product = $this->Product->find(['id_article'],[':id_article'=>$id_article])[0];
 
             $id_cat_parent = $this->Categories->selectMainCatOfProduct($id_article)['id_categorie'];
             $this->updateStrongofproduct($id_article,$_POST);
@@ -162,7 +176,7 @@ class AdminUpdateProductController extends Controller
     }
     public function updateStrongofproduct($id_article,$form)
     {
-        if(!empty($_POST['FORCE']) XOR !empty($_POST['PROVENENCE']))
+        if(!empty($_POST['FORCE']) XOR !empty($_POST['PROVENENCE']) XOR !empty($_POST['VARIÉTÉ']))
         {
         $key = array_key_first($form);
         $strength = $this->Categories->getSectionCatByIdProduct($id_article,$key)[0];

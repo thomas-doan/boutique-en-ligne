@@ -40,10 +40,6 @@ class PaymentComponent extends Controller
             $selection = ['sku', 'titre_article', 'prix_article'];
             $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'), $selection);
 
-            echo "<pre>";
-
-
-
             if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
@@ -66,12 +62,12 @@ class PaymentComponent extends Controller
                 $_SESSION['halfQuantityPayment'][$id_article][2] = $prix_article;
             }
 
-            if ($checkQuantity[$key][0]["sku"] == 0) {
+            /*             if ($checkQuantity[$key][0]["sku"] == 0) {
                 $_SESSION['noStock'][$id_article][1] = $titre_article;
 
                 unset($_SESSION['quantite'][$id_article]);
                 unset($_SESSION['prix'][$id_article]);
-            }
+            } */
         }
     }
 
@@ -190,15 +186,14 @@ class PaymentComponent extends Controller
 
             if ($this->fieldCheck() == 1) {
                 try {
+
+                    /*    $this->checkQuantity(); */
                     $db->beginTransaction();
-                    //modifie les quantités en fonction du stock
-                    $this->checkQuantity();
                     $getIdNumCommande = $this->insertNumCommande($db);
                     $this->updateQuantity($db);
-                    $this->insertLivraison($getIdNumCommande);
                     $this->insertCommandes($getIdNumCommande);
+                    $this->insertLivraison($getIdNumCommande);
                     $db->commit();
-                    header('location: ./panier');
                 } catch (Exception $e) {
                     $db->rollBack();
                     echo "Failed: " . $e->getMessage();

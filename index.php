@@ -199,9 +199,9 @@ $router->map(
     '/produit/[*:id_article]',
     function ($id_article) {
         $controller = new App\Controllers\ProductController();
+        $controller->Like($id_article);
         $controller->index($id_article);
         $controller->addComment($id_article);
-        $controller->Like($id_article);
     },
 );
 

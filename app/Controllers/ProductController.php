@@ -22,9 +22,9 @@ class ProductController extends Controller
     {
         $title = "Produit";
         $comments = $this->Comments->getCommentbyId($id_article);
+        $numberOfComment = $this->NumberComment($id_article);
         $product = $this->getProductById($id_article);
         $likes = $this->getLike($id_article);
-        // $categories = $this->getCatByIdProduct($id_article);
         $CatOfProduct = array(
             'variete' => $this->Categories->getSectionCatByIdProduct($id_article,'VARIÉTÉ'),
             'specificite' => $this->Categories->getSectionCatByIdProduct($id_article,'SPÉCIFICITÉ'),
@@ -34,7 +34,7 @@ class ProductController extends Controller
             );
         $this->addComment($id_article);
 
-        return $this->view('shop.produit', compact('title', 'comments', 'product', 'CatOfProduct', 'likes'));
+        return $this->view('shop.produit', compact('title', 'comments', 'product', 'CatOfProduct', 'likes', 'numberOfComment'));
     }
 
     public function getProductById($id_article){
@@ -63,6 +63,11 @@ class ProductController extends Controller
         }
     }
 
+    public function NumberComment($id_article){
+        $result = $this->Comments->getNumberOfComment($id_article);
+        return $result;
+    }
+
     public function getLike($id_article)
     {
         $result = $this->Like->getLikeByArticle($id_article);
@@ -74,16 +79,17 @@ class ProductController extends Controller
         $argument = ['id_utilisateur'];
         $fk_id_utilisateur = $_SESSION['id_utilisateur'];
         $fk_id_article = $id_article;
-        // $checkLike = $this->Like->find($argument, compact('fk_id_utilisateur'));
         $checkLike = $this->Like->getLike($fk_id_utilisateur);
         
         if(isset($_POST['like']))
         {
             if($checkLike == false)
             {
-                $this->Like->insertLike($id_article, $fk_id_utilisateur);   
+                $this->Like->insertLike($id_article, $fk_id_utilisateur);
+                header("Refresh:0");
             } else {
-                $this->Like->deleteLike($id_article, $fk_id_utilisateur);   
+                $this->Like->deleteLike($id_article, $fk_id_utilisateur);
+                header("Refresh:0");   
             }
         }
     }

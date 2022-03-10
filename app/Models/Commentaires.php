@@ -30,4 +30,9 @@ class Commentaires extends Model
         $fk_id_article = $id_article;
         return $this->requete($sql, compact('commentaire','fk_id_utilisateur','fk_id_article'));
     }
+
+    public function getNumberOfComment($id_article){
+        $sql = "SELECT COUNT(commentaire) FROM commentaires WHERE fk_id_article = $id_article";
+        return (int)$this->requete($sql)->fetch()['COUNT(commentaire)'];
+    }
 }

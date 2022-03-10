@@ -53,7 +53,7 @@ class AdminUpdateUserController extends Controller
         $model = new Utilisateurs();
         $id_utilisateur = $id;
         $actualPassword = $this->getUser($id);
-        var_dump($actualPassword[0]['password']);
+        // var_dump($actualPassword[0]['password']);
 
         if (isset($_POST['modifier'])) {
             $email = $_POST['email'];

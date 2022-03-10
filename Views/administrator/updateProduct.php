@@ -1,4 +1,4 @@
-
+<?php var_dump($_POST)?>
 <h3>Modification d'articles</h3>
 
 <?php if($param == 'liste'):?>
@@ -10,7 +10,7 @@
         <button>Search</button>
     </fieldset>
 </form>
-<form action="<?=$urlRedirect?>" method="POST">
+<form action="" method="POST">
 <label for="PRINCIPALE ">Trier par Catégories Principales</label>
         <select list="list_categories" name="PRINCIPALE" id="list_categories">
             <datalist id="list_categories">

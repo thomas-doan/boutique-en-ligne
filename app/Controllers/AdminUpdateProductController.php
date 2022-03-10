@@ -26,12 +26,18 @@ class AdminUpdateProductController extends Controller
 
         if($id_article == 'liste')
         {
-        $titre_article = $_GET['recherche'];
+        $titre_article = @$_GET['recherche'];
         $urlRedirect = $this->modifLinkget('&PRINCIPALE');
-        if(isset($_POST['PRINCIPALE']) && $_POST['PRINCIPALE']!==$_GET['PRINCIPALE']){header('location: '.$urlRedirect.'&PRINCIPALE='.$_POST['PRINCIPALE']);}
+        
+        if(isset($_POST['PRINCIPALE']) && $_POST['PRINCIPALE']!==$_GET['PRINCIPALE'])
+        {
+            if(isset($_GET['recherche'])){$getArgument = '&';}else{$getArgument = '?';}
+
+            header('location: '.$urlRedirect.$getArgument.'PRINCIPALE='.$_POST['PRINCIPALE']);
+        }
         if(!empty($_GET['recherche'])){$result = $this->Product->find_article($_GET['recherche']);} 
         else $result = $this->Product->getAllProductForUpdate();
-        $resultSearch = $this->Product->selectArrayByValue($result,'cat parent',$_GET['PRINCIPALE']);       
+        $resultSearch = $this->Product->selectArrayByValue($result,'cat parent',@$_GET['PRINCIPALE']);       
         $allCategories = $this->Categories->chooseCategoriesBySection(['section'],'PRINCIPALE');
         $methodImport = new AdminUpdateProductController;
         $compact = compact('title', 'param','allCategories','urlRedirect','methodImport','resultSearch');

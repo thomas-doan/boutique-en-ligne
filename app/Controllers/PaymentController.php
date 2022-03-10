@@ -196,7 +196,7 @@ class PaymentController extends Controller
 
     public function stripe()
     {
-
+        /* var_dump($_POST); */
         $totalPrice = 200;
         // Nous appelons l'autoloader pour avoir accès à Stripe      
         // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
@@ -210,7 +210,7 @@ class PaymentController extends Controller
         //     )
         // );
         // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
-        \Stripe\PaymentIntent::create([
+        $intent = \Stripe\PaymentIntent::create([
             'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
             'currency' => 'eur',
         ]);

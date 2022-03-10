@@ -3,7 +3,7 @@
       <input id="cardholder-name" type="text" placeholder="Titulaire de la carte">
       <div id="card-elements" class="test"></div>
       <div id="card-errors" role="alert"></div>
-      <button id="card-button" type="submit" data-secret="">Valider le paiement</button>
+      <button id="card-button" type="submit" data-secret="<?= $intent['client_secret'] ?>">Valider le paiement</button>
     </form>
 
     <script src="https://js.stripe.com/v3/"></script>

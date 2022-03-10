@@ -6,7 +6,6 @@ namespace App\Controllers;
 
 use App\Models\Articles;
 use App\Models\Utilisateurs;
-use App\Models\Adresses;
 
 
 class OrderController extends Controller
@@ -14,11 +13,8 @@ class OrderController extends Controller
 
     public function __construct()
     {
-
-
         $this->model = new Utilisateurs();
         $this->modelArticle = new Articles();
-        $this->modelAdresses = new Adresses();
     }
 
 
@@ -27,14 +23,9 @@ class OrderController extends Controller
         $id = $_SESSION['id_utilisateur'];
         $info_user = $this->getUser($id);
         $orderCheck = $this->orderResume();
-        $title = "Commande - Kawa";
+        $title = "Commande resumé - Kawa";
 
-        if ($this->adressCheck()) {
-            $adress = $this->adressCheck();
-            return $this->view('shop.order', compact('title', 'info_user', 'orderCheck', 'adress'));
-        } else {
-            return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
-        };
+        return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
     }
 
     public function getUser($id)
@@ -64,27 +55,10 @@ class OrderController extends Controller
     }
 
 
-    public function adressCheck()
+    public function validate()
     {
-
-        $fk_id_utilisateur = $_SESSION['id_utilisateur'];
-        $argument = ['fk_id_utilisateur'];
-        $adresse = $this->modelAdresses->find($argument, compact('fk_id_utilisateur'));
-
-        foreach ($adresse as $key => $value) {
-            $resultat[$value['id_adresse']] = $value;
-        }
-
-        return $resultat;
-    }
-
-    public function getAdress()
-    {
-
-        if (isset($_POST['id_adresse'])) {
-            $_SESSION['select_adress'] = $_POST['id_adresse'];
-
-            header("location: ./commande");
+        if (isset($_POST['submit'])) {
+            header('location: ./livraison');
         }
     }
 }

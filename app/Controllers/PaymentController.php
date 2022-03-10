@@ -1,21 +1,21 @@
 <?php
 
+namespace App\Controllers;
 
-namespace App\Controllers\Components;
-
-
-use App\Models\NumCommande;
-use App\Models\Commandes;
-use App\Models\Livraison;
-use App\Models\Articles;
-use Database\DBConnection;
-
-use App\Controllers\Controller;
-use App\Controllers\Security;
 use Exception;
 use Throwable;
 
-class PaymentComponent extends Controller
+use Stripe\Stripe;
+use App\Models\Articles;
+use App\Models\Commandes;
+use App\Models\Livraison;
+use Stripe\PaymentIntent;
+use Database\DBConnection;
+use App\Models\NumCommande;
+use App\Controllers\Security;
+use App\Controllers\Controller;
+
+class PaymentController extends Controller
 {
 
     public function __construct()
@@ -25,6 +25,29 @@ class PaymentComponent extends Controller
         $this->modelLivraison = new Livraison();
         $this->modelArticle = new Articles();
     }
+
+
+    public function index()
+    {
+
+        $title = "Paiement - Kawa";
+
+        $totalPrice = 600;
+        // Nous appelons l'autoloader pour avoir accès à Stripe
+
+
+        // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
+        \Stripe\Stripe::setApiKey('sk_test_51Kbk2DKiGV4T2BDFJHQjg1nW2gLVxPy5Renk8jdaZPIAvD31kIDLzrOmRiyxFEiszws6noml2hucPUeteSJfXnRp006gqmAwdp');
+
+        // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
+            'currency' => 'eur',
+        ]);
+
+        return $this->view('shop.payment', compact('title', 'intent'));
+    }
+
 
     public function checkQuantity()
     {
@@ -80,64 +103,37 @@ class PaymentComponent extends Controller
     }
 
 
-    public function fieldCheck()
-    {
-        if (isset($_POST['submit'])) {
-            $email = Security::control($_POST['email']);
-            $nom = Security::control($_POST['nom']);
-            $prenom = Security::control($_POST['prenom']);
-            $nom_adresse = Security::control($_POST['nom_adresse']);
-            $ville = Security::control($_POST['ville']);
-            $pays = Security::control($_POST['pays']);
-            $voie = Security::control($_POST['voie']);
-            $voie_sup = Security::control($_POST['voie_sup']);
-            $code_postal = Security::control($_POST['code_postal']);
-            $telephone = Security::control($_POST['telephone']);
-
-            if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
-                $validation = 1;
-                return $validation;
-            } else {
-                $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
-                header('location: ./commande');
-            }
-        }
-    }
-
     public function insertLivraison($idNumC, $connexion)
     {
-        if (isset($_POST['submit'])) {
-            $fk_id_num_commande = Security::control($idNumC);
-            $email = Security::control($_POST['email']);
-            $nom = Security::control($_POST['nom']);
-            $prenom = Security::control($_POST['prenom']);
-            $nom_adresse = Security::control($_POST['nom_adresse']);
-            $ville = Security::control($_POST['ville']);
-            $pays = Security::control($_POST['pays']);
-            $voie = Security::control($_POST['voie']);
-            $voie_sup = Security::control($_POST['voie_sup']);
-            $code_postal = Security::control($_POST['code_postal']);
-            $telephone = Security::control($_POST['telephone']);
-            $etat_livraison = "en attente confirmation";
+        $fk_id_num_commande = Security::control($idNumC);
+        $email = Security::control($_SESSION['validate']['email']);
+        $nom = Security::control($_SESSION['validate']['nom']);
+        $prenom = Security::control($_SESSION['validate']['prenom']);
+        $nom_adresse = Security::control($_SESSION['validate']['nom_adresse']);
+        $ville =   Security::control($_SESSION['validate']['ville']);
+        $pays = Security::control($_SESSION['validate']['pays']);
+        $voie = Security::control($_SESSION['validate']['voie']);
+        $voie_sup =  Security::control($_SESSION['validate']['voie_sup']);
+        $code_postal =  Security::control($_SESSION['validate']['code_postal']);
+        $telephone =   Security::control($_SESSION['validate']['telephone']);
+        $etat_livraison = "en attente confirmation";
+
+        $modelHydrate = $this->modelLivraison
+            ->setFk_id_num_commande($fk_id_num_commande)
+            ->setEmail($email)
+            ->setNom($nom)
+            ->setPrenom($prenom)
+            ->setNom_adresse($nom_adresse)
+            ->setVille($ville)
+            ->setPays($pays)
+            ->setVoie($voie)
+            ->setVoie_sup($voie_sup)
+            ->setCode_postal($code_postal)
+            ->setTelephone($telephone)
+            ->setEtat_livraison($etat_livraison);
 
 
-            $modelHydrate = $this->modelLivraison
-                ->setFk_id_num_commande($fk_id_num_commande)
-                ->setEmail($email)
-                ->setNom($nom)
-                ->setPrenom($prenom)
-                ->setNom_adresse($nom_adresse)
-                ->setVille($ville)
-                ->setPays($pays)
-                ->setVoie($voie)
-                ->setVoie_sup($voie_sup)
-                ->setCode_postal($code_postal)
-                ->setTelephone($telephone)
-                ->setEtat_livraison($etat_livraison);
-
-
-            $this->modelLivraison->createTransaction($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone', 'etat_livraison'), $connexion);
-        }
+        $this->modelLivraison->createTransaction($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone', 'etat_livraison'), $connexion);
     }
 
     public function insertCommandes($idNumC, $connexion)
@@ -150,7 +146,7 @@ class PaymentComponent extends Controller
                     $nb_article = $value1;
                     (float) $prix_article = $value2;
                     $fk_id_article = $key1;
-                    (float) $prix_commande = $prix_article * $nb_article;
+                    (float) $prix_commande = ($prix_article * $nb_article);
                     $modelHydrate = $this->modelCommandes
                         ->setFk_id_num_commande($fk_id_num_commande)
                         ->setFk_id_article($fk_id_article)
@@ -196,36 +192,51 @@ class PaymentComponent extends Controller
     {
         (int) $secureIdUser = Security::control($_SESSION['id_utilisateur']);
         (int) $secureTotalProduit = $this->totalQuantity();
-        (float) $secureWithoutTvaPrice = $this->totalPrice();
+        (float) $secureWithTvaPrice = $this->totalPrice();
 
         // variable init envoyer dans le model Num Commande
         $fk_id_utilisateurs = $secureIdUser;
         $total_produit = $secureTotalProduit;
-        $prix_sans_tva = $secureWithoutTvaPrice;
-        $prix_avec_tva = $secureWithoutTvaPrice * 1.055;
+        $prix_avec_tva = $secureWithTvaPrice;
+        $prix_sans_tva = $secureWithTvaPrice * (94.5 / 100);
         $resultat =  $this->modelNumCommande->orderInsert($db, compact('fk_id_utilisateurs', 'total_produit', 'prix_sans_tva', 'prix_avec_tva'));
         return $resultat;
     }
 
 
-    public function payment()
+    public function stripe($totalPrice)
     {
+        $totalPrice = $totalPrice * 1.055;
+        // Nous appelons l'autoloader pour avoir accès à Stripe
+        require_once('vendor/autoload.php');
+
+        // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
+        \Stripe\Stripe::setApiKey('sk_test_51KMXz2L8eUNbBHo6sgsAeEAIaLa7YN4KePAc6VyIzBD6vYPobi6nvhiIZc2i7IwDQ6mY7st3C9SGpQ8EqTeIa8tt00N7j8mWAF');
+
+        // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
+            'currency' => 'eur',
+        ]);
+    }
+
+    public function payment()
+    {           /*         $this->stripe($this->totalPrice()); */
         if (isset($_POST['submit'])) {
             $db = DBConnection::getPDO();
 
-            if ($this->fieldCheck() == 1) {
-                try {
-                    $db->beginTransaction();
-                    $this->checkQuantity();
-                    $getIdNumCommande = $this->insertNumCommande($db);
-                    $this->updateQuantity($db);
-                    $this->insertLivraison($getIdNumCommande, $db);
-                    $this->insertCommandes($getIdNumCommande, $db);
-                    $db->commit();
-                } catch (Exception $e) {
-                    $db->rollBack();
-                    echo "Failed: " . $e->getMessage();
-                }
+            try {
+                $db->beginTransaction();
+                $this->checkQuantity();
+                $getIdNumCommande = $this->insertNumCommande($db);
+                $this->updateQuantity($db);
+
+                $this->insertLivraison($getIdNumCommande, $db);
+                $this->insertCommandes($getIdNumCommande, $db);
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Failed: " . $e->getMessage();
             }
         }
     }

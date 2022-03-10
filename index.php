@@ -206,25 +206,9 @@ $router->map(
 );
 
 
-//Commande
-$router->map(
-    'GET/POST',
-    '/commande',
-    function () {
-        $controller = new App\Controllers\OrderController();
-        $controller->index();
-        $controller->orderResume();
-        $controller->adressCheck();
-        $controller->getAdress();
-        $PaymentComponent = new App\Controllers\Components\PaymentComponent();
-        $PaymentComponent->payment();
-    },
-    'commande'
-);
 
 
 //PANIER
-
 
 $router->map(
     'POST',
@@ -242,6 +226,45 @@ $router->map(
 );
 
 
+//Commande
+$router->map(
+    'GET/POST',
+    '/commande',
+    function () {
+        $controller = new App\Controllers\OrderController();
+        $controller->index();
+        $controller->orderResume();
+        $controller->validate();
+    },
+    'commande'
+);
+
+
+//livraison
+$router->map(
+    'GET/POST',
+    '/livraison',
+    function () {
+        $controller = new App\Controllers\LivraisonController();
+        $controller->index();
+        $controller->fieldCheck();
+        $controller->adressCheck();
+        $controller->getAdress();
+    },
+    'livraison'
+);
+
+//Paiement
+$router->map(
+    'GET/POST',
+    '/paiement',
+    function () {
+        $controller = new App\Controllers\PaymentController();
+        $controller->index();
+        $controller->payment();
+    },
+    'paiement'
+);
 
 $match = $router->match();
 if (is_array($match)) {

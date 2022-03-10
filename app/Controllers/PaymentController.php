@@ -35,17 +35,7 @@ class PaymentController extends Controller
         $totalPrice = 600;
         // Nous appelons l'autoloader pour avoir accès à Stripe
 
-
-        // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
-        \Stripe\Stripe::setApiKey('sk_test_51Kbk2DKiGV4T2BDFJHQjg1nW2gLVxPy5Renk8jdaZPIAvD31kIDLzrOmRiyxFEiszws6noml2hucPUeteSJfXnRp006gqmAwdp');
-
-        // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
-            'currency' => 'eur',
-        ]);
-
-        return $this->view('shop.payment', compact('title', 'intent'));
+        return $this->view('shop.payment', compact('title'));
     }
 
 
@@ -204,17 +194,23 @@ class PaymentController extends Controller
     }
 
 
-    public function stripe($totalPrice)
+    public function stripe()
     {
-        $totalPrice = $totalPrice * 1.055;
-        // Nous appelons l'autoloader pour avoir accès à Stripe
-        require_once('vendor/autoload.php');
 
+        $totalPrice = 200;
+        // Nous appelons l'autoloader pour avoir accès à Stripe      
         // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
-        \Stripe\Stripe::setApiKey('sk_test_51KMXz2L8eUNbBHo6sgsAeEAIaLa7YN4KePAc6VyIzBD6vYPobi6nvhiIZc2i7IwDQ6mY7st3C9SGpQ8EqTeIa8tt00N7j8mWAF');
+        \Stripe\Stripe::setApiKey('sk_test_51Kbk2DKiGV4T2BDFJHQjg1nW2gLVxPy5Renk8jdaZPIAvD31kIDLzrOmRiyxFEiszws6noml2hucPUeteSJfXnRp006gqmAwdp');
 
+        // $customer = \Stripe\Customer::create(
+        //     array(
+        //         'email' => $_POST['emailStripe'],
+        //         'source' => $token,
+
+        //     )
+        // );
         // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
-        $intent = \Stripe\PaymentIntent::create([
+        \Stripe\PaymentIntent::create([
             'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
             'currency' => 'eur',
         ]);
@@ -226,11 +222,11 @@ class PaymentController extends Controller
             $db = DBConnection::getPDO();
 
             try {
+                $this->stripe();
                 $db->beginTransaction();
                 $this->checkQuantity();
                 $getIdNumCommande = $this->insertNumCommande($db);
                 $this->updateQuantity($db);
-
                 $this->insertLivraison($getIdNumCommande, $db);
                 $this->insertCommandes($getIdNumCommande, $db);
                 $db->commit();

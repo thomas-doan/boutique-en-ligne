@@ -214,7 +214,7 @@ class ProductComponent extends Product
      */
     public function updateProduct(array $form,$idProduct, ?string $pictureFileName)
     {   
-        $this->model->id = 'id_article';
+        
         $this->model->id_article = $idProduct;
         if(!empty($pictureFileName))
         {
@@ -242,5 +242,45 @@ class ProductComponent extends Product
         $item = $this->update($NewArticle,compact('id_article','image_article','titre_article','presentation_article','description_article','prix_article','sku','fournisseur','conditionnement'));
     }
 
-    
+    /**
+     * Permet d'Update le nombre d'unité en stocke
+     * @param array fomrulaire de reception
+     */
+    public function updateSku(array $form)
+    {
+        $oldSku =$this->find(['id_article'],['id_article'=>$form['id_article']],['sku'])[0]['sku'];
+        $newStock = (int)$form['sku'];
+        $total = ($newStock + $oldSku);
+        $form['sku'] = $total;
+        if(!empty($form['sku'])&& !empty($form['id_article']))
+        {
+            $req="UPDATE `articles` SET `sku`= :sku WHERE `id_article`= :id_article;";
+
+            $this->requete($req, $form);
+        }
+    }
+
+    /**
+     * Methode specifique au compte des stock aillant moins de 10 unité
+     * Permet de récupérer les articles dont le SKU est compris entre 0 et 10
+     */
+    public function stockNow()
+    {
+        $allsTock = $this->getAllProductForUpdate(['ASC'=>'sku']);
+
+        $arrayStockNow = [];
+        $i = 0;
+            while(isset($allsTock[$i]))
+            {
+                foreach($allsTock[$i] as $key => $value)
+                {
+                    if($key=='sku' && $value<=10)
+                    {
+                        $arrayStockNow[] = $allsTock[$i];
+                    }
+                }
+                $i++;
+            }
+        return $arrayStockNow;
+    }
 }

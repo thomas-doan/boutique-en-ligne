@@ -28,7 +28,7 @@ class AdminCreateProductController extends Controller
             pensez à contacter vos founisseur';
         }
         else $sendStock = null;
-        $this->view('administrator/index', compact('menu','title','sendStock'));
+        $this->view('administrator/index', compact('title','sendStock'));
     }
 
     /**

@@ -67,6 +67,8 @@ class PaymentComponent extends Controller
             }
 
             if ($checkQuantity[$key][0]["sku"] == 0) {
+                $_SESSION['noStock'][$id_article][1] = $titre_article;
+
                 unset($_SESSION['quantite'][$id_article]);
                 unset($_SESSION['prix'][$id_article]);
             }
@@ -81,9 +83,6 @@ class PaymentComponent extends Controller
         }
     }
 
-    /*     public function insertLivraison($idNumC)
-    {
-    } */
 
     public function fieldCheck()
     {

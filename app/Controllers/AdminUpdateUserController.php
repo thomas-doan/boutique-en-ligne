@@ -52,20 +52,34 @@ class AdminUpdateUserController extends Controller
     {
         $model = new Utilisateurs();
         $id_utilisateur = $id;
+        $actualPassword = $this->getUser($id);
+        var_dump($actualPassword[0]['password']);
 
         if (isset($_POST['modifier'])) {
             $email = $_POST['email'];
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $password = $_POST['password'];
             $role = $_POST['role'];
-
-            $updateUser = $model
-                ->setEmail($email)
-                ->setNom($nom)
-                ->setPrenom($prenom)
-                ->setPassword($password)
-                ->setRole($role);
+            $updateUser = $model;
+            
+            if(empty($password)){
+                $password = $actualPassword[0]['password'];
+                $updateUser = $model
+                    ->setEmail($email)
+                    ->setNom($nom)
+                    ->setPrenom($prenom)
+                    ->setPassword($password)
+                    ->setRole($role);
+            }else {
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $updateUser = $model
+                    ->setEmail($email)
+                    ->setNom($nom)
+                    ->setPrenom($prenom)
+                    ->setPassword($password)
+                    ->setRole($role);
+            }
 
             $model->update($updateUser, compact('email', 'nom', 'prenom', 'password', 'role', 'id_utilisateur'));
             $_SESSION['flash']['erreur'] = "L'utilisateur a bien été modifié";

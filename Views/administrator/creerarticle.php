@@ -1,4 +1,4 @@
-<?php var_dump($_SESSION);?>
+<h3>Creer un Article</h3>
 <section>
     <h3>Admin</h3>
     <ul>
@@ -7,7 +7,7 @@
         <li><a href="../gestiondestock">Gestion des stocks ></a></li>
         <li><a href="">Historique de commande ></a></li>
         <li><a href="">Gestion de livraison ></a></li>
-        <li><a href="..//gestionUtilisateur/liste"></a>Gestion des utilisateurs</li>
+        <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
     </ul>
 </section>
     <p><?=$error?></p>

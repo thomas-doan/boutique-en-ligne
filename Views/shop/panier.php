@@ -6,8 +6,6 @@ echo "<br>";
 var_dump($_SESSION['quantite']);
 echo "<br>";
 
-echo "<br>";
-
 var_dump($_SESSION['prix']);
 echo "<br>";
 ?>
@@ -18,32 +16,31 @@ echo "<br>";
 <?php
 
 
-    if (isset($_SESSION['quantite'])) { ?>
+if (isset($_SESSION['quantite'])) { ?>
 
     <?php
 
-    foreach ($articles as $article)
-    { ?>
+    foreach ($articles as $key => $article) {
+
+
+    ?>
         <form action="" method="post">
 
             <p> <?= $article['titre_article'] ?> </p>
             <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
             <button name="upQuantity" value="1" type="submit"> + </button>
-        <?php } ?>
+        <?php
+
+
+
+
+    } ?>
 
         <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
             <button name="downQuantity" value="1" type="submit"> - </button>
         </form>
     <?php } ?>
 
-
-
-    <form action="" method="post">
-        <button name="add" type="submit"> creer </button>
-        <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-        <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
-
-    </form>
 
     <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
 

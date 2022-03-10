@@ -147,7 +147,7 @@ $router->map(
         $controller->index();
     },
     'Admin index'
-); 
+);
 
 $router->map(
     'GET|POST',
@@ -162,12 +162,12 @@ $router->map(
 $router->map(
     'POST',
     '/admin/restocker',
-    function (){
+    function () {
         $controller = new App\Controllers\AdminUpdateSkuController();
         $controller->index();
     }
 );
-    
+
 //PANIER
 $router->map(
     'GET',
@@ -184,6 +184,7 @@ $router->map(
     '/panier',
     function () {
         $controller = new App\Controllers\shoppingCartController();
+
         $controller->upValue();
         $controller->downValue();
         // $controller->shoppingBag();
@@ -200,6 +201,7 @@ $router->map(
     function ($id_article) {
         $controller = new App\Controllers\ProductController();
         $controller->index($id_article);
+        $controller->shoppingBag();
         // $controller->Like($id_article);
         // $controller->addComment($id_article);
     },

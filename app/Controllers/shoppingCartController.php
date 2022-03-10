@@ -10,41 +10,42 @@ use App\Models\Articles;
 class shoppingCartController extends Controller
 {
 
+    public function __construct()
+    {
+
+        $this->modelArticle = new Articles();
+    }
+
     public function index()
     {
 
-   
+        $articles = $this->getArticles();
+        echo "<pre>";
+        var_dump($articles);
+        echo "</pre>";
+        /*     die; */
         $title = "panier";
-        return $this->view('shop.panier', compact('title'));
+        return $this->view('shop.panier', compact('articles', 'title'));
     }
 
-    // public function shoppingBag()
-    // {
-      
-    //     if (isset($_POST['add'])) {
-    //         if (isset($_SESSION['quantite'])) {
-    //             // assignation valeur
-    //             $id_article =  (int) $_POST['id_article'];
-    //             $prix_article =  (float) $_POST['prix_article'];
 
-    //             $_SESSION['quantite'][$id_article] = 1;
-    //             $_SESSION['prix'][$id_article] = $prix_article;
-    //         } else {
-    //             //init session
-    //             $_SESSION['quantite'] = [];
-    //             $_SESSION['prix'] = [];
+    public function getArticles()
+    {
+        /* $resultat = []; */
+        $articles = $this->modelArticle->findAll();
+        /*        $i = 0;
+        foreach ($articles as $id1 => $article) {
 
-    //             // assignation valeur
+            foreach ($_SESSION['panier'] as $id2 => $value) {
 
-    //             $prix_article =  (float) $_POST['prix_article'];
-    //             $id_article =  (int) $_POST['id_article'];
-    //             $_SESSION['quantite'][$id_article] = 1;
-    //             $_SESSION['prix'][$id_article] = $prix_article;
-    //         }
-    //         header('location: ./panier');
-    //     }
-    // }
+                if ($id2 == $id1) {
+                    $resultat[$i++] = $article[$id1];
+                }
+            }
+        } */
 
+        return $articles;
+    }
 
     public function upValue()
     {

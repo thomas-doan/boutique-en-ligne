@@ -23,7 +23,7 @@ class ModifierPasswordController extends Controller
             $ancienMdp = $_POST['ancienMdp'];
             $nouveauMdp = $_POST['nouveauMdp'];
             $confirmMdp = $_POST['confirmMdp'];
-            $id_utilisateur =  $_SESSION['id_utilisateur'];
+            $id_utilisateur =  $_SESSION[['user']['id_utilisateur'];
 
             $argument = ['id_utilisateur'];
             $checkUser = $model->find($argument, compact('id_utilisateur'));
@@ -41,8 +41,8 @@ class ModifierPasswordController extends Controller
 
                 // $updateMdp = $model;
                 // $updateMdp->setPassword(password_hash($nouveauMdp, PASSWORD_DEFAULT));
-                // $model->updateProfil($_SESSION['id_utilisateur'], $updateMdp);
-                // $_SESSION['password'] = $model->getPassword();
+                // $model->updateProfil($_SESSION[['user']['id_utilisateur'], $updateMdp);
+                // $_SESSION[['user']['password'] = $model->getPassword();
                 // $_SESSION['flash']['sucess'] = "Bravo votre changement a bien été effectué";
                 // header('Location: ../profil');
                 // exit();
@@ -53,7 +53,7 @@ class ModifierPasswordController extends Controller
                     ->setPassword($passwordHash);
                 $model->update($updateMdp, compact('password', 'id_utilisateur'));
 
-                $_SESSION['password'] = $model->getPassword();
+                $_SESSION[['user']['password'] = $model->getPassword();
                 $_SESSION['flash']['sucess'] = "Bravo votre changement a bien été effectué";
                 header('Location: ../profil');
                 exit();

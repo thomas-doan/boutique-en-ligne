@@ -147,7 +147,7 @@ $router->map(
         $controller->index();
     },
     'Admin index'
-); 
+);
 
 $router->map(
     'GET|POST',
@@ -159,15 +159,15 @@ $router->map(
     'update product'
 );
 
-$route->map(
+$router->map(
     'POST',
     '/admin/restocker',
-    function (){
+    function () {
         $controller = new App\Controllers\AdminUpdateSkuController();
         $controller->index();
     }
 );
-    
+
 
 // CRUD Category
 $router->map(
@@ -240,10 +240,6 @@ $router->map(
     },
     'panier post'
 );
-
-
-
-
 
 
 

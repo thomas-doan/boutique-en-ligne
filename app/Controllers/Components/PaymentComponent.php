@@ -122,6 +122,7 @@ class PaymentComponent extends Controller
             $voie_sup = Security::control($_POST['voie_sup']);
             $code_postal = Security::control($_POST['code_postal']);
             $telephone = Security::control($_POST['telephone']);
+            $etat_livraison = "en attente confirmation";
 
 
             $modelHydrate = $this->modelLivraison
@@ -136,10 +137,11 @@ class PaymentComponent extends Controller
                 ->setVoie_sup($voie_sup)
                 ->setCode_postal($code_postal)
                 ->setTelephone($telephone);
+            /*   ->setEtat_livraison($etat_livraison); */
 
-            $this->modelLivraison->create($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone'));
+
+            $this->modelLivraison->create($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone'/* , 'etat_livraison' */));
         }
-        header('location: ./commande');
     }
 
     public function insertCommandes($idNumC)
@@ -195,8 +197,8 @@ class PaymentComponent extends Controller
                     $this->updateQuantity($db);
                     $this->insertLivraison($getIdNumCommande);
                     $this->insertCommandes($getIdNumCommande);
-
                     $db->commit();
+                    header('location: ./panier');
                 } catch (Exception $e) {
                     $db->rollBack();
                     echo "Failed: " . $e->getMessage();

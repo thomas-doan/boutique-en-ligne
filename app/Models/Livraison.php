@@ -19,6 +19,7 @@ class Livraison extends Model
     protected $voie_sup;
     protected $code_postal;
     protected $telephone;
+    protected $etat_livraison;
 
     /**
      * Get the value of id_livraison
@@ -256,6 +257,26 @@ class Livraison extends Model
     public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of etat_livraison
+     */
+    public function getEtat_livraison()
+    {
+        return $this->etat_livraison;
+    }
+
+    /**
+     * Set the value of etat_livraison
+     *
+     * @return  self
+     */
+    public function setEtat_livraison($etat_livraison)
+    {
+        $this->etat_livraison = $etat_livraison;
 
         return $this;
     }

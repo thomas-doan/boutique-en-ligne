@@ -62,12 +62,12 @@ class PaymentComponent extends Controller
                 $_SESSION['halfQuantityPayment'][$id_article][2] = $prix_article;
             }
 
-            /*             if ($checkQuantity[$key][0]["sku"] == 0) {
+            if ($checkQuantity[$key][0]["sku"] == 0) {
                 $_SESSION['noStock'][$id_article][1] = $titre_article;
 
                 unset($_SESSION['quantite'][$id_article]);
                 unset($_SESSION['prix'][$id_article]);
-            } */
+            }
         }
     }
 
@@ -104,7 +104,7 @@ class PaymentComponent extends Controller
         }
     }
 
-    public function insertLivraison($idNumC)
+    public function insertLivraison($idNumC, $connexion)
     {
         if (isset($_POST['submit'])) {
             $fk_id_num_commande = Security::control($idNumC);
@@ -132,15 +132,15 @@ class PaymentComponent extends Controller
                 ->setVoie($voie)
                 ->setVoie_sup($voie_sup)
                 ->setCode_postal($code_postal)
-                ->setTelephone($telephone);
-            /*   ->setEtat_livraison($etat_livraison); */
+                ->setTelephone($telephone)
+                ->setEtat_livraison($etat_livraison);
 
 
-            $this->modelLivraison->create($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone'/* , 'etat_livraison' */));
+            $this->modelLivraison->createTransaction($modelHydrate, compact('fk_id_num_commande', 'email', 'nom', 'prenom', 'nom_adresse', 'ville', 'pays', 'voie', 'voie_sup', 'code_postal', 'telephone', 'etat_livraison'), $connexion);
         }
     }
 
-    public function insertCommandes($idNumC)
+    public function insertCommandes($idNumC, $connexion)
     {
 
         foreach ($_SESSION['quantite'] as $key1 => $value1) {
@@ -157,17 +157,46 @@ class PaymentComponent extends Controller
                         ->setNb_article($nb_article)
                         ->setPrix_article($prix_article)
                         ->setPrix_commande($prix_commande);
-                    $this->modelCommandes->create($modelHydrate, compact('fk_id_num_commande', 'fk_id_article', 'nb_article', 'prix_article', 'prix_commande'));
+                    $this->modelCommandes->createTransaction($modelHydrate, compact('fk_id_num_commande', 'fk_id_article', 'nb_article', 'prix_article', 'prix_commande'), $connexion);
                 }
             }
         }
     }
 
+    public function totalPrice()
+    {
+
+        if (isset($_SESSION['quantite'])) {
+
+            $result = 0;
+            foreach ($_SESSION['quantite'] as $key1 => $value1) {
+                foreach ($_SESSION['prix'] as $key2 => $value2) {
+                    if ($key1 == $key2) {
+
+                        $resultSinglePrice = $value1 * $value2;
+                        $result += $resultSinglePrice;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function totalQuantity()
+    {
+        (float) $result = 0;
+        foreach ($_SESSION['quantite'] as $quantite) {
+            $result = $result + $quantite;
+        }
+
+        return $result;
+    }
+
     public function insertNumCommande($db)
     {
         (int) $secureIdUser = Security::control($_SESSION['id_utilisateur']);
-        (int) $secureTotalProduit = Security::control($_SESSION['totalQuantity']);
-        (float) $secureWithoutTvaPrice = Security::control($_SESSION['totalPrice']);
+        (int) $secureTotalProduit = $this->totalQuantity();
+        (float) $secureWithoutTvaPrice = $this->totalPrice();
 
         // variable init envoyer dans le model Num Commande
         $fk_id_utilisateurs = $secureIdUser;
@@ -186,13 +215,12 @@ class PaymentComponent extends Controller
 
             if ($this->fieldCheck() == 1) {
                 try {
-
-                    /*    $this->checkQuantity(); */
                     $db->beginTransaction();
+                    $this->checkQuantity();
                     $getIdNumCommande = $this->insertNumCommande($db);
                     $this->updateQuantity($db);
-                    $this->insertCommandes($getIdNumCommande);
-                    $this->insertLivraison($getIdNumCommande);
+                    $this->insertLivraison($getIdNumCommande, $db);
+                    $this->insertCommandes($getIdNumCommande, $db);
                     $db->commit();
                 } catch (Exception $e) {
                     $db->rollBack();

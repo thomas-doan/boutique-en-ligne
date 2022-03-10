@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Model;
 use Database\DBConnection;
-use Models\Database;
 
 Class Product extends Model
 {
@@ -22,6 +21,8 @@ Class Product extends Model
     {
         // Spécifie la table à utiliser pour la class Model
         $this->table = 'articles';
+        $this->db = DBConnection::getPDO();
+        $this->id = 'id_article';
         
     }
 
@@ -40,7 +41,43 @@ Class Product extends Model
     //     return $this->show_column($table);
     // }
 
-    
+    public function find_article($searchResult)
+    {
+
+        $req = 
+        "
+            SELECT `art1`.id_article, `art1`.titre_article, `art1`.prix_article,`cat2`.`nom_categorie` AS 'cat parent', 'article' AS 'type'
+            FROM articles_categories_filtre
+            INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article`
+            INNER JOIN categories AS `cat1` ON articles_categories_filtre.fk_id_cat_categorie = `cat1`.id_categorie
+            INNER JOIN categories AS `cat2` ON articles_categories_filtre.id_parent = `cat2`.id_categorie
+            WHERE  MATCH (`art1`.titre_article  ) AGAINST (:titre_article )
+            GROUP BY `art1`.`id_article`;
+        ";
+
+        $query = $this->db->prepare($req);
+
+        $query->setFetchMode(\PDO::FETCH_ASSOC);
+        $query->execute(array(
+            ":titre_article" => "%$searchResult%",
+        ));
+        $article = $query->fetchall();
+
+        return $article;
+    }
+
+    public function getAllProductForUpdate()
+    {
+        $req ="
+        SELECT `art1`.id_article, `art1`.titre_article, `art1`.prix_article,`cat2`.`nom_categorie` AS 'cat parent' 
+        FROM articles_categories_filtre 
+        INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article` 
+        INNER JOIN categories AS `cat2` ON articles_categories_filtre.id_parent = `cat2`.id_categorie 
+        GROUP BY `art1`.`id_article`;";
+        $query = $this->requete($req);
+        return $query->fetchAll();
+    }
+
 }
 
 ?>

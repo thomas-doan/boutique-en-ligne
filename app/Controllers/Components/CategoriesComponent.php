@@ -23,6 +23,8 @@ class CategoriesComponent extends Categories
         return $item;
     }
 
+    
+
     /**
      * Récupère le nom d'une catégorie par son Id
      * @param array Ensemble des critère à chercher

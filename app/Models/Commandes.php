@@ -1,3 +1,14 @@
+    public function getInfoCommande($id_commande)
+    {
+        $sql =
+            "SELECT commandes.date_commande, commandes.prix_total, adresses.ville, adresses.voie, adresses.voie_sup, adresses.code_postal, articles.titre_article, articles.prix_article, commandes.nb_article, commandes.num_commande
+            FROM commandes 
+            INNER JOIN articles ON commandes.fk_id_article = articles.id_article 
+            INNER JOIN utilisateurs ON commandes.fk_id_utilisateur = utilisateurs.id_utilisateur
+            INNER JOIN adresses ON utilisateurs.id_utilisateur = adresses.fk_id_utilisateur
+            WHERE commandes.id_commande = $id_commande";
+        return $this->requete($sql)->fetchAll();
+    }
 <?php
 
 namespace App\Models;

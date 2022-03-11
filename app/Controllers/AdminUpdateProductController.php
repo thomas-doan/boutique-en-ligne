@@ -74,6 +74,10 @@ class AdminUpdateProductController extends Controller
             }
             if(!empty($_POST['id_parent'])){$this->Categories->updateMainCatOfProduct($id_article, $_POST['id_parent']);}
 
+            $this->gestionTag($param);
+            $tagOfProduct = $this->Product->getTagByProduct($param);
+            $allTags = $this->Product->getAlltag();
+
             $product = $this->Product->find(['id_article'],[':id_article'=>$id_article])[0];
 
             $id_cat_parent = $this->Categories->selectMainCatOfProduct($id_article)['id_categorie'];
@@ -97,7 +101,7 @@ class AdminUpdateProductController extends Controller
                 'origin' => $this->Categories->chooseCategoriesBySection(['section'], 'PROVENENCE')
                 );
 
-            $compact = compact('title','param','product','CatOfProduct','AllCat');   
+            $compact = compact('title','param','product','CatOfProduct','AllCat','allTags','tagOfProduct');   
         }
         // On génére la vue
         $this->view('administrator.updateProduct', $compact );
@@ -190,9 +194,41 @@ class AdminUpdateProductController extends Controller
         if(!empty($_FILES[$name_file]['name']))
         {
         $this->Product->verify_upload($name_file);
-        var_dump($this->Product->verify_upload($name_file));
         $this->Product->stock_picture($chemin,$namePicture);
         }
     }
 
+    public function gestionTag($param)
+    {
+        //gestion des tags
+        $allTags = $this->Product->getAlltag();//On récupère les tags
+
+        if(!empty($_POST['delettag']))//
+        {
+            $this->Product->deleteTagOfProduct($_POST['delettag'], $param);
+        }
+        if(!empty($_POST['addTag'])&& !empty($_POST['tag']))
+        {
+            if(in_array($_POST['tag'],array_column($allTags,'nom_tag')))
+            {
+                foreach($allTags as $key => $value)
+                {
+                    if($value['nom_tag'] == $_POST['tag'])
+                    {
+                        $idNewTag = (int)$value['id_tag'];
+                    }
+                }
+                if(in_array($idNewTag,array_column($this->Product->getTagByProduct($param),'fk_id_tag'))==false)
+                {
+                $this->Product->insertTag($idNewTag,$param);
+                }
+            }
+            else
+            {
+                $this->Product->insertNewTag($_POST['tag']);
+                $idNewTag = ($allTags[array_key_last($allTags)]['id_tag'])+1;
+                $this->Product->insertTag($idNewTag,$param);
+            }
+        }
+    }
 }

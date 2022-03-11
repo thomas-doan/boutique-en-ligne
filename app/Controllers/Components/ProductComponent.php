@@ -306,6 +306,11 @@ class ProductComponent extends Product
         $result = $this->requete($req, compact('nom_tag'));
     }
 
+    public function insertTag($fk_id_tag,$fk_id_article)
+    {
+        $req = "INSERT INTO `articles_tags`(`fk_id_tag`, `fk_id_article`) VALUES (:fk_id_tag,:fk_id_article);";
+        $this->requete($req,compact('fk_id_tag','fk_id_article'));
+    }
     /**
      * Permet d'ajouter tout les tag d'un produit
      * @param array le tableau avec les tags
@@ -316,8 +321,22 @@ class ProductComponent extends Product
         foreach($array as $key => $value)
         {
             $fk_id_tag = $key;
-            $req = "INSERT INTO `articles_tags`(`fk_id_tag`, `fk_id_article`) VALUES (:fk_id_tag,:fk_id_article);";
-            $this->requete($req,compact('fk_id_tag','fk_id_article'));
+            $this->insertTag($fk_id_tag,$fk_id_article);
         }
+    }
+
+    public function getTagByProduct($fk_id_article)
+    {
+        $req = "SELECT `articles_tags`.fk_id_article, `articles_tags`.fk_id_tag, `tag`.nom_tag  FROM `articles_tags`
+        INNER JOIN `tag` ON `tag`.id_tag = `articles_tags`.fk_id_tag
+        WHERE `articles_tags`.fk_id_article = :fk_id_article;";
+        $result = $this->requete($req, compact('fk_id_article'))->fetchAll();
+        return $result;
+    }
+
+    public function deleteTagOfProduct($fk_id_tag, $fk_id_article)
+    {
+        $req = "DELETE FROM `articles_tags` WHERE fk_id_tag = :fk_id_tag AND fk_id_article = :fk_id_article;";
+        $resutl = $this->requete($req,compact('fk_id_article','fk_id_tag'));
     }
 }

@@ -194,16 +194,7 @@ $router->map(
 
 
 
-//PANIER
-$router->map(
-    'GET',
-    '/panier',
-    function () {
-        $controller = new App\Controllers\ShoppingCartController();
-        $controller->index();
-    },
-    'panier'
-);
+
 
 
 // PRODUIT
@@ -219,12 +210,9 @@ $router->map(
     },
 );
 
-
-
 //PANIER
-
 $router->map(
-    'POST',
+    'GET/POST',
     '/panier',
     function () {
         $controller = new App\Controllers\ShoppingCartController();
@@ -236,9 +224,23 @@ $router->map(
         $controller->singlePrice();
         $controller->totalQuantity();
         $controller->totalPrice();
+        $controller->index();
+    },
+    'panier'
+);
+
+//PANIER
+/* 
+$router->map(
+    'POST',
+    '/panier',
+    function () {
+        $controller = new App\Controllers\ShoppingCartController();
+
+
     },
     'panier post'
-);
+); */
 
 
 //Commande

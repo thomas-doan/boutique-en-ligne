@@ -29,12 +29,7 @@ class PaymentController extends Controller
 
     public function index()
     {
-
         $title = "Paiement - Kawa";
-
-        $totalPrice = 600;
-        // Nous appelons l'autoloader pour avoir accès à Stripe
-
         return $this->view('shop.payment', compact('title'));
     }
 
@@ -196,33 +191,37 @@ class PaymentController extends Controller
 
     public function stripe()
     {
-        /* var_dump($_POST); */
-        $totalPrice = 200;
-        // Nous appelons l'autoloader pour avoir accès à Stripe      
-        // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
-        \Stripe\Stripe::setApiKey('sk_test_51Kbk2DKiGV4T2BDFJHQjg1nW2gLVxPy5Renk8jdaZPIAvD31kIDLzrOmRiyxFEiszws6noml2hucPUeteSJfXnRp006gqmAwdp');
+        if (isset($_POST['submit'])) {
+            /* var_dump($_POST); */
+            $totalPrice = 200;
+            // Nous appelons l'autoloader pour avoir accès à Stripe      
+            // Nous instancions Stripe en indiquand la clé privée, pour prouver que nous sommes bien à l'origine de cette demande
+            \Stripe\Stripe::setApiKey('sk_test_51Kbk2DKiGV4T2BDFJHQjg1nW2gLVxPy5Renk8jdaZPIAvD31kIDLzrOmRiyxFEiszws6noml2hucPUeteSJfXnRp006gqmAwdp');
 
-        // $customer = \Stripe\Customer::create(
-        //     array(
-        //         'email' => $_POST['emailStripe'],
-        //         'source' => $token,
+            /*     $customer = \Stripe\Customer::create(
+            array(
+                'email' => Security::control($_SESSION['validate']['nom']),
+            )
+        ); */
+            // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
+            $intent = \Stripe\PaymentIntent::create([
+                'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
+                'currency' => 'eur',
+                'payment_method_types' => ['card'],
+                ['payment_method' => 'pm_card_visa'],
+            ]);
 
-        //     )
-        // );
-        // Nous créons l'intention de paiement et stockons la réponse dans la variable $intent
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $totalPrice * 100, // Le prix doit être transmis en centimes
-            'currency' => 'eur',
-        ]);
+            $intent['client_secret'];
+        }
     }
 
     public function payment()
     {           /*         $this->stripe($this->totalPrice()); */
         if (isset($_POST['submit'])) {
             $db = DBConnection::getPDO();
-
+            /*     $this->stripe(); */
             try {
-                $this->stripe();
+
                 $db->beginTransaction();
                 $this->checkQuantity();
                 $getIdNumCommande = $this->insertNumCommande($db);

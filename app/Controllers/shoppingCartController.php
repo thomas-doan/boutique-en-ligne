@@ -19,10 +19,10 @@ class ShoppingCartController extends Controller
     public function index()
     {
 
-
+        /*   $totalQuantity = $this->totalQuantity(); */
         $articles = $this->modelArticle->findAll();
         $title = "panier";
-        return $this->view('shop.panier', compact('articles', 'title'));
+        return $this->view('shop.panier', compact('articles', 'title'/* , 'totalQuantity' */));
     }
 
     public function shoppingBag()
@@ -78,7 +78,7 @@ class ShoppingCartController extends Controller
 
     public function downValue()
     {
-        var_dump($_SESSION);
+
         if (isset($_POST['downQuantity'])) {
 
             $down =  $_POST['downQuantity'];
@@ -102,17 +102,20 @@ class ShoppingCartController extends Controller
 
     public function singlePrice()
     {
-        $_SESSION['singlePrice'] = [];
 
-        $result = 0;
-        foreach ($_SESSION['quantite'] as $key1 => $value1) {
-            foreach ($_SESSION['prix'] as $key2 => $value2) {
-                if ($key1 == $key2) {
+        if (isset($_SESSION['quantite'])) {
+            $_SESSION['singlePrice'] = [];
 
-                    $result = $value1 * $value2;
+            $result = 0;
+            foreach ($_SESSION['quantite'] as $key1 => $value1) {
+                foreach ($_SESSION['prix'] as $key2 => $value2) {
+                    if ($key1 == $key2) {
+
+                        $result = $value1 * $value2;
 
 
-                    $_SESSION['singlePrice'][$key1]  = $result;
+                        $_SESSION['singlePrice'][$key1]  = $result;
+                    }
                 }
             }
         }
@@ -120,27 +123,30 @@ class ShoppingCartController extends Controller
     public function totalQuantity()
     {
 
-        (float)$_SESSION['totalQuantity'] = 0;
+        $_SESSION['totalQuantity'] = 0;
         foreach ($_SESSION['quantite'] as $quantite) {
-            $_SESSION['totalQuantity'] = $_SESSION['totalQuantity'] + $quantite;
-        }
+            $_SESSION['totalQuantity'] += $quantite;
+        };
+
+        /* return $_SESSION['totalQuantity'] */
     }
 
     public function totalPrice()
     {
 
+        if (isset($_SESSION['quantite'])) {
+            $_SESSION['totalPrice'] = [];
 
-        $_SESSION['totalPrice'] = [];
+            $result = 0;
+            foreach ($_SESSION['quantite'] as $key1 => $value1) {
+                foreach ($_SESSION['prix'] as $key2 => $value2) {
+                    if ($key1 == $key2) {
 
-        $result = 0;
-        foreach ($_SESSION['quantite'] as $key1 => $value1) {
-            foreach ($_SESSION['prix'] as $key2 => $value2) {
-                if ($key1 == $key2) {
+                        $resultSinglePrice = $value1 * $value2;
+                        $result += $resultSinglePrice;
 
-                    $resultSinglePrice = $value1 * $value2;
-                    $result += $resultSinglePrice;
-
-                    $_SESSION['totalPrice'] = $result;
+                        $_SESSION['totalPrice'] = $result;
+                    }
                 }
             }
         }

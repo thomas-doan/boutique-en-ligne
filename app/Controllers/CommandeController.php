@@ -13,6 +13,8 @@ class CommandeController extends Controller
         $title = "Commande";
         $idCommande = $id_commande;
         $order = $this->getOrderInfo($idCommande);
+
+
         // $allInfoById = $this->getCommandeById($idCommande);
         return $this->view('profil.commande', compact('title', 'order'));
     }

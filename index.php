@@ -107,10 +107,10 @@ $router->map(
 
 $router->map(
     'GET|POST',
-    '/profil/historiqueCommande/commande/[i:id_commande]',
-    function ($id_commande) {
+    '/profil/historiqueCommande/commande/[i:id_num_commande]',
+    function ($id_num_commande) {
         $controller = new App\Controllers\CommandeController();
-        $controller->index($id_commande);
+        $controller->index($id_num_commande);
 
         // $controller->getCommandebyId($id_commande);
     },

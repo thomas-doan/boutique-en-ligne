@@ -5,7 +5,7 @@ use App\Controllers\AdresseController;
 
 $adresse = new AdresseController;
 
-var_dump($_SESSION);
+
 if(empty($_SESSION['user']))
 {
     $userPath = '/boutique-en-ligne/connexion';

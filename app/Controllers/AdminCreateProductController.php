@@ -39,7 +39,6 @@ class AdminCreateProductController extends Controller
         //$param et défini selon la redirection du formulaire
         $title = 'Admin | Nouvel Article';
         $this->recover(); //Enregistre les valeurs du formulaire en variable de section
-        $this->less_part($param);//Passe à l'étape suivante selon les conditions d'acceptations
 
         if($param == 'partie1')//Première partie du formulaire ___ Information dédier à la Table Article
         {
@@ -58,11 +57,46 @@ class AdminCreateProductController extends Controller
             'strong' => $this->Categories->chooseCategoriesBySection(['section'],'FORCE'),
             'origin' => $this->Categories->chooseCategoriesBySection(['section'], 'PROVENENCE')
             );
-            $compact = compact('param','result_request','title');
+
+            //gestion des tags
+            $allTags = $this->Product->getAlltag();//On récupère les tags
+
+            if(!empty($_POST['delettag']))//
+            {
+                unset($_SESSION['nouvelarticle']['tag'][$_POST['delettag']]);
+            }
+            if(!empty($_POST['addTag'])&& !empty($_POST['tag']))
+            {
+                if(in_array($_POST['tag'],array_column($allTags,'nom_tag')))
+                {
+                    foreach($allTags as $key => $value)
+                    {
+                        if($value['nom_tag'] == $_POST['tag'])
+                        {
+                            $idNewTag = (int)$value['id_tag'];
+                        }
+                    }
+                    $_SESSION['nouvelarticle']['tag'][$idNewTag]= $_POST['tag']; 
+                }
+                else
+                {
+                    $this->Product->insertNewTag($_POST['tag']);
+                    $idNewTag = ($allTags[array_key_last($allTags)]['id_tag'])+1;
+                    $_SESSION['nouvelarticle']['tag'][$idNewTag]= $_POST['tag'];
+                }
+
+                var_dump($_SESSION['nouvelarticle']['tag']);
+                $allTags = $this->Product->getAlltag();
+            }
+
+            $compact = compact('param','result_request','title','allTags');
         }
         elseif($param == 'rendu')
         {
-            $compact = compact('param','title');
+            
+            unset($_SESSION['nouvelarticle']['etape2']['tag']);
+            $printTag = 'TAG : #'.implode(' #',$_SESSION['nouvelarticle']['tag']);
+            $compact = compact('param','title','printTag');
         }
         elseif($param == 'upload')
         {   if(
@@ -81,6 +115,8 @@ class AdminCreateProductController extends Controller
                     $this->Product->useLastId(),
                     $_SESSION['nouvelarticle']['etape2']['PRINCIPALE'],
                 );
+                $this->Product->insertAllcatByProducts($_SESSION['nouvelarticle']['tag'], $this->Product->useLastId());
+                
                 unset($_SESSION['nouvelarticle']);
                 $message = 'Félicitation ! Votre article est à présent en ligne';
             }
@@ -89,7 +125,7 @@ class AdminCreateProductController extends Controller
         }
         else $retour = 'Pas de paramettre à effectué';
 
-    
+        $this->less_part($param);//Passe à l'étape suivante selon les conditions d'acceptations
         $this->view('administrator.creerarticle', $compact);
     }
 
@@ -205,6 +241,10 @@ class AdminCreateProductController extends Controller
         elseif(isset($_POST['etape2'])&& empty($_POST['SAVEUR']))
         {
             $_SESSION['flash']['categorie'] = "Votre article doit avoir au moins une saveur";
+        }
+        elseif(isset($_POST['etape2'])&& empty($_SESSION['nouvelarticle']['tag']))
+        {
+            $_SESSION['flash']['categorie'] = "Votre article doit avoir au moins un tag d'assigné";
         }
         elseif(isset($_SESSION['nouvelarticle']) && ($this->verify_input($_SESSION['nouvelarticle']['etape1'])===true)
         && !empty($_SESSION['nouvelarticle']['etape2']['PRINCIPALE'])

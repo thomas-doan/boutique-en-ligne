@@ -1,4 +1,4 @@
-
+<?php var_dump($_SESSION)?>
 <section>
     <h3>Admin</h3>
     <ul>
@@ -165,10 +165,38 @@
         ?>
         </fieldset>
 
+        <fieldset>
+        <p>Filtres selectionnés : </p>
+            <?php if(!empty($_SESSION['nouvelarticle']['tag'])):?>
+            <?php foreach($_SESSION['nouvelarticle']['tag'] as $key => $value):?>
+            <button type="submit" name="delettag" value="<?=$key?>">&#10006; <?=$value?></button>
+            <?php endforeach;
+            endif ;?>
+
+            <legend>Tags</legend>
+            <p>Ajouter des tags :</p>
+
+            <label for="liste_tag">Liste des tags :</label>
+            <input list="all_tag" name="tag" id="liste_tag">
+            <datalist id="all_tag">
+        <?php
+        foreach($allTags as $value)
+        {
+            ?>
+                <option value = "<?=$value['nom_tag']?>"><?=$value['nom_tag']?></option>
+            <?php
+        }
+        ?>
+        </datalist>
+        <input type="submit" name="addTag" value="ajouter">
+        </fieldset>
+
         <input type="submit" name="etape2" value="Visualiser le résultat">
         </form>
          
 <?php endif ; ?>
+
+
 <?php if($param == 'rendu') :?>
         <article>
             <div>
@@ -181,6 +209,7 @@
                     <h4><?=$_SESSION['nouvelarticle']['etape1']['presentation_article']?></h4>
                     <p><?=$_SESSION['nouvelarticle']['etape1']['description_article']?></p>
                     <?=$this->Categories->printAllCategories($_SESSION['nouvelarticle']['etape2'])?>
+                    <p><?=$printTag?></p>
                 </div>
             </div>
         </article>

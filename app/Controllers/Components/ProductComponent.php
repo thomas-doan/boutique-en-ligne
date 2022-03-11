@@ -290,5 +290,34 @@ class ProductComponent extends Product
                 $i++;
             }
         return $arrayStockNow;
+
+    }
+
+    public function getAlltag()
+    {
+        $req = "SELECT * FROM `tag`";
+        $result = $this->requete($req)->fetchAll();
+        return $result;
+    }
+
+    public function insertNewTag($nom_tag)
+    {
+        $req= "INSERT INTO `tag`(`nom_tag`) VALUES (:nom_tag)";
+        $result = $this->requete($req, compact('nom_tag'));
+    }
+
+    /**
+     * Permet d'ajouter tout les tag d'un produit
+     * @param array le tableau avec les tags
+     * @param ,id de l'article en question
+     */
+    public function insertAllcatByProducts($array, $fk_id_article)
+    {
+        foreach($array as $key => $value)
+        {
+            $fk_id_tag = $key;
+            $req = "INSERT INTO `articles_tags`(`fk_id_tag`, `fk_id_article`) VALUES (:fk_id_tag,:fk_id_article);";
+            $this->requete($req,compact('fk_id_tag','fk_id_article'));
+        }
     }
 }

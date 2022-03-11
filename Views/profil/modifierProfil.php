@@ -15,13 +15,13 @@
     <form action="#" method="post">
 
         <label for="email">Email : </label>
-        <input type="text" id="email" name="email" value="<?= $_SESSION['email'] ?>">
+        <input type="text" id="email" name="email" value="<?= $_SESSION['user']['email'] ?>">
 
         <label for="nom">Nom : </label>
-        <input type="text" id="nom" name="nom" value="<?= $_SESSION['nom'] ?>">
+        <input type="text" id="nom" name="nom" value="<?= $_SESSION['user']['nom'] ?>">
 
         <label for="prenom">Prenom : </label>
-        <input type="text" id="prenom" name="prenom" value="<?= $_SESSION['prenom'] ?>">
+        <input type="text" id="prenom" name="prenom" value="<?= $_SESSION['user']['prenom'] ?>">
 
         <input type="submit" name="submit" value="Modifier">
     </form>

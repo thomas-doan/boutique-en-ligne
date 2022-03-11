@@ -2,21 +2,18 @@
 
 namespace App\Models;
 
-use PDO;
-
 class Commandes extends Model
+
 {
     protected $table = 'commandes';
-    protected $id = "id_commande";
+    protected $id = 'id_commande';
     protected $id_commande;
-    protected $etat_commande;
-    protected $prix_commande;
-    protected $num_commande;
-    protected $prix_total;
-    protected $date_commande;
-    protected $fk_id_utilisateur;
+    protected $fk_id_num_commande;
     protected $fk_id_article;
     protected $nb_article;
+    protected $prix_article;
+    protected $prix_commande;
+
 
     /**
      * Get the value of id_commande
@@ -39,121 +36,21 @@ class Commandes extends Model
     }
 
     /**
-     * Get the value of etat_commande
+     * Get the value of fk_id_num_commande
      */
-    public function getEtat_commande()
+    public function getFk_id_num_commande()
     {
-        return $this->etat_commande;
+        return $this->fk_id_num_commande;
     }
 
     /**
-     * Set the value of etat_commande
+     * Set the value of fk_id_num_commande
      *
      * @return  self
      */
-    public function setEtat_commande($etat_commande)
+    public function setFk_id_num_commande($fk_id_num_commande)
     {
-        $this->etat_commande = $etat_commande;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of prix_commande
-     */
-    public function getPrix_commande()
-    {
-        return $this->prix_commande;
-    }
-
-    /**
-     * Set the value of prix_commande
-     *
-     * @return  self
-     */
-    public function setPrix_commande($prix_commande)
-    {
-        $this->prix_commande = $prix_commande;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of num_commande
-     */
-    public function getNum_commande()
-    {
-        return $this->num_commande;
-    }
-
-    /**
-     * Set the value of num_commande
-     *
-     * @return  self
-     */
-    public function setNum_commande($num_commande)
-    {
-        $this->num_commande = $num_commande;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of prix_total
-     */
-    public function getPrix_total()
-    {
-        return $this->prix_total;
-    }
-
-    /**
-     * Set the value of prix_total
-     *
-     * @return  self
-     */
-    public function setPrix_total($prix_total)
-    {
-        $this->prix_total = $prix_total;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of date_commande
-     */
-    public function getDate_commande()
-    {
-        return $this->date_commande;
-    }
-
-    /**
-     * Set the value of date_commande
-     *
-     * @return  self
-     */
-    public function setDate_commande($date_commande)
-    {
-        $this->date_commande = $date_commande;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of fk_id_utilisateur
-     */
-    public function getFk_id_utilisateur()
-    {
-        return $this->fk_id_utilisateur;
-    }
-
-    /**
-     * Set the value of fk_id_utilisateur
-     *
-     * @return  self
-     */
-    public function setFk_id_utilisateur($fk_id_utilisateur)
-    {
-        $this->fk_id_utilisateur = $fk_id_utilisateur;
+        $this->fk_id_num_commande = $fk_id_num_commande;
 
         return $this;
     }
@@ -194,6 +91,46 @@ class Commandes extends Model
     public function setNb_article($nb_article)
     {
         $this->nb_article = $nb_article;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of prix_commande
+     */
+    public function getPrix_commande()
+    {
+        return $this->prix_commande;
+    }
+
+    /**
+     * Set the value of prix_commande
+     *
+     * @return  self
+     */
+    public function setPrix_commande($prix_commande)
+    {
+        $this->prix_commande = $prix_commande;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of prix_article
+     */
+    public function getPrix_article()
+    {
+        return $this->prix_article;
+    }
+
+    /**
+     * Set the value of prix_article
+     *
+     * @return  self
+     */
+    public function setPrix_article($prix_article)
+    {
+        $this->prix_article = $prix_article;
 
         return $this;
     }

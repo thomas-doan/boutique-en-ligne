@@ -157,7 +157,7 @@ $router->map(
         $controller->index();
     },
     'Admin index'
-); 
+);
 
 $router->map(
     'GET|POST',
@@ -172,7 +172,7 @@ $router->map(
 $router->map(
     'GET|POST',
     '/admin/gestiondestock',
-    function (){
+    function () {
         $controller = new App\Controllers\AdminUpdateSkuController();
         $controller->index();
     },
@@ -182,7 +182,7 @@ $router->map(
 $router->map(
     'GET|POST',
     '/admin/gestionUtilisateur/[*:param]',
-    function ($param){
+    function ($param) {
         $controller = new App\Controllers\AdminUpdateUserController();
         $controller->index($param);
         $controller->getUser($param);
@@ -192,40 +192,142 @@ $router->map(
 );
 
 
-    
-//PANIER
+// CRUD Category
 $router->map(
     'GET',
+    '/admin/categorie',
+    function () {
+        $controller = new App\Controllers\AdminCategoryController();
+        $controller->index();
+    },
+
+);
+
+$router->map(
+    'POST',
+    '/admin/categorie',
+    function () {
+        $controller = new App\Controllers\AdminCategoryController();
+        $controller->update();
+        $controller->create();
+        $controller->delete();
+    },
+
+);
+
+
+$router->map(
+    'POST/GET',
+    '/admin/tag',
+    function () {
+        $controller = new App\Controllers\AdminTagController();
+        $controller->update();
+        $controller->create();
+        $controller->delete();
+        $controller->index();
+    },
+
+);
+
+
+
+// PRODUIT
+$router->map(
+    'GET|POST',
+    '/produit/[*:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\ProductController();
+        $controller->index($id_article);
+        $controller->shoppingBag();
+        // $controller->Like($id_article);
+        // $controller->addComment($id_article);
+    },
+);
+
+//PANIER
+$router->map(
+    'GET/POST',
     '/panier',
     function () {
-        $controller = new App\Controllers\shoppingCartController();
+        $controller = new App\Controllers\ShoppingCartController();
+
+        $controller->upValue();
+        $controller->downValue();
+        // $controller->shoppingBag();
+        $controller->deleteProduct();
+        $controller->singlePrice();
+        $controller->totalQuantity();
+        $controller->totalPrice();
         $controller->index();
     },
     'panier'
 );
 
+//PANIER
+/* 
 $router->map(
     'POST',
     '/panier',
     function () {
-        $controller = new App\Controllers\shoppingCartController();
-        $controller->upValue();
-        $controller->downValue();
-        $controller->shoppingBag();
-        $controller->deleteProduct();
-        $controller->totalPrice();
+        $controller = new App\Controllers\ShoppingCartController();
+
+
     },
     'panier post'
+); */
+
+
+//Commande
+$router->map(
+    'GET/POST',
+    '/commande',
+    function () {
+        $controller = new App\Controllers\OrderController();
+        $controller->index();
+        $controller->orderResume();
+        $controller->validate();
+    },
+    'commande'
 );
 
-//SHOP
+// PRODUIT
 $router->map(
     'GET|POST',
-    '/boutique/[*:param]',
-    function ($param){
-        $controller = new App\Controllers\BoutiqueSearchController();
-        $controller->index($param);
-    }
+    '/produit/[*:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\ProductController();
+        $controller->index($id_article);
+        $controller->shoppingBag();
+        // $controller->Like($id_article);
+        // $controller->addComment($id_article);
+    },
+);
+
+//livraison
+$router->map(
+    'GET/POST',
+    '/livraison',
+    function () {
+        $controller = new App\Controllers\LivraisonController();
+        $controller->index();
+        $controller->fieldCheck();
+        $controller->adressCheck();
+        $controller->getAdress();
+    },
+    'livraison'
+);
+
+//Paiement
+$router->map(
+    'GET/POST',
+    '/paiement',
+    function () {
+        $controller = new App\Controllers\PaymentController();
+        $controller->index();
+        $controller->payment();
+        $controller->stripe();
+    },
+    'paiement'
 );
 
 $match = $router->match();

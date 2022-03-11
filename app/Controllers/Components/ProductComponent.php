@@ -8,13 +8,12 @@ use App\Models\Product;
 class ProductComponent extends Product
 {
     protected $model;
-    public $error= [];
+    public $error = [];
 
     public function __construct()
     {
         parent::__construct();
         $this->model = new Product();
-       
     }
     /**
     * Verifie la taille du fichier télécharger
@@ -77,23 +76,22 @@ class ProductComponent extends Product
                 $explode_file[1] = ".$explode_file[1]";//Ajout du dote avant concatenation
                 $_FILES['image_article']['name'] = $explode_file[0].$explode_file[1];//Concataination du nom et de l'exention
                 $im_miniature = $_FILES['image_article']['name'];
-                
+
                 //Modification de la taille de l'image
-                $taille = getimagesize($_FILES['image_article']['tmp_name']);//Traitement de la largeur et  de la hauteur d'origine du fichier
+                $taille = getimagesize($_FILES['image_article']['tmp_name']); //Traitement de la largeur et  de la hauteur d'origine du fichier
                 $largeur = $taille[0];
                 $hauteur = $taille[1];
                 $largeur_miniature = 720; //Definition de la nouvelle largeur
                 $hauteur_miniature = $hauteur / $largeur * 720; //Definition de la nouvelle hauteur relative à la largeur
-                $im = imagecreatefromjpeg($_FILES['image_article']['tmp_name']);//Creation d'une nouvelle image dans la memoire tampon
-                $im_miniature = imagecreatetruecolor($largeur_miniature, $hauteur_miniature);//creation d'un gabari selon les dimention defini
-                imagecopyresampled($im_miniature, $im, 0, 0, 0, 0, $largeur_miniature, $hauteur_miniature, $largeur, $hauteur);//redimention de l'image à la taille de l'image tampon
-                imagejpeg($im_miniature, $chemin.$_FILES['image_article']['name'],90);//Création de l'image dans le dossier assigner
+                $im = imagecreatefromjpeg($_FILES['image_article']['tmp_name']); //Creation d'une nouvelle image dans la memoire tampon
+                $im_miniature = imagecreatetruecolor($largeur_miniature, $hauteur_miniature); //creation d'un gabari selon les dimention defini
+                imagecopyresampled($im_miniature, $im, 0, 0, 0, 0, $largeur_miniature, $hauteur_miniature, $largeur, $hauteur); //redimention de l'image à la taille de l'image tampon
+                imagejpeg($im_miniature, $chemin . $_FILES['image_article']['name'], 90); //Création de l'image dans le dossier assigner
 
                 $this->image_article = $_FILES['image_article']['name'];
 
                 return $this->image_article;
-            }
-            else $this->error['image'] = 'Assurez-vous que l\'image soit bien en jpg,jpeg.';
+            } else $this->error['image'] = 'Assurez-vous que l\'image soit bien en jpg,jpeg.';
 
             return null;
         }
@@ -104,13 +102,13 @@ class ProductComponent extends Product
      * @param string lein vers l'image
      * @param string Nome de l'image selectionner
      */
-    public function screen_result(string $nom_image = 'no_pict_product.jpg',string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/',)
+    public function screen_result(string $nom_image = 'no_pict_product.jpg', string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/',)
     {
-        ?>
-            <img style="width: 200px;height: 200px;" src="<?=$chemin.$nom_image?>" alt="votre nouvelle image d'article'">
-        <?php
-    
-      
+?>
+        <img style="width: 200px;height: 200px;" src="<?= $chemin . $nom_image ?>" alt="votre nouvelle image d'article'">
+<?php
+
+
     }
 
     // public function select_col_table($table)
@@ -134,26 +132,23 @@ class ProductComponent extends Product
     {
         $this->db = DBConnection::getPDO();
         $this->table = 'articles';
-        
+
         $this->model->image_article = $array['image_article'];
-        foreach($array['etape1'] as $key => $value)
-        {
+        foreach ($array['etape1'] as $key => $value) {
             $this->model->$key = $value;
         }
 
-            $NewArticle = $this->model;
-            $image_article = $this->model->image_article;
-            $titre_article = $this->model->titre_article;
-            $presentation_article = $this->model->presentation_article;
-            $description_article = $this->model->description_article;
-            $prix_article = (float)$this->model->prix_article;
-            $sku = (int)$this->model->sku;
-            $fournisseur = $this->model->fournisseur;
-            $conditionnement = $this->model->conditionnement;
+        $NewArticle = $this->model;
+        $image_article = $this->model->image_article;
+        $titre_article = $this->model->titre_article;
+        $presentation_article = $this->model->presentation_article;
+        $description_article = $this->model->description_article;
+        $prix_article = (float)$this->model->prix_article;
+        $sku = (int)$this->model->sku;
+        $fournisseur = $this->model->fournisseur;
+        $conditionnement = $this->model->conditionnement;
 
-         $item = $this->create($NewArticle,compact('image_article','titre_article','presentation_article','description_article','prix_article','sku','fournisseur','conditionnement'));
-          
-
+        $item = $this->create($NewArticle, compact('image_article', 'titre_article', 'presentation_article', 'description_article', 'prix_article', 'sku', 'fournisseur', 'conditionnement'));
     }
     public function useLastId()
     {

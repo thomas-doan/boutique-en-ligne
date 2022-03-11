@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Model;
 use Database\DBConnection;
 
-Class Product extends Model
+class Product extends Model
 {
     public $image_article;
     protected $id_article;
@@ -23,7 +23,6 @@ Class Product extends Model
         $this->table = 'articles';
         $this->db = DBConnection::getPDO();
         $this->id = 'id_article';
-        
     }
 
     /**
@@ -44,8 +43,8 @@ Class Product extends Model
     public function find_article($searchResult)
     {
 
-        $req = 
-        "
+        $req =
+            "
             SELECT `art1`.id_article, `art1`.titre_article, `art1`.prix_article,`cat2`.`nom_categorie` AS 'cat parent', 'article' AS 'type'
             FROM articles_categories_filtre
             INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article`
@@ -102,7 +101,4 @@ Class Product extends Model
         $query = $this->requete($req);
         return $query->fetchAll();
     }
-
 }
-
-?>

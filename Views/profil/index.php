@@ -10,7 +10,7 @@
     <?php endif; ?>
     <section>
         <h1><?= ucfirst(@$_SESSION['user']['prenom']) . ' ' . ucfirst(@$_SESSION['user']['nom']); ?></h1>
-        <p><?= @$_SESSION['email'] ?></p>
+        <p><?= @$_SESSION['user']['email'] ?></p>
     </section>
     <section>
         <img src="public/img/Icon_Profil-test.png" alt="profil picture">

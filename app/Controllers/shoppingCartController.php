@@ -25,7 +25,8 @@ class ShoppingCartController extends Controller
         return $this->view('shop.panier', compact('articles', 'title'/* , 'totalQuantity' */));
     }
 
-    public function shoppingBag()
+
+    public function getArticles()
     {
 
         if (isset($_POST['add'])) {
@@ -34,24 +35,16 @@ class ShoppingCartController extends Controller
                 $id_article =  (int) $_POST['id_article'];
                 $prix_article =  (float) $_POST['prix_article'];
 
-                $_SESSION['quantite'][$id_article] = 1;
-                $_SESSION['prix'][$id_article] = $prix_article;
-            } else {
-                //init session
-                $_SESSION['quantite'] = [];
-                $_SESSION['prix'] = [];
+            foreach ($_SESSION['panier'] as $id2 => $value) {
 
-                // assignation valeur
-
-                $prix_article =  (float) $_POST['prix_article'];
-                $id_article =  (int) $_POST['id_article'];
-                $_SESSION['quantite'][$id_article] = 1;
-                $_SESSION['prix'][$id_article] = $prix_article;
+                if ($id2 == $id1) {
+                    $resultat[$i++] = $article[$id1];
+                }
             }
-            header('location: ./panier');
-        }
-    }
+        } */
 
+        return $articles;
+    }
 
     public function upValue()
     {

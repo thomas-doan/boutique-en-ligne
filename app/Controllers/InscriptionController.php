@@ -55,13 +55,13 @@ class InscriptionController extends Controller
                 header('location: ./inscription');
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                $role = "user";
+                $role = "Utilisateurs";
                 $user = $model
                     ->setEmail($email)
                     ->setPrenom($prenom)
                     ->setNom($nom)
                     ->setPassword($password)
-                    ->setRole("user");
+                    ->setRole($role);
                 $model->create($user, compact('email', 'prenom', 'nom', 'password', 'role'));
                 var_dump($user);
 

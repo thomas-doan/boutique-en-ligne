@@ -10,7 +10,7 @@
     <?php
 
     ?>
-    <form action="/boutique-en-ligne/search" method="GET">
+    <form action="/boutique-en-ligne/boutique/all" method="GET">
         <label for="site-search">Search the site:</label>
         <input type="search" name="recherche" aria-label="Search through site content">
         <button>Search</button>

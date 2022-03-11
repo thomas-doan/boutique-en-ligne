@@ -160,11 +160,24 @@ $router->map(
 );
 
 $router->map(
-    'POST',
-    '/admin/restocker',
-    function () {
+    'GET|POST',
+    '/admin/gestiondestock',
+    function (){
         $controller = new App\Controllers\AdminUpdateSkuController();
         $controller->index();
+    },
+    'gestion de stock'
+);
+
+$router->map(
+    'GET|POST',
+    '/admin/gestionUtilisateur/[*:param]',
+    function ($param){
+        $controller = new App\Controllers\AdminUpdateUserController();
+        $controller->index($param);
+        $controller->getUser($param);
+        $controller->deleteUser($param);
+        $controller->UpdateUser($param);
     }
 );
 

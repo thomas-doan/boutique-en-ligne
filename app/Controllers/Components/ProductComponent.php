@@ -16,22 +16,29 @@ class ProductComponent extends Product
         $this->model = new Product();
     }
     /**
-     * Verifie la taille du fichier télécharger
-     * Verifie si le téléchargement a bien était effectuée
-     * @param string nom du fichier à verifier
-     * @param int taille du fichier maximum
-     * @return bool Si le fichier et inferieur à la taille maximal alors True, sinon False
-     */
-    public function verify_upload(string $name_file, ?int $size = 1000000): bool
-    {
-        if (@$_FILES[$name_file]['size'] > $size) {
-            $this->error['image'] = 'Le fichier télécharger est trop volumineux, taille maximum 1Mo';
-            return false;
-        } elseif (empty($_FILES[$name_file]['tmp_name'])) {
-            $this->error['image'] = 'Le téléchargement de l\'image n\'a pas été effectué';
-            return false;
-        } else return true;
-    }
+    * Verifie la taille du fichier télécharger
+    * Verifie si le téléchargement a bien était effectuée
+    * @param string nom du fichier à verifier
+    * @param int taille du fichier maximum
+    * @return bool Si le fichier et inferieur à la taille maximal alors True, sinon False
+    */
+   public function verify_upload(string $name_file, ?int $size = 1000000):bool
+   {
+       if(@$_FILES[$name_file]['size']>$size)
+       {
+        $_SESSION['flash']['imageTaille'] = 'Le fichier télécharger est trop volumineux, taille maximum 1Mo';
+           return false;
+       }
+       elseif(empty($_FILES[$name_file]['tmp_name'])){
+           if(!empty($_SESSION['nouvelarticle']['image_article']))
+           {
+            $_SESSION['flash']['imageProbleme'] = 'Le téléchargement de l\'image n\'a pas été effectué';
+           }
+        
+           return false;
+       }
+       else return true;
+   }
 
     /**
      * Traite l'image et l'ajoute dans un dossier donnée
@@ -41,15 +48,21 @@ class ProductComponent extends Product
      */
     public function stock_picture(string $chemin = '/boutique-en-ligne/public/assets/pictures/pictures_product/',?string $lastName = null)
     {
-        if ($this->verify_upload('image_article') == true) {
-            //Verification de l'extention du fichier reçu
-            $explode_file = explode(".", $_FILES['image_article']['name']);
-            $extention = ['jpeg', 'jpg', 'JPEG', 'JPG'];
-
-            foreach ($extention as $value) {
-                if ($value == $explode_file[1]) {
+        if($this->verify_upload('image_article')==true)
+        {
+        //Verification de l'extention du fichier reçu
+        $explode_file = explode(".",$_FILES['image_article']['name']);
+        $extention = ['jpeg','jpg','JPEG','JPG'];
+        $approuve = false;
+            foreach($extention as $value)
+            {
+                if($value == $explode_file[1]){
                     $approuve = true;
                 }
+            }
+            if($approuve == false)
+            {
+                $_SESSION['flash']['format'] ="L'image doit être en jpeg";
             }
 
             if($approuve==true)
@@ -272,5 +285,53 @@ class ProductComponent extends Product
                 $i++;
             }
         return $arrayStockNow;
+
+    }
+
+    public function getAlltag()
+    {
+        $req = "SELECT * FROM `tag`";
+        $result = $this->requete($req)->fetchAll();
+        return $result;
+    }
+
+    public function insertNewTag($nom_tag)
+    {
+        $req= "INSERT INTO `tag`(`nom_tag`) VALUES (:nom_tag)";
+        $result = $this->requete($req, compact('nom_tag'));
+    }
+
+    public function insertTag($fk_id_tag,$fk_id_article)
+    {
+        $req = "INSERT INTO `articles_tags`(`fk_id_tag`, `fk_id_article`) VALUES (:fk_id_tag,:fk_id_article);";
+        $this->requete($req,compact('fk_id_tag','fk_id_article'));
+    }
+    /**
+     * Permet d'ajouter tout les tag d'un produit
+     * @param array le tableau avec les tags
+     * @param ,id de l'article en question
+     */
+    public function insertAllcatByProducts($array, $fk_id_article)
+    {
+        foreach($array as $key => $value)
+        {
+            $fk_id_tag = $key;
+            $this->insertTag($fk_id_tag,$fk_id_article);
+        }
+    }
+
+    public function getTagByProduct($fk_id_article)
+    {
+        $req = "SELECT `articles_tags`.fk_id_article, `articles_tags`.fk_id_tag, `tag`.nom_tag  FROM `articles_tags`
+        INNER JOIN `tag` ON `tag`.id_tag = `articles_tags`.fk_id_tag
+        WHERE `articles_tags`.fk_id_article = :fk_id_article;";
+        $result = $this->requete($req, compact('fk_id_article'))->fetchAll();
+        return $result;
+    }
+
+    public function deleteTagOfProduct($fk_id_tag, $fk_id_article)
+    {
+        $req = "DELETE FROM `articles_tags` WHERE fk_id_tag = :fk_id_tag AND fk_id_article = :fk_id_article;";
+        $resutl = $this->requete($req,compact('fk_id_article','fk_id_tag'));
     }
 }

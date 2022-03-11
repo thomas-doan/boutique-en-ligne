@@ -1,4 +1,3 @@
-
 form {
     display: flex;
 }
@@ -7,13 +6,13 @@ form>* {
     padding: 1rem;
 }
 
-/* teste pour card*/
-.boutique{
+.boutique {
     display: flex;
     max-width: 1280px;
     flex-wrap: wrap;
 }
-.card{
+
+.card {
     overflow: hidden;
     background-color: white;
     border-radius: 5px;
@@ -26,11 +25,13 @@ form>* {
     margin: 10px;
     overflow-wrap: break-word;
 }
-.picture{
+
+.picture {
     width: 100%;
     border-radius: 5px;
 }
-.logonostock{
+
+.logonostock {
     position: absolute;
     width: 300px;
     z-index: 1;
@@ -38,38 +39,44 @@ form>* {
     right: 0;
 }
 
-.logoAb{
+.logoAb {
     position: absolute;
-        width: 300px;
-        z-index: 2;
-        top: 0;
-        right: 0;
+    width: 300px;
+    z-index: 2;
+    top: 0;
+    right: 0;
 }
-.card div{
+
+.card div {
     width: 100%;
     padding: 0px 15px;
 }
-.inOver{
+
+.inOver {
     display: none;
 }
-.inOver div{
+
+.inOver div {
     display: flex;
     justify-content: space-between;
 }
-.inOver h4{
+
+.inOver h4 {
     color: rgb(93, 175, 10);
 }
 
-.card:hover .picture{
+.card:hover .picture {
     width: 400px;
     height: 400px;
     align-self: center;
     filter: brightness(30%);
 }
-.card:hover .logoAb{
+
+.card:hover .logoAb {
     display: none;
 }
-.card:hover .inOver{
+
+.card:hover .inOver {
     width: 270px;
     height: 400px;
     z-index: 1;
@@ -78,7 +85,8 @@ form>* {
     flex-direction: column;
     align-items: center;
 }
-.card:hover .inOver p{
+
+.card:hover .inOver p {
     color: aliceblue;
     align-self: center;
     text-align: center;

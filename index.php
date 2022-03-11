@@ -162,7 +162,7 @@ $router->map(
 $router->map(
     'GET|POST',
     '/admin/gestiondestock',
-    function (){
+    function () {
         $controller = new App\Controllers\AdminUpdateSkuController();
         $controller->index();
     },
@@ -172,7 +172,7 @@ $router->map(
 $router->map(
     'GET|POST',
     '/admin/gestionUtilisateur/[*:param]',
-    function ($param){
+    function ($param) {
         $controller = new App\Controllers\AdminUpdateUserController();
         $controller->index($param);
         $controller->getUser($param);
@@ -304,6 +304,7 @@ $router->map(
         $controller = new App\Controllers\PaymentController();
         $controller->index();
         $controller->payment();
+        $controller->stripe();
     },
     'paiement'
 );

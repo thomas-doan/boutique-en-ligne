@@ -22,7 +22,13 @@ class AdminCreateProductController extends Controller
     {
         $title = 'Admin';
         // On génére la vue
-        $this->view('administrator/index', compact('menu','title'));
+        if(!empty($this->Product->stockNow()))
+        {
+            $sendStock = 'Vous avez certains article dont le stock est critique,
+            pensez à contacter vos founisseur';
+        }
+        else $sendStock = null;
+        $this->view('administrator/index', compact('title','sendStock'));
     }
 
     /**

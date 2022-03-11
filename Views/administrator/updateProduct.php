@@ -1,6 +1,15 @@
-<a href="./liste">Revenir à la liste</a>
 <h3>Modification d'articles</h3>
-
+<section>
+    <h3>Admin</h3>
+    <ul>
+        <li><a href="../creerArticle/partie1">Creer un Article ></a></li>
+        <li><a href="../modifierArticle/liste">Modifier un articles ></a></li>
+        <li><a href="../gestiondestock">Gestion des stocks ></a></li>
+        <li><a href="">Historique de commande ></a></li>
+        <li><a href="">Gestion de livraison ></a></li>
+        <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
+    </ul>
+</section>
 <?php if($param == 'liste'):?>
 <form action="" method="GET">
     <fieldset>
@@ -10,7 +19,7 @@
         <button>Search</button>
     </fieldset>
 </form>
-<form action="<?=$urlRedirect?>" method="POST">
+<form action="" method="POST">
 <label for="PRINCIPALE ">Trier par Catégories Principales</label>
         <select list="list_categories" name="PRINCIPALE" id="list_categories">
             <datalist id="list_categories">
@@ -44,6 +53,7 @@
 <?php endif;?>
 
 <?php if($param !== 'liste'):?>
+    <a href="./liste">Revenir à la liste</a>
     <form action="./<?=$param?>" method="post" name="info_article_pincipal" enctype="multipart/form-data">
         <fieldset>
             <legend>Modifier l'image</legend>

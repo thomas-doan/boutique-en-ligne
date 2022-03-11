@@ -9,8 +9,8 @@
         <?php unset($_SESSION['flash']) ?>
     <?php endif; ?>
     <section>
-        <h1><?= ucfirst(@$_SESSION['prenom']) . ' ' . ucfirst(@$_SESSION['nom']); ?></h1>
-        <p><?= @$_SESSION['email'] ?></p>
+        <h1><?= ucfirst(@$_SESSION['user']['prenom']) . ' ' . ucfirst(@$_SESSION['user']['nom']); ?></h1>
+        <p><?= @$_SESSION['user']['email'] ?></p>
     </section>
     <section>
         <img src="public/img/Icon_Profil-test.png" alt="profil picture">

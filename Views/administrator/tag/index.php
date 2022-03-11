@@ -24,8 +24,8 @@
 
         <input name="id_tag" value="<?= $value['id_tag'] ?>" type="hidden">
         <input name="nom_tag" value="<?= $value['nom_tag'] ?>" type="text">
-        <button name="update_cat" type="submit"> Modifier tag </button>
-        <button name="delete_cat" type="submit"> Suppr tag </button>
+        <button name="update_tag" type="submit"> Modifier tag </button>
+        <button name="delete_tag" type="submit"> Suppr tag </button>
     </form>
 
 <?php } ?>

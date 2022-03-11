@@ -24,7 +24,7 @@ class LivraisonController extends Controller
 
     public function index()
     {
-        $id = $_SESSION['id_utilisateur'];
+        $id = $_SESSION['user']['id_utilisateur'];
         $info_user = $this->getUser($id);
         $title = "Livraison - Kawa";
 
@@ -51,7 +51,7 @@ class LivraisonController extends Controller
     public function adressCheck()
     {
 
-        $fk_id_utilisateur = $_SESSION['id_utilisateur'];
+        $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
         $argument = ['fk_id_utilisateur'];
         $adresse = $this->modelAdresses->find($argument, compact('fk_id_utilisateur'));
 

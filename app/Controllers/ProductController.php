@@ -56,7 +56,7 @@ class ProductController extends Controller
     public function addComment($id_article)
     {
         if (isset($_POST['submit'])) {
-            $author = $_SESSION['id_utilisateur'];
+            $author = $_SESSION['user']['id_utilisateur'];
             $content = $_POST['com'];
             if (!$content) {
                 $_SESSION['flash']['sucess'] = "Il faut écrire du contenu pour laisser un commentaire :)";
@@ -84,18 +84,25 @@ class ProductController extends Controller
 
     public function Like($id_article)
     {
-        $argument = ['id_utilisateur'];
-        $fk_id_utilisateur = $_SESSION['id_utilisateur'];
-        $fk_id_article = $id_article;
-        $checkLike = $this->Like->getLike($fk_id_utilisateur);
-
+        
         if (isset($_POST['like'])) {
-            if ($checkLike == false) {
-                $this->Like->insertLike($id_article, $fk_id_utilisateur);
+            if(!isset($_SESSION['user'])){
+                $_SESSION['flash']['sucess'] = "Il vous faut un compte utilisateur pour liker un produit :)";
                 header("Refresh:0");
-            } else {
-                $this->Like->deleteLike($id_article, $fk_id_utilisateur);
-                header("Refresh:0");
+                exit();
+            }else{
+
+                $argument = ['id_utilisateur'];
+                $fk_id_utilisateur = @$_SESSION['user']['id_utilisateur'];
+                $fk_id_article = $id_article;
+                $checkLike = $this->Like->getLike($fk_id_utilisateur);
+                if ($checkLike == false) {
+                    $this->Like->insertLike($id_article, $fk_id_utilisateur);
+                    header("Refresh:0");
+                } else {
+                    $this->Like->deleteLike($id_article, $fk_id_utilisateur);
+                    header("Refresh:0");
+                }
             }
         }
     }

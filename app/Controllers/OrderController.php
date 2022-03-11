@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $id = $_SESSION['id_utilisateur'];
+        $id = $_SESSION['user']['id_utilisateur'];
         $info_user = $this->getUser($id);
         $orderCheck = $this->orderResume();
         $title = "Commande resumé - Kawa";

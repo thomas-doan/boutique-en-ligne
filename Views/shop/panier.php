@@ -1,6 +1,6 @@
    <?php
-    if (!isset($_SESSION['id_utilisateur'])) {
-        $_SESSION['id_utilisateur'] = 1;
+    if (!isset($_SESSION['user']['id_utilisateur'])) {
+        $_SESSION['user']['id_utilisateur'] = 1;
     }
 
     ?>

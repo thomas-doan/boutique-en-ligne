@@ -175,7 +175,7 @@ class PaymentController extends Controller
 
     public function insertNumCommande($db)
     {
-        (int) $secureIdUser = Security::control($_SESSION['id_utilisateur']);
+        (int) $secureIdUser = Security::control($_SESSION['user']['id_utilisateur']);
         (int) $secureTotalProduit = $this->totalQuantity();
         (float) $secureWithTvaPrice = $this->totalPrice();
 

@@ -89,7 +89,7 @@
 
 
 
-       <input name="fk_id_utilisateur" value="<?= $_SESSION['id_utilisateur'] ?>" type="hidden">
+       <input name="fk_id_utilisateur" value="<?= $_SESSION['user']['id_utilisateur'] ?>" type="hidden">
 
        <input name="submit" type="submit" value="Valider">
    </form>

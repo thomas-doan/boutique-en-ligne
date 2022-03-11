@@ -1,4 +1,3 @@
-<?php var_dump($_POST)?>
 <section>
     <ul>
         <li><a href="./Dosette">Dosette</a></li>

@@ -63,9 +63,9 @@ class PaymentController extends Controller
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
 
-                $newCalcul = $value - $checkQuantity[$key][0]["sku"];
-                $_SESSION['quantite'][$key] = $newCalcul;
-                $_SESSION['halfQuantityPayment'][$id_article][0] = $newCalcul;
+                // si commande 5 articles mais 3 en bdd, actualisation de nbr d'unité. 
+                $_SESSION['quantite'][$key] = $checkQuantity[$key][0]["sku"];
+                $_SESSION['halfQuantityPayment'][$id_article][0] = $checkQuantity[$key][0]["sku"];
                 $_SESSION['halfQuantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['halfQuantityPayment'][$id_article][2] = $prix_article;
             }
@@ -175,7 +175,7 @@ class PaymentController extends Controller
 
     public function insertNumCommande($db)
     {
-        (int) $secureIdUser = Security::control($_SESSION['id_utilisateur']);
+        (int) $secureIdUser = Security::control($_SESSION['user']['id_utilisateur']);
         (int) $secureTotalProduit = $this->totalQuantity();
         (float) $secureWithTvaPrice = $this->totalPrice();
 

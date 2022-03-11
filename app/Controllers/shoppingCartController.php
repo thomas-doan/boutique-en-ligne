@@ -73,6 +73,7 @@ class ShoppingCartController extends Controller
             }
 
             header('location: ./panier');
+            exit();
         }
     }
 

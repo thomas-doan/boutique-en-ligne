@@ -13,11 +13,11 @@
     echo "<br>";
 
     echo "<br>";
-
+    echo "prix";
     var_dump($_SESSION['prix']);
     echo "<br>";
 
-
+    echo "simpleprix";
     var_dump($_SESSION['singlePrice']);
     ?>
 
@@ -36,58 +36,63 @@
 
    <?php
 
-    foreach ($articles as $article) { ?>
+    foreach ($articles as $article) {
+        foreach ($_SESSION['quantite'] as $key => $value) {
+            if ($article['id_article'] == $key) {
 
 
-       <?php
-        if (isset($_SESSION['quantite'])) { ?>
+    ?>
+
+
+
+               <form action="" method="post">
+
+                   <p> <?= $article['titre_article'] ?> </p>
+                   <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+                   <button name="upQuantity" value="1" type="submit"> + </button>
+
+
+                   <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
+                       <button name="downQuantity" value="1" type="submit"> - </button>
+               </form>
+           <?php } ?>
+           <p>Nombre : <?= $_SESSION['quantite'][$article['id_article']]  ?></p>
+
+
            <form action="" method="post">
-
-               <p> <?= $article['titre_article'] ?> </p>
+               <button name="add" type="submit"> creer </button>
                <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-               <button name="upQuantity" value="1" type="submit"> + </button>
+               <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
+
+           </form>
+
+           <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
+
+               <form action="" method="post">
+                   <button name="deleteProduct" type="submit"> supprimer article </button>
+                   <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+               </form>
+
            <?php } ?>
 
-           <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
-               <button name="downQuantity" value="1" type="submit"> - </button>
-           </form>
-       <?php } ?>
-       <p>Nombre : <?= $_SESSION['quantite'][$article['id_article']]  ?></p>
-
-
-       <form action="" method="post">
-           <button name="add" type="submit"> creer </button>
-           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-           <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
-
-       </form>
-
-       <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
-
-           <form action="" method="post">
-               <button name="deleteProduct" type="submit"> supprimer article </button>
-               <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-           </form>
-
-       <?php } ?>
-
-       <p>prix : <?php if (isset($_SESSION['singlePrice'][$article['id_article']])) {
-                        echo $_SESSION['singlePrice'][$article['id_article']];
-                    }  ?></p>
+           <p>prix : <?php if (isset($_SESSION['singlePrice'][$article['id_article']])) {
+                            echo $_SESSION['singlePrice'][$article['id_article']];
+                        }  ?></p>
 
 
    <?php }
-    (float)$_SESSION['totalQuantity'] = 0;
-    foreach ($_SESSION['quantite'] as $quantite) {
-        $_SESSION['totalQuantity'] = $_SESSION['totalQuantity'] + $quantite;
-    }
-    ?>
+        }
+    } ?>
 
    <p> nombre total d'articles : <?= $_SESSION['totalQuantity']  ?> </p>
 
-   <p>Prix total : <?php echo $_SESSION['totalPrice']  ?> </p>
+   <?php if (!empty($_SESSION['quantite'])) { ?>
 
-   <form action="./commande" method="post">
+       <p>Prix total : <?= $_SESSION['totalPrice'] ?></p>
 
-       <input name="checkout" value="commandé" type="submit">
-   </form>
+       <form action="./commande" method="post">
+
+           <input name="checkout" value="commandé" type="submit">
+       </form>
+
+   <?php } ?>

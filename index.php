@@ -206,6 +206,19 @@ $router->map(
 );
 
 
+// PRODUIT
+$router->map(
+    'GET|POST',
+    '/produit/[*:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\ProductController();
+        $controller->index($id_article);
+        $controller->shoppingBag();
+        // $controller->Like($id_article);
+        // $controller->addComment($id_article);
+    },
+);
+
 
 
 //PANIER
@@ -215,11 +228,13 @@ $router->map(
     '/panier',
     function () {
         $controller = new App\Controllers\ShoppingCartController();
+
         $controller->upValue();
         $controller->downValue();
         $controller->shoppingBag();
         $controller->deleteProduct();
         $controller->singlePrice();
+        $controller->totalQuantity();
         $controller->totalPrice();
     },
     'panier post'

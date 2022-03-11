@@ -102,43 +102,45 @@ class ShoppingCartController extends Controller
 
     public function singlePrice()
     {
+        $_SESSION['singlePrice'] = [];
 
-        if (isset($_SESSION['quantite'])) {
-            $_SESSION['singlePrice'] = [];
+        $result = 0;
+        foreach ($_SESSION['quantite'] as $key1 => $value1) {
+            foreach ($_SESSION['prix'] as $key2 => $value2) {
+                if ($key1 == $key2) {
 
-            $result = 0;
-            foreach ($_SESSION['quantite'] as $key1 => $value1) {
-                foreach ($_SESSION['prix'] as $key2 => $value2) {
-                    if ($key1 == $key2) {
-
-                        $result = $value1 * $value2;
+                    $result = $value1 * $value2;
 
 
-                        $_SESSION['singlePrice'][$key1]  = $result;
-                    }
+                    $_SESSION['singlePrice'][$key1]  = $result;
                 }
             }
         }
     }
+    public function totalQuantity()
+    {
 
-
+        (float)$_SESSION['totalQuantity'] = 0;
+        foreach ($_SESSION['quantite'] as $quantite) {
+            $_SESSION['totalQuantity'] = $_SESSION['totalQuantity'] + $quantite;
+        }
+    }
 
     public function totalPrice()
     {
 
-        if (isset($_SESSION['quantite'])) {
-            $_SESSION['totalPrice'] = [];
 
-            $result = 0;
-            foreach ($_SESSION['quantite'] as $key1 => $value1) {
-                foreach ($_SESSION['prix'] as $key2 => $value2) {
-                    if ($key1 == $key2) {
+        $_SESSION['totalPrice'] = [];
 
-                        $resultSinglePrice = $value1 * $value2;
-                        $result += $resultSinglePrice;
+        $result = 0;
+        foreach ($_SESSION['quantite'] as $key1 => $value1) {
+            foreach ($_SESSION['prix'] as $key2 => $value2) {
+                if ($key1 == $key2) {
 
-                        $_SESSION['totalPrice'] = $result;
-                    }
+                    $resultSinglePrice = $value1 * $value2;
+                    $result += $resultSinglePrice;
+
+                    $_SESSION['totalPrice'] = $result;
                 }
             }
         }

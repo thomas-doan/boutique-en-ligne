@@ -244,6 +244,16 @@ $router->map(
     },
 );
 
+//SHOP
+$router->map(
+    'GET|POST',
+    '/boutique/[*:param]',
+    function ($param) {
+        $controller = new App\Controllers\BoutiqueSearchController();
+        $controller->index($param);
+    }
+);
+
 //PANIER
 $router->map(
     'GET/POST',
@@ -262,20 +272,6 @@ $router->map(
     },
     'panier'
 );
-
-//PANIER
-/* 
-$router->map(
-    'POST',
-    '/panier',
-    function () {
-        $controller = new App\Controllers\ShoppingCartController();
-
-
-    },
-    'panier post'
-); */
-
 
 //Commande
 $router->map(

@@ -1,4 +1,3 @@
-<?php var_dump($_POST)?>
 <section>
     <ul>
         <li><a href="./Dosette">Dosette</a></li>
@@ -108,6 +107,7 @@
         }
     }
 ?>
+</section>
 <form action="" method="get">
     <?php if($firstProduct > 8):?>
     <button type="submit" name="page" value="<?=(($firstProduct-8)-8) ?>"><< Page Précédente </button>
@@ -116,5 +116,3 @@
     <button type="submit" name="page" value="<?=($firstProduct) ?>">Page suivante >></button>
     <?php endif;?>
 </form>
-
-</section>

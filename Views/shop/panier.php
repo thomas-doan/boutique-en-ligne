@@ -1,8 +1,4 @@
    <?php
-    echo "<pre>";
-    var_dump($_SESSION['quantityPayment']);
-    echo "</pre>";
-
     if (!isset($_SESSION['id_utilisateur'])) {
         $_SESSION['id_utilisateur'] = 1;
     }

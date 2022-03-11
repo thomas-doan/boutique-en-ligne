@@ -219,7 +219,7 @@ $router->map(
 
         $controller->upValue();
         $controller->downValue();
-        $controller->shoppingBag();
+        // $controller->shoppingBag();
         $controller->deleteProduct();
         $controller->singlePrice();
         $controller->totalQuantity();
@@ -256,6 +256,18 @@ $router->map(
     'commande'
 );
 
+// PRODUIT
+$router->map(
+    'GET|POST',
+    '/produit/[*:id_article]',
+    function ($id_article) {
+        $controller = new App\Controllers\ProductController();
+        $controller->index($id_article);
+        $controller->shoppingBag();
+        // $controller->Like($id_article);
+        // $controller->addComment($id_article);
+    },
+);
 
 //livraison
 $router->map(

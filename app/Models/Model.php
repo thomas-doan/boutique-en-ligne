@@ -40,6 +40,21 @@ abstract class Model
         }
     }
 
+    public function requeteTransaction(string $sql, $connexion,  $attributs = null)
+    {
+
+        // On vérifie si on a des attributs
+        if ($attributs !== null) {
+            //Requête préparée
+            $query = $connexion->prepare($sql);
+            $query->execute($attributs);
+            return $query;
+        } else {
+            // Requête simple
+            return $connexion->query($sql);
+        }
+    }
+
 
 
     /**
@@ -82,19 +97,19 @@ abstract class Model
             $liste_selections = implode(', ', $selection);
 
 
-                // $selections[] = "$valeur";
-                // valeur = valeur associé à l'index
+            // $selections[] = "$valeur";
+            // valeur = valeur associé à l'index
 
-                // On transforme le tableau champs en une string
-                // $liste_selections = implode(',', $selections);
-            }
+            // On transforme le tableau champs en une string
+            // $liste_selections = implode(',', $selections);
+        }
 
-            $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
+        $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
 
-            // On exécute la requête 
-            return $this->requete($req, $donnees)->fetchAll();
+        // On exécute la requête 
+        return $this->requete($req, $donnees)->fetchAll();
     }
-    
+
 
     /**
      * Methode qui permet de récupérer tout les enregistrements d'une table
@@ -165,6 +180,32 @@ abstract class Model
     }
 
 
+    public function createTransaction(Model $model, array $donnees, $connexion)
+    {
+        // Récupére l'index
+        $champs = [];
+        // liste des points d'intérogation pour la requête aussi long que la listre des champs
+        $inter = [];
+
+
+        // On boucle pour éclater le tableau
+        foreach ($model as $champ => $valeur) {
+            if ($valeur !== null && $champ != 'db' && $champ != 'table' && $champ != 'id' && $champ != "$this->id") {
+                // Champ = index
+                $champs[] = $champ;
+                $inter[] = ":$champ";
+            }
+        }
+        // On transforme le tableau champs en string
+        $liste_champs = implode(', ', $champs);
+        $liste_inter = implode(', ', $inter);
+
+
+        $req = 'INSERT INTO ' . $this->table . ' (' . $liste_champs . ') VALUES (' . $liste_inter . ')';
+
+        // On exécute la requête 
+        return $this->requeteTransaction($req, $connexion, $donnees);
+    }
 
     // UPDATE
     /**

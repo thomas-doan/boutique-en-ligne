@@ -7,21 +7,27 @@ namespace App\Controllers;
 use App\Models\Articles;
 
 
-class shoppingCartController extends Controller
+class ShoppingCartController extends Controller
 {
+
+    public function __construct()
+    {
+
+        $this->modelArticle = new Articles();
+    }
 
     public function index()
     {
 
-        $model = new Articles($this->getDB());
-        $articles = $model->findAll();
+        /*   $totalQuantity = $this->totalQuantity(); */
+        $articles = $this->modelArticle->findAll();
         $title = "panier";
-        return $this->view('shop.panier', compact('articles', 'title'));
+        return $this->view('shop.panier', compact('articles', 'title'/* , 'totalQuantity' */));
     }
 
     public function shoppingBag()
     {
-      
+
         if (isset($_POST['add'])) {
             if (isset($_SESSION['quantite'])) {
                 // assignation valeur
@@ -53,8 +59,18 @@ class shoppingCartController extends Controller
 
             $up =  $_POST['upQuantity'];
             $id_article =  (int) $_POST['id_article'];
+            $argument = ['id_article'];
 
-            $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] + $up;
+            $checkQuantity = [];
+
+            $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'));
+
+
+            if (($_SESSION['quantite'][$id_article] + $up)  <= $checkQuantity[$id_article][0]['sku']) {
+                $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] + $up;
+            } else {
+                $_SESSION['flash']['quantity'] = "Le stock est vide !";
+            }
 
             header('location: ./panier');
         }
@@ -62,7 +78,7 @@ class shoppingCartController extends Controller
 
     public function downValue()
     {
-        var_dump($_SESSION);
+
         if (isset($_POST['downQuantity'])) {
 
             $down =  $_POST['downQuantity'];
@@ -81,6 +97,39 @@ class shoppingCartController extends Controller
             unset($_SESSION['prix'][(int) $_POST['id_article']]);
             header('location: ./panier');
         }
+    }
+
+
+    public function singlePrice()
+    {
+
+        if (isset($_SESSION['quantite'])) {
+            $_SESSION['singlePrice'] = [];
+
+            $result = 0;
+            foreach ($_SESSION['quantite'] as $key1 => $value1) {
+                foreach ($_SESSION['prix'] as $key2 => $value2) {
+                    if ($key1 == $key2) {
+
+                        $result = $value1 * $value2;
+
+
+                        $_SESSION['singlePrice'][$key1]  = $result;
+                    }
+                }
+            }
+        }
+    }
+    public function totalQuantity()
+    {
+        if (isset($_SESSION['quantite'])) {
+            $_SESSION['totalQuantity'] = 0;
+            foreach ($_SESSION['quantite'] as $quantite) {
+                $_SESSION['totalQuantity'] += $quantite;
+            }
+        };
+
+        /* return $_SESSION['totalQuantity'] */
     }
 
     public function totalPrice()

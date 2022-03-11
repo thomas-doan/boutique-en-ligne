@@ -4,20 +4,21 @@ namespace App\Models;
 
 
 
+
 class Adresses extends Model
+
 {
     protected $table = 'adresses';
-    protected $id = "id_adresse";
+    protected $id = 'id_adresse';
     protected $id_adresse;
     protected $nom_adresse;
     protected $ville;
+    protected $pays;
     protected $voie;
     protected $voie_sup;
     protected $code_postal;
     protected $telephone;
-    protected $pays;
     protected $fk_id_utilisateur;
-
 
     /**
      * Get the value of id_adresse
@@ -75,6 +76,26 @@ class Adresses extends Model
     public function setVille($ville)
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pays
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * Set the value of pays
+     *
+     * @return  self
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
 
         return $this;
     }
@@ -155,26 +176,6 @@ class Adresses extends Model
     public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of pays
-     */
-    public function getPays()
-    {
-        return $this->pays;
-    }
-
-    /**
-     * Set the value of pays
-     *
-     * @return  self
-     */
-    public function setPays($pays)
-    {
-        $this->pays = $pays;
 
         return $this;
     }

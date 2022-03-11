@@ -11,6 +11,7 @@
         }
     },
     "require": {
-        "altorouter/altorouter": "^2.0"
+        "altorouter/altorouter": "^2.0",
+        "stripe/stripe-php": "^7.116"
     }
 }

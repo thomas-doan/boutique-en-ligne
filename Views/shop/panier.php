@@ -1,77 +1,72 @@
    <?php
+    if (!isset($_SESSION['id_utilisateur'])) {
+        $_SESSION['id_utilisateur'] = 1;
+    }
 
-    /*     if (!isset($_SESSION['quantite'])) {
-        $_SESSION['quantite']['1'] = 1;
-        $_SESSION['quantite']['2'] = 1;
-        $_SESSION['quantite']['3'] = 1;
-        $_SESSION['quantite']['4'] = 1;
-    } */
-
-
-
-    echo "<br>";
-    echo "quantite";
-    echo "<br>";
-    var_dump($_SESSION['quantite']);
-    echo "<br>";
-
-    echo "<br>";
-
-    var_dump($_SESSION['prix']);
-    echo "<br>";
     ?>
 
+   <?php if (!empty($_SESSION['quantite'])) { ?>
+       <p> c'est le panier </p>
 
-   <p> c'est le panier </p>
-
-   <br>
-   <?php
-
-    foreach ($articles as $article) { ?>
-
-
+       <?php if (isset($_SESSION['flash'])) : ?>
+           <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+               <div><?= $message; ?></div>
+           <?php endforeach; ?>
+       <?php endif; ?>
+       <?php if (isset($_SESSION['flash'])) :  ?>
+           <?php unset($_SESSION['flash']) ?>
+       <?php endif; ?>
 
 
        <?php
-        if (isset($_SESSION['quantite'])) { ?>
-           <form action="" method="post">
+        //affiche uniquement les articles selectionnés par l'utilisateur
+        foreach ($articles as $article) {
+            foreach ($_SESSION['quantite'] as $key => $value) {
+                if ($article['id_article'] == $key) {
+        ?>
 
-               <p> <?= $article['titre_article'] ?> </p>
-               <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-               <button name="upQuantity" value="1" type="submit"> + </button>
-           <?php } ?>
+                   <form action="" method="post">
 
-           <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
-               <button name="downQuantity" value="1" type="submit"> - </button>
-           </form>
-       <?php } ?>
-
+                       <p> <?= $article['titre_article'] ?> </p>
+                       <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+                       <button name="upQuantity" value="1" type="submit"> + </button>
 
 
-       <form action="" method="post">
-           <button name="add" type="submit"> creer </button>
-           <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-           <input name="prix_article" value="<?= $article['prix_article'] ?>" type="hidden">
+                       <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
+                           <button name="downQuantity" value="1" type="submit"> - </button>
+                   </form>
+               <?php } ?>
+               <p>Nombre : <?= $_SESSION['quantite'][$article['id_article']]  ?></p>
 
-       </form>
 
-       <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
+               <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
 
-           <form action="" method="post">
-               <button name="deleteProduct" type="submit"> supprimer article </button>
-               <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-           </form>
+                   <form action="" method="post">
+                       <button name="deleteProduct" type="submit"> supprimer article </button>
+                       <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+                   </form>
 
-       <?php } ?>
+               <?php } ?>
+
+               <p>prix : <?php if (isset($_SESSION['singlePrice'][$article['id_article']])) {
+                                echo $_SESSION['singlePrice'][$article['id_article']];
+                            }  ?></p>
 
 
    <?php }
-    $resultat = 0;
-    foreach ($_SESSION['quantite'] as $quantite) {
-        $resultat = $resultat + $quantite;
-    }
-    ?>
+            }
+        } ?>
 
-   <p> nombre total d'articles : <?= $resultat ?> </p>
+   <p> nombre total d'articles : <?php echo $_SESSION['totalQuantity'] ?> </p>
 
-   <p>Prix total : <?= $_SESSION['totalPrice']  ?> </p>
+   <p>Prix total : <?= $_SESSION['totalPrice'] ?></p>
+
+   <form action="./commande" method="post">
+
+       <input name="checkout" value="commandé" type="submit">
+   </form>
+
+   <?php } else { ?>
+       <p>Votre panier est vide.</p>
+   <?php
+    } ?>

@@ -206,7 +206,18 @@ $router->map(
 );
 
 
+$router->map(
+    'POST/GET',
+    '/admin/tag',
+    function () {
+        $controller = new App\Controllers\AdminTagController();
+        $controller->update();
+        $controller->create();
+        $controller->delete();
+        $controller->index();
+    },
 
+);
 
 
 

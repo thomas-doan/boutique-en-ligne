@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\admin;
+
+use App\Controllers\Controller;
 
 use App\Models\Utilisateurs;
 
@@ -53,7 +55,7 @@ class AdminUpdateUserController extends Controller
         $model = new Utilisateurs();
         $id_utilisateur = $id;
         $actualPassword = $this->getUser($id);
-        // var_dump($actualPassword[0]['password']);
+
 
         if (isset($_POST['modifier'])) {
             $email = $_POST['email'];
@@ -62,8 +64,8 @@ class AdminUpdateUserController extends Controller
             $password = $_POST['password'];
             $role = $_POST['role'];
             $updateUser = $model;
-            
-            if(empty($password)){
+
+            if (empty($password)) {
                 $password = $actualPassword[0]['password'];
                 $updateUser = $model
                     ->setEmail($email)
@@ -71,7 +73,7 @@ class AdminUpdateUserController extends Controller
                     ->setPrenom($prenom)
                     ->setPassword($password)
                     ->setRole($role);
-            }else {
+            } else {
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $updateUser = $model
                     ->setEmail($email)

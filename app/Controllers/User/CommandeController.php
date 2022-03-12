@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\User;
+
+use App\Controllers\Controller;
 
 use App\Models\Commandes;
 
@@ -13,6 +15,8 @@ class CommandeController extends Controller
         $title = "Commande";
         $idCommande = $id_commande;
         $order = $this->getOrderInfo($idCommande);
+
+
         // $allInfoById = $this->getCommandeById($idCommande);
         return $this->view('profil.commande', compact('title', 'order'));
     }

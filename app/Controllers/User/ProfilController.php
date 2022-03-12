@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\User;
 
-use App\Controllers\AdresseController;
+use App\Controllers\Controller;
+
+use App\Controllers\User\AdresseController;
 
 class ProfilController extends Controller
 {
@@ -16,11 +18,9 @@ class ProfilController extends Controller
     public function index()
     {
         $title = "Profil";
-        if($this->adresse->getAdress()==null)
-        {
+        if ($this->adresse->getAdress() == null) {
             $notifAdresse = "Vous n'avez pas encore renseigné d'adresses, cela pourrait vous facilité votre utilisation";
-        }
-        else $notifAdresse = null;
-        return $this->view('profil.index', compact('title','notifAdresse'));
+        } else $notifAdresse = null;
+        return $this->view('profil.index', compact('title', 'notifAdresse'));
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-use App\Controllers\AdresseController;
+use App\Controllers\User\AdresseController;
 
 $adresse = new AdresseController;
 
@@ -25,5 +25,3 @@ elseif($_SESSION['user']['role']=='Admin')
     $iconUser = '<i class="fa-solid fa-user-gear"></i>';
     $userPath = '/boutique-en-ligne/admin';
 }
-
-?>

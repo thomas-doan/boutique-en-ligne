@@ -11,11 +11,12 @@ class Commentaires extends Model
     protected $fk_id_utilisateur;
     protected $fk_id_article;
     protected $signaler;
+    protected $date;
 
     public function getCommentById($id_article)
     {
         $sql =
-            "SELECT commentaires.commentaire, utilisateurs.nom, utilisateurs.prenom
+            "SELECT commentaires.commentaire, utilisateurs.nom, utilisateurs.prenom, commentaires.date
             FROM commentaires
             INNER JOIN utilisateurs ON commentaires.fk_id_utilisateur = utilisateurs.id_utilisateur
             INNER JOIN articles ON commentaires.fk_id_article = articles.id_article
@@ -23,14 +24,14 @@ class Commentaires extends Model
         return $this->requete($sql)->fetchAll();
     }
 
-    public function insertComment($value, $id_utilisateur, $id_article)
+    /*     public function insertComment($value, $id_utilisateur, $id_article)
     {
         $sql = "INSERT INTO `commentaires`(`commentaire`, `fk_id_utilisateur`, `fk_id_article`) VALUES (:commentaire, :fk_id_utilisateur, :fk_id_article)";
         $commentaire = $value;
         $fk_id_utilisateur = $id_utilisateur;
         $fk_id_article = $id_article;
         return $this->requete($sql, compact('commentaire', 'fk_id_utilisateur', 'fk_id_article'));
-    }
+    } */
 
     public function getNumberOfComment($id_article)
     {
@@ -121,6 +122,26 @@ class Commentaires extends Model
     public function setSignaler($signaler)
     {
         $this->signaler = $signaler;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the value of date
+     *
+     * @return  self
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
 
         return $this;
     }

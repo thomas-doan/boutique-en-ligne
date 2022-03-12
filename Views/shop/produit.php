@@ -6,15 +6,15 @@
 <!-- <?php var_dump($likes); ?> -->
 <?php var_dump($numberOfComment) ?>
 <article>
-<?php if (isset($_SESSION['flash'])) : ?>
-            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-                <div><?= $message; ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+    <?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
-        <?php if (isset($_SESSION['flash'])) :  ?>
-            <?php unset($_SESSION['flash']) ?>
-        <?php endif; ?>
+    <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+    <?php endif; ?>
     <h1><?= $product[0]['titre_article'] ?></h1>
     <img src="../public/assets/pictures/pictures_product/<?= $product[0]['image_article'] ?>" alt="Image du produit">
     <div>
@@ -55,6 +55,7 @@
         <section>
             <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?></h3>
             <p><?= $comment['commentaire'] ?></p>
+            <p><?= $comment['date'] ?></p>
         </section>
     <?php endforeach; ?>
     <section>

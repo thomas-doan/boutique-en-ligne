@@ -27,6 +27,7 @@ class ProductController extends Controller
         $likes = $this->getLike($id_article);
         $this->Like($id_article);
         $this->addComment($id_article);
+        $this->getAnswerCom();
         $CatOfProduct = array(
             'variete' => $this->Categories->getSectionCatByIdProduct($id_article, 'VARIÉTÉ'),
             'specificite' => $this->Categories->getSectionCatByIdProduct($id_article, 'SPÉCIFICITÉ'),
@@ -53,7 +54,9 @@ class ProductController extends Controller
         return $result;
     }
 
-
+    public function getAnswerCom()
+    {
+    }
 
 
     public function addComment($id_article)
@@ -62,22 +65,28 @@ class ProductController extends Controller
             $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
             $commentaire = $_POST['com'];
             if (!$commentaire) {
-                $_SESSION['flash']['sucess'] = "Il faut écrire du contenu pour laisser un commentaire :)";
+                $_SESSION['flash']['sucess'] = "Il faut écrire du contenu pour laisser un commentaire.)";
                 header("Refresh:0");
                 exit();
             } else {
                 $fk_id_article = $id_article;
+                $date = date('Y-m-d H:i:s');
                 $modelHydrate = $this->Comments
                     ->setCommentaire($commentaire)
                     ->setFk_id_article($fk_id_article)
-                    ->setFk_id_utilisateur($fk_id_utilisateur);
-                $this->Comments->create($modelHydrate, compact('commentaire', 'fk_id_article', 'fk_id_utilisateur'));
+                    ->setFk_id_utilisateur($fk_id_utilisateur)
+                    ->setDate($date);
+                $this->Comments->create($modelHydrate, compact('commentaire', 'fk_id_article', 'fk_id_utilisateur', 'date'));
 
                 header("Refresh:0");
                 exit();
             }
         }
     }
+
+
+
+
 
     public function NumberComment($id_article)
     {

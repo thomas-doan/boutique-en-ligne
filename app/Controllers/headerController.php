@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Controllers\User\AdresseController;
@@ -6,6 +7,8 @@ use App\Controllers\User\AdresseController;
 $adresse = new AdresseController;
 
 
+var_dump($_SERVER['HTTP_REFERER']);
+var_dump($_SESSION['reload']);
 if(empty($_SESSION['user']))
 {
     $userPath = '/boutique-en-ligne/connexion';

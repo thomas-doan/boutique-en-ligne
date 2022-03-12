@@ -108,7 +108,7 @@ class LivraisonController extends Controller
                 echo 'else';
                 $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
                 //header('location: ./livraison');
-                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./livraison'\" </SCRIPT>"; //force la direction
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./connexion'\" </SCRIPT>"; //force la direction
                 exit();
             }
         }

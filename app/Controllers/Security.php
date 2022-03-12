@@ -46,4 +46,54 @@ class Security
             return $compact; //On retourne le resultat sous forme de int ou String
         }
     }
+
+    public static function controlAll($compact)
+    {
+        if (is_array($compact)) {
+            foreach ($compact as $key => $value) {
+                // On regarde si le type de string est un nombre entier (int)
+                // if (ctype_digit($value) && is_array($value)==false) {
+                //     $value = intval($value);
+                // }
+                // Pour tous les autres types
+                // else {
+                    if(is_array($value))
+                    {
+                        foreach($value as $underKey => $undervalue)
+                        {
+                            if (ctype_digit($undervalue)) {
+                                $undervalue = intval($undervalue);
+                            }
+                            else{
+                            $undervalue  = strip_tags($undervalue);
+                            $undervalue = htmlentities($undervalue);
+                            $undervalue = htmlspecialchars($undervalue);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ctype_digit($value)) {
+                            $value = intval($value);
+                        }
+                        else{
+                        $value  = strip_tags($value);
+                        $value = htmlentities($value);
+                        $value = htmlspecialchars($value);
+                        }
+                    }
+                // }
+            }
+        } else {
+            if (ctype_digit($compact)) {
+                $compact = intval($compact);
+            }
+            // Pour tous les autres types
+            else {
+                $compact  = strip_tags($compact);
+                $compact = htmlentities($compact);
+                $compact = htmlspecialchars($compact);
+            }
+        }
+    }
 }

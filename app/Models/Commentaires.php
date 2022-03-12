@@ -16,22 +16,34 @@ class Commentaires extends Model
     public function getCommentById($id_article)
     {
         $sql =
-            "SELECT commentaires.commentaire, utilisateurs.nom, utilisateurs.prenom, commentaires.date
-            FROM commentaires
-            INNER JOIN utilisateurs ON commentaires.fk_id_utilisateur = utilisateurs.id_utilisateur
-            INNER JOIN articles ON commentaires.fk_id_article = articles.id_article
-            WHERE articles.id_article = $id_article";
+            "SELECT c.commentaire, u.nom, u.prenom, c.date,c.id_commentaire, rep.fk_id_commentaire FROM commentaires as c 
+            LEFT JOIN utilisateurs as u ON c.fk_id_utilisateur = u.id_utilisateur 
+            LEFT JOIN articles as art ON c.fk_id_article = art.id_article 
+            LEFT JOIN reponse_com as rep ON rep.fk_id_commentaire = c.id_commentaire 
+            LEFT JOIN utilisateurs u2 ON rep.fk_id_utilisateur = u2.id_utilisateur
+             WHERE art.id_article =  $id_article GROUP BY c.id_commentaire
+            ";
+
+
         return $this->requete($sql)->fetchAll();
     }
 
-    /*     public function insertComment($value, $id_utilisateur, $id_article)
+    public function getAnswerById($id_article)
     {
-        $sql = "INSERT INTO `commentaires`(`commentaire`, `fk_id_utilisateur`, `fk_id_article`) VALUES (:commentaire, :fk_id_utilisateur, :fk_id_article)";
-        $commentaire = $value;
-        $fk_id_utilisateur = $id_utilisateur;
-        $fk_id_article = $id_article;
-        return $this->requete($sql, compact('commentaire', 'fk_id_utilisateur', 'fk_id_article'));
-    } */
+        $sql =
+            "SELECT  rep.commentaire as reponse_assoc, rep.fk_id_commentaire , u2.nom as reponse_nom, u2.prenom as reponse_prenom, rep.date as reponse_date
+            FROM commentaires as c
+            INNER JOIN utilisateurs as u ON c.fk_id_utilisateur = u.id_utilisateur
+            INNER JOIN articles as art ON c.fk_id_article = art.id_article
+            INNER JOIN reponse_com as rep ON rep.fk_id_commentaire = c.id_commentaire
+            INNER JOIN utilisateurs u2 ON rep.fk_id_utilisateur = u2.id_utilisateur
+            WHERE art.id_article = $id_article";
+
+
+        return $this->requete($sql)->fetchAll();
+    }
+
+
 
     public function getNumberOfComment($id_article)
     {

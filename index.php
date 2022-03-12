@@ -269,6 +269,7 @@ $router->map(
         $controller = new App\Controllers\ProductController();
         $controller->index($id_article);
         $controller->shoppingBag();
+        $controller->pushAnswerCom($id_article);
         // $controller->Like($id_article);
         // $controller->addComment($id_article);
     },

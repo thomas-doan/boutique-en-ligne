@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\Product;
 use App\Models\Commentaires;
 use App\Models\Like;
+use App\Models\Reponse_com;
 
 class ProductController extends Controller
 {
@@ -16,18 +17,20 @@ class ProductController extends Controller
         $this->Product = new Product();
         $this->Categories = new Categories();
         $this->Like = new Like();
+        $this->AnswerCom = new Reponse_com();
     }
 
     public function index($id_article)
     {
         $title = "Produit";
-        $comments = $this->Comments->getCommentbyId($id_article);
+
+        $comments = $this->comAssociate($id_article);
         $numberOfComment = $this->NumberComment($id_article);
         $product = $this->getProductById($id_article);
         $likes = $this->getLike($id_article);
         $this->Like($id_article);
         $this->addComment($id_article);
-        $this->getAnswerCom();
+
         $CatOfProduct = array(
             'variete' => $this->Categories->getSectionCatByIdProduct($id_article, 'VARIÉTÉ'),
             'specificite' => $this->Categories->getSectionCatByIdProduct($id_article, 'SPÉCIFICITÉ'),
@@ -48,44 +51,106 @@ class ProductController extends Controller
         return $result;
     }
 
+    public function comAssociate($id)
+    {
+
+        $id_article = $id;
+        $comments = $this->Comments->getCommentbyId($id_article);
+        $answerComments = $this->Comments->getAnswerById($id_article);
+
+        foreach ($comments as $key => $comment) {
+            $i = 0;
+            $j = 0;
+            foreach ($answerComments as $answerComment) {
+
+                if ($comment['fk_id_commentaire'] == $comment['id_commentaire']) {
+
+                    if ($answerComment['fk_id_commentaire'] == $comment['fk_id_commentaire']) {
+                        $comments[$key][$i++] = $answerComment;
+                    }
+                }
+            }
+        }
+
+        return $comments;
+    }
+
+
     public function getCatByIdProduct($id_article)
     {
         $result = $this->Categories->getSectionCatByIdProduct($id_article);
         return $result;
     }
 
-    public function getAnswerCom()
+    public function pushAnswerCom($id_article)
     {
+        if (isset($_POST['submitAnswer'])) {
+            if (!isset($_SESSION['user'])) {
+                $_SESSION['flash']['sucess'] = "Connectez-vous pour commenter.";
+                header("location: ./$id_article");
+                exit();
+            }
+
+            if (isset($_SESSION['user'])) {
+
+
+                $commentaire = $_POST['comment'];
+                if (!empty($commentaire)) {
+                    $fk_id_commentaire = $_POST['id_commentaire'];
+                    $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+
+
+                    $date = date('Y-m-d H:i:s');
+                    $modelHydrate = $this->AnswerCom
+                        ->setCommentaire($commentaire)
+                        ->setFk_id_commentaire($fk_id_commentaire)
+                        ->setFk_id_utilisateur($fk_id_utilisateur)
+                        ->setDate($date);
+                    $this->AnswerCom->create($modelHydrate, compact('commentaire', 'fk_id_commentaire', 'fk_id_utilisateur', 'date'));
+                    $_SESSION['flash']['sucess'] = "Votre  réponse est postée.";
+                    header("location: ./$id_article");
+                    exit();
+                }
+
+                if (empty($commentaire)) {
+                    $_SESSION['flash']['error'] = "Vous devez remplir le champs.";
+                    header("location: ./$id_article");
+                    exit();
+                }
+            }
+        }
     }
 
 
     public function addComment($id_article)
     {
         if (isset($_POST['submit'])) {
-            $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
-            $commentaire = $_POST['com'];
-            if (!$commentaire) {
-                $_SESSION['flash']['sucess'] = "Il faut écrire du contenu pour laisser un commentaire.)";
-                header("Refresh:0");
-                exit();
-            } else {
-                $fk_id_article = $id_article;
-                $date = date('Y-m-d H:i:s');
-                $modelHydrate = $this->Comments
-                    ->setCommentaire($commentaire)
-                    ->setFk_id_article($fk_id_article)
-                    ->setFk_id_utilisateur($fk_id_utilisateur)
-                    ->setDate($date);
-                $this->Comments->create($modelHydrate, compact('commentaire', 'fk_id_article', 'fk_id_utilisateur', 'date'));
 
-                header("Refresh:0");
+            if (isset($_SESSION['user'])) {
+                $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+                $commentaire = $_POST['com'];
+                if (!$commentaire) {
+                    $_SESSION['flash']['error'] = "Il faut écrire du contenu pour laisser un commentaire.";
+                    header("location: ./$id_article");
+                    exit();
+                } else {
+                    $fk_id_article = $id_article;
+                    $date = date('Y-m-d H:i:s');
+                    $modelHydrate = $this->Comments
+                        ->setCommentaire($commentaire)
+                        ->setFk_id_article($fk_id_article)
+                        ->setFk_id_utilisateur($fk_id_utilisateur)
+                        ->setDate($date);
+                    $this->Comments->create($modelHydrate, compact('commentaire', 'fk_id_article', 'fk_id_utilisateur', 'date'));
+                }
+
+                $_SESSION['flash']['sucess'] = "Commentaire posté.";
+
+                header("location: ./$id_article");
                 exit();
             }
         }
     }
-
-
-
 
 
     public function NumberComment($id_article)

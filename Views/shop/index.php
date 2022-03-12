@@ -8,10 +8,5 @@
 <?php } ?>
 
 <?php
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<pre>";
-var_dump($jojo);
-echo "</pre>";
+
 ?>

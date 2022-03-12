@@ -4,7 +4,7 @@
 <!-- <?php var_dump($comments); ?> -->
 <!-- <?php var_dump($CatOfProduct); ?> -->
 <!-- <?php var_dump($likes); ?> -->
-<?php var_dump($numberOfComment) ?>
+
 <article>
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -35,7 +35,7 @@
         </li>
     </ul>
     <section>
-        <p><?= $numberOfComment ?></p>
+        <p> nombre de commentaire : <?= $numberOfComment ?></p>
         <a href="#comment">Voir les commentaires</a>
         <form action="" method="post">
             <label for="addBasket"></label>
@@ -51,13 +51,48 @@
 
 <article>
     <h2>Commentaires</h2>
-    <?php foreach ($comments as $comment) : ?>
+    <?php
+
+    foreach ($comments as $key => $comment) {
+        $NbrOfIndex = count($comment);
+        $NbrOfIndex = $NbrOfIndex - 6;
+    ?>
         <section>
             <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?></h3>
             <p><?= $comment['commentaire'] ?></p>
             <p><?= $comment['date'] ?></p>
         </section>
-    <?php endforeach; ?>
+        <section>
+            <form action="" method="POST">
+                <input type="hidden" id="comment" name="id_commentaire" value="<?= $comment['id_commentaire'] ?>">
+
+                <input type="text" id="comment" name="comment" placeholder="Répondre au commentaire" value="">
+                <input type="submit" name="submitAnswer" value="ok">
+            </form>
+        </section>
+        <?php
+        for ($i = 0; $i < $NbrOfIndex; $i++) {
+            if ($comment['fk_id_commentaire'] == $comment['id_commentaire']) {
+
+        ?>
+                <section>
+
+                    <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?></h3>
+                    <p> commentaire : <?= $comment[$i]['reponse_assoc'] ?></p>
+                    <p> date : <?= $comment[$i]['reponse_date'] ?></p>
+
+                </section>
+
+
+    <?php
+            }
+        }
+    }
+
+    ?>
+
+
+
     <section>
         <form action="" method="POST">
             <label for="comment" style="display: none">Ecrire un commentaire</label>

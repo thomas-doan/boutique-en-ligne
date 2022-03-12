@@ -22,7 +22,7 @@ class ShoppingCartController extends Controller
         /*   $totalQuantity = $this->totalQuantity(); */
         $articles = $this->modelArticle->findAll();
         $title = "panier";
-        return $this->view('shop.panier', compact('articles', 'title'/* , 'totalQuantity' */));
+        return compact('articles', 'title'/* , 'totalQuantity' */);
     }
 
     public function shoppingBag()
@@ -48,7 +48,7 @@ class ShoppingCartController extends Controller
                 $_SESSION['quantite'][$id_article] = 1;
                 $_SESSION['prix'][$id_article] = $prix_article;
             }
-            header('location: ./panier');
+            header('refresh: 0');
         }
     }
 
@@ -72,7 +72,7 @@ class ShoppingCartController extends Controller
                 $_SESSION['flash']['quantity'] = "Le stock est vide !";
             }
 
-            header('location: ./panier');
+            header('refresh: 0');
             exit();
         }
     }
@@ -87,7 +87,8 @@ class ShoppingCartController extends Controller
 
             $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] - $down;
 
-            header('location: ./panier');
+            header('refresh: 0');
+            exit();
         }
     }
 
@@ -96,7 +97,8 @@ class ShoppingCartController extends Controller
         if (isset($_POST['deleteProduct'])) {
             unset($_SESSION['quantite'][(int) $_POST['id_article']]);
             unset($_SESSION['prix'][(int) $_POST['id_article']]);
-            header('location: ./panier');
+            header('refresh: 0');
+            exit();
         }
     }
 

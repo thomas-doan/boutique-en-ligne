@@ -291,23 +291,23 @@ $router->map(
 
 
 //PANIER
-$router->map(
-    'GET/POST',
-    '/panier',
-    function () {
-        $controller = new App\Controllers\ShoppingCartController();
+// $router->map(
+//     'GET/POST',
+//     '/panier',
+//     function () {
+//         $controller = new App\Controllers\ShoppingCartController();
 
-        $controller->upValue();
-        $controller->downValue();
-        // $controller->shoppingBag();
-        $controller->deleteProduct();
-        $controller->singlePrice();
-        $controller->totalQuantity();
-        $controller->totalPrice();
-        $controller->index();
-    },
-    'panier'
-);
+//         $controller->upValue();
+//         $controller->downValue();
+//         // $controller->shoppingBag();
+//         $controller->deleteProduct();
+//         $controller->singlePrice();
+//         $controller->totalQuantity();
+//         $controller->totalPrice();
+//         $controller->index();
+//     },
+//     'panier'
+// );
 
 //Commande
 $router->map(

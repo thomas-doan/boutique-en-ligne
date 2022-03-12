@@ -1,4 +1,3 @@
-<!-- <?php var_dump($_SESSION); ?> -->
 <article>
     <h1>Connexion</h1>
 
@@ -7,8 +6,6 @@
             <div><?= $message; ?></div>
         <?php endforeach; ?>
     <?php endif; ?>
-
-    <!-- <?php session_destroy(); ?> -->
 
     <?php if (isset($_SESSION['flash'])) :  ?>
         <?php unset($_SESSION['flash']) ?>
@@ -24,4 +21,5 @@
 
         <input type="submit" name="submit" value="Connexion">
     </form>
+    <a href="inscription">Je créer un compte</a>
 </article>

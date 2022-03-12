@@ -1,4 +1,3 @@
-<?php var_dump($_SESSION); ?>
 <article>
     <h1>Inscription</h1>
 
@@ -31,4 +30,5 @@
 
         <input type="submit" name="submit" value="Inscription">
     </form>
+    <a href="connexion">J'ai déjà un compte</a>
 </article>

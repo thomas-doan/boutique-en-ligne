@@ -12,10 +12,10 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->Comments = new Commentaires;
-        $this->Product = new Product;
-        $this->Categories = new Categories;
-        $this->Like = new Like;
+        $this->Comments = new Commentaires();
+        $this->Product = new Product();
+        $this->Categories = new Categories();
+        $this->Like = new Like();
     }
 
     public function index($id_article)
@@ -34,7 +34,7 @@ class ProductController extends Controller
             'strong' => $this->Categories->getSectionCatByIdProduct($id_article, 'FORCE'),
             'origin' => $this->Categories->getSectionCatByIdProduct($id_article, 'PROVENENCE')
         );
-        $this->addComment($id_article);
+        /* $this->addComment($id_article); */
         $prix_article = $product[0]['prix_article'];
         $this->shoppingBag($id_article, $prix_article);
 
@@ -53,17 +53,26 @@ class ProductController extends Controller
         return $result;
     }
 
+
+
+
     public function addComment($id_article)
     {
         if (isset($_POST['submit'])) {
-            $author = $_SESSION['user']['id_utilisateur'];
-            $content = $_POST['com'];
-            if (!$content) {
+            $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+            $commentaire = $_POST['com'];
+            if (!$commentaire) {
                 $_SESSION['flash']['sucess'] = "Il faut écrire du contenu pour laisser un commentaire :)";
                 header("Refresh:0");
                 exit();
             } else {
-                $this->Comments->insertComment($content, $author, $id_article);
+                $fk_id_article = $id_article;
+                $modelHydrate = $this->Comments
+                    ->setCommentaire($commentaire)
+                    ->setFk_id_article($fk_id_article)
+                    ->setFk_id_utilisateur($fk_id_utilisateur);
+                $this->Comments->create($modelHydrate, compact('commentaire', 'fk_id_article', 'fk_id_utilisateur'));
+
                 header("Refresh:0");
                 exit();
             }
@@ -84,13 +93,13 @@ class ProductController extends Controller
 
     public function Like($id_article)
     {
-        
+
         if (isset($_POST['like'])) {
-            if(!isset($_SESSION['user'])){
+            if (!isset($_SESSION['user'])) {
                 $_SESSION['flash']['sucess'] = "Il vous faut un compte utilisateur pour liker un produit :)";
                 header("Refresh:0");
                 exit();
-            }else{
+            } else {
 
                 $argument = ['id_utilisateur'];
                 $fk_id_utilisateur = @$_SESSION['user']['id_utilisateur'];

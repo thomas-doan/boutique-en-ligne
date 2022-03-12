@@ -72,6 +72,7 @@ class ProductController extends Controller
             }
         }
 
+
         return $comments;
     }
 
@@ -189,9 +190,9 @@ class ProductController extends Controller
             }
         }
     }
+
     public function shoppingBag()
     {
-
         if (isset($_POST['add'])) {
             if (isset($_SESSION['quantite'])) {
                 // assignation valeur

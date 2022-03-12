@@ -11,7 +11,9 @@ class Reponse_com extends Model
     protected $commentaire;
     protected $fk_id_commentaire;
     protected $fk_id_utilisateur;
+    protected $signaler;
     protected $date;
+
 
     /**
      * Get the value of id_reponse_com
@@ -109,6 +111,26 @@ class Reponse_com extends Model
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of signaler
+     */
+    public function getSignaler()
+    {
+        return $this->signaler;
+    }
+
+    /**
+     * Set the value of signaler
+     *
+     * @return  self
+     */
+    public function setSignaler($signaler)
+    {
+        $this->signaler = $signaler;
 
         return $this;
     }

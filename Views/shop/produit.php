@@ -55,7 +55,7 @@
 
     foreach ($comments as $key => $comment) {
         $NbrOfIndex = count($comment);
-        $NbrOfIndex = $NbrOfIndex - 6;
+        $NbrOfIndex = $NbrOfIndex - 7;
     ?>
         <section>
             <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?></h3>

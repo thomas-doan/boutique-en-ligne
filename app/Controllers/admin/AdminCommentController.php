@@ -6,6 +6,7 @@ use App\Controllers\Controller;
 
 use App\Models\Commentaires;
 use App\Models\Articles;
+use App\Models\Reponse_com;
 
 class AdminCommentController extends Controller
 {
@@ -14,6 +15,7 @@ class AdminCommentController extends Controller
     {
         $this->model = new Commentaires();
         $this->modelArticles = new Articles();
+        $this->modelReponse_com = new Reponse_com();
     }
 
     public function index()
@@ -21,15 +23,15 @@ class AdminCommentController extends Controller
         $title = "Admin commentaire - Kawa";
 
         $comment = $this->model->selectCommentwithArticleUser();
+        $answers = $this->model->selectAnswerCommentwithArticleUser();
         $articles = $this->modelArticles->findAll();
 
-        $this->view('administrator/comment/index', compact('title', 'comment', 'articles'));
+        $this->view('administrator/comment/index', compact('title', 'comment', 'articles', 'answers'));
     }
 
     public function update()
     {
         if (isset($_POST['update_comment'])) {
-
 
             if (isset($_POST['comment'])) {
 
@@ -39,16 +41,39 @@ class AdminCommentController extends Controller
                     exit();
                 }
 
-
                 if (!empty($_POST['comment'])) {
                     $id_commentaire = $_POST['id_commentaire'];
                     $commentaire = $_POST['comment'];
-
 
                     $modelHydrate = $this->model
                         ->setCommentaire($commentaire);
 
                     $this->model->update($modelHydrate, compact('id_commentaire', 'commentaire'));
+                    $_SESSION['flash']['sucess'] = "Le commentaire est modifié !";
+                    header('location: ./commentaire');
+                    exit();
+                }
+            }
+        }
+
+        if (isset($_POST['update_answer_comment'])) {
+
+            if (isset($_POST['answer'])) {
+
+                if (empty($_POST['answer'])) {
+                    $_SESSION['flash']['champsvides'] = "Le champ est vide !";
+                    header('location: ./commentaire');
+                    exit();
+                }
+
+                if (!empty($_POST['answer'])) {
+                    $id_reponse_com = $_POST['id_reponse_com'];
+                    $commentaire = $_POST['answer'];
+
+                    $modelHydrate = $this->modelReponse_com
+                        ->setCommentaire($commentaire);
+
+                    $this->modelReponse_com->update($modelHydrate, compact('id_reponse_com', 'commentaire'));
                     $_SESSION['flash']['sucess'] = "Le commentaire est modifié !";
                     header('location: ./commentaire');
                     exit();
@@ -93,6 +118,14 @@ class AdminCommentController extends Controller
         if (isset($_POST['delete_comment'])) {
             $id_commentaire = $_POST['id_commentaire'];
             $this->model->delete(compact('id_commentaire'));
+            $_SESSION['flash']['delete'] = "Le commentaire est supprimé !";
+            header('location: ./commentaire');
+            exit();
+        }
+
+        if (isset($_POST['delete_answer_comment'])) {
+            $id_reponse_com = $_POST['id_reponse_com'];
+            $this->modelReponse_com->delete(compact('id_reponse_com'));
             $_SESSION['flash']['delete'] = "Le commentaire est supprimé !";
             header('location: ./commentaire');
             exit();

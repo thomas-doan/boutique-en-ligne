@@ -80,3 +80,21 @@
         </form>
 <?php }
 } ?>
+
+<?php
+
+foreach ($answers as $answer) {
+    if ($answer['role'] == 'Utilisateurs' && $answer['signaler'] == 1) { ?>
+
+
+        <label> Commentaire : de <?= $answer['prenom'] ?> <?= $answer['nom'] ?> sur le commentaire <?= $answer['reponse_au_com'] ?> </label>
+
+        <form action="" method="post">
+
+            <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
+            <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
+            <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
+            <button name="delete_answer_comment" type="submit"> Suppr commentaire </button>
+        </form>
+<?php }
+} ?>

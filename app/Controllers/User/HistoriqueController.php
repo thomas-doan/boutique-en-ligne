@@ -1,27 +1,30 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\User;
+
+use App\Controllers\Controller;
 
 use PDO;
-use App\Models\Commandes;
+use App\Models\NumCommande;
 
 class HistoriqueController extends Controller
 {
-    protected $model;
+
 
     public function index()
     {
         $title = "Historique de commande";
         $orders = $this->getOrder();
+
         return $this->view('profil.historiqueCommande', compact('title', 'orders'));
     }
 
     public function getOrder()
     {
-        $model = new Commandes();
+        $model = new NumCommande();
         $argument = ['fk_id_utilisateur'];
         $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
-        $order = $model->find($argument, compact('fk_id_utilisateur'));
+        $order = $model->getAllOrderbyIdUser($fk_id_utilisateur);
         return $order;
     }
 }

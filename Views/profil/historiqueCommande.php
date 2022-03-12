@@ -14,13 +14,13 @@
     <section>
         <h2>Commande en cours de livraison</h2>
         <?php foreach ($orders as $order) : ?>
-            <?php if ($order['etat_commande'] === "En cours de livraison") : ?>
+            <?php if ($order['etat_livraison'] === "en attente confirmation") : ?>
                 <section>
                     <ul>
-                        <li>N°<?= $order['num_commande'] ?></li>
-                        <li><?= $order['date_commande'] ?></li>
-                        <li><?= $order['prix_total'] ?> €</li>
-                        <li><a href="./historiqueCommande/commande/<?= $order['id_commande'] ?>">Details > </a></li>
+                        <li>N°<?= $order['fk_id_num_commande'] ?></li>
+                        <li><?= $order['date'] ?></li>
+                        <li><?= $order['prix_avec_tva'] ?> €</li>
+                        <li><a href="./historiqueCommande/commande/<?= $order['fk_id_num_commande'] ?>">Details > </a></li>
                     </ul>
                 </section>
             <?php endif; ?>
@@ -30,13 +30,13 @@
     <section>
         <h2>Commande livrées</h2>
         <?php foreach ($orders as $order) : ?>
-            <?php if ($order['etat_commande'] === "Commande livrées") : ?>
+            <?php if ($order['etat_livraison'] === "Commande livrées") : ?>
                 <section>
                     <ul>
-                        <li>N°<?= $order['num_commande'] ?></li>
-                        <li><?= $order['date_commande'] ?></li>
-                        <li><?= $order['prix_total'] ?> €</li>
-                        <li><a href="./historiqueCommande/commande/<?= $order['id_commande'] ?>">Details > </a></li>
+                        <li>N°<?= $order['fk_id_num_commande'] ?></li>
+                        <li><?= $order['date'] ?></li>
+                        <li><?= $order['prix_avec_tva'] ?> €</li>
+                        <li><a href="./historiqueCommande/commande/<?= $order['fk_id_num_commande'] ?>">Details > </a></li>
                     </ul>
                 </section>
             <?php endif; ?>

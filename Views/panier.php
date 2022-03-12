@@ -71,7 +71,7 @@ extract($controller->index());
 
    <p>Prix total : <?= $_SESSION['totalPrice'] ?></p>
 
-   <form action="./commande" method="post">
+   <form action="../commande" method="post">
 
        <input name="checkout" value="commandé" type="submit">
    </form>

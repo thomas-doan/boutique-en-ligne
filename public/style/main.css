@@ -1,9 +1,10 @@
+html {
+  scroll-behavior: smooth;
+}
+
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-* {
   margin: 0;
   padding: 0;
 }
@@ -17,11 +18,21 @@ img, picture, video, canvas, svg {
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input, button, textarea, select, a {
   font: inherit;
+  background-color: inherit;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
+}
+
+a, li {
+  text-decoration: none;
+  list-style: none;
+}
+
+a:visited {
+  color: inherit;
 }
 /*# sourceMappingURL=main.css.map */

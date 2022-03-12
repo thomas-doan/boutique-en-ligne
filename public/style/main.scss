@@ -9,6 +9,7 @@
 // 2. Base stuff
 @import
   'base/animations',
+  'base/base',
   'base/fonts',
   'base/reset';
 
@@ -24,7 +25,3 @@
 // 5. Page-specific styles
 @import
   'pages/home';
-
-// 5. Vendors
-@import
-  'vendors/...';

@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f21968915f9af21c7ef64246fe1a51aca703d09c',
+        'reference' => '1280faca31cf29c079e5b6016a4c3f4586d8a9e6',
         'name' => 'boutique/boutique',
         'dev' => true,
     ),
@@ -25,7 +25,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f21968915f9af21c7ef64246fe1a51aca703d09c',
+            'reference' => '1280faca31cf29c079e5b6016a4c3f4586d8a9e6',
             'dev_requirement' => false,
         ),
         'stripe/stripe-php' => array(

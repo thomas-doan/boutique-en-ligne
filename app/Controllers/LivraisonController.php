@@ -52,6 +52,7 @@ class LivraisonController extends Controller
     {
 
         $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+
         $argument = ['fk_id_utilisateur'];
         $adresse = $this->modelAdresses->find($argument, compact('fk_id_utilisateur'));
 

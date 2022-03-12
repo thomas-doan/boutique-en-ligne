@@ -1,21 +1,15 @@
-   <?php
-    if (!isset($_SESSION['user']['id_utilisateur'])) {
-        $_SESSION['user']['id_utilisateur'] = 1;
-    }
-
-    ?>
+   <?php if (isset($_SESSION['flash'])) : ?>
+       <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+           <div><?= $message; ?></div>
+       <?php endforeach; ?>
+   <?php endif; ?>
+   <?php if (isset($_SESSION['flash'])) :  ?>
+       <?php unset($_SESSION['flash']) ?>
+   <?php endif; ?>
 
    <?php if (!empty($_SESSION['quantite'])) { ?>
        <p> c'est le panier </p>
 
-       <?php if (isset($_SESSION['flash'])) : ?>
-           <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-               <div><?= $message; ?></div>
-           <?php endforeach; ?>
-       <?php endif; ?>
-       <?php if (isset($_SESSION['flash'])) :  ?>
-           <?php unset($_SESSION['flash']) ?>
-       <?php endif; ?>
 
 
        <?php

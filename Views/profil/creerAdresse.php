@@ -1,3 +1,14 @@
+<section>
+    <img src="../public/img/Icon_Profil-test.png" alt="profil picture">
+    <h2>Profil</h2>
+    <ul>
+        <li><a href="./modifierProfil">Modifier mon profil</a></li>
+        <li><a href="./modifierMotdePasse">Modifier mon mot de passe</a></li>
+        <li><a href="./adresse">Adresse de livraison</a></li>
+        <li><a href="./historiqueCommande">Historique de commande</a></li>
+        <li><a href="./deconnexion">Se deconnecter</a></li>
+    </ul>
+</section>
 <article>
     <form action="" method="post">
         <label for="nomAdresse">Nom de l'enregistrement : </label>

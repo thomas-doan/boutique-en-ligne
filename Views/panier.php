@@ -1,3 +1,20 @@
+<?php 
+require_once './app/Controllers/ShoppingCartController.php';
+
+
+$controller = new App\Controllers\ShoppingCartController();
+
+$controller->upValue();
+$controller->downValue();
+// $controller->shoppingBag();
+$controller->deleteProduct();
+$controller->singlePrice();
+$controller->totalQuantity();
+$controller->totalPrice();
+$controller->index();
+extract($controller->index());
+?>
+
    <?php if (isset($_SESSION['flash'])) : ?>
        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
            <div><?= $message; ?></div>
@@ -9,7 +26,6 @@
 
    <?php if (!empty($_SESSION['quantite'])) { ?>
        <p> c'est le panier </p>
-
 
 
        <?php

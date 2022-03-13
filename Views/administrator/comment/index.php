@@ -59,6 +59,8 @@ foreach ($answers as $answer) {
 
             <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
             <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
+
+
             <button> <a href="../produit/<?= $answer['fk_id_article'] ?>">Voir l'article associé</a></button>
             <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_answer_comment" type="submit"> X </button>
@@ -85,10 +87,19 @@ foreach ($commentCommunityManag as $valueTime) {
 
             <input name="id_commentaire" value="<?= $valueTime['id_commentaire'] ?>" type="hidden">
             <input name="comment" value="<?= $valueTime['commentaire'] ?>" type="text">
-            <button> <a href="../produit/<?= $valueTime['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <button name="update_comment" type="submit"> Modifier commentaire </button>
-            <button name="delete_comment" type="submit"> X </button>
+
             <button name="validateCom" type="submit" value="<?= $valueTime['check_admin'] ?>"> Valider commentaire </button>
+            <button name="delete_comment" type="submit"> X </button>
+
+            <button> <a href="../produit/<?= $valueTime['fk_id_article'] ?>">Voir l'article associé</a></button>
+            <textarea name="answerComAdmin" placeholder="Votre réponse."></textarea>
+
+
+
+            <input name="fk_id_article" value="<?= $valueTime['fk_id_article'] ?>" type="hidden">
+            <button name="subAnswerComAdmin" type="submit"> Répondre au commentaire </button>
+
+
 
         </form>
 <?php }
@@ -107,10 +118,19 @@ foreach ($answersCommunityManag as $answerTime) {
 
             <input name="id_reponse_com" value="<?= $answerTime['id_reponse_com'] ?>" type="hidden">
             <input name="answer" value="<?= $answerTime['commentaire'] ?>" type="text">
-            <button> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
-            <button name="delete_answer_comment" type="submit"> X </button>
+
             <button name="validateAnswerCom" type="submit" value="<?= $answerTime['check_admin'] ?>"> Valider commentaire </button>
+            <button name="delete_answer_comment" type="submit"> X </button>
+
+            <button> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article associé</a></button>
+            <textarea name="answerAdmin" placeholder="Votre réponse."></textarea>
+
+
+
+
+            <input name="fk_id_commentaire" value="<?= $answerTime['fk_id_commentaire'] ?>" type="hidden">
+            <button name="subAnswerAdmin" type="submit"> Répondre au commentaire </button>
+
         </form>
 <?php }
 } ?>

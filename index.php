@@ -1,8 +1,18 @@
 <?php session_start();
 
-use Exceptions\NotFoundException;
 
 require('vendor/autoload.php');
+
+
+define('VIEWS', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '404.php');
+
+function error($param)
+{
+    if ($param === False) {
+        http_response_code(404);
+        require VIEWS;
+    }
+}
 
 
 $router = new AltoRouter();
@@ -237,11 +247,13 @@ $router->map(
         $controller->update();
         $controller->create();
         $controller->delete();
-
+        $controller->createAnswerCom();
+        $controller->createAnswerAdmin();
         $controller->reportAnswer();
         $controller->report();
         $controller->validateAnswer();
         $controller->validateAnswerCom();
+
         $controller->index();
     },
 
@@ -365,9 +377,4 @@ if (is_array($match)) {
         call_user_func_array($match['target'], $match['params']);
     }
 }
-
-try {
-    $match;
-} catch (NotFoundException $e) {
-    return $e->error404();
-}
+error($match);

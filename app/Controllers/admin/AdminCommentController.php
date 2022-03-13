@@ -2,11 +2,12 @@
 
 namespace App\Controllers\admin;
 
-use App\Controllers\Controller;
+use Exception;
 
-use App\Models\Commentaires;
 use App\Models\Articles;
 use App\Models\Reponse_com;
+use App\Models\Commentaires;
+use App\Controllers\Controller;
 
 class AdminCommentController extends Controller
 {
@@ -117,6 +118,74 @@ class AdminCommentController extends Controller
         }
     }
 
+
+    public function createAnswerAdmin()
+    {
+        if (isset($_POST['subAnswerAdmin'])) {
+
+            if (!empty($_POST['fk_id_commentaire']) && !empty($_POST['answerAdmin'])) {
+
+                $commentaire = $_POST['answerAdmin'];
+                $fk_id_commentaire = $_POST['fk_id_commentaire'];
+                $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+
+                $modelHydrate =
+                    $this->modelReponse_com
+                    ->setCommentaire($commentaire)
+                    ->setfk_id_commentaire($fk_id_commentaire)
+                    ->setFk_id_utilisateur($fk_id_utilisateur);
+                $this->modelReponse_com->create($modelHydrate, compact('commentaire', 'fk_id_commentaire', 'fk_id_utilisateur'));
+                $_SESSION['flash']['sucess'] = "Le commentaire est créé !";
+
+                header('location: ./commentaire');
+                exit();
+            }
+
+            if (empty($_POST['fk_id_commentaire']) || empty($_POST['answerAdmin'])) {
+                $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
+                header('location: ./commentaire');
+                exit();
+            }
+        }
+    }
+
+    public function createAnswerCom()
+    {
+        if (isset($_POST['subAnswerComAdmin'])) {
+            /*        echo "post com";
+            var_dump($_POST['commentaire']);
+            echo "<br>";
+
+            var_dump($_POST['id_article']);
+            die; */
+
+            if (!empty($_POST['fk_id_article']) && !empty($_POST['answerComAdmin'])) {
+
+                $commentaire = $_POST['answerComAdmin'];
+                $fk_id_article = $_POST['fk_id_article'];
+                $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+
+                $modelHydrate = $this->model
+                    ->setCommentaire($commentaire)
+                    ->setFk_id_article($fk_id_article)
+                    ->setFk_id_utilisateur($fk_id_utilisateur);
+                $this->model->create($modelHydrate, compact('commentaire', 'fk_id_article', 'fk_id_utilisateur'));
+                $_SESSION['flash']['sucess'] = "Le commentaire est créé !";
+
+                header('location: ./commentaire');
+                exit();
+            }
+
+            if (empty($_POST['id_article']) || empty($_POST['commentaire'])) {
+                $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
+                header('location: ./commentaire');
+                exit();
+            }
+        }
+    }
+
+
+
     public function  report()
     {
         if (isset($_POST['signaler'])) {
@@ -172,8 +241,15 @@ class AdminCommentController extends Controller
     public function delete()
     {
         if (isset($_POST['delete_comment'])) {
+
             $id_commentaire = $_POST['id_commentaire'];
-            $this->model->delete(compact('id_commentaire'));
+
+            try {
+                $this->model->delete(compact('id_commentaire'));
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+
             $_SESSION['flash']['delete'] = "Le commentaire est supprimé !";
             header('location: ./commentaire');
             exit();
@@ -182,6 +258,12 @@ class AdminCommentController extends Controller
         if (isset($_POST['delete_answer_comment'])) {
             $id_reponse_com = $_POST['id_reponse_com'];
             $this->modelReponse_com->delete(compact('id_reponse_com'));
+
+            try {
+                $this->modelReponse_com->delete(compact('id_reponse_com'));
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
             $_SESSION['flash']['delete'] = "Le commentaire est supprimé !";
             header('location: ./commentaire');
             exit();

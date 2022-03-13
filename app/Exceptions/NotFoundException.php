@@ -2,6 +2,8 @@
 
 namespace Exceptions;
 
+namespace App\Controllers\Exceptions;
+
 use Exception;
 use Throwable;
 

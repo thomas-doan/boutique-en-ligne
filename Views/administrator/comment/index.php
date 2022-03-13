@@ -28,6 +28,7 @@
 
 </form>
 <h3>Commentaire des admins : </h3>
+
 <?php foreach ($comment as $value) {
 
     if ($value['role'] == 'Admin' && $value['check_admin'] == 0) { ?>
@@ -70,9 +71,12 @@ foreach ($answers as $answer) {
 
 <h3>Commentaire d'utilisateur des 3 dernières semaines : </h3>
 
-<?php foreach ($commentCommunityManag as $valueTime) {
+<?php
 
-    if ($valueTime['role'] == 'Utilisateurs' && $valueTime['signaler'] == 0 && $valueTime['check_admin'] == 0) { ?>
+
+foreach ($commentCommunityManag as $valueTime) {
+
+    if ($valueTime['role'] == 'Utilisateurs'  && $valueTime['check_admin'] == 0) { ?>
 
 
         <label> Commentaire : de <?= $valueTime['prenom'] ?> <?= $valueTime['nom'] ?> article <?= $valueTime['titre_article'] ?> le : <?= $valueTime['date'] ?> </label>
@@ -93,7 +97,8 @@ foreach ($answers as $answer) {
 <?php
 
 foreach ($answersCommunityManag as $answerTime) {
-    if ($answerTime['role'] == 'Utilisateurs' && $answerTime['signaler'] == 0 && $answerTime['check_admin'] == 0) { ?>
+
+    if ($answerTime['role'] == 'Utilisateurs'  && $answerTime['check_admin'] == 0) { ?>
 
 
         <label> Commentaire : de <?= $answerTime['prenom'] ?> <?= $answerTime['nom'] ?> sur le commentaire <?= $answerTime['reponse_au_com'] ?> le : <?= $answerTime['date'] ?> </label>
@@ -105,9 +110,7 @@ foreach ($answersCommunityManag as $answerTime) {
             <button> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article associé</a></button>
             <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_answer_comment" type="submit"> X </button>
-            <?php if (($answerTime['check_admin']) == 0) { ?>
-                <button name="check_admin" type="submit" value="<?= $answerTime['check_admin'] ?>"> Valider commentaire </button>
-            <?php } ?>
+            <button name="check_admin" type="submit" value="<?= $answerTime['check_admin'] ?>"> Valider commentaire </button>
         </form>
 <?php }
 } ?>

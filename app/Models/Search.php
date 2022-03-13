@@ -17,7 +17,7 @@ class Search extends Model
 
         $query = $this->db->prepare("
 
-     SELECT articles.id_article, articles.sku, articles.titre_article, articles.presentation_article,  articles.prix_article, articles.image_article, `cat2`.`nom_categorie` AS 'cat parent', 'categorie' AS 'type'
+     SELECT articles.id_article, articles.sku, articles.titre_article, articles.presentation_article, articles.description_article, articles.prix_article, articles.image_article, `cat2`.`nom_categorie` AS 'cat parent', 'categorie' AS 'type'
             FROM articles
             INNER JOIN articles_categories_filtre ON articles_categories_filtre.fk_id_article = articles.id_article
             INNER JOIN categories AS `cat1` ON articles_categories_filtre.fk_id_cat_categorie = `cat1`.id_categorie 
@@ -27,7 +27,7 @@ class Search extends Model
             GROUP BY articles.id_article
 UNION ALL
 
-SELECT `art1`.id_article, `art1`.sku, `art1`.titre_article, `art1`.presentation_article, `art1`.prix_article, `art1`.image_article, `cat2`.`nom_categorie` AS 'cat parent', 'article' AS 'type'
+SELECT `art1`.id_article, `art1`.sku, `art1`.titre_article, `art1`.presentation_article, `art1`.description_article,`art1`.prix_article, `art1`.image_article, `cat2`.`nom_categorie` AS 'cat parent', 'article' AS 'type'
             FROM articles_categories_filtre
             INNER JOIN articles AS `art1` ON articles_categories_filtre.fk_id_article = `art1`.`id_article`
             INNER JOIN categories AS `cat1` ON articles_categories_filtre.fk_id_cat_categorie = `cat1`.id_categorie
@@ -36,7 +36,7 @@ SELECT `art1`.id_article, `art1`.sku, `art1`.titre_article, `art1`.presentation_
         GROUP BY `art1`.id_article
 UNION ALL
 
-SELECT articles.id_article, articles.sku, articles.titre_article, articles.presentation_article, articles.prix_article, articles.image_article, `cat2`.`nom_categorie` AS 'cat parent', 'tag' AS 'type'
+SELECT articles.id_article, articles.sku, articles.titre_article, articles.presentation_article, articles.description_article, articles.prix_article, articles.image_article, `cat2`.`nom_categorie` AS 'cat parent', 'tag' AS 'type'
             FROM articles
             INNER JOIN articles_tags ON articles_tags.fk_id_article = articles.id_article
             INNER JOIN articles_categories_filtre ON articles.id_article = articles_categories_filtre.fk_id_article

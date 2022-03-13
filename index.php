@@ -8,7 +8,7 @@ if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
     if(isset($_SESSION['user']))
     {
     // echo 'redirection';
-    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/profil" </SCRIPT>'; //force la direction
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/profil" </SCRIPT>'; //force la direction
     exit();
     }
     else{

@@ -2,6 +2,10 @@
 // This file contains all css reset declarations.
 // -----------------------------------------------------------------------------
 
+html {
+    font-size: 62.5%;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -10,11 +14,15 @@
 
 body {
     -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    font-size: 1.3125rem;
+    line-height: 1.6;
 }
 
 img, picture, video, canvas, svg {
     display: block;
     max-width: 100%;
+    height: auto;
 }
 
 input, button, textarea, select, a {
@@ -26,9 +34,10 @@ p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
 }
 
-a, li {
+a, li, form {
     text-decoration: none;
     list-style: none;
+    color: inherit;
 }
 
 a:visited {

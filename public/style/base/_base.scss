@@ -1,3 +1,9 @@
 html {
     scroll-behavior: smooth;
+    overflow-z: none;
+}
+
+body {
+    width: 100%;
+    height: 200vh;
 }

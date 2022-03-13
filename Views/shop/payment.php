@@ -3,7 +3,7 @@
   <input id="cardholder-name" type="text" placeholder="Titulaire de la carte">
   <div id="card-elements" class="test"></div>
   <div id="card-errors" role="alert"></div>
-  <button id="card-button" type="submit" data-secret="<?= $intent['client_secret'] ?>" name="submit">Valider le paiement</button>
+  <button id="card-button" type="submit" name="submit">Valider le paiement</button>
 
 
 </form>

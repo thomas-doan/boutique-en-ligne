@@ -34,15 +34,15 @@ class Security
 
             return $compact; //On retourne les resultats sous forme de tableau
         } else {
-            if (ctype_digit($compact)) {
-                $compact = intval($compact);
-            }
+            // if (ctype_digit($compact)==true) {
+            //     $compact = intval($compact);
+            // }
             // Pour tous les autres types
-            else {
+            // else {
                 $compact  = strip_tags($compact);
                 $compact = htmlentities($compact);
                 $compact = htmlspecialchars($compact);
-            }
+            // }
             return $compact; //On retourne le resultat sous forme de int ou String
         }
     }

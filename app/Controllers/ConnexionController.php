@@ -11,8 +11,8 @@ class ConnexionController extends Controller
     public function index()
     {
         $title = "Connexion";
-        var_dump(explode('/',$_SERVER['HTTP_REFERER']));
-        if(explode('/',$_SERVER['HTTP_REFERER'])[4]!=='connexion')
+        $refererPath = explode('/',$_SERVER['HTTP_REFERER'])[4];
+        if($refererPath!=='connexion' && $refererPath!=='admin')
         {
         $_SESSION['reload']=$_SERVER['HTTP_REFERER'];
         }

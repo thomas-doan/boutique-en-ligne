@@ -1,6 +1,6 @@
 <?php session_start();
 
-
+//Control d'accée à l'url
 $urlControlUser=$_SERVER['REQUEST_URI'];
 $pathControl = explode('/',$urlControlUser);
 if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
@@ -14,6 +14,10 @@ if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
     else{
         echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
     }
+}
+if($pathControl[2]=='profil' && empty($_SESSION['user']))
+{
+    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
 }
 
 use App\Controllers\Security;

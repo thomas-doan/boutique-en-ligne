@@ -100,7 +100,8 @@ class LivraisonController extends Controller
                 $_SESSION['validate']['code_postal'] = $code_postal;
                 $_SESSION['validate']['telephone'] = $telephone;
 
-                header('location: ./paiement');
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction
+                exit();
             } else {
                 $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
                 header('location: ./livraison');

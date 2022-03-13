@@ -29,7 +29,7 @@ class CardCompenent extends Product
                 </div>
                 <p><?=$dataProduct['description_article']?></p>
                 <?php if($dataProduct['sku']!==0):?>
-                <button><a href=""></a>Consulter</button>
+                <button><a href="/boutique-en-ligne/produit/<?=$dataProduct['id_article']?>">Consulter</a></button>
                 <?php endif;?>
             </div>
         </section>

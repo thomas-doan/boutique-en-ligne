@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Controllers;
 
 use Exception;
@@ -210,8 +212,14 @@ class PaymentController extends Controller
                 'payment_method_types' => ['card'],
                 ['payment_method' => 'pm_card_visa'],
             ]);
-
-            $intent['client_secret'];
+            if(empty($intent))
+            {
+                $intent = 'importe stripe';
+            }
+            else{
+                $intent['client_secret'];
+            }
+            
         }
     }
 

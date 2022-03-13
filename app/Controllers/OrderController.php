@@ -20,10 +20,20 @@ class OrderController extends Controller
 
     public function index()
     {
+        if(isset($_SESSION['user']))
+        {
         $id = $_SESSION['user']['id_utilisateur'];
         $info_user = $this->getUser($id);
         $orderCheck = $this->orderResume();
         $title = "Commande resumé - Kawa";
+        }
+        else{
+            $_SESSION['flash']['noConnect']= 'Connectez-vous pour valider votre commande';
+            $_SESSION['referer'] = $_SERVER['REQUEST_URI'];
+            echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./connexion\" </SCRIPT>"; //force la direction
+            exit();
+            }
+        
 
         return $this->view('shop.order', compact('title', 'info_user', 'orderCheck'));
     }

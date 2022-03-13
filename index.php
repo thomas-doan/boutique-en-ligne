@@ -1,8 +1,42 @@
 <?php session_start();
 
+//Control d'accée à l'url
+$urlControlUser=$_SERVER['REQUEST_URI'];
+$pathControl = explode('/',$urlControlUser);
+if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
+{
+    if(isset($_SESSION['user']))
+    {
+    // echo 'redirection';
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/profil" </SCRIPT>'; //force la direction
+    exit();
+    }
+    else{
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+    }
+}
+if($pathControl[2]=='profil' && empty($_SESSION['user']))
+{
+    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+}
+
+use App\Controllers\Security;
 use Exceptions\NotFoundException;
 
+require_once 'app/Controllers/Security.php';
+//Sécurité de tout les formulaire Get|POST
+$securityAll = new Security();
+if(isset($_GET))
+{
+    $securityAll->controlAll($_GET);
+}
+if(isset($_POST))
+{
+    $securityAll->controlAll($_POST);
+}
+
 require('vendor/autoload.php');
+
 
 
 $router = new AltoRouter();
@@ -291,23 +325,23 @@ $router->map(
 
 
 //PANIER
-$router->map(
-    'GET/POST',
-    '/panier',
-    function () {
-        $controller = new App\Controllers\ShoppingCartController();
+// $router->map(
+//     'GET/POST',
+//     '/panier',
+//     function () {
+//         $controller = new App\Controllers\ShoppingCartController();
 
-        $controller->upValue();
-        $controller->downValue();
-        // $controller->shoppingBag();
-        $controller->deleteProduct();
-        $controller->singlePrice();
-        $controller->totalQuantity();
-        $controller->totalPrice();
-        $controller->index();
-    },
-    'panier'
-);
+//         $controller->upValue();
+//         $controller->downValue();
+//         // $controller->shoppingBag();
+//         $controller->deleteProduct();
+//         $controller->singlePrice();
+//         $controller->totalQuantity();
+//         $controller->totalPrice();
+//         $controller->index();
+//     },
+//     'panier'
+// );
 
 //Commande
 $router->map(

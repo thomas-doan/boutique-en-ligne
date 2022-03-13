@@ -7,6 +7,7 @@ class Commentaires extends Model
 {
     protected $table = 'commentaires';
     protected $id = "id_commentaire";
+    protected $id_commentaire;
     protected $commentaire;
     protected $fk_id_utilisateur;
     protected $fk_id_article;
@@ -31,7 +32,7 @@ class Commentaires extends Model
     public function getAnswerById($id_article)
     {
         $sql =
-            "SELECT  rep.commentaire as reponse_assoc, rep.fk_id_commentaire , u2.nom as reponse_nom, u2.prenom as reponse_prenom, rep.date as reponse_date, rep.signaler
+            "SELECT  rep.commentaire as reponse_assoc, rep.id_reponse_com, rep.fk_id_commentaire , u2.nom as reponse_nom, u2.prenom as reponse_prenom, rep.date as reponse_date, rep.signaler
             FROM commentaires as c
             INNER JOIN utilisateurs as u ON c.fk_id_utilisateur = u.id_utilisateur
             INNER JOIN articles as art ON c.fk_id_article = art.id_article
@@ -111,20 +112,41 @@ class Commentaires extends Model
         return $this;
     }
 
-    public function selectCommentwithArticleUser()
+    public function selectCommentwithArticleUser($week = NULL)
     {
-        $sql = "SELECT  commentaires.id_commentaire, commentaires.signaler, commentaires.commentaire,
+        if ($week == null) {
+            $sql = "SELECT  commentaires.id_commentaire, commentaires.signaler, commentaires.commentaire,
          utilisateurs.nom, utilisateurs.prenom, utilisateurs.role, articles.titre_article, commentaires.date
     FROM commentaires INNER JOIN utilisateurs ON commentaires.fk_id_utilisateur = utilisateurs.id_utilisateur INNER JOIN articles ON commentaires.fk_id_article = articles.id_article";
-        return $this->requete($sql)->fetchAll();
+
+
+            return $this->requete($sql)->fetchAll();
+        } else {
+            $sql = " SELECT  commentaires.id_commentaire, commentaires.signaler, commentaires.commentaire,
+    utilisateurs.nom, utilisateurs.prenom, utilisateurs.role, articles.titre_article, commentaires.date
+    FROM commentaires INNER JOIN utilisateurs ON commentaires.fk_id_utilisateur = utilisateurs.id_utilisateur INNER JOIN articles ON commentaires.fk_id_article = articles.id_article WHERE commentaires.date > (NOW() - INTERVAL $week WEEK)";
+
+
+            return $this->requete($sql)->fetchAll();
+        }
     }
 
-    public function selectAnswerCommentwithArticleUser()
+    public function selectAnswerCommentwithArticleUser($week = NULL)
     {
-        $sql = "SELECT  reponse_com.fk_id_utilisateur, reponse_com.signaler, reponse_com.commentaire, reponse_com.date, reponse_com.id_reponse_com,
+        if ($week == null) {
+            $sql = "SELECT  reponse_com.fk_id_utilisateur, reponse_com.signaler, reponse_com.commentaire, reponse_com.date, reponse_com.id_reponse_com,
          utilisateurs.nom, utilisateurs.prenom, utilisateurs.role, commentaires.commentaire AS reponse_au_com
     FROM reponse_com INNER JOIN utilisateurs ON reponse_com.fk_id_utilisateur = utilisateurs.id_utilisateur INNER JOIN commentaires ON commentaires.id_commentaire = reponse_com.fk_id_commentaire";
-        return $this->requete($sql)->fetchAll();
+
+            return $this->requete($sql)->fetchAll();
+        } else {
+            $sql = "SELECT  reponse_com.fk_id_utilisateur, reponse_com.signaler, reponse_com.commentaire, reponse_com.date, reponse_com.id_reponse_com,
+         utilisateurs.nom, utilisateurs.prenom, utilisateurs.role, commentaires.commentaire AS reponse_au_com
+    FROM reponse_com INNER JOIN utilisateurs ON reponse_com.fk_id_utilisateur = utilisateurs.id_utilisateur INNER JOIN commentaires ON commentaires.id_commentaire = reponse_com.fk_id_commentaire WHERE reponse_com.date > (NOW() - INTERVAL $week WEEK)";
+
+
+            return $this->requete($sql)->fetchAll();
+        }
     }
 
     /**
@@ -163,6 +185,26 @@ class Commentaires extends Model
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id_commentaire
+     */
+    public function getId_commentaire()
+    {
+        return $this->id_commentaire;
+    }
+
+    /**
+     * Set the value of id_commentaire
+     *
+     * @return  self
+     */
+    public function setId_commentaire($id_commentaire)
+    {
+        $this->id_commentaire = $id_commentaire;
 
         return $this;
     }

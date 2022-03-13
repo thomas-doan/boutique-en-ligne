@@ -122,6 +122,33 @@ class ProductController extends Controller
         }
     }
 
+    public function  report($id_article)
+    {
+        if (isset($_POST['signaler'])) {
+            $id_commentaire = $_POST['signalement'];
+            $signaler = 1;
+            $modelHydrate = $this->Comments
+                ->setSignaler($signaler);
+            $this->Comments->update($modelHydrate, compact('id_commentaire', 'signaler'));
+            $_SESSION['flash']['success'] = "Signalement enregistré.";
+            header("location: ./$id_article");
+            exit();
+        }
+    }
+
+    public function  reportAnswer($id_article)
+    {
+        if (isset($_POST['reportAnswer'])) {
+            $id_reponse_com = $_POST['idReportAnswer'];
+            $signaler = 1;
+            $modelHydrate = $this->AnswerCom
+                ->setSignaler($signaler);
+            $this->AnswerCom->update($modelHydrate, compact('id_reponse_com', 'signaler'));
+            $_SESSION['flash']['success'] = "Signalement enregistré.";
+            header("location: ./$id_article");
+            exit();
+        }
+    }
 
     public function addComment($id_article)
     {

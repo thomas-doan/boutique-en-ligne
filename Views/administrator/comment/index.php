@@ -32,7 +32,7 @@
 
     if ($value['role'] == 'Admin') { ?>
 
-        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> </label>
+        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> le : <?= $value['date'] ?> </label>
 
         <form action="" method="post">
 
@@ -44,22 +44,57 @@
 
 <?php }
 } ?>
+<?php
 
-<h3>Commentaire des utilisateurs : </h3>
+foreach ($answers as $answer) {
+?>
 
-<?php foreach ($comment as $value) {
 
-    if ($value['role'] == 'Utilisateurs' && $value['signaler'] == 0) { ?>
+    <label> Commentaire : de <?= $answer['prenom'] ?> <?= $answer['nom'] ?> sur le commentaire <?= $answer['reponse_au_com'] ?> : <?= $answer['date'] ?> </label>
 
-        <h3>Commentaire des utilisateurs : </h3>
-        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> </label>
+    <form action="" method="post">
+
+        <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
+        <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
+        <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
+        <button name="delete_answer_comment" type="submit"> Suppr commentaire </button>
+    </form>
+<?php
+} ?>
+
+<h3>Commentaire d'utilisateur des 3 dernières semaines : </h3>
+
+<?php foreach ($commentCommunityManag as $valueTime) {
+
+    if ($valueTime['role'] == 'Utilisateurs' && $valueTime['signaler'] == 0) { ?>
+
+
+        <label> Commentaire : de <?= $valueTime['prenom'] ?> <?= $valueTime['nom'] ?> article <?= $valueTime['titre_article'] ?> le : <?= $valueTime['date'] ?> </label>
 
         <form action="" method="post">
 
-            <input name="id_commentaire" value="<?= $value['id_commentaire'] ?>" type="hidden">
-            <input name="comment" value="<?= $value['commentaire'] ?>" type="text">
+            <input name="id_commentaire" value="<?= $valueTime['id_commentaire'] ?>" type="hidden">
+            <input name="comment" value="<?= $valueTime['commentaire'] ?>" type="text">
             <button name="update_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_comment" type="submit"> Suppr commentaire </button>
+        </form>
+<?php }
+} ?>
+<h3>Réponses des utilisateurs : </h3>
+<?php
+
+foreach ($answersCommunityManag as $answerTime) {
+    if ($answerTime['role'] == 'Utilisateurs' && $answerTime['signaler'] == 0) { ?>
+
+
+        <label> Commentaire : de <?= $answerTime['prenom'] ?> <?= $answerTime['nom'] ?> sur le commentaire <?= $answerTime['reponse_au_com'] ?> le : <?= $answerTime['date'] ?> </label>
+
+        <form action="" method="post">
+
+            <input name="id_reponse_com" value="<?= $answerTime['id_reponse_com'] ?>" type="hidden">
+            <input name="answer" value="<?= $answerTime['commentaire'] ?>" type="text">
+            <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
+            <button name="delete_answer_comment" type="submit"> Suppr commentaire </button>
         </form>
 <?php }
 } ?>
@@ -69,12 +104,13 @@
     if ($value['role'] == 'Utilisateurs' && $value['signaler'] == 1) { ?>
 
 
-        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> </label>
+        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> : le : <?= $answer['date'] ?></label>
 
         <form action="" method="post">
 
             <input name="id_commentaire" value="<?= $value['id_commentaire'] ?>" type="hidden">
             <input name="comment" value="<?= $value['commentaire'] ?>" type="text">
+            <button name="signaler" type="submit" value="<?= $value['id_commentaire'] ?>"> Modifier signalement </button>
             <button name="update_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_comment" type="submit"> Suppr commentaire </button>
         </form>
@@ -93,6 +129,7 @@ foreach ($answers as $answer) {
 
             <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
             <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
+            <button name="reportAnswer" type="submit" value="<?= $answer['id_reponse_com'] ?>"> Modifier signalement </button>
             <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_answer_comment" type="submit"> Suppr commentaire </button>
         </form>

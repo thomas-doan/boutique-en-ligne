@@ -55,15 +55,20 @@
 
     foreach ($comments as $key => $comment) {
         $NbrOfIndex = count($comment);
-        $NbrOfIndex = $NbrOfIndex - 7;
+        $NbrOfIndex = $NbrOfIndex - 8;
     ?>
         <section>
-            <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?></h3>
+            <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?> <?php if ($comment['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
             <p><?= $comment['commentaire'] ?></p>
             <p><?= $comment['date'] ?></p>
         </section>
         <section>
             <form action="" method="POST">
+                <?php if ($comment['signaler'] == 0) { ?>
+                    <input type="hidden" value="<?= $comment['id_commentaire'] ?>" name="signalement">
+                    <button type="submit" name="signaler" value="1">Signaler</button>
+                <?php  } ?>
+
                 <input type="hidden" id="comment" name="id_commentaire" value="<?= $comment['id_commentaire'] ?>">
 
                 <input type="text" id="comment" name="comment" placeholder="Répondre au commentaire" value="">
@@ -77,10 +82,15 @@
         ?>
                 <section>
 
-                    <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?></h3>
+                    <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?> <?php if ($comment[$i]['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
                     <p> commentaire : <?= $comment[$i]['reponse_assoc'] ?></p>
                     <p> date : <?= $comment[$i]['reponse_date'] ?></p>
-
+                    <form action="" method="POST">
+                        <?php if ($comment[$i]['signaler'] == 0) { ?>
+                            <input type="hidden" value="<?= $comment[$i]['id_reponse_com'] ?>" name="idReportAnswer">
+                            <button type="submit" name="reportAnswer" value="1">Signaler</button>
+                        <?php  } ?>
+                    </form>
                 </section>
 
 

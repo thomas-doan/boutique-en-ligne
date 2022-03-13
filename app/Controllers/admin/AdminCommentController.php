@@ -24,9 +24,14 @@ class AdminCommentController extends Controller
 
         $comment = $this->model->selectCommentwithArticleUser();
         $answers = $this->model->selectAnswerCommentwithArticleUser();
+
+        //nombre semaines pour afficher les commentaires :
+        $nombreofweek = "3";
+        $commentCommunityManag = $this->model->selectCommentwithArticleUser($nombreofweek);
+        $answersCommunityManag = $this->model->selectAnswerCommentwithArticleUser($nombreofweek);
         $articles = $this->modelArticles->findAll();
 
-        $this->view('administrator/comment/index', compact('title', 'comment', 'articles', 'answers'));
+        $this->view('administrator/comment/index', compact('title', 'comment', 'articles', 'answers', 'commentCommunityManag', 'answersCommunityManag'));
     }
 
     public function update()
@@ -112,6 +117,31 @@ class AdminCommentController extends Controller
         }
     }
 
+    public function  report()
+    {
+        if (isset($_POST['signaler'])) {
+            $id_commentaire = $_POST['signaler'];
+            $signaler = 0;
+            $modelHydrate = $this->model
+                ->setSignaler($signaler);
+            $this->model->update($modelHydrate, compact('id_commentaire', 'signaler'));
+            $_SESSION['flash']['success'] = "Retrait du signalement.";
+            header('location: ./commentaire');
+        }
+    }
+
+    public function  reportAnswer()
+    {
+        if (isset($_POST['reportAnswer'])) {
+            $id_reponse_com = $_POST['reportAnswer'];
+            $signaler = 0;
+            $modelHydrate = $this->modelReponse_com
+                ->setSignaler($signaler);
+            $this->modelReponse_com->update($modelHydrate, compact('id_reponse_com', 'signaler'));
+            $_SESSION['flash']['success'] = "Retrait du signalement.";
+            header('location: ./commentaire');
+        }
+    }
 
     public function delete()
     {

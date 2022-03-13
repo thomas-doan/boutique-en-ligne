@@ -238,6 +238,8 @@ $router->map(
         $controller->create();
         $controller->delete();
         $controller->index();
+        $controller->reportAnswer();
+        $controller->report();
     },
 
 );
@@ -270,6 +272,8 @@ $router->map(
         $controller->index($id_article);
         $controller->shoppingBag();
         $controller->pushAnswerCom($id_article);
+        $controller->report($id_article);
+        $controller->reportAnswer($id_article);
         // $controller->Like($id_article);
         // $controller->addComment($id_article);
     },

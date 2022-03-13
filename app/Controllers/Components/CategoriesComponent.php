@@ -10,6 +10,7 @@ class CategoriesComponent extends Categories
     {
         parent::__construct();
     }
+    
     /**
      * Renvoie l'ensemble des données selon le nom de la section
      * @param array Ensemble des critères à chercher

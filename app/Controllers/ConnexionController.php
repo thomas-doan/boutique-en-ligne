@@ -11,7 +11,11 @@ class ConnexionController extends Controller
     public function index()
     {
         $title = "Connexion";
-
+        $refererPath = explode('/',$_SERVER['HTTP_REFERER'])[4];
+        if($refererPath!=='connexion' && $refererPath!=='admin')
+        {
+        $_SESSION['reload']=$_SERVER['HTTP_REFERER'];
+        }
         return $this->view('profil.connexion', compact('title'));
     }
 
@@ -45,8 +49,23 @@ class ConnexionController extends Controller
                     $_SESSION['user']['password'] = $user->getPassword();
                     $_SESSION['user']['role'] = $user->getRole();
                     // var_dump($user);
-                    header('Location: ./profil');
+                    // header('Location: ./profil');
+                    if(isset($_SESSION['referer']))
+                    {
+                        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$_SESSION['referer'].'" </SCRIPT>'; //force la direction
+                        // unset($_SESSION['referer']);
+                        exit();
+                    }
+                    elseif(explode('/',$_SESSION['reload'])[4]!=='inscription')
+                    {
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$_SESSION['reload'].'" </SCRIPT>'; //force la direction
+                    unset($_SESSION['reload']);
                     exit();
+                    }
+                    else{
+                        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./profil" </SCRIPT>'; //force la direction
+                    exit();
+                    }
                 } else {
 
                     $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est inccorecte";

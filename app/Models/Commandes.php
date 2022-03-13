@@ -138,7 +138,7 @@ class Commandes extends Model
     public function getInfoCommande($id_commande)
     {
         $query = $this->db->prepare(
-            "SELECT num_commande.date, num_commande.prix_avec_tva, num_commande.total_produit, num_commande.id_num_commande,
+            "SELECT num_commande.fk_id_utilisateurs, num_commande.date, num_commande.prix_avec_tva, num_commande.total_produit, num_commande.id_num_commande,
 
 c1.nb_article, c1.prix_article, c1.prix_commande,
 

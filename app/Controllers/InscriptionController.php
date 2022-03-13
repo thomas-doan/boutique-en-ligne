@@ -66,7 +66,8 @@ class InscriptionController extends Controller
                 var_dump($user);
 
                 $_SESSION['flash']['sucess'] = "Bravo vous êtes à présent inscrit, vous pouvez maintenant vous connectez";
-                header('Location: ./connexion');
+                // header('Location: ./connexion');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./connexion\" </SCRIPT>"; //force la direction
                 exit();
             }
         }

@@ -16,6 +16,14 @@ class CommandeController extends Controller
         $idCommande = $id_commande;
         $order = $this->getOrderInfo($idCommande);
 
+        var_dump($_SESSION);
+        if($order['fk_id_utilisateurs']!==$_SESSION['user']['id_utilisateur'])
+        {
+            $_SESSION['flash']='Ce numero de commande ne correspond à aucune de vos commandes';
+            $order = null;
+        }
+        var_dump($order);
+
 
         // $allInfoById = $this->getCommandeById($idCommande);
         return $this->view('profil.commande', compact('title', 'order'));

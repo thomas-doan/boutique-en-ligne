@@ -11,6 +11,7 @@ class Commentaires extends Model
     protected $commentaire;
     protected $fk_id_utilisateur;
     protected $fk_id_article;
+    protected $check_admin;
     protected $signaler;
     protected $date;
 
@@ -209,6 +210,26 @@ class Commentaires extends Model
     public function setId_commentaire($id_commentaire)
     {
         $this->id_commentaire = $id_commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of check_admin
+     */
+    public function getCheck_admin()
+    {
+        return $this->check_admin;
+    }
+
+    /**
+     * Set the value of check_admin
+     *
+     * @return  self
+     */
+    public function setCheck_admin($check_admin)
+    {
+        $this->check_admin = $check_admin;
 
         return $this;
     }

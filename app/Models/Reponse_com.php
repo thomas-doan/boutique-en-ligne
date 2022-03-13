@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Model;
+
 
 class Reponse_com extends Model
 {
@@ -11,6 +13,7 @@ class Reponse_com extends Model
     protected $commentaire;
     protected $fk_id_commentaire;
     protected $fk_id_utilisateur;
+    protected $check_admin;
     protected $signaler;
     protected $date;
 
@@ -131,6 +134,26 @@ class Reponse_com extends Model
     public function setSignaler($signaler)
     {
         $this->signaler = $signaler;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of check_admin
+     */
+    public function getCheck_admin()
+    {
+        return $this->check_admin;
+    }
+
+    /**
+     * Set the value of check_admin
+     *
+     * @return  self
+     */
+    public function setCheck_admin($check_admin)
+    {
+        $this->check_admin = $check_admin;
 
         return $this;
     }

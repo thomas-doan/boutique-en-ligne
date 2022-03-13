@@ -237,9 +237,12 @@ $router->map(
         $controller->update();
         $controller->create();
         $controller->delete();
-        $controller->index();
+
         $controller->reportAnswer();
         $controller->report();
+        $controller->validateAnswer();
+        $controller->validateAnswerCom();
+        $controller->index();
     },
 
 );

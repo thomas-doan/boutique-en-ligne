@@ -42,7 +42,7 @@
             <button> <a href="../produit/<?= $value['fk_id_article'] ?>">Voir l'article associé</a></button>
             <button name="update_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_comment" type="submit"> X </button>
-            <button name="check_admin" type="submit" value="<?= $value['check_admin'] ?>"> Valider commentaire </button>
+            <button name="validateCom" type="submit" value="<?= $value['check_admin'] ?>"> Valider commentaire </button>
         </form>
 
 <?php }
@@ -62,7 +62,7 @@ foreach ($answers as $answer) {
             <button> <a href="../produit/<?= $answer['fk_id_article'] ?>">Voir l'article associé</a></button>
             <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_answer_comment" type="submit"> X </button>
-            <button name="check_admin" type="submit" value="<?= $answer['check_admin'] ?>"> Valider commentaire </button>
+            <button name="validateAnswerCom" type="submit" value="<?= $answer['check_admin'] ?>"> Valider commentaire </button>
 
         </form>
 <?php
@@ -88,7 +88,7 @@ foreach ($commentCommunityManag as $valueTime) {
             <button> <a href="../produit/<?= $valueTime['fk_id_article'] ?>">Voir l'article associé</a></button>
             <button name="update_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_comment" type="submit"> X </button>
-            <button name="check_admin" type="submit" value="<?= $valueTime['check_admin'] ?>"> Valider commentaire </button>
+            <button name="validateCom" type="submit" value="<?= $valueTime['check_admin'] ?>"> Valider commentaire </button>
 
         </form>
 <?php }
@@ -110,7 +110,7 @@ foreach ($answersCommunityManag as $answerTime) {
             <button> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article associé</a></button>
             <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
             <button name="delete_answer_comment" type="submit"> X </button>
-            <button name="check_admin" type="submit" value="<?= $answerTime['check_admin'] ?>"> Valider commentaire </button>
+            <button name="validateAnswerCom" type="submit" value="<?= $answerTime['check_admin'] ?>"> Valider commentaire </button>
         </form>
 <?php }
 } ?>

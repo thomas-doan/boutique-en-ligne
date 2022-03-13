@@ -240,7 +240,7 @@ class ProductController extends Controller
                 $_SESSION['quantite'][$id_article] = 1;
                 $_SESSION['prix'][$id_article] = $prix_article;
             }
-            header('location: ../panier');
+            // header('location: ../panier'); test d'ajout panier sur le Layout
         }
     }
 }

@@ -392,8 +392,13 @@ if (is_array($match)) {
     }
 }
 
-try {
-    $match;
-} catch (NotFoundException $e) {
-    return $e->error404();
+if($match===False)
+{
+    echo '404';
 }
+
+// try {
+//     $match;
+// } catch (NotFoundException $e) {
+//     return $e->error404();
+// }

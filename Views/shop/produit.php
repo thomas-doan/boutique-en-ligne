@@ -4,17 +4,17 @@
 <!-- <?php var_dump($comments); ?> -->
 <!-- <?php var_dump($CatOfProduct); ?> -->
 <!-- <?php var_dump($likes); ?> -->
-<?php var_dump($numberOfComment) ?>
-<article>
-<?php if (isset($_SESSION['flash'])) : ?>
-            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-                <div><?= $message; ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
 
-        <?php if (isset($_SESSION['flash'])) :  ?>
-            <?php unset($_SESSION['flash']) ?>
-        <?php endif; ?>
+<article>
+    <?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+            <div><?= $message; ?></div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+    <?php endif; ?>
     <h1><?= $product[0]['titre_article'] ?></h1>
     <img src="../public/assets/pictures/pictures_product/<?= $product[0]['image_article'] ?>" alt="Image du produit">
     <div>
@@ -35,7 +35,7 @@
         </li>
     </ul>
     <section>
-        <p><?= $numberOfComment ?></p>
+        <p> nombre de commentaire : <?= $numberOfComment ?></p>
         <a href="#comment">Voir les commentaires</a>
         <form action="" method="post">
             <label for="addBasket"></label>
@@ -51,12 +51,58 @@
 
 <article>
     <h2>Commentaires</h2>
-    <?php foreach ($comments as $comment) : ?>
+    <?php
+
+    foreach ($comments as $key => $comment) {
+        $NbrOfIndex = count($comment);
+        $NbrOfIndex = $NbrOfIndex - 8;
+    ?>
         <section>
-            <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?></h3>
+            <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?> <?php if ($comment['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
             <p><?= $comment['commentaire'] ?></p>
+            <p><?= $comment['date'] ?></p>
         </section>
-    <?php endforeach; ?>
+        <section>
+            <form action="" method="POST">
+                <?php if ($comment['signaler'] == 0) { ?>
+                    <input type="hidden" value="<?= $comment['id_commentaire'] ?>" name="signalement">
+                    <button type="submit" name="signaler" value="1">Signaler</button>
+                <?php  } ?>
+
+                <input type="hidden" id="comment" name="id_commentaire" value="<?= $comment['id_commentaire'] ?>">
+
+                <input type="text" id="comment" name="comment" placeholder="Répondre au commentaire" value="">
+                <input type="submit" name="submitAnswer" value="ok">
+            </form>
+        </section>
+        <?php
+        for ($i = 0; $i < $NbrOfIndex; $i++) {
+            if ($comment['fk_id_commentaire'] == $comment['id_commentaire']) {
+
+        ?>
+                <section>
+
+                    <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?> <?php if ($comment[$i]['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
+                    <p> commentaire : <?= $comment[$i]['reponse_assoc'] ?></p>
+                    <p> date : <?= $comment[$i]['reponse_date'] ?></p>
+                    <form action="" method="POST">
+                        <?php if ($comment[$i]['signaler'] == 0) { ?>
+                            <input type="hidden" value="<?= $comment[$i]['id_reponse_com'] ?>" name="idReportAnswer">
+                            <button type="submit" name="reportAnswer" value="1">Signaler</button>
+                        <?php  } ?>
+                    </form>
+                </section>
+
+
+    <?php
+            }
+        }
+    }
+
+    ?>
+
+
+
     <section>
         <form action="" method="POST">
             <label for="comment" style="display: none">Ecrire un commentaire</label>

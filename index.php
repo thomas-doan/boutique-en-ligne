@@ -1,23 +1,19 @@
 <?php session_start();
 
 //Control d'accée à l'url
-$urlControlUser=$_SERVER['REQUEST_URI'];
-$pathControl = explode('/',$urlControlUser);
-if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
-{
-    if(isset($_SESSION['user']))
-    {
-    // echo 'redirection';
-        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/profil" </SCRIPT>'; //force la direction
-    exit();
-    }
-    else{
-        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+$urlControlUser = $_SERVER['REQUEST_URI'];
+$pathControl = explode('/', $urlControlUser);
+if ($pathControl[2] == 'admin' && $_SESSION['user']['role'] !== 'Admin') {
+    if (isset($_SESSION['user'])) {
+        // echo 'redirection';
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/profil" </SCRIPT>'; //force la direction
+        exit();
+    } else {
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/connexion" </SCRIPT>'; //force la direction 
     }
 }
-if($pathControl[2]=='profil' && empty($_SESSION['user']))
-{
-    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+if ($pathControl[2] == 'profil' && empty($_SESSION['user'])) {
+    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/connexion" </SCRIPT>'; //force la direction 
 }
 
 use App\Controllers\Security;
@@ -26,17 +22,25 @@ use Exceptions\NotFoundException;
 require_once 'app/Controllers/Security.php';
 //Sécurité de tout les formulaire Get|POST
 $securityAll = new Security();
-if(isset($_GET))
-{
+if (isset($_GET)) {
     $securityAll->controlAll($_GET);
 }
-if(isset($_POST))
-{
+if (isset($_POST)) {
     $securityAll->controlAll($_POST);
 }
 
 require('vendor/autoload.php');
 
+
+define('VIEWS', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '404.php');
+
+function error($param)
+{
+    if ($param === False) {
+        http_response_code(404);
+        require VIEWS;
+    }
+}
 
 
 $router = new AltoRouter();
@@ -271,6 +275,13 @@ $router->map(
         $controller->update();
         $controller->create();
         $controller->delete();
+        $controller->createAnswerCom();
+        $controller->createAnswerAdmin();
+        $controller->reportAnswer();
+        $controller->report();
+        $controller->validateAnswer();
+        $controller->validateAnswerCom();
+
         $controller->index();
     },
 
@@ -303,6 +314,9 @@ $router->map(
         $controller = new App\Controllers\ProductController();
         $controller->index($id_article);
         $controller->shoppingBag();
+        $controller->pushAnswerCom($id_article);
+        $controller->report($id_article);
+        $controller->reportAnswer($id_article);
         // $controller->Like($id_article);
         // $controller->addComment($id_article);
     },
@@ -391,9 +405,4 @@ if (is_array($match)) {
         call_user_func_array($match['target'], $match['params']);
     }
 }
-
-try {
-    $match;
-} catch (NotFoundException $e) {
-    return $e->error404();
-}
+error($match);

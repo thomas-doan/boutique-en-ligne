@@ -34,9 +34,27 @@ class NumCommande extends Model
         return $resultat;
     }
 
-
-    public function getAllOrderbyIdUser($id_user)
+    public function countWaitingValidate()
     {
+        $req = "SELECT etat_livraison, COUNT(etat_livraison) as nb FROM livraison WHERE etat_livraison = 'en attente confirmation'";
+        $stmt = $this->db->prepare($req);
+        $stmt->execute();
+        $resultat = $stmt->fetch();
+        return $resultat;
+    }
+
+    public function getAllOrderbyIdUser($id_user = null)
+    {
+        if ($id_user == null) {
+            $stringWhere = null;
+            $executearray =  null;
+        } else {
+            $stringWhere = "WHERE num_commande.fk_id_utilisateurs = :fk_id_utilisateurs";
+            $executearray =  array(
+                ":fk_id_utilisateurs" => "$id_user",
+            );
+        }
+
         $query = $this->db->prepare(
             "SELECT num_commande.date, num_commande.prix_avec_tva, num_commande.total_produit, num_commande.id_num_commande,
 
@@ -45,7 +63,7 @@ c1.nb_article, c1.prix_article, c1.prix_commande,
 
 livraison.ville, livraison.voie, livraison.voie_sup, livraison.code_postal, 
 livraison.prenom,livraison.nom_adresse,livraison.telephone,livraison.nom, livraison.email, 
-livraison.fk_id_num_commande, livraison.pays, livraison.etat_livraison,
+livraison.fk_id_num_commande, livraison.pays, livraison.etat_livraison, livraison.id_livraison,
 
 articles.titre_article
 
@@ -53,15 +71,13 @@ articles.titre_article
             INNER JOIN commandes AS c1 ON c1.fk_id_num_commande = num_commande.id_num_commande 
             INNER JOIN livraison ON livraison.fk_id_num_commande = num_commande.id_num_commande
             INNER JOIN articles ON articles.id_article = c1.fk_id_article
-            
-           WHERE num_commande.fk_id_utilisateurs = :fk_id_utilisateurs"
+            $stringWhere;
+           "
         );
 
         $query->setFetchMode(\PDO::FETCH_ASSOC);
-        $query->execute(array(
-            ":fk_id_utilisateurs" => "$id_user",
+        $query->execute($executearray);
 
-        ));
         $result = $query->fetchall();
 
         return $result;

@@ -241,6 +241,16 @@ $router->map(
     }
 );
 
+$router->map(
+    'GET|POST',
+    '/admin/validercommande',
+    function () {
+        $controller = new App\Controllers\admin\AdminOrderController();
+        $controller->index();
+        $controller->update();
+    },
+
+);
 
 // CRUD Category
 $router->map(
@@ -337,25 +347,6 @@ $router->map(
 ----------------------------- PARCOURS PANIER -----------------------------
 ----------------------------- PARCOURS PANIER ----------------------------- */
 
-
-//PANIER
-// $router->map(
-//     'GET/POST',
-//     '/panier',
-//     function () {
-//         $controller = new App\Controllers\ShoppingCartController();
-
-//         $controller->upValue();
-//         $controller->downValue();
-//         // $controller->shoppingBag();
-//         $controller->deleteProduct();
-//         $controller->singlePrice();
-//         $controller->totalQuantity();
-//         $controller->totalPrice();
-//         $controller->index();
-//     },
-//     'panier'
-// );
 
 //Commande
 $router->map(

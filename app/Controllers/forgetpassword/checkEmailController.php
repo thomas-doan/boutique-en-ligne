@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\forgetpassword;
+
+use App\Controllers\Controller;
 
 use App\Models\Utilisateurs;
 
-class ConnexionController extends Controller
+class checkEmailController extends Controller
 {
     protected $model;
 
@@ -22,13 +24,13 @@ class ConnexionController extends Controller
         return $this->view('resetpassword.checkEmail', compact('title'));
     }
 
-    public function Checklogin()
+    public function checkLogin()
     {
         $model = new Utilisateurs();
 
         if (isset($_POST['submit'])) {
             $email = $_POST['emailVerify'];
-            $mdp = $_POST['mdp'];
+
 
             if (empty($email)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez remplir tout les champs";
@@ -40,11 +42,12 @@ class ConnexionController extends Controller
                     $user = $model
                         ->setId_utilisateur((int)$checkUser[0]['id_utilisateur'])
                         ->setEmail($checkUser[0]['email'])
-                        ->setQuestion_secrete($checkUser[0]['password']);
+                        ->setQuestion_secrete($checkUser[0]['question_secrete']);
 
-                    $_SESSION['check']['id_utilisateur'] = (int)$user->getId_utilisateur();
-                    $_SESSION['check']['question'] = $user->getQuestion_secrete();
-                    $_SESSION['check']['email'] = $user->getEmail();
+                    $_SESSION['reset']['id_utilisateur'] = (int)$user->getId_utilisateur();
+                    $_SESSION['reset']['question'] = $user->getQuestion_secrete();
+                    $_SESSION['reset']['email'] = $user->getEmail();
+                    header('Location: ./resetpassword');
                 } else {
                     $_SESSION['flash']['erreur'] = "Oups ! l'email est incorrect";
                     header('Location: ./checkemail');

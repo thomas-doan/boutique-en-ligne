@@ -76,6 +76,31 @@ $router->map(
 
 $router->map(
     'GET|POST',
+    '/checkemail',
+    function () {
+        $controller = new App\Controllers\forgetpassword\checkEmailController();
+        $controller->index();
+        $controller->checkLogin();
+    },
+);
+
+
+
+$router->map(
+    'GET|POST',
+    '/resetpassword',
+    function () {
+
+        $controller = new App\Controllers\forgetpassword\resetPasswordController();
+        $controller->index();
+        $controller->resetPassword();
+    },
+);
+
+
+
+$router->map(
+    'GET|POST',
     '/profil',
     function () {
         $controller = new App\Controllers\User\ProfilController();

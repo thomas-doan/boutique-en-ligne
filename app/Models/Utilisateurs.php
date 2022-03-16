@@ -12,6 +12,8 @@ class Utilisateurs extends Model
     protected $nom;
     protected $password;
     protected $role;
+    protected $question_secrete;
+    protected $reponse;
 
     /**
      * Get the value of id_utilisateur
@@ -129,6 +131,46 @@ class Utilisateurs extends Model
     public function setRole($role)
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of question_secrete
+     */
+    public function getQuestion_secrete()
+    {
+        return $this->question_secrete;
+    }
+
+    /**
+     * Set the value of question_secrete
+     *
+     * @return  self
+     */
+    public function setQuestion_secrete($question_secrete)
+    {
+        $this->question_secrete = $question_secrete;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of reponse
+     */
+    public function getReponse()
+    {
+        return $this->reponse;
+    }
+
+    /**
+     * Set the value of reponse
+     *
+     * @return  self
+     */
+    public function setReponse($reponse)
+    {
+        $this->reponse = $reponse;
 
         return $this;
     }

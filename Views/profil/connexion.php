@@ -22,5 +22,5 @@
         <input type="submit" name="submit" value="Connexion">
     </form>
     <a href="inscription">Je créer un compte</a>
-    <a href="mdpOublie">Mot de passe oublié ?</a>
+    <a href="checkemail">Mot de passe oublié ?</a>
 </article>

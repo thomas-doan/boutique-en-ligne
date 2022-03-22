@@ -17,14 +17,19 @@ if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
     // echo 'redirection';
         echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/profil" </SCRIPT>'; //force la direction
     exit();
-    }
-    else{
-        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+$urlControlUser = $_SERVER['REQUEST_URI'];
+$pathControl = explode('/', $urlControlUser);
+if ($pathControl[2] == 'admin' && $_SESSION['user']['role'] !== 'Admin') {
+    if (isset($_SESSION['user'])) {
+        // echo 'redirection';
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/profil" </SCRIPT>'; //force la direction
+        exit();
+    } else {
+        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/connexion" </SCRIPT>'; //force la direction 
     }
 }
-if($pathControl[2]=='profil' && empty($_SESSION['user']))
-{
-    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+if ($pathControl[2] == 'profil' && empty($_SESSION['user'])) {
+    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/connexion" </SCRIPT>'; //force la direction 
 }
 if(($pathControl[2]=='connexion' && !empty($_SESSION['user'])) || ($pathControl[2]=='inscription' && !empty($_SESSION['user'])))
 {
@@ -38,17 +43,25 @@ use Exceptions\NotFoundException;
 require_once 'app/Controllers/Security.php';
 //Sécurité de tout les formulaire Get|POST
 $securityAll = new Security();
-if(isset($_GET))
-{
+if (isset($_GET)) {
     $securityAll->controlAll($_GET);
 }
-if(isset($_POST))
-{
+if (isset($_POST)) {
     $securityAll->controlAll($_POST);
 }
 
 require('vendor/autoload.php');
 
+
+define('VIEWS', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '404.php');
+
+function error($param)
+{
+    if ($param === False) {
+        http_response_code(404);
+        require VIEWS;
+    }
+}
 
 
 $router = new AltoRouter();
@@ -81,6 +94,31 @@ $router->map(
         $controller->login();
     },
 );
+
+$router->map(
+    'GET|POST',
+    '/checkemail',
+    function () {
+        $controller = new App\Controllers\forgetpassword\checkEmailController();
+        $controller->index();
+        $controller->checkLogin();
+    },
+);
+
+
+
+$router->map(
+    'GET|POST',
+    '/resetpassword',
+    function () {
+
+        $controller = new App\Controllers\forgetpassword\resetPasswordController();
+        $controller->index();
+        $controller->resetPassword();
+    },
+);
+
+
 
 $router->map(
     'GET|POST',
@@ -249,6 +287,16 @@ $router->map(
     }
 );
 
+$router->map(
+    'GET|POST',
+    '/admin/validercommande',
+    function () {
+        $controller = new App\Controllers\admin\AdminOrderController();
+        $controller->index();
+        $controller->update();
+    },
+
+);
 
 // CRUD Category
 $router->map(
@@ -283,6 +331,13 @@ $router->map(
         $controller->update();
         $controller->create();
         $controller->delete();
+        $controller->createAnswerCom();
+        $controller->createAnswerAdmin();
+        $controller->reportAnswer();
+        $controller->report();
+        $controller->validateAnswer();
+        $controller->validateAnswerCom();
+
         $controller->index();
     },
 
@@ -315,6 +370,9 @@ $router->map(
         $controller = new App\Controllers\ProductController();
         $controller->index($id_article);
         $controller->shoppingBag();
+        $controller->pushAnswerCom($id_article);
+        $controller->report($id_article);
+        $controller->reportAnswer($id_article);
         // $controller->Like($id_article);
         // $controller->addComment($id_article);
     },
@@ -335,25 +393,6 @@ $router->map(
 ----------------------------- PARCOURS PANIER -----------------------------
 ----------------------------- PARCOURS PANIER ----------------------------- */
 
-
-//PANIER
-// $router->map(
-//     'GET/POST',
-//     '/panier',
-//     function () {
-//         $controller = new App\Controllers\ShoppingCartController();
-
-//         $controller->upValue();
-//         $controller->downValue();
-//         // $controller->shoppingBag();
-//         $controller->deleteProduct();
-//         $controller->singlePrice();
-//         $controller->totalQuantity();
-//         $controller->totalPrice();
-//         $controller->index();
-//     },
-//     'panier'
-// );
 
 //Commande
 $router->map(
@@ -403,14 +442,10 @@ if (is_array($match)) {
         call_user_func_array($match['target'], $match['params']);
     }
 }
+error($match);
 
-if($match===False)
-{
-    echo '404';
+try {
+    $match;
+} catch (NotFoundException $e) {
+    return $e->error404();
 }
-
-// try {
-//     $match;
-// } catch (NotFoundException $e) {
-//     return $e->error404();
-// }

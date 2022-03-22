@@ -1,5 +1,5 @@
 <article>
-    <h1>Connexion</h1>
+    <h1>Votre email </h1>
 
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -14,13 +14,8 @@
     <form action="#" method="post">
 
         <label for="email">Email : </label>
-        <input type="text" id="email" name="email">
-
-        <label for="mdp">Mot de passe : </label>
-        <input type="password" id="mdp" name="mdp">
-
-        <input type="submit" name="submit" value="Connexion">
+        <input type="text" id="email" name="emailVerify">
+        <input type="submit" name="submit" value="verification email">
     </form>
-    <a href="inscription">Je créer un compte</a>
-    <a href="checkemail">Mot de passe oublié ?</a>
+
 </article>

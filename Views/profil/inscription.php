@@ -22,6 +22,12 @@
         <label for="email">Email :</label>
         <input type="text" id="email" name="email" aria-required="true">
 
+        <label for="email">Ecrire votre question secrete :</label>
+        <input type="text" id="email" name="question_secrete" aria-required="true">
+
+        <label for="email">reponse :</label>
+        <input type="password" id="email" name="reponse" aria-required="true">
+
         <label for="mdp">Mot de passe : </label>
         <input type="password" id="mdp" name="mdp" aria-required="true">
 

@@ -14,16 +14,15 @@ class CommandeController extends Controller
     {
         $title = "Commande";
         $idCommande = $id_commande;
+
         $order = $this->getOrderInfo($idCommande);
 
-        var_dump($_SESSION);
-        if($order['fk_id_utilisateurs']!==$_SESSION['user']['id_utilisateur'])
-        {
-            $_SESSION['flash']='Ce numero de commande ne correspond à aucune de vos commandes';
+        if ($_SESSION['user']['role'] == 'Admin' || $order['fk_id_utilisateurs'] == $_SESSION['user']['id_utilisateur']) {
+            echo 'ok';
+        } else {
+            $_SESSION['flash'] = 'Ce numero de commande ne correspond à aucune de vos commandes';
             $order = null;
         }
-        var_dump($order);
-
 
         // $allInfoById = $this->getCommandeById($idCommande);
         return $this->view('profil.commande', compact('title', 'order'));
@@ -33,14 +32,7 @@ class CommandeController extends Controller
     {
         $model = new Commandes();
         $commande = $model->getInfoCommande($id_commande);
+
         return $commande;
     }
-
-    // public function getCommandeById($id_commande)
-    // {
-    //     $model = new Commandes();
-    //     $criteres = ['id_commande'];
-    //     $adress = $model->find($criteres, compact('id_commande'));
-    //     return $adress;
-    // }
 }

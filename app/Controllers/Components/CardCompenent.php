@@ -10,6 +10,10 @@ use App\Models\Product;
 class CardCompenent extends Product
 {
 
+    public function getDataByid($id_article)
+    {
+        return $this->getProductForCardbyID($id_article);
+    }
     public function printCard(array $dataProduct)
     {
 
@@ -35,7 +39,6 @@ class CardCompenent extends Product
                 
                 <button><a href="/boutique-en-ligne/produit/<?=$dataProduct['id_article']?>">Consulter</a></button>
                 <?php if($dataProduct['sku']!==0):?>
-                    <?php $FooBag = new ProductController;?>
                     <form action="" method="post">
                     <label for="addBasket"></label>
                     <input type="hidden" name="id_article" value="<?=$dataProduct['id_article']?>"></input>

@@ -3,6 +3,13 @@
 //Control d'accée à l'url
 $urlControlUser=$_SERVER['REQUEST_URI'];
 $pathControl = explode('/',$urlControlUser);
+if($pathControl[2]!=='connexion')
+{
+    if($pathControl[2]!=='inscription')
+    {
+    $_SERVER['HTTP_REFERER']=$_SERVER['REQUEST_URI'];
+    }
+}
 if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
 {
     if(isset($_SESSION['user']))
@@ -18,6 +25,11 @@ if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
 if($pathControl[2]=='profil' && empty($_SESSION['user']))
 {
     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/connexion" </SCRIPT>'; //force la direction 
+}
+if(($pathControl[2]=='connexion' && !empty($_SESSION['user'])) || ($pathControl[2]=='inscription' && !empty($_SESSION['user'])))
+{
+    
+    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="../boutique-en-ligne/"</SCRIPT>'; //force la direction 
 }
 
 use App\Controllers\Security;

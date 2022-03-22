@@ -1,3 +1,3 @@
-<section>
+<section class="footer">
     <h3>footer</h3>
 </section>

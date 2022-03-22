@@ -1,0 +1,26 @@
+.form {
+  @include alignColumn(center);
+  margin: 0 auto;
+  padding: 50px;
+
+  &__field {
+    @include alignColumn(center);
+    padding: 10px;
+    label {
+      align-self: flex-start;
+      // display: none;
+    }
+  }
+
+  &__text {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: solid 1px black;
+      &:focus {
+          outline-offset: 0px;
+          outline: none;
+        }
+  } 
+}
+

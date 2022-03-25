@@ -23,7 +23,6 @@
             <li><a href="profil/deconnexion">Se deconnecter</a></li>
         </ul>
     </section>
-    <hr>
     <?php if($notifAdresse !== null):?>
     <section>
         <p><?=$notifAdresse?></p>

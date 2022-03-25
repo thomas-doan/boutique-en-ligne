@@ -1,3 +1,52 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+.containerCard{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.cardChoice{
+    width: calc((100vw / 2) - 16px);
+    margin: 8px;
+    border-radius: 4px;
+     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.20);
+    overflow: hidden;
+    transition: 0.7s;
+    & a img{
+        width: 100%;
+    }
+    & a p{
+        text-align: center;
+        padding: 5%;
+        font-weight: 400;
+        font-size: 1.5rem;
+    }
+}
+.cardChoice:hover{
+    filter: brightness(66%);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+@media only screen and (min-device-width : 768px)
+{
+    .cardChoice{
+        width: calc((100vw / 4) - 16px);
+    }
+}
+
+.homeProposition{
+    display: flex;
+}
+
+.lastProduct{
+    position: relative;
+    & img:last-child{
+        width: 80px;
+        position: absolute;
+        top: -16px;
+        left: -6px;
+    }
+}

@@ -10,12 +10,22 @@ use App\Models\Product;
 class CardCompenent extends Product
 {
 
+    public function getDataByid($id_article)
+    {
+        return $this->getProductForCardbyID($id_article);
+    }
     public function printCard(array $dataProduct)
     {
-
+        if(isset($i))
+        {
+            $id = 'id="card'.$i.'"';
+        }
+        else{
+            $id = '';
+        }
     ?>
         <section class="card">
-            <img class="picture" src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$dataProduct['image_article']?>" alt="">
+            <img <?=$id?> class="picture" src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$dataProduct['image_article']?>" alt="">
             <?php if(isset($dataProduct['SPÉCIFICITÉ']) && in_array('Biologique',$dataProduct['SPÉCIFICITÉ'])==true):?>
                 <img class="logoAb" src="/boutique-en-ligne/public/assets/pictures/pictures_product/kawa_logo_ab.png" alt="">
             <?php endif;?>
@@ -35,7 +45,6 @@ class CardCompenent extends Product
                 
                 <button><a href="/boutique-en-ligne/produit/<?=$dataProduct['id_article']?>">Consulter</a></button>
                 <?php if($dataProduct['sku']!==0):?>
-                    <?php $FooBag = new ProductController;?>
                     <form action="" method="post">
                     <label for="addBasket"></label>
                     <input type="hidden" name="id_article" value="<?=$dataProduct['id_article']?>"></input>

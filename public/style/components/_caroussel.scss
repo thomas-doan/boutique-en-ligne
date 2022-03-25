@@ -1,0 +1,31 @@
+.caroussel{
+ overflow: hidden;
+ scroll-behavior: smooth;
+ align-items: center;
+
+ &--home{
+     width: 80%;
+ }
+ &--product{
+     width: 100%;
+ }
+ &__element{
+    display: flex;
+    width: calc(100% * 4);
+    max-width: calc(316px*4);
+ }
+
+}
+
+// .caroussel_element section{
+//     margin-left: calc((100vw - 300px)/2);
+//     margin-right: calc((100vw - 300px)/2);
+// }
+
+
+// @media screen and (min-width: 624px){
+//     .caroussel_element section{
+//         margin-left: 8px;
+//         margin-right: 8px;
+//     } 
+// }

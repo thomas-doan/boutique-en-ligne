@@ -16,10 +16,16 @@ class CardCompenent extends Product
     }
     public function printCard(array $dataProduct)
     {
-
+        if(isset($i))
+        {
+            $id = 'id="card'.$i.'"';
+        }
+        else{
+            $id = '';
+        }
     ?>
         <section class="card">
-            <img class="picture" src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$dataProduct['image_article']?>" alt="">
+            <img <?=$id?> class="picture" src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$dataProduct['image_article']?>" alt="">
             <?php if(isset($dataProduct['SPÉCIFICITÉ']) && in_array('Biologique',$dataProduct['SPÉCIFICITÉ'])==true):?>
                 <img class="logoAb" src="/boutique-en-ligne/public/assets/pictures/pictures_product/kawa_logo_ab.png" alt="">
             <?php endif;?>

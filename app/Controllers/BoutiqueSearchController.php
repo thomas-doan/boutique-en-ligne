@@ -14,12 +14,15 @@ class BoutiqueSearchController extends Controller
     protected $Product;
     protected $Categories;
     protected $search;
+    protected $FooBag;
 
     public function __construct()
     {
         $this->Product = new ProductComponent();
         $this->Categories = new CategoriesComponent();
         $this->search = new Search();
+        $this->FooBag = new ProductController();
+
         $this->error;
     }
 
@@ -31,6 +34,7 @@ class BoutiqueSearchController extends Controller
      */
     public function index(string $param)
     {
+        $this->FooBag->shoppingBag();
         /**
          * On redirige l'utilisateur si la valeur entrer dans l'url ne coresspond à aucun
          * élément attendue dans $param.

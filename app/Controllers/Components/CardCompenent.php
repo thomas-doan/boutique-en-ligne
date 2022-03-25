@@ -2,13 +2,17 @@
 
 namespace App\Controllers\Components;
 
+use App\Controllers\ProductController;
 use Database\DBConnection;
 use App\Models\Product;
 
+
 class CardCompenent extends Product
 {
+
     public function printCard(array $dataProduct)
     {
+
     ?>
         <section class="card">
             <img class="picture" src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$dataProduct['image_article']?>" alt="">
@@ -28,8 +32,16 @@ class CardCompenent extends Product
                 <h4><?=$dataProduct['prix_article']?>€</h4>
                 </div>
                 <p><?=$dataProduct['description_article']?></p>
-                <?php if($dataProduct['sku']!==0):?>
+                
                 <button><a href="/boutique-en-ligne/produit/<?=$dataProduct['id_article']?>">Consulter</a></button>
+                <?php if($dataProduct['sku']!==0):?>
+                    <?php $FooBag = new ProductController;?>
+                    <form action="" method="post">
+                    <label for="addBasket"></label>
+                    <input type="hidden" name="id_article" value="<?=$dataProduct['id_article']?>"></input>
+                    <input type="hidden" name="prix_article" value="<?=$dataProduct['prix_article']?>"></input>
+                    <input type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >">
+                    </form>
                 <?php endif;?>
             </div>
         </section>

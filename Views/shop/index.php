@@ -9,7 +9,7 @@
 </div>
 </section>
 <article class="homeProposition">
-    <section class="caroussel carousel--home">
+    <section class="caroussel caroussel--home">
         <div class="caroussel__element">
             <?php for($i = 0; $i <=$selectNumberofCard;$i++):?>
             <?php $cards->printCard($cards->getDataByid($bestArticle[$i]['fk_id_article']))?>

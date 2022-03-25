@@ -18,7 +18,7 @@ class MainController extends Controller
         $bestArticle = $model->bestProduct();
         $cards = new CardCompenent;
         $lastidProduct = $model->lastProductById()['id_article'];
-        if(count($bestArticle)>5)
+        if(count($bestArticle)>8)
         {
             $selectNumberofCard = 4;
         }

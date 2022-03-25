@@ -39,7 +39,16 @@
 
 .homeProposition{
     display: flex;
+    flex-wrap: wrap;
 }
+@media only screen and (max-device-width : 768px)
+{
+   .homeProposition{
+    justify-content: center;
+   }
+
+}
+
 
 .lastProduct{
     position: relative;

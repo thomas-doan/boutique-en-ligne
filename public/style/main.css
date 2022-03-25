@@ -89,10 +89,10 @@ h1 {
 
 .caroussel {
   overflow: hidden;
-  scroll-behavior: smooth;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  min-width: 316px;
 }
 
 .caroussel--home {
@@ -109,6 +109,86 @@ h1 {
   display: flex;
   width: calc(100% * 4);
   max-width: calc(316px*4);
+  -webkit-animation: 20s linear infinite direction forwards;
+          animation: 20s linear infinite direction forwards;
+  -webkit-animation-name: caroussel;
+          animation-name: caroussel;
+}
+
+@-webkit-keyframes caroussel {
+  0% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  22% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  25% {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+  }
+  47% {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+  }
+  50% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  72% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  75% {
+    -webkit-transform: translateX(-75%);
+            transform: translateX(-75%);
+  }
+  100% {
+    -webkit-transform: translateX(-75%);
+            transform: translateX(-75%);
+  }
+}
+
+@keyframes caroussel {
+  0% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  22% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  25% {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+  }
+  47% {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+  }
+  50% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  72% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  75% {
+    -webkit-transform: translateX(-75%);
+            transform: translateX(-75%);
+  }
+  100% {
+    -webkit-transform: translateX(-75%);
+            transform: translateX(-75%);
+  }
+}
+
+@media only screen and (max-device-width: 768px) {
+  .caroussel--home {
+    width: 316px;
+  }
 }
 
 .nav {
@@ -283,6 +363,16 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media only screen and (max-device-width: 768px) {
+  .homeProposition {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .lastProduct {

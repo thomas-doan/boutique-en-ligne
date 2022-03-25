@@ -152,12 +152,6 @@ class AdminCommentController extends Controller
     public function createAnswerCom()
     {
         if (isset($_POST['subAnswerComAdmin'])) {
-            /*        echo "post com";
-            var_dump($_POST['commentaire']);
-            echo "<br>";
-
-            var_dump($_POST['id_article']);
-            die; */
 
             if (!empty($_POST['fk_id_article']) && !empty($_POST['answerComAdmin'])) {
 

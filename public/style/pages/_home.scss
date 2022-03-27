@@ -108,3 +108,31 @@
         left: -6px;
     }
 }
+
+.aboutUs{
+    align-self: center;
+    padding: 32px 16px 64px 16px;
+    background-image: url("../assets/pictures/kawa_background_apropos.jpg");
+    background-size: 100%;
+    width: 100%;
+    height: calc(100vw * 1.499);
+    max-height: 500px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    & h3{
+        font-size: 2.3rem;
+    }
+    & img{
+        max-width: 600px;
+        align-self: center;
+        width: 80%;
+        height: auto;
+    }
+    & p{
+        padding: 16px;
+        font-size: 2rem;
+    }
+
+}

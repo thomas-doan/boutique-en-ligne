@@ -1,5 +1,4 @@
-<?php ?>
-<p> C'est l'accueil</p>
+
 <section class="hero">
 <img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
 <div class="CTA">
@@ -85,7 +84,8 @@
 
 </article>
 
-<article>
+<article class="aboutUs">
     <h3>A propos</h3>
-    <p>Cette boutique en ligne est l'oeuvre de trois étudiant s'exerçant dans un cursus dans le domaine du Developpement Web & Mobile. Elle n'a pas pour vocation de vous permettre de commander du Café.</p>
+    <img src="./public/assets/pictures/kawa_logo_blac_text.svg" alt="">
+    <p>Cette boutique en ligne est l'oeuvre de trois étudiant s'exerçant dans un cursus dans le domaine du Developpement Web & Mobile. Elle n'a pas pour vocation de vous permettre de commander du Café. Par conséquent les articles plésentés peuvent être imaginaires</p>
 </article>

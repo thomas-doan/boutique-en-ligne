@@ -457,4 +457,44 @@ h1 {
   top: -16px;
   left: -6px;
 }
+
+.aboutUs {
+  -ms-flex-item-align: center;
+      align-self: center;
+  padding: 32px 16px 64px 16px;
+  background-image: url("../assets/pictures/kawa_background_apropos.jpg");
+  background-size: 100%;
+  width: 100%;
+  height: calc(100vw * 1.499);
+  max-height: 500px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.aboutUs h3 {
+  font-size: 2.3rem;
+}
+
+.aboutUs img {
+  max-width: 600px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 80%;
+  height: auto;
+}
+
+.aboutUs p {
+  padding: 16px;
+  font-size: 2rem;
+}
 /*# sourceMappingURL=main.css.map */

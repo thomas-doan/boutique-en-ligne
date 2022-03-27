@@ -35,6 +35,11 @@
         display: inline-flex;
     }
 
+    &__link{
+        font-size:30px;
+        cursor:pointer;
+    }
+
     &__test {
         display: flex;
         justify-content: space-around;

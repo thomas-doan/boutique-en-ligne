@@ -17,6 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://use.typekit.net/gij8hzs.css">
     <link rel="stylesheet" href="/boutique-en-ligne/public/style/main.css">
     <link rel="stylesheet" href="\boutique-en-ligne\public\css\style.css">
+    <script type="text/javaScript" src="/boutique-en-ligne/public/js/panier.js"></script>
     <title><?= $title ?></title>
 </head>
 

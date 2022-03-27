@@ -12,21 +12,20 @@
  &__element{
     display: flex;
     width: calc(100% * 4);
-    max-width: calc(316px*4);
     animation: 20s linear infinite direction forwards;
     animation-name: caroussel;
  }
 
 }
 @keyframes caroussel {
-    0% { transform: translateX(0%)}
-    22%{ transform: translateX(0%)}
-    25%{ transform: translateX(-25%)}
-    47%{ transform: translateX(-25%)}
-    50% {transform: translateX(-50%)}
-    72% {transform: translateX(-50%)}
-    75% {transform: translateX(-75%)}
-    100% {transform: translateX(-75%)}
+    0% { transform: translateX(0)}
+    22%{ transform: translateX(0)}
+    25%{ transform: translateX(-316px)}
+    47%{ transform: translateX(-316px)}
+    50% {transform: translateX(calc(-316px * 2))}
+    72% {transform: translateX(calc(-316px * 2))}
+    75% {transform: translateX(calc(-316px * 1))}
+    100% {transform: translateX(calc(-316px * 1))}
     
 }
 

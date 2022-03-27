@@ -1,7 +1,7 @@
 <?php ?>
 <p> C'est l'accueil</p>
 <section class="hero">
-<img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_mobile.jpg" alt="hero">
+<img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
 <div class="CTA">
     <h2>Kawa</h2>
     <h3>Une boutique dédier aux amateurs de café</h3>

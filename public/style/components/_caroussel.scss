@@ -2,6 +2,7 @@
  overflow: hidden;
  align-items: center;
  min-width: 316px;
+ max-width: calc((316px * 3) + 8px);
 
  &--home{
      width: 80%;
@@ -11,8 +12,8 @@
  }
  &__element{
     display: flex;
-    width: calc(100% * 4);
-    animation: 20s linear infinite direction forwards;
+    width: calc(316px * 8);
+    animation: 20s linear infinite direction;
     animation-name: caroussel;
  }
 
@@ -24,17 +25,28 @@
     47%{ transform: translateX(-316px)}
     50% {transform: translateX(calc(-316px * 2))}
     72% {transform: translateX(calc(-316px * 2))}
-    75% {transform: translateX(calc(-316px * 1))}
-    100% {transform: translateX(calc(-316px * 1))}
+    75% {transform: translateX(calc(-316px * 3))}
+    100% {transform: translateX(calc(-316px * 3))}
     
 }
 
-@media only screen and (max-device-width : 768px)
+@media only screen and (max-device-width : 820px)
 {
    .caroussel--home{
     width: 316px;
    }
-
+}
+@media only screen and (min-device-width : 1024px)
+{
+    .caroussel--home{
+        width: calc(316px * 2);
+    }
+}
+@media only screen and (min-device-width : 1440px)
+{
+    .caroussel--home{
+        width: calc(316px * 3);
+    }
 }
 // .caroussel_element section{
 //     margin-left: calc((100vw - 300px)/2);

@@ -10,12 +10,17 @@ use App\Models\Product;
 class CardCompenent extends Product
 {
 
+
+
     public function getDataByid($id_article)
     {
         return $this->getProductForCardbyID($id_article);
     }
+
     public function printCard(array $dataProduct)
     {
+        $ProductControl= new ProductController();
+        $likes = $ProductControl->getLike($dataProduct['id_article']);
         if(isset($i))
         {
             $id = 'id="card'.$i.'"';
@@ -32,26 +37,29 @@ class CardCompenent extends Product
             <?php if($dataProduct['sku']==0):?>
                 <img class="logonostock" src="/boutique-en-ligne/public/assets/pictures/pictures_product/kawa_vigne_nostock.png" alt="">
             <?php endif;?>
-            <div>
-            <h3><?=$dataProduct['titre_article']?></h3>
-            <p><?=$dataProduct['presentation_article']?></p>
+            <div class="info">
+                <h3><?=$dataProduct['titre_article']?></h3>
+                <p><?=$dataProduct['presentation_article']?></p>
             </div>
             <div class="inOver">
                 <div>
-                <H4>like</H4>
+                
+                <H4><?=$likes?></H4>
                 <h4><?=$dataProduct['prix_article']?>€</h4>
                 </div>
                 <p><?=$dataProduct['description_article']?></p>
-                
+
+                <div>
                 <button><a href="/boutique-en-ligne/produit/<?=$dataProduct['id_article']?>">Consulter</a></button>
                 <?php if($dataProduct['sku']!==0):?>
                     <form action="" method="post">
                     <label for="addBasket"></label>
                     <input type="hidden" name="id_article" value="<?=$dataProduct['id_article']?>"></input>
                     <input type="hidden" name="prix_article" value="<?=$dataProduct['prix_article']?>"></input>
-                    <input type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >">
+                    <button type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >"><i class="nav__icon fa-solid fa-cart-shopping"></i></button>
                     </form>
                 <?php endif;?>
+                </div>
             </div>
         </section>
     <?php

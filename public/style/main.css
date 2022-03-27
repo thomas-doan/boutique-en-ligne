@@ -93,6 +93,7 @@ h1 {
       -ms-flex-align: center;
           align-items: center;
   min-width: 316px;
+  max-width: calc((316px * 3) + 8px);
 }
 
 .caroussel--home {
@@ -107,87 +108,98 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: calc(100% * 4);
-  max-width: calc(316px*4);
-  -webkit-animation: 20s linear infinite direction forwards;
-          animation: 20s linear infinite direction forwards;
+  width: calc(316px * 8);
+  -webkit-animation: 20s linear infinite direction;
+          animation: 20s linear infinite direction;
   -webkit-animation-name: caroussel;
           animation-name: caroussel;
 }
 
 @-webkit-keyframes caroussel {
   0% {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   22% {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   25% {
-    -webkit-transform: translateX(-25%);
-            transform: translateX(-25%);
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
   }
   47% {
-    -webkit-transform: translateX(-25%);
-            transform: translateX(-25%);
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
   }
   50% {
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
   }
   72% {
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
   }
   75% {
-    -webkit-transform: translateX(-75%);
-            transform: translateX(-75%);
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
   }
   100% {
-    -webkit-transform: translateX(-75%);
-            transform: translateX(-75%);
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
   }
 }
 
 @keyframes caroussel {
   0% {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   22% {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   25% {
-    -webkit-transform: translateX(-25%);
-            transform: translateX(-25%);
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
   }
   47% {
-    -webkit-transform: translateX(-25%);
-            transform: translateX(-25%);
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
   }
   50% {
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
   }
   72% {
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
   }
   75% {
-    -webkit-transform: translateX(-75%);
-            transform: translateX(-75%);
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
   }
   100% {
-    -webkit-transform: translateX(-75%);
-            transform: translateX(-75%);
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
   }
 }
 
-@media only screen and (max-device-width: 768px) {
+@media only screen and (max-device-width: 820px) {
   .caroussel--home {
     width: 316px;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) {
+  .caroussel--home {
+    width: calc(316px * 2);
+  }
+}
+
+@media only screen and (min-device-width: 1440px) {
+  .caroussel--home {
+    width: calc(316px * 3);
   }
 }
 

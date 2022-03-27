@@ -44,7 +44,7 @@ class CardCompenent extends Product
             <div class="inOver">
                 <div>
                 
-                <H4><?=$likes?></H4>
+                <H4><i class="fa-solid fa-thumbs-up"> </i><?=$likes?></H4>
                 <h4><?=$dataProduct['prix_article']?>€</h4>
                 </div>
                 <p><?=$dataProduct['description_article']?></p>

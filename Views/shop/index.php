@@ -3,8 +3,8 @@
 <section class="hero">
 <img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
 <div class="CTA">
-    <h2>Kawa</h2>
-    <h3>Une boutique dédier aux amateurs de café</h3>
+    <h1>Kawa</h1>
+    <h2>Une boutique dédier aux amateurs de café</h2>
     <button><a href="./boutique/all">Découvrir ></a></button>
 </div>
 </section>

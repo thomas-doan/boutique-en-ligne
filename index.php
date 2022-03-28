@@ -442,9 +442,3 @@ if (is_array($match)) {
     }
 }
 error($match);
-
-try {
-    $match;
-} catch (NotFoundException $e) {
-    return $e->error404();
-}

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Components\CardCompenent;
+use App\Models\Product;
 use App\Models\Articles;
 
 
@@ -12,18 +14,18 @@ class MainController extends Controller
     {
         $title = "accueil - kawa";
 
-        $model = new Articles();
-        $articles = $model->findAll();
+        $model = new Product();
+        $bestArticle = $model->bestProduct();
+        $cards = new CardCompenent;
+        $lastidProduct = $model->lastProductById()['id_article'];
+        if(count($bestArticle)>8)
+        {
+            $selectNumberofCard = 4;
+        }
+        else $selectNumberofCard = (count($bestArticle)-1);
 
+        
 
-        $titre_article = "toto";
-        $prix_article = "2";
-        $criteres = ["titre_article", "prix_article"];
-        $specifique = ["titre_article", "presentation_article"];
-        $jojo = $model->find($criteres, compact('titre_article', 'prix_article'), $specifique);
-
-
-
-        return $this->view('shop.index', compact('title', 'articles', 'jojo'));
+        return $this->view('shop.index', compact('title', 'bestArticle','cards','lastidProduct','selectNumberofCard'));
     }
 }

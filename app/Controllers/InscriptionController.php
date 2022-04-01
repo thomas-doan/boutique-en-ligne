@@ -23,6 +23,8 @@ class InscriptionController extends Controller
             $prenom = $_POST['prenom'];
             $nom = $_POST['nom'];
             $email = $_POST['email'];
+            $question_secrete = $_POST['question_secrete'];
+            $reponse = $_POST['reponse'];
             $password = $_POST['mdp'];
             $mdpConfirm = $_POST['mdpConfirm'];
 
@@ -30,6 +32,8 @@ class InscriptionController extends Controller
                 'prenom',
                 'nom',
                 'email',
+                'question_secrete',
+                'reponse',
                 'mdp',
                 'mdpConfirm'
             );
@@ -55,15 +59,18 @@ class InscriptionController extends Controller
                 header('location: ./inscription');
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
+                $reponse = password_hash($reponse, PASSWORD_DEFAULT);
                 $role = "Utilisateurs";
                 $user = $model
                     ->setEmail($email)
                     ->setPrenom($prenom)
                     ->setNom($nom)
                     ->setPassword($password)
+                    ->setQuestion_secrete($question_secrete)
+                    ->setReponse($reponse)
                     ->setRole($role);
-                $model->create($user, compact('email', 'prenom', 'nom', 'password', 'role'));
-                var_dump($user);
+                $model->create($user, compact('email', 'prenom', 'nom', 'password', 'question_secrete', 'reponse', 'role'));
+
 
                 $_SESSION['flash']['sucess'] = "Bravo vous êtes à présent inscrit, vous pouvez maintenant vous connectez";
                 // header('Location: ./connexion');

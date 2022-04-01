@@ -14,7 +14,8 @@ $controller->totalPrice();
 $controller->index();
 extract($controller->index());
 ?>
-
+<section id="mySidenav" class="sidenav">
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
    <?php if (isset($_SESSION['flash'])) : ?>
        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
            <div><?= $message; ?></div>
@@ -80,3 +81,4 @@ extract($controller->index());
        <p>Votre panier est vide.</p>
    <?php
     } ?>
+</section>

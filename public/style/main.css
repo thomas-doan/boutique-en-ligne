@@ -1,32 +1,9 @@
-/*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
-/*=============== VARIABLES CSS ===============*/
-:root {
-  --header-height: 3rem;
-  /*========== Colors ==========*/
-  --hue: 174;
-  --sat: 63%;
-  --first-color: hsl(var(--hue), var(--sat), 40%);
-  --first-color-alt: hsl(var(--hue), var(--sat), 36%);
-  --title-color: hsl(var(--hue), 12%, 15%);
-  --text-color: hsl(var(--hue), 8%, 35%);
-  --body-color: hsl(var(--hue), 100%, 99%);
-  --container-color: #FFF;
-  /*========== Font and typography ==========*/
-  --body-font: 'Open Sans', sans-serif;
-  --h1-font-size: 1.5rem;
-  --normal-font-size: .938rem;
-  --tiny-font-size: .625rem;
-  /*========== z index ==========*/
-  --z-tooltip: 10;
-  --z-fixed: 100;
+--title {
+  font-family: 'DM Serif Display', serif;
 }
 
-@media screen and (min-width: 968px) {
-  :root {
-    --h1-font-size: 2.25rem;
-    --normal-font-size: 1rem;
-  }
+--primaryFont {
+  font-family: 'century-gothic, sans-serif';
 }
 
 html {
@@ -80,7 +57,16 @@ html {
 body {
   width: 100%;
   height: 200vh;
-  background-color: #9cc09c;
+  font-family: century-gothic, sans-serif;
+  color: #424242;
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+}
+
+@font-face {
+  font-family: century-gothic, sans-serif;
 }
 
 .form__button {
@@ -99,6 +85,128 @@ body {
 .form__button:hover {
   background-color: black;
   color: white;
+}
+
+/**
+#1d3f36
+#19453b
+#145a48
+#135e4c
+*/
+.caroussel {
+  overflow: hidden;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 316px;
+  max-width: calc((316px * 3) + 8px);
+}
+
+.caroussel--home {
+  width: 80%;
+}
+
+.caroussel--product {
+  width: 100%;
+}
+
+.caroussel__element {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(316px * 8);
+  -webkit-animation: 20s linear infinite direction;
+          animation: 20s linear infinite direction;
+  -webkit-animation-name: caroussel;
+          animation-name: caroussel;
+}
+
+@-webkit-keyframes caroussel {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  22% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25% {
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
+  }
+  47% {
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
+  }
+  50% {
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
+  }
+  72% {
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
+  }
+  75% {
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
+  }
+  100% {
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
+  }
+}
+
+@keyframes caroussel {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  22% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25% {
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
+  }
+  47% {
+    -webkit-transform: translateX(-316px);
+            transform: translateX(-316px);
+  }
+  50% {
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
+  }
+  72% {
+    -webkit-transform: translateX(calc(-316px * 2));
+            transform: translateX(calc(-316px * 2));
+  }
+  75% {
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
+  }
+  100% {
+    -webkit-transform: translateX(calc(-316px * 3));
+            transform: translateX(calc(-316px * 3));
+  }
+}
+
+@media only screen and (max-device-width: 820px) {
+  .caroussel--home {
+    width: 316px;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) {
+  .caroussel--home {
+    width: calc(316px * 2);
+  }
+}
+
+@media only screen and (min-device-width: 1440px) {
+  .caroussel--home {
+    width: calc(316px * 3);
+  }
 }
 
 .nav {
@@ -270,5 +378,240 @@ body {
 .form__text:focus {
   outline-offset: 0px;
   outline: none;
+}
+
+.sidenav {
+  height: 100%;
+  /* 100% Full-height */
+  width: 0;
+  /* 0 width - change this with JavaScript */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Stay on top */
+  top: 0;
+  /* Stay at the top */
+  right: 0;
+  background-color: white;
+  /* Black*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  padding-top: 60px;
+  /* Place content 60px from the top */
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav p, form {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  -webkit-transition: margin-left .5s;
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+.hero {
+  width: 100%;
+  height: calc(100vw * 0.478);
+  min-height: 400px;
+  overflow: hidden;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.hero img:first-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height: 400px;
+  min-width: 836px;
+}
+
+.CTA {
+  width: 80%;
+  z-index: 1;
+  color: white;
+  font-family: 'DM Serif Display', serif;
+}
+
+.CTA H1 {
+  font-size: 3rem;
+}
+
+.CTA H2 {
+  font-size: 2.3rem;
+}
+
+.CTA button {
+  background-color: #135e4c;
+  color: white;
+  border: none;
+  font-family: 'century-gothic, sans-serif';
+  padding: 8px 16px;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .hero {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: end;
+  }
+  .CTA {
+    width: 33%;
+    margin-right: 15%;
+  }
+}
+
+.containerCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.cardChoice {
+  width: calc((100vw / 2) - 16px);
+  margin: 8px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+}
+
+.cardChoice a img {
+  width: 100%;
+}
+
+.cardChoice a p {
+  text-align: center;
+  padding: 5%;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.cardChoice:hover {
+  -webkit-filter: brightness(66%);
+          filter: brightness(66%);
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+@media only screen and (min-device-width: 768px) {
+  .cardChoice {
+    width: calc((100vw / 4) - 32px);
+  }
+}
+
+.homeProposition {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media only screen and (max-device-width: 768px) {
+  .homeProposition {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.lastProduct {
+  position: relative;
+}
+
+.lastProduct img:last-child {
+  width: 80px;
+  position: absolute;
+  top: -16px;
+  left: -6px;
+}
+
+.aboutUs {
+  -ms-flex-item-align: center;
+      align-self: center;
+  padding: 32px 16px 64px 16px;
+  background-image: url("../assets/pictures/kawa_background_apropos.jpg");
+  background-size: 100%;
+  width: 100%;
+  height: calc(100vw * 1.499);
+  max-height: 500px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.aboutUs h3 {
+  font-size: 2.3rem;
+}
+
+.aboutUs img {
+  max-width: 600px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 80%;
+  height: auto;
+}
+
+.aboutUs p {
+  padding: 16px;
+  font-size: 2rem;
 }
 /*# sourceMappingURL=main.css.map */

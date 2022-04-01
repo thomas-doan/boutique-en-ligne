@@ -7,10 +7,16 @@
 @import "base/reset", "base/base", "base/animations", "base/fonts";
 
 // 3. Components
-@import "components/button";
+@import
+'components/button',
+'components/caroussel';
 
 // 4. Layout-related sections
-@import "layout/header", "layout/mediaqueries", "layout/form", "layout/footer";
+@import
+'layout/header',
+'layout/form',
+'layout/footer',
+'layout/panier';
 
 // 5. Page-specific styles
 @import "pages/home";

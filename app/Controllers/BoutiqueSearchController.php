@@ -14,12 +14,15 @@ class BoutiqueSearchController extends Controller
     protected $Product;
     protected $Categories;
     protected $search;
+    protected $FooBag;
 
     public function __construct()
     {
         $this->Product = new ProductComponent();
         $this->Categories = new CategoriesComponent();
         $this->search = new Search();
+        $this->FooBag = new ProductController();
+
         $this->error;
     }
 
@@ -31,6 +34,10 @@ class BoutiqueSearchController extends Controller
      */
     public function index(string $param)
     {
+        var_dump($_SESSION['filter']);
+        $this->FooBag->shoppingBag();
+        
+
         /**
          * On redirige l'utilisateur si la valeur entrer dans l'url ne coresspond à aucun
          * élément attendue dans $param.
@@ -47,6 +54,7 @@ class BoutiqueSearchController extends Controller
 
         $result = $this->mergeCattoProduct();//On merge les tables produit avec la tables catégorie
 
+        $this->getSelection();
         if($param !== 'all')//Si une ategorie autre que all a était selectionner on trie le tableau selon la categorie principale
         {
             $result = $this->Product->selectArrayByValue($result,'cat parent', $param);
@@ -93,13 +101,21 @@ class BoutiqueSearchController extends Controller
         /**
          * On prépare les condition de pagination
          */
+        if(isset($_GET['recherche']))
+        {
+            $urlGet = $_GET['recherche'];
+        }
+        else
+        {
+            $urlGet = '';
+        }
         if(empty($_GET['page']))
         {
             $_GET['page']=0;
         }
         $firstProduct = (int)$_GET['page'];
         $lastProduct = ((int)$_GET['page']+8);
-        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct'); 
+        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet'); 
         $this->view('shop.boutique', $compact );
     }
 
@@ -159,9 +175,13 @@ class BoutiqueSearchController extends Controller
         return($result);
     }
 
+    /**
+     * Permet de générer un nous veautableau multidimentsionnel de resultat
+     * en le triant par les les variable de session définit
+     * @param array Le tableau de resultat original
+     */
     public function gestionFilter(array $result)
     {
-            var_dump($_SESSION['filter']);
             if(isset($_SESSION['filter']['VARIÉTÉ'])&& count($result)>=1)
             {
             $result = $this->Product->selectArrayByValue($result,'VARIÉTÉ', $_SESSION['filter']['VARIÉTÉ']);
@@ -242,5 +262,26 @@ class BoutiqueSearchController extends Controller
             }
 
             return $result;
+    }
+
+    public function getSelection()
+    {
+        if(isset($_GET['selection']))
+        {
+            $selection = $_GET['selection'];
+            if($selection == '1')
+            {
+                $_SESSION['filter']['SPÉCIFICITÉ']= [0 =>'Décaféiné '];
+            }
+            elseif($selection == '2')
+            {
+                $_SESSION['filter']['FORCE']= 5;
+            }
+            elseif($selection == '3')
+            {
+                $_SESSION['filter']['FORCE']= 5;
+            }
+        }
+    
     }
 }

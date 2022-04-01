@@ -13,8 +13,10 @@
     <H1>Historique de Commande</H1>
     <section>
         <h2>Commande en cours de livraison</h2>
+
+
         <?php foreach ($orders as $order) : ?>
-            <?php if ($order['etat_livraison'] === "en attente confirmation") : ?>
+            <?php if ($order['etat_livraison'] === "confirme") : ?>
                 <section>
                     <ul>
                         <li>N°<?= $order['fk_id_num_commande'] ?></li>

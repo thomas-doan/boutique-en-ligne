@@ -19,7 +19,6 @@ class ShoppingCartController extends Controller
     public function index()
     {
 
-        /*   $totalQuantity = $this->totalQuantity(); */
         $articles = $this->modelArticle->findAll();
         $title = "panier";
         return compact('articles', 'title'/* , 'totalQuantity' */);

@@ -1,3 +1,4 @@
+<?php var_dump(($urlGet)) ?>
 <section>
     <ul>
         <li><a href="./Dosette">Dosette</a></li>
@@ -108,11 +109,15 @@
     }
 ?>
 </section>
+
 <form action="" method="get">
+    <?php if(isset($_GET['recherche'])):?>
+    <input type="hidden" name="recherche" value=<?=$urlGet?>>
+    <?php endif;?>
     <?php if($firstProduct > 8):?>
-    <button type="submit" name="page" value="<?=(($firstProduct-8)-8) ?>"><< Page Précédente </button>
+    <button type="submit" name="page" value="<?=(($firstProduct-8)-8)?>"><< Page Précédente </button>
     <?php endif;
     if(isset($result[$firstProduct])):?>
-    <button type="submit" name="page" value="<?=($firstProduct) ?>">Page suivante >></button>
+    <button type="submit" name="page" value="<?=($firstProduct)?>">Page suivante >></button>
     <?php endif;?>
 </form>

@@ -21,5 +21,6 @@
 
         <input class="form__button" type="submit" name="submit" value="Connexion">
     </form>
+    <a href="checkemail">Mot de passe oublié ?</a>
     <a class="container__link" href="inscription">Je créer un compte</a>
 </article>

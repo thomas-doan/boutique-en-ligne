@@ -34,7 +34,6 @@ class BoutiqueSearchController extends Controller
      */
     public function index(string $param)
     {
-        var_dump($_SESSION['filter']);
         $this->FooBag->shoppingBag();
         
 

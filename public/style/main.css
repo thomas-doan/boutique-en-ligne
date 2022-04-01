@@ -209,6 +209,120 @@ h1 {
   }
 }
 
+.card {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 5px;
+  width: 300px;
+  height: 400px;
+  position: relative;
+  -webkit-box-shadow: 1px 2px 8px 2px rgba(0, 0, 0, 0.171);
+          box-shadow: 1px 2px 8px 2px rgba(0, 0, 0, 0.171);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 8px;
+  overflow-wrap: break-word;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.card__like {
+  color: #135e4c;
+}
+
+.card__picture {
+  width: 100%;
+  height: 230px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.card__logonostock {
+  position: absolute;
+  width: 300px;
+  z-index: 1;
+  top: -100px;
+  right: 0;
+}
+
+.card__logoAb {
+  position: absolute;
+  width: 300px;
+  z-index: 2;
+  top: 0;
+  right: 0;
+}
+
+.card__info {
+  padding: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.card__info__titre {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.card__info form {
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  margin: 0;
+  padding: 0;
+  margin-top: auto;
+  z-index: 3;
+}
+
+.card__info form label {
+  font-size: 1.3rem;
+  color: #135e4c;
+}
+
+.card__info form button {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: white;
+  color: #135e4c;
+  border: none;
+}
+
+.card__info form:hover button i {
+  color: #1d3f36;
+}
+
+.card:hover .card__picture {
+  -webkit-filter: brightness(30%);
+          filter: brightness(30%);
+}
+
+/**
+#1d3f36
+#19453b
+#145a48
+#135e4c
+*/
 .nav {
   width: 100%;
   height: 8vh;

@@ -6,9 +6,9 @@
         <img class="nav__logo" style="height:40px" src="/boutique-en-ligne/public/assets/pictures/kawa_logo_color.svg" alt="revenir à l'accuil principal">
     </a>
 
-    <a class="nav__link" href="">
+    <span class="nav__link" onclick="openNav()" href="/boutique-en-ligne/panier">
         <i class="nav__icon fa-solid fa-cart-shopping"></i>
-    </a>
+    </span>
 
     <a class="nav__link" href="<?= $userPath ?>"><?= $iconUser ?></a>
 

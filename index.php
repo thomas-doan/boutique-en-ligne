@@ -1,4 +1,5 @@
 <?php session_start();
+error_reporting(0);
 use App\Controllers\Security;
 use Exceptions\NotFoundException;
 

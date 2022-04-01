@@ -18,6 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="/boutique-en-ligne/public/style/main.css">
     <link rel="stylesheet" href="\boutique-en-ligne\public\css\style.css">
     <script type="text/javaScript" src="/boutique-en-ligne/public/js/panier.js"></script>
+    <script type="text/javaScript" src="/boutique-en-ligne/public/js/search.js"></script>
     <title><?= $title ?></title>
 </head>
 
@@ -32,7 +33,6 @@ if (session_status() === PHP_SESSION_NONE) {
     <footer>
         <?php require_once 'footer.php'; ?>
     </footer>
-    <script src="/boutique-en-ligne/nav.js"></script>
 </body>
 
 </html>

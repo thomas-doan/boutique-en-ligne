@@ -1,5 +1,5 @@
-<article class="container">
-    <h1 class="container_title">Connexion</h1>
+<article class="form">
+    <h1 class="form_title">Connexion</h1>
 
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -22,5 +22,5 @@
         <input class="form__button" type="submit" name="submit" value="Connexion">
     </form>
     <a href="checkemail">Mot de passe oublié ?</a>
-    <a class="container__link" href="inscription">Je créer un compte</a>
+    <a class="form__link" href="inscription">Je créer un compte</a>
 </article>

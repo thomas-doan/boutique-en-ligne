@@ -13,20 +13,23 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="stylesheet" href="../public/css/style.css"> -->
     <link rel="stylesheet" href="/boutique-en-ligne/public/style/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
     <title><?= $title ?></title>
 </head>
 
 <body>
-    <header>
+    <header id="header">
         <?php require_once 'header.php'; ?>
     </header>
     <main>
-        <?php require_once 'panier.php';?>
+        <?php require_once 'panier.php'; ?>
         <?= $pageContent ?>
     </main>
     <footer>
         <?php require_once 'footer.php'; ?>
     </footer>
+    <script src="/boutique-en-ligne/nav.js"></script>
 </body>
 
 </html>

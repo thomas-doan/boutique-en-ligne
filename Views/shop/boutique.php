@@ -1,11 +1,10 @@
-<?php var_dump(($urlGet)) ?>
-<section>
+<nav class="navCatégories">
     <ul>
         <li><a href="./Dosette">Dosette</a></li>
         <li><a href="./Moulu">Moulu</a></li>
         <li><a href="./Grain">Grain</a></li>
     </ul>
-</section>
+</nav>
 <?php if(!empty($erreur)):?>
 <h4><?=$erreur?></h4>
 <?php endif;?>
@@ -27,10 +26,9 @@
 </section>
 <?php endif ;?>
 
-<h3>Boutique</h3>
-
-<section>
-<form action="" method="post">
+<section class="moreRecherche">
+<a href="#formRecherche">Recherche avancer</a>
+<form id="formRecherche" action="" method="post">
         <h4>Recherche avancer</h4>
         <fieldset>
             <legend>Variétés & Spécificités</legend>
@@ -98,6 +96,8 @@
         <input type="submit" name="filtre" value="Filtrer">
         </form>
 </section>
+
+<h3>Boutique</h3>
 
 <section class="boutique">
     <?php for ($firstProduct; $firstProduct < $lastProduct ; ++$firstProduct)

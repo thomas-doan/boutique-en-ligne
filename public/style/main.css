@@ -1,3 +1,4 @@
+@charset "UTF-8";
 --title {
   font-family: 'DM Serif Display', serif;
 }
@@ -681,5 +682,28 @@ h1 {
 .aboutUs p {
   padding: 16px;
   font-size: 2rem;
+}
+
+.navCatégories {
+  width: 100%;
+}
+
+.navCatégories ul {
+  margin: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.navCatégories ul li a {
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.navCatégories ul li a:hover {
+  font-weight: bold;
 }
 /*# sourceMappingURL=main.css.map */

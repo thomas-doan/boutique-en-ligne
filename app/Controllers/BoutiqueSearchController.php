@@ -100,6 +100,20 @@ class BoutiqueSearchController extends Controller
         /**
          * On prépare les condition de pagination
          */
+        var_dump(round((count($result)/8))+1);
+        $allPages = [];
+        for ($i=0; $i < round((count($result)/8))+1 ; $i++) {
+
+            if(isset($_GET['page']) && $_GET['page']==($i*8))
+            {
+                $allPages[$i] = '<button class="pholioSelected" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
+            }
+            else{
+                $allPages[$i] = '<button class="pholio" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
+            }
+            
+        }
+        
         if(isset($_GET['recherche']))
         {
             $urlGet = $_GET['recherche'];
@@ -114,7 +128,7 @@ class BoutiqueSearchController extends Controller
         }
         $firstProduct = (int)$_GET['page'];
         $lastProduct = ((int)$_GET['page']+8);
-        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet'); 
+        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet','allPages'); 
         $this->view('shop.boutique', $compact );
     }
 

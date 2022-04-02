@@ -318,12 +318,6 @@ h1 {
           filter: brightness(30%);
 }
 
-/**
-#1d3f36
-#19453b
-#145a48
-#135e4c
-*/
 .nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -769,12 +763,126 @@ h1 {
   color: white;
 }
 
+.moreRecherche #formRecherche > input {
+  background-color: #135e4c;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.moreRecherche #formRecherche > input:hover {
+  background-color: #1d3f36;
+}
+
 .moreRecherche #formRecherche fieldset:first-child label {
   display: none;
 }
 
 .moreRecherche #formRecherche:target {
   height: auto;
+}
+
+.boutiqueMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.boutiqueMain .boutique {
+  width: 316px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.boutiquePagination {
+  font-size: 1.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 32px;
+}
+
+.boutiquePagination button {
+  color: #135e4c;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+}
+
+.boutiquePagination button:hover {
+  color: #1d3f36;
+  text-decoration: underline;
+}
+
+.boutiquePagination .pholio {
+  background-color: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.boutiquePagination .pholioSelected {
+  font-weight: bold;
+}
+
+@media only screen and (min-device-width: 664px) {
+  .boutiqueMain .boutique {
+    width: calc(332px * 2);
+  }
+}
+
+@media only screen and (min-device-width: 1024px) {
+  .boutiqueWrapper {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[24];
+        grid-template-columns: repeat(24, 1fr);
+    grid-gap: 15px;
+  }
+  .moreRecherche {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 5;
+    grid-column: 1 / 6;
+    -webkit-box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, 0.185);
+            box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, 0.185);
+  }
+  .moreRecherche > a {
+    display: none;
+  }
+  .moreRecherche #formRecherche {
+    height: auto;
+  }
+  .moreRecherche #formRecherche > h4 {
+    display: initial;
+  }
+  .boutiqueMain {
+    -ms-grid-column: 6;
+    -ms-grid-column-span: 18;
+    grid-column: 6 / 24;
+  }
+  .boutiqueMain .boutique {
+    width: 100%;
+    padding: 16px;
+  }
 }
 
 .filterSelect {

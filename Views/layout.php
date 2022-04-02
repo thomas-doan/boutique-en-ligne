@@ -17,15 +17,16 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://use.typekit.net/gij8hzs.css">
     <link rel="stylesheet" href="/boutique-en-ligne/public/style/main.css">
     <script type="text/javaScript" src="/boutique-en-ligne/public/js/panier.js"></script>
+    <script type="text/javaScript" src="/boutique-en-ligne/public/js/search.js"></script>
     <title><?= $title ?></title>
 </head>
 
 <body>
-    <header>
+    <header id="header">
         <?php require_once 'header.php'; ?>
     </header>
     <main>
-        <?php require_once 'panier.php';?>
+        <?php require_once 'panier.php'; ?>
         <?= $pageContent ?>
     </main>
     <footer>

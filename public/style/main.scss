@@ -1,17 +1,10 @@
 @charset "UTF-8";
 
 // Configuration and helpers (functions, variables, mixins)
-@import
-'utils/variables',
-'utils/functions',
-'utils/mixins';
+@import "utils/variables", "utils/functions", "utils/mixins";
 
 // 2. Base stuff
-@import
-'base/reset',
-'base/base',
-'base/animations',
-'base/fonts';
+@import "base/reset", "base/base", "base/animations", "base/fonts";
 
 // 3. Components
 @import

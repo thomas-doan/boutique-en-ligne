@@ -50,6 +50,15 @@ class BoutiqueSearchController extends Controller
         }
         else header('location: ./all');
 
+        if($param != 'all')
+        {
+            $style ='<style type="text/css">
+            #'.$param.' {
+                font-weight: bold !important;
+            }</style>';
+        }
+        else $style= null;
+
 
         $result = $this->mergeCattoProduct();//On merge les tables produit avec la tables catégorie
 
@@ -100,11 +109,14 @@ class BoutiqueSearchController extends Controller
         /**
          * On prépare les condition de pagination
          */
-        var_dump(round((count($result)/8))+1);
         $allPages = [];
-        for ($i=0; $i < round((count($result)/8))+1 ; $i++) {
+        for ($i=0; $i < ceil((count($result)/8)) ; $i++) {
 
             if(isset($_GET['page']) && $_GET['page']==($i*8))
+            {
+                $allPages[$i] = '<button class="pholioSelected" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
+            }
+            elseif(empty($_GET['page']) && $i==0)
             {
                 $allPages[$i] = '<button class="pholioSelected" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
             }
@@ -128,7 +140,7 @@ class BoutiqueSearchController extends Controller
         }
         $firstProduct = (int)$_GET['page'];
         $lastProduct = ((int)$_GET['page']+8);
-        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet','allPages'); 
+        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet','allPages', 'style'); 
         $this->view('shop.boutique', $compact );
     }
 

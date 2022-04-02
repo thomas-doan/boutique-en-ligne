@@ -1,8 +1,9 @@
+<?=$style?>
 <nav class="navCatégories">
     <ul>
-        <li><a href="./Dosette">Dosette</a></li>
-        <li><a href="./Moulu">Moulu</a></li>
-        <li><a href="./Grain">Grain</a></li>
+        <li><a id="Dosette" href="./Dosette">Dosette</a></li>
+        <li><a id="Moulu" href="./Moulu">Moulu</a></li>
+        <li><a id="Grain" href="./Grain">Grain</a></li>
     </ul>
 </nav>
 

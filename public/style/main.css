@@ -443,6 +443,10 @@ h1 {
   outline: none;
 }
 
+.footer {
+  height: 100px;
+}
+
 .sidenav {
   height: 100%;
   /* 100% Full-height */
@@ -812,7 +816,8 @@ h1 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 32px;
+  gap: 8px;
+  padding: 16px 0px;
 }
 
 .boutiquePagination button {

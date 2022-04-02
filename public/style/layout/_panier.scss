@@ -1,25 +1,137 @@
+.poductPanier,.footerPanier{
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #a7a7a7;
+  padding: 8px 0px;
+}
+
+.footerPanier{
+  font-size: 1.6rem;
+  justify-content: space-between;
+    font-size: 2rem;
+    color: #135e4c;
+    font-weight: bold;
+  & input{
+    background-color: #135e4c;
+    color: white;
+    border-radius: 4px;
+    padding: 8px 16px;
+    border: none;
+    margin-top: 8px;
+    &:hover{
+      background-color: #1d3f36;
+    }
+  }
+}
+.infoPanier{
+  font-size: 1.7rem;
+  width: 100%;
+}
+.firstInfoPanier{
+  color: #424242;
+  display: flex;
+  font-weight: bold;
+  width: 100%;
+  & p:last-child{
+    margin-left: auto;
+  }
+}
+
+.picturePanier{
+  width: 150px;
+  height: auto;
+  margin-right: 16px;
+  border-radius: 4px;
+}
+
+.selectQuatity{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 90px;
+
+  & div:first-child{
+    display: flex;
+
+    & button{
+      color: white;
+      font-size: 2rem;
+      background-color: #135e4c;
+      width: 30px;
+      height: 50px;
+      border: none;
+      cursor: pointer;
+      &:hover{
+        background-color: #1d3f36;
+      }
+    }
+
+    & .buttonPanierDown{
+      order: -1;
+      border-radius: 4px 0px 0px 4px;
+    }
+
+    & .buttonPanierUp{
+      order: 3;
+      border-radius: 0px 4px 4px 0px;
+    }
+
+    & >div{
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+      border-top: #135e4c solid 1px;
+      border-bottom: #135e4c solid 1px;
+      & p{
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  & form:last-child{
+    margin: 0;
+    padding: 0;
+    order: -1;
+    & button{
+      border: none;
+      color: #818181;
+    }
+  }
+}
 .sidenav {
+    
+    z-index: 99;
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: rgb(255, 255, 255); /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
+    box-shadow: -10px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.95); /* Black*/
+    backdrop-filter: blur(5px);
+    overflow: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    &:target{
+      width: 500px;
+      z-index: 99;
+      padding: 64px 32px 64px 32px; /* Place content 60px from the top */
+    }
   }
   
   /* The navigation menu links */
-  .sidenav p, form {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
+  // .sidenav > p, form {
+  //   padding: 8px 32px;
+  //   text-decoration: none;
+  //   font-size: 25px;
+  //   color: #818181;
+  //   display: block;
+  //   transition: 0.3s;
+  // }
   
   /* Position and style the close button (top right corner) */
   .sidenav .closebtn {

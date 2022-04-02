@@ -1,6 +1,6 @@
+@charset "UTF-8";
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
-@charset "UTF-8";
 --title {
   font-family: 'DM Serif Display', serif;
 }
@@ -500,40 +500,178 @@ h1 {
   height: 100px;
 }
 
+.poductPanier, .footerPanier {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #a7a7a7;
+  padding: 8px 0px;
+}
+
+.footerPanier {
+  font-size: 1.6rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 2rem;
+  color: #135e4c;
+  font-weight: bold;
+}
+
+.footerPanier input {
+  background-color: #135e4c;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+  border: none;
+  margin-top: 8px;
+}
+
+.footerPanier input:hover {
+  background-color: #1d3f36;
+}
+
+.infoPanier {
+  font-size: 1.7rem;
+  width: 100%;
+}
+
+.firstInfoPanier {
+  color: #424242;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: bold;
+  width: 100%;
+}
+
+.firstInfoPanier p:last-child {
+  margin-left: auto;
+}
+
+.picturePanier {
+  width: 150px;
+  height: auto;
+  margin-right: 16px;
+  border-radius: 4px;
+}
+
+.selectQuatity {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  height: 90px;
+}
+
+.selectQuatity div:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.selectQuatity div:first-child button {
+  color: white;
+  font-size: 2rem;
+  background-color: #135e4c;
+  width: 30px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.selectQuatity div:first-child button:hover {
+  background-color: #1d3f36;
+}
+
+.selectQuatity div:first-child .buttonPanierDown {
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.selectQuatity div:first-child .buttonPanierUp {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.selectQuatity div:first-child > div {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
+  border-top: #135e4c solid 1px;
+  border-bottom: #135e4c solid 1px;
+}
+
+.selectQuatity div:first-child > div p {
+  margin: 0;
+  padding: 0;
+}
+
+.selectQuatity form:last-child {
+  margin: 0;
+  padding: 0;
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+}
+
+.selectQuatity form:last-child button {
+  border: none;
+  color: #818181;
+}
+
 .sidenav {
+  z-index: 99;
   height: 100%;
   /* 100% Full-height */
   width: 0;
   /* 0 width - change this with JavaScript */
   position: fixed;
   /* Stay in place */
-  z-index: 1;
-  /* Stay on top */
   top: 0;
   /* Stay at the top */
   right: 0;
-  background-color: white;
+  -webkit-box-shadow: -10px 0px 10px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: -10px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.95);
   /* Black*/
-  overflow-x: hidden;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  overflow: hidden;
   /* Disable horizontal scroll */
-  padding-top: 60px;
-  /* Place content 60px from the top */
   -webkit-transition: 0.5s;
   transition: 0.5s;
   /* 0.5 second transition effect to slide in the sidenav */
 }
 
-/* The navigation menu links */
-.sidenav p, form {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+.sidenav:target {
+  width: 500px;
+  z-index: 99;
+  padding: 64px 32px 64px 32px;
+  /* Place content 60px from the top */
 }
 
+/* The navigation menu links */
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;

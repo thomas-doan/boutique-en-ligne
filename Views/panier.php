@@ -15,7 +15,9 @@ $controller->index();
 extract($controller->index());
 ?>
 <section id="mySidenav" class="sidenav">
-<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+<h1>Mon panier</h1>
+<p> nombre total d'articles : <?php echo $_SESSION['totalQuantity'] ?> </p>
    <?php if (isset($_SESSION['flash'])) : ?>
        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
            <div><?= $message; ?></div>
@@ -26,7 +28,6 @@ extract($controller->index());
    <?php endif; ?>
 
    <?php if (!empty($_SESSION['quantite'])) { ?>
-       <p> c'est le panier </p>
 
 
        <?php
@@ -35,48 +36,50 @@ extract($controller->index());
             foreach ($_SESSION['quantite'] as $key => $value) {
                 if ($article['id_article'] == $key) {
         ?>
+                   <form class="poductPanier" action="" method="post">
 
-                   <form action="" method="post">
-
-                       <p> <?= $article['titre_article'] ?> </p>
-                       <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
-                       <button name="upQuantity" value="1" type="submit"> + </button>
-
-
-                       <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
-                           <button name="downQuantity" value="1" type="submit"> - </button>
+                        <img class="picturePanier" src="/boutique-en-ligne/public/assets/pictures/pictures_product/<?=$article['image_article']?>" alt="">
+                    <div class="infoPanier">
+                        <div class="firstInfoPanier">
+                            <p> <?= $article['titre_article'] ?> </p>
+                            <p><?=$article['prix_article']?> €</p>
+                        </div>
+                       <div class="selectQuatity">
+                           <div>
+                            <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+                            <button class="buttonPanierUp" name="upQuantity" value="1" type="submit"> + </button>
+                            <div>
+                                <p><?= $_SESSION['quantite'][$article['id_article']]  ?></p>
+                            </div>
+                            <?php if ($_SESSION['quantite'][$article['id_article']] > 0) { ?>
+                                <button class="buttonPanierDown" name="downQuantity" value="1" type="submit"> - </button>
+                    
                    </form>
                <?php } ?>
-               <p>Nombre : <?= $_SESSION['quantite'][$article['id_article']]  ?></p>
-
-
+                            </div>
                <?php if (isset($_SESSION['quantite'][$article['id_article']])) { ?>
 
                    <form action="" method="post">
-                       <button name="deleteProduct" type="submit"> supprimer article </button>
+                       <button name="deleteProduct" type="submit"> <i class="fa-solid fa-trash"></i> </button>
                        <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
                    </form>
-
                <?php } ?>
-
-               <p>prix : <?php if (isset($_SESSION['singlePrice'][$article['id_article']])) {
+                </div>
+               
+               <p>prix total: <?php if (isset($_SESSION['singlePrice'][$article['id_article']])) {
                                 echo $_SESSION['singlePrice'][$article['id_article']];
-                            }  ?></p>
-
+                            }  ?> €</p>
+            </div>
 
    <?php }
             }
         } ?>
-
-   <p> nombre total d'articles : <?php echo $_SESSION['totalQuantity'] ?> </p>
-
-   <p>Prix total : <?= $_SESSION['totalPrice'] ?></p>
-
-   <form action="../commande" method="post">
-
-       <input name="checkout" value="commandé" type="submit">
-   </form>
-
+    <div class="footerPanier">
+    <p>Prix total : <?= $_SESSION['totalPrice'] ?> €</p>
+    <form action="../commande" method="post">
+        <input name="checkout" value="commandé" type="submit">
+    </form>
+   </div>
    <?php } else { ?>
        <p>Votre panier est vide.</p>
    <?php

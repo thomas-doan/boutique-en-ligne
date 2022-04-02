@@ -706,4 +706,96 @@ h1 {
 .navCatégories ul li a:hover {
   font-weight: bold;
 }
+
+.moreRecherche {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.moreRecherche a {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.moreRecherche #formRecherche {
+  height: 0;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+  overflow: hidden;
+}
+
+.moreRecherche #formRecherche > h4 {
+  display: none;
+}
+
+.moreRecherche #formRecherche * {
+  font-size: 1.3rem;
+}
+
+.moreRecherche #formRecherche fieldset {
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.moreRecherche #formRecherche fieldset label {
+  border: solid 1px #135e4c;
+  color: #135e4c;
+  border-radius: 24px;
+  padding: 4px 8px;
+  margin: 4px;
+  -webkit-margin-after: 4px;
+          margin-block-end: 4px;
+}
+
+.moreRecherche #formRecherche fieldset input {
+  display: none;
+}
+
+.moreRecherche #formRecherche fieldset input:checked + label {
+  font-weight: bold;
+  background-color: #135e4c;
+  border: #1d3f36;
+  color: white;
+}
+
+.moreRecherche #formRecherche fieldset:first-child label {
+  display: none;
+}
+
+.moreRecherche #formRecherche:target {
+  height: auto;
+}
+
+.filterSelect {
+  font-size: 1.3rem;
+}
+
+.filterSelect button {
+  border: solid 1px #135e4c;
+  color: #135e4c;
+  border-radius: 24px;
+  padding: 4px 8px;
+}
+
+.filterSelect button:hover {
+  background-color: #135e4d1e;
+}
+
+/**
+#1d3f36
+#19453b
+#145a48
+#135e4c
+*/
 /*# sourceMappingURL=main.css.map */

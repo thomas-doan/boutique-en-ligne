@@ -5,34 +5,13 @@
         <li><a href="./Grain">Grain</a></li>
     </ul>
 </nav>
-<?php if(!empty($erreur)):?>
-<h4><?=$erreur?></h4>
-<?php endif;?>
-
-<?php if(isset($resultFilter)):?>
-<section>
-    <form action="" method="post">
-    <p>Filtres selectionnés : </p>
-    <?php foreach($resultFilter as $key => $value):?>
-        <?php if(is_array($value)):?>
-        <?php foreach($value as $underkey => $underValue):?>
-            <button type="submit" name="deletFilter" value="<?=$key?>-<?=$underkey?>-<?=$underValue?>">&#10006; <?=$underValue?></button>
-        <?php endforeach;?>
-        <?php else :?>
-         <button type="submit" name="deletFilter" value="<?=$key?>-<?=$value?>">&#10006; <?=$value?></button>
-        <?php endif ;?>
-    <?php endforeach; ?>
-    </form>
-</section>
-<?php endif ;?>
 
 <section class="moreRecherche">
-<a href="#formRecherche">Recherche avancer</a>
-<form id="formRecherche" action="" method="post">
+    <a href="#formRecherche">Recherche avancer <i class="fa-solid fa-angle-down"></i></a>
+<form id="formRecherche" action="#" method="post">
         <h4>Recherche avancer</h4>
         <fieldset>
-            <legend>Variétés & Spécificités</legend>
-            <label for="VARIÉTÉ">variété :</label>
+            <legend>Variétés</legend>
         <?php
         foreach($result_request['variete'] as $value)
         {
@@ -98,6 +77,27 @@
 </section>
 
 <h3>Boutique</h3>
+
+<?php if(isset($resultFilter)):?>
+<section>
+    <form class="filterSelect" action="" method="post">
+    <p>Filtres selectionnés : </p>
+    <?php foreach($resultFilter as $key => $value):?>
+        <?php if(is_array($value)):?>
+        <?php foreach($value as $underkey => $underValue):?>
+            <button type="submit" name="deletFilter" value="<?=$key?>-<?=$underkey?>-<?=$underValue?>">&#10006; <?=$underValue?></button>
+        <?php endforeach;?>
+        <?php else :?>
+         <button type="submit" name="deletFilter" value="<?=$key?>-<?=$value?>">&#10006; <?=$value?></button>
+        <?php endif ;?>
+    <?php endforeach; ?>
+    </form>
+</section>
+<?php endif ;?>
+
+<?php if(!empty($erreur)):?>
+<h4><?=$erreur?></h4>
+<?php endif;?>
 
 <section class="boutique">
     <?php for ($firstProduct; $firstProduct < $lastProduct ; ++$firstProduct)

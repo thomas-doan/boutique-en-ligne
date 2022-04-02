@@ -756,6 +756,10 @@ h1 {
           margin-block-end: 4px;
 }
 
+.moreRecherche #formRecherche fieldset label:hover {
+  background-color: #135e4d1e;
+}
+
 .moreRecherche #formRecherche fieldset input {
   display: none;
 }

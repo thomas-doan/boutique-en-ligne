@@ -46,18 +46,13 @@ class BoutiqueSearchController extends Controller
         || $param == 'Moulu'
         || $param == 'Grain')
         {
-            $title = 'Boutique |'.$param;
-        }
-        else header('location: ./all');
-
-        if($param != 'all')
-        {
+            $title = 'Boutique | '.$param;
             $style ='<style type="text/css">
             #'.$param.' {
                 font-weight: bold !important;
             }</style>';
         }
-        else $style= null;
+        else header('location: ./all');
 
 
         $result = $this->mergeCattoProduct();//On merge les tables produit avec la tables catégorie

@@ -43,6 +43,9 @@
                 padding: 4px 8px;
                 margin: 4px;
                 margin-block-end: 4px;
+                &:hover{
+                    background-color: #135e4d1e;
+                }
             }
             & input{
                 display: none;

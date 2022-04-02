@@ -1,6 +1,7 @@
 <?=$style?>
 <nav class="navCatégories">
     <ul>
+        <li><a id="all" href="./all">Tous</a></li>
         <li><a id="Dosette" href="./Dosette">Dosette</a></li>
         <li><a id="Moulu" href="./Moulu">Moulu</a></li>
         <li><a id="Grain" href="./Grain">Grain</a></li>

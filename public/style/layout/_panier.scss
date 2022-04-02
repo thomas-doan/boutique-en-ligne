@@ -33,13 +33,16 @@
   font-weight: bold;
   width: 100%;
   & p:last-child{
+    display: none;
     margin-left: auto;
   }
 }
 
 .picturePanier{
-  width: 150px;
-  height: auto;
+  width: 40%;
+  max-width: 150px;
+  height: 40%;
+  max-height: 150px;
   margin-right: 16px;
   border-radius: 4px;
 }
@@ -48,9 +51,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  height: 90px;
 
   & div:first-child{
+    
     display: flex;
 
     & button{
@@ -94,6 +97,7 @@
   }
 
   & form:last-child{
+    display: none;
     margin: 0;
     padding: 0;
     order: -1;
@@ -117,7 +121,7 @@
     overflow: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     &:target{
-      width: 500px;
+      width: 100vw;
       z-index: 99;
       padding: 64px 32px 64px 32px; /* Place content 60px from the top */
     }
@@ -152,4 +156,29 @@
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+  }
+
+  @media screen and (min-device-width : 450px) {
+    .selectQuatity form:last-child{
+      display: initial;
+    }
+
+    .firstInfoPanier p:last-child{
+      display: initial;
+    }
+
+    .infoPanier{
+      max-height: 167px;
+      display: flex;
+      flex-direction: column;
+    }
+    .selectQuatity{
+      margin-top: auto;
+    }
+  }
+
+  @media screen and (min-device-width : 1024px){
+    .sidenav:target{
+      width: 450px;
+    }
   }

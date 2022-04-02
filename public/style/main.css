@@ -547,12 +547,15 @@ h1 {
 }
 
 .firstInfoPanier p:last-child {
+  display: none;
   margin-left: auto;
 }
 
 .picturePanier {
-  width: 150px;
-  height: auto;
+  width: 40%;
+  max-width: 150px;
+  height: 40%;
+  max-height: 150px;
   margin-right: 16px;
   border-radius: 4px;
 }
@@ -567,7 +570,6 @@ h1 {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  height: 90px;
 }
 
 .selectQuatity div:first-child {
@@ -628,6 +630,7 @@ h1 {
 }
 
 .selectQuatity form:last-child {
+  display: none;
   margin: 0;
   padding: 0;
   -webkit-box-ordinal-group: 0;
@@ -665,7 +668,7 @@ h1 {
 }
 
 .sidenav:target {
-  width: 500px;
+  width: 100vw;
   z-index: 99;
   padding: 64px 32px 64px 32px;
   /* Place content 60px from the top */
@@ -695,6 +698,34 @@ h1 {
   }
   .sidenav a {
     font-size: 18px;
+  }
+}
+
+@media screen and (min-device-width: 450px) {
+  .selectQuatity form:last-child {
+    display: initial;
+  }
+  .firstInfoPanier p:last-child {
+    display: initial;
+  }
+  .infoPanier {
+    max-height: 167px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .selectQuatity {
+    margin-top: auto;
+  }
+}
+
+@media screen and (min-device-width: 1024px) {
+  .sidenav:target {
+    width: 450px;
   }
 }
 

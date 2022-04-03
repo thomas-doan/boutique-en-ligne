@@ -88,7 +88,9 @@ class ProductController extends Controller
         if (isset($_POST['submitAnswer'])) {
             if (!isset($_SESSION['user'])) {
                 $_SESSION['flash']['sucess'] = "Connectez-vous pour commenter.";
-                header("location: ./$id_article");
+                /*  header("location: ./$id_article"); */
+
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
                 exit();
             }
 
@@ -131,7 +133,7 @@ class ProductController extends Controller
                 ->setSignaler($signaler);
             $this->Comments->update($modelHydrate, compact('id_commentaire', 'signaler'));
             $_SESSION['flash']['success'] = "Signalement enregistré.";
-            header("location: ./$id_article");
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
             exit();
         }
     }
@@ -145,7 +147,7 @@ class ProductController extends Controller
                 ->setSignaler($signaler);
             $this->AnswerCom->update($modelHydrate, compact('id_reponse_com', 'signaler'));
             $_SESSION['flash']['success'] = "Signalement enregistré.";
-            header("location: ./$id_article");
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
             exit();
         }
     }

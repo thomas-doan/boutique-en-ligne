@@ -17,7 +17,7 @@ use App\Models\NumCommande;
 use App\Controllers\Security;
 use App\Controllers\Controller;
 
-class PaymentController extends Controller
+class PaymentResumeController extends Controller
 {
 
     public function __construct()

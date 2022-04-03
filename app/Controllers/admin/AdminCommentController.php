@@ -142,7 +142,7 @@ class AdminCommentController extends Controller
             }
 
             if (empty($_POST['fk_id_commentaire']) || empty($_POST['answerAdmin'])) {
-                $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
+                $_SESSION['flash']['champsvides'] = "Les champs sont vides teeeeeeest!";
                 header('location: ./commentaire');
                 exit();
             }

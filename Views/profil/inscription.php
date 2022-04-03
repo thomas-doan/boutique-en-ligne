@@ -1,4 +1,4 @@
-<article class="container">
+<article class="form">
 
     <section class="alert">
 
@@ -19,7 +19,7 @@
     
     <form class="form" action="" method="post">
 
-        <h1 class="container__title">Inscription</h1>
+        <h1 class="form__title">Inscription</h1>
         <div class="form__field">
 
             <label class="form__label" for="prenom">Prenom :</label>
@@ -62,7 +62,7 @@
             
             <input class="form__button" type="submit" name="submit" value="Inscription">
         </div>
-        <a class="container__link" href="connexion">J'ai déjà un compte ></a>
+        <a class="form__link" href="connexion">J'ai déjà un compte ></a>
     </form>
 
 </article>

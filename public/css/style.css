@@ -22,21 +22,57 @@ form>* {
     box-shadow: 1px 2px 8px 2px rgba(0, 0, 0, 0.171);
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 8px;
     overflow-wrap: break-word;
+    transition: 0.3s;
 }
 
 .picture {
     width: 100%;
-    border-radius: 5px;
+    height: 230px;
+    transition: 0.3s;
 }
 
 .logonostock {
     position: absolute;
     width: 300px;
     z-index: 1;
-    top: 0;
+    top: -100px;
     right: 0;
+}
+
+.info{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.info_titre{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+.info form{
+    align-self: end;
+    margin: 0;
+    padding: 0;
+    margin-top: auto;
+    z-index: 3;
+}
+.info form label{
+    font-size: 1.3rem;
+    color: #135e4c;
+}
+/* .info form:hover button i{
+    color: #1d3f36;
+} */
+.info form button{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 }
 
 .logoAb {
@@ -49,41 +85,29 @@ form>* {
 
 .card div {
     width: 100%;
-    padding: 0px 15px;
-}
-
-.inOver {
-    display: none;
-}
-
-.inOver div {
-    display: flex;
-    justify-content: space-between;
-}
-
-.inOver h4 {
-    color: rgb(93, 175, 10);
 }
 
 .card:hover .picture {
-    width: 400px;
-    height: 400px;
-    align-self: center;
     filter: brightness(30%);
 }
 
 .card:hover .logoAb {
     display: none;
 }
+.card h4:first-child{
+    color: #135e4c;
+}
 
 .card:hover .inOver {
-    width: 270px;
+    width: 300px;
     height: 400px;
     z-index: 1;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    padding: 8px;
 }
 
 .card:hover .inOver p {
@@ -91,3 +115,16 @@ form>* {
     align-self: center;
     text-align: center;
 }
+.card button{
+    background-color:  white;
+    color: #135e4c;
+    border: none;
+    margin: 8px;
+}
+
+/**
+#1d3f36
+#19453b
+#145a48
+#135e4c
+*/

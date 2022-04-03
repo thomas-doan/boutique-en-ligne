@@ -1,15 +1,14 @@
-<?php ?>
-<p> C'est l'accueil</p>
+
 <section class="hero">
-<img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_mobile.jpg" alt="hero">
+<img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
 <div class="CTA">
-    <h2>Kawa</h2>
-    <h3>Une boutique dédier aux amateurs de café</h3>
+    <h1>Kawa</h1>
+    <h2>Une boutique dédier aux amateurs de café</h2>
     <button><a href="./boutique/all">Découvrir ></a></button>
 </div>
 </section>
 <article class="homeProposition">
-    <section class="caroussel carousel--home">
+    <section class="caroussel caroussel--home">
         <div class="caroussel__element">
             <?php for($i = 0; $i <=$selectNumberofCard;$i++):?>
             <?php $cards->printCard($cards->getDataByid($bestArticle[$i]['fk_id_article']))?>
@@ -85,7 +84,8 @@
 
 </article>
 
-<article>
+<article class="aboutUs">
     <h3>A propos</h3>
-    <p>Cette boutique en ligne est l'oeuvre de trois étudiant s'exerçant dans un cursus dans le domaine du Developpement Web & Mobile. Elle n'a pas pour vocation de vous permettre de commander du Café.</p>
+    <img src="./public/assets/pictures/kawa_logo_blac_text.svg" alt="">
+    <p>Cette boutique en ligne est l'oeuvre de trois étudiant s'exerçant dans un cursus dans le domaine du Developpement Web & Mobile. Elle n'a pas pour vocation de vous permettre de commander du Café. Par conséquent les articles plésentés peuvent être imaginaires</p>
 </article>

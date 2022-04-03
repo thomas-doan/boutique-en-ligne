@@ -34,7 +34,6 @@ class BoutiqueSearchController extends Controller
      */
     public function index(string $param)
     {
-        var_dump($_SESSION['filter']);
         $this->FooBag->shoppingBag();
         
 
@@ -47,7 +46,11 @@ class BoutiqueSearchController extends Controller
         || $param == 'Moulu'
         || $param == 'Grain')
         {
-            $title = 'Boutique |'.$param;
+            $title = 'Boutique | '.$param;
+            $style ='<style type="text/css">
+            #'.$param.' {
+                font-weight: bold !important;
+            }</style>';
         }
         else header('location: ./all');
 
@@ -101,6 +104,23 @@ class BoutiqueSearchController extends Controller
         /**
          * On prépare les condition de pagination
          */
+        $allPages = [];
+        for ($i=0; $i < ceil((count($result)/8)) ; $i++) {
+
+            if(isset($_GET['page']) && $_GET['page']==($i*8))
+            {
+                $allPages[$i] = '<button class="pholioSelected" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
+            }
+            elseif(empty($_GET['page']) && $i==0)
+            {
+                $allPages[$i] = '<button class="pholioSelected" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
+            }
+            else{
+                $allPages[$i] = '<button class="pholio" type="submit" name="page" value="'.($i*8).'">'.($i+1).'</button>';
+            }
+            
+        }
+        
         if(isset($_GET['recherche']))
         {
             $urlGet = $_GET['recherche'];
@@ -115,7 +135,7 @@ class BoutiqueSearchController extends Controller
         }
         $firstProduct = (int)$_GET['page'];
         $lastProduct = ((int)$_GET['page']+8);
-        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet'); 
+        $compact = compact('title','result_request','resultFilter','erreur','result','card','firstProduct','lastProduct','urlGet','allPages', 'style'); 
         $this->view('shop.boutique', $compact );
     }
 

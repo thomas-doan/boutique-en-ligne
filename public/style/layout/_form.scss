@@ -1,26 +1,45 @@
 .form {
+  overflow-x: hidden;
   @include alignColumn(center);
   margin: 0 auto;
   padding: 50px;
 
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // background-color: red;
+    color: black;
+  }
+
   &__field {
+    width: 100%;
     @include alignColumn(center);
     padding: 10px;
-    label {
-      align-self: flex-start;
-      // display: none;
-    }
+  }
+
+  &__label {
+    align-self: flex-start;
+    // display: none;
+    font-size: 16px;
   }
 
   &__text {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      border-bottom: solid 1px black;
-      &:focus {
-          outline-offset: 0px;
-          outline: none;
-        }
-  } 
-}
+    font-size: 16px;
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1px black;
+    height: 20px;
+    &:focus {
+      outline-offset: 0px;
+      outline: none;
+    }
+  }
 
+  &__link {
+    font-size: 12px;
+  }
+}

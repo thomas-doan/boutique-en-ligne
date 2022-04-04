@@ -1,17 +1,13 @@
 <article class="form">
 
-    <section class="alert">
-
+<section class="alert">
         <?php if (isset($_SESSION['flash'])) : ?>
-
             <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-
                 <p class="alert__message"><?= $message; ?></p>
             <?php endforeach; ?>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['flash'])) :  ?>
-
             <?php unset($_SESSION['flash']) ?>
         <?php endif; ?>
     </section>

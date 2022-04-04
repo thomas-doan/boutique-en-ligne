@@ -9,40 +9,71 @@
         <li><a href="./deconnexion">Se deconnecter</a></li>
     </ul>
 </section>
-<article>
-    <form action="" method="post">
-        <label for="nomAdresse">Nom de l'enregistrement : </label>
-        <input type="text" id="nomAdresse" name="nomAdresse" aria-required="true">
+<article class="form">
+    <section class="alert">
+        <?php if (isset($_SESSION['flash'])) : ?>
+            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                <p class="alert__message"><?= $message; ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-        <h2>Destinataire</h2>
+        <?php if (isset($_SESSION['flash'])) :  ?>
+            <?php unset($_SESSION['flash']) ?>
+        <?php endif; ?>
+    </section>
 
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" aria-required="true">
+    <form class="form__container" action="" method="post">
+        <h2 class="form__title">Destinataire</h2>
 
-        <label for="prenom">Prenom :</label>
-        <input type="text" id="prenom" name="prenom" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="nomAdresse">Nom de l'enregistrement : </label>
+            <input class="form__text" type="text" id="nomAdresse" name="nomAdresse" aria-required="true">
+        </div>
 
-        <h2>Adresse</h2>
+        <div class="form__field">
+            <label class="form__label" for="nom">Nom :</label>
+            <input class="form__text" type="text" id="nom" name="nom" aria-required="true">
+        </div>
 
-        <label for="libelle">Libellé : </label>
-        <input type="text" id="libelle" name="libelle" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="prenom">Prenom :</label>
+            <input class="form__text" type="text" id="prenom" name="prenom" aria-required="true">
+        </div>
 
-        <label for="voieSup">Voie Sup : </label>
-        <input type="text" id="voieSup" name="voieSup" aria-required="true">
+        <h2 class="form__title">Adresse</h2>
 
-        <label for="codePostal">Code Postal : </label>
-        <input type="number" id="codePostal" name="codePostal" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="libelle">Libellé : </label>
+            <input class="form__text" type="text" id="libelle" name="libelle" aria-required="true">
+        </div>
 
-        <label for="ville">Ville : </label>
-        <input type="text" id="ville" name="ville" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="voieSup">Voie Sup : </label>
+            <input class="form__text" type="text" id="voieSup" name="voieSup" aria-required="true">
+        </div>
 
-        <label for="pays">Pays : </label>
-        <input type="text" id="pays" name="pays" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="codePostal">Code Postal : </label>
+            <input class="form__text" type="number" id="codePostal" name="codePostal" aria-required="true">
+        </div>
 
-        <label for="telephone">Telephone : </label>
-        <input type="number" id="telephone" name="telephone" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="ville">Ville : </label>
+            <input class="form__text" type="text" id="ville" name="ville" aria-required="true">
+        </div>
 
+        <div class="form__field">
+            <label class="form__label" for="pays">Pays : </label>
+            <input class="form__text" type="text" id="pays" name="pays" aria-required="true">
+        </div>
 
-        <input type="submit" name="submit" value="Ajouter">
+        <div class="form__field">
+            <label class="form__label" for="telephone">Telephone : </label>
+            <input class="form__text" type="number" id="telephone" name="telephone" aria-required="true">
+        </div>
+
+        <div class="form__field">
+            <input class="form__button" type="submit" name="submit" value="Ajouter">
+        </div>
     </form>
 </article>

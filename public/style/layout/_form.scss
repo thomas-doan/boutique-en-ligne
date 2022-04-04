@@ -17,6 +17,10 @@
     width: 100%;
     @include alignColumn(center);
     padding: 10px;
+
+    &--row {
+      flex-direction: row;
+    }
   }
 
   &__label {

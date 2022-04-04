@@ -450,6 +450,7 @@ h1 {
 }
 
 .form {
+  overflow-x: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -468,6 +469,7 @@ h1 {
 }
 
 .form__field {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -490,6 +492,7 @@ h1 {
 }
 
 .form__text {
+  width: 100%;
   border-top: none;
   border-left: none;
   border-right: none;

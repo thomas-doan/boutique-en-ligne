@@ -1,11 +1,21 @@
 .form {
+  overflow-x: hidden;
   @include alignColumn(center);
   margin: 0 auto;
   padding: 50px;
 
+  &__container {
+    // border: 1px solid black;
+  }
+
+  &__title {
+  }
+
   &__field {
+    width: 100%;
     @include alignColumn(center);
     padding: 10px;
+
     label {
       align-self: flex-start;
       // display: none;
@@ -13,14 +23,14 @@
   }
 
   &__text {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      border-bottom: solid 1px black;
-      &:focus {
-          outline-offset: 0px;
-          outline: none;
-        }
-  } 
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1px black;
+    &:focus {
+      outline-offset: 0px;
+      outline: none;
+    }
+  }
 }
-

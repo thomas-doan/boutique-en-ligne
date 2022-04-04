@@ -397,18 +397,6 @@ $router->map(
 ----------------------------- PARCOURS PANIER ----------------------------- */
 
 
-//Commande
-$router->map(
-    'GET/POST',
-    '/commande',
-    function () {
-        $controller = new App\Controllers\OrderController();
-        $controller->index();
-        $controller->orderResume();
-        $controller->validate();
-    },
-    'commande'
-);
 
 //livraison
 $router->map(

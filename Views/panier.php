@@ -78,9 +78,9 @@ extract($controller->index());
             }
         } ?>
     <div class="footerPanier">
-        <p>Prix total : <?= $_SESSION['totalPrice'] ?> €</p>
+        <p>Total tva incl : <?= $_SESSION['totalPrice'] ?> €</p>
         <form action="" method="post">
-            <input name="goDelivery" value="commandé" type="submit">
+            <input class="button" name="goDelivery" value="commandé" type="submit">
         </form>
     </div>
 <?php } else { ?>

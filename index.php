@@ -1,7 +1,7 @@
 <?php session_start();
 // error_reporting(0);
 
-use App\Controllers\Security;
+/* use App\Controllers\Security;
 use Exceptions\NotFoundException;
 
 //Control d'accée à l'url
@@ -35,6 +35,7 @@ if ($pathControl[2] == 'profil' && empty($_SESSION['user'])) {
 if (($pathControl[2] == 'connexion' && !empty($_SESSION['user'])) || ($pathControl[2] == 'inscription' && !empty($_SESSION['user']))) {
     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="../boutique-en-ligne/"</SCRIPT>'; //force la direction 
 }
+ */
 
 use App\Controllers\Security;
 use Exceptions\NotFoundException;
@@ -53,6 +54,9 @@ require('vendor/autoload.php');
 
 
 define('VIEWS', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '404.php');
+
+define('REDIRECT', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'shop' . DIRECTORY_SEPARATOR . 'livraison.php');
+
 
 function error($param)
 {
@@ -416,6 +420,7 @@ $router->map(
         $controller->fieldCheck();
         $controller->adressCheck();
         $controller->getAdress();
+        $controller->back();
     },
     'livraison'
 );

@@ -92,4 +92,5 @@
        <input name="fk_id_utilisateur" value="<?= $_SESSION['user']['id_utilisateur'] ?>" type="hidden">
 
        <input name="submit" type="submit" value="Valider">
+       <input name="back" type="submit" value="retour">
    </form>

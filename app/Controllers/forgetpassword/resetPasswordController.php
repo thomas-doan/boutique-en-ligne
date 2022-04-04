@@ -44,15 +44,17 @@ class resetPasswordController extends Controller
                         ->setPassword($password);
                     $id_utilisateur = (int)$checkUser[0]['id_utilisateur'];
                     $this->model->update($user, compact('id_utilisateur', 'password'));
-                    header('Location: ./connexion');
-                    exit();
+
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
+
                 } else {
 
                     $_SESSION['flash']['erreur'] = "Oups ! La réponse est fausse !";
                 }
             }
-            header('Location: ./resetpassword');
-            exit();
+
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
+
         }
     }
 }

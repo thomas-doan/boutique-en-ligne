@@ -101,11 +101,21 @@ class LivraisonController extends Controller
                 $_SESSION['validate']['telephone'] = $telephone;
 
                 echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction
-                exit();
+
             } else {
                 $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
-                header('location: ./livraison');
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>'; //force la direction
+
             }
+        }
+    }
+
+    public function back()
+    {
+        if (isset($_POST['back'])) {
+            /*  header('location: ./livraison'); */
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./commande" </SCRIPT>'; //force la direction
+
         }
     }
 }

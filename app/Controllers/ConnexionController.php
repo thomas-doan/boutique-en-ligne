@@ -11,10 +11,10 @@ class ConnexionController extends Controller
     public function index()
     {
         $title = "Connexion";
-        $refererPath = explode('/', $_SERVER['HTTP_REFERER'])[4];
-        if ($refererPath !== 'connexion' && $refererPath !== 'admin') {
+        /*  $refererPath = explode('/', $_SERVER['HTTP_REFERER'])[4];
+               if ($refererPath !== 'connexion' && $refererPath !== 'Admin') {
             $_SESSION['reload'] = $_SERVER['HTTP_REFERER'];
-        }
+        } */
         return $this->view('profil.connexion', compact('title'));
     }
 
@@ -28,6 +28,8 @@ class ConnexionController extends Controller
 
             if (empty($email) || empty($mdp)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez remplir tout les champs";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
+
             } else {
 
                 $argument = ['email'];
@@ -63,7 +65,8 @@ class ConnexionController extends Controller
                 } else {
 
                     $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est inccorecte";
-                    header('Location: ./connexion');
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
+
                 }
             }
         }

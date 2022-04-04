@@ -47,10 +47,11 @@ class checkEmailController extends Controller
                     $_SESSION['reset']['id_utilisateur'] = (int)$user->getId_utilisateur();
                     $_SESSION['reset']['question'] = $user->getQuestion_secrete();
                     $_SESSION['reset']['email'] = $user->getEmail();
-                    header('Location: ./resetpassword');
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
+
                 } else {
                     $_SESSION['flash']['erreur'] = "Oups ! l'email est incorrect";
-                    header('Location: ./checkemail');
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./checkemail" </SCRIPT>'; //force la direction
                 }
             }
         }

@@ -6,7 +6,7 @@ $controller = new App\Controllers\ShoppingCartController();
 
 $controller->upValue();
 $controller->downValue();
-// $controller->shoppingBag();
+$controller->shoppingBag();
 $controller->deleteProduct();
 $controller->singlePrice();
 $controller->totalQuantity();

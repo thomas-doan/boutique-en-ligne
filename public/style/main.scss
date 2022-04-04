@@ -17,9 +17,12 @@
 'layout/header',
 'layout/form',
 'layout/footer',
-'layout/panier';
+'layout/panier',
+'layout/sidebarre';
 
 // 5. Page-specific styles
 @import
 'pages/home',
-'pages/boutique';
+'pages/boutique',
+'pages/adminIndex',
+'pages/creerArticle';

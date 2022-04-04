@@ -76,7 +76,7 @@ class CategoriesComponent extends Categories
                     $i++;
                 }
 ?>
-                <p><?php echo "{$key}" ?> : <?= $result ?></p>
+                <p><b><?php echo "{$key}" ?></b> : <?= $result ?></p>
             <?php
             } elseif (($key == 'SAVEUR') || ($key == 'SPÉCIFICITÉ')) {
                 $list_argument = '';
@@ -85,12 +85,12 @@ class CategoriesComponent extends Categories
                 }
                 $list_argument[-1] = ' ';
             ?>
-                <p><?php echo "{$key}" ?> : <?= $list_argument ?></p>
+                <p><b><?php echo "{$key}" ?></b> : <?= $list_argument ?></p>
             <?php
             } elseif ($key == 'etape2' || $key == 'PROVENENCE') {
             } else {
             ?>
-                <p><?php echo "{$key}"; ?>:<?= $this->getNameById(['id_categorie'], $value) ?></p>
+                <p><b><?php echo "{$key}"; ?></b> : <?= $this->getNameById(['id_categorie'], $value) ?></p>
 <?php
             }
         }

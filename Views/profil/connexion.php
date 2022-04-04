@@ -1,5 +1,4 @@
 <article class="form">
-    <h1 class="form__title">Connexion</h1>
 
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -12,12 +11,14 @@
     <?php endif; ?>
 
     <form class="form__container" action="#" method="post">
+
+        <h1 class="form__title">Connexion</h1>
         <div class="form__field">
-            <label for="email">Email : </label>
+            <label for="email" class="form__label">Email : </label>
             <input class="form__text" type="text" id="email" name="email">
         </div>
         <div class="form__field">
-            <label for="mdp">Mot de passe : </label>
+            <label for="mdp" class="form__label">Mot de passe : </label>
             <input class="form__text" type="password" id="mdp" name="mdp">
         </div>
 
@@ -25,7 +26,7 @@
             <input class="form__button" type="submit" name="submit" value="Connexion">
         </div>
 
+        <a class="form__link" href="checkemail">Mot de passe oublié ?</a>
+        <a class="form__link" href="inscription">Je créer un compte</a>
     </form>
-    <a href="checkemail">Mot de passe oublié ?</a>
-    <a class="form__link" href="inscription">Je créer un compte</a>
 </article>

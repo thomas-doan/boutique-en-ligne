@@ -17,28 +17,13 @@
     </section>
 
 
-    <form class="form" action="" method="post">
+    <form class="form__container" action="" method="post">
 
         <h1 class="form__title">Inscription</h1>
 
         <div class="form__field">
             <label class="form__label" for="prenom">Prenom :</label>
             <input class="form__text" type="text" id="prenom" name="prenom" aria-required="true">
-        </div>
-
-        <div class="form__field">
-            <label for="question" class="form__label">Ecrire votre question secrete :</label>
-            <input type="text" id="question" name="question_secrete" aria-required="true" class="form__text">
-        </div>
-
-        <div class="form__field">
-            <label for="reponse" class="form__label">Reponse :</label>
-            <input type="password" id="reponse" name="reponse" aria-required="true" class="form__text">
-        </div>
-
-        <div class="form__field">
-            <label for="mdp" class="form__label">Mot de passe : </label>
-            <input type="password" id="mdp" name="mdp" aria-required="true" class="form__text">
         </div>
 
         <div class="form__field">
@@ -51,16 +36,25 @@
             <input class="form__text" type="text" id="email" name="email" aria-required="true">
         </div>
 
-        <div class="form__field">
 
+        <div class="form__field">
             <label class="form__label" for="mdp">Mot de passe : </label>
             <input class="form__text" type="password" id="mdp" name="mdp" aria-required="true">
         </div>
 
         <div class="form__field">
-
             <label class="form__label" for="mdpConfirm">Confirmez votre mot de Passe :</label>
             <input class="form__text" type="password" id="mdpConfirm" name="mdpConfirm" aria-required="true">
+        </div>
+
+        <div class="form__field">
+            <label for="question" class="form__label">Ecrire votre question secrete :</label>
+            <input type="text" id="question" name="question_secrete" aria-required="true" class="form__text">
+        </div>
+
+        <div class="form__field">
+            <label for="reponse" class="form__label">Reponse :</label>
+            <input type="password" id="reponse" name="reponse" aria-required="true" class="form__text">
         </div>
 
         <div class="form__field">

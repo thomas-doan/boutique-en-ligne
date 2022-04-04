@@ -61,10 +61,11 @@ body {
   height: 200vh;
   font-family: century-gothic, sans-serif;
   color: #424242;
+  background-color: #f3f8f6;
 }
 
 h1 {
-  font-family: 'DM Serif Display', serif;
+  font-family: "DM Serif Display", serif;
 }
 
 @font-face {
@@ -72,21 +73,20 @@ h1 {
 }
 
 .form__button {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: solid 1px black;
-  background-color: white;
-  padding: 5px;
+  border: none;
+  background-color: #135e4c;
+  color: white;
   cursor: pointer;
   outline: none;
   -webkit-transition: 0.4s ease-in-out;
   transition: 0.4s ease-in-out;
+  font-size: 20px;
+  padding: 8px 24px;
+  border-radius: 4px;
 }
 
 .form__button:hover {
-  background-color: black;
-  color: white;
+  background-color: #1d3f36;
 }
 
 /**
@@ -468,6 +468,23 @@ h1 {
   padding: 50px;
 }
 
+.form__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: black;
+}
+
 .form__field {
   width: 100%;
   display: -webkit-box;
@@ -486,22 +503,29 @@ h1 {
   padding: 10px;
 }
 
-.form__field label {
+.form__label {
   -ms-flex-item-align: start;
       align-self: flex-start;
+  font-size: 16px;
 }
 
 .form__text {
+  font-size: 16px;
   width: 100%;
   border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: solid 1px black;
+  height: 20px;
 }
 
 .form__text:focus {
   outline-offset: 0px;
   outline: none;
+}
+
+.form__link {
+  font-size: 12px;
 }
 
 .sidenav {

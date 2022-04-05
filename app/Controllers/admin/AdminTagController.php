@@ -58,6 +58,13 @@ class AdminTagController extends Controller
     public function create()
     {
         if (isset($_POST['create_tag'])) {
+
+            if (empty($_POST['nom_tag'])) {
+                $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
+                header('location: ./tag');
+                exit();
+            }
+
             $nom_tag = $_POST['nom_tag'];
             $modelHydrate = $this->model
                 ->setNom_tag($nom_tag);

@@ -31,12 +31,7 @@ class AdminCategoryController extends Controller
 
             if (isset($_POST['section']) || isset($_POST['nom_categorie'])) {
 
-                if (empty($_POST['section'])) {
-                    $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
-                    header('location: ./categorie');
-                    exit();
-                }
-                if (empty($_POST['nom_categorie'])) {
+                if (empty($_POST['nom_categorie']) || empty($_POST['section'])) {
                     $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
                     header('location: ./categorie');
                     exit();
@@ -63,6 +58,12 @@ class AdminCategoryController extends Controller
     public function create()
     {
         if (isset($_POST['create_cat'])) {
+
+            if (empty($_POST['nom_categorie']) || empty($_POST['section'])) {
+                $_SESSION['flash']['champsvides'] = "Les champs sont vides !";
+                header('location: ./categorie');
+                exit();
+            }
             $nom_categorie = $_POST['nom_categorie'];
             $section = $_POST['section'];
             $modelHydrate = $this->model

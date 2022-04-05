@@ -2,11 +2,11 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 --title {
-  font-family: 'DM Serif Display', serif;
+  font-family: "DM Serif Display", serif;
 }
 
 --primaryFont {
-  font-family: 'century-gothic, sans-serif';
+  font-family: "century-gothic, sans-serif";
 }
 
 --primaryBgColor {
@@ -83,6 +83,51 @@ body {
 
 h1 {
   font-family: "DM Serif Display", serif;
+}
+
+.layoutContainertable {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.layoutContainertable div:nth-child(1) {
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  border-radius: 4px;
+}
+
+.layoutContainertable article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.layoutContainertable input {
+  border: none;
+  border-bottom: 1px solid #135e4d33;
+}
+
+.layoutContainertable button {
+  margin: 0.5rem;
 }
 
 @font-face {
@@ -1382,7 +1427,8 @@ h1 {
   font-size: 1.8rem;
 }
 
-.sideBarreAdmin ul li a, .sideBarreAdmin ul li i {
+.sideBarreAdmin ul li a,
+.sideBarreAdmin ul li i {
   color: #135e4c;
 }
 
@@ -1915,5 +1961,275 @@ h1 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.containerInfo form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.containerInfo textarea {
+  border: none;
+  background-color: #f9f7f4;
+}
+
+.commentAdmin button,
+input,
+textarea,
+div,
+h3 {
+  margin: 0.5rem;
+}
+
+/* Header */
+#header {
+  background-size: cover;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/*================================*/
+/*=== Partie sur le Swipe Menu ===*/
+/*================================*/
+/* Menu burger */
+#menu-burger {
+  position: fixed;
+  top: 1.5em;
+  right: 3.5em;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#menu-burger .bar1,
+#menu-burger .bar2,
+#menu-burger .bar3 {
+  width: 32px;
+  height: 5px;
+  background-color: #0c4b10;
+  margin: 6px 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+#menu-burger:hover {
+  opacity: 0.75;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#menu-burger.clicked .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+#menu-burger.clicked .bar2 {
+  opacity: 0;
+}
+
+#menu-burger.clicked .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+#menu {
+  position: fixed;
+  z-index: 9999;
+  left: -25%;
+  top: auto;
+  background-color: white;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  width: 25%;
+  min-height: 100%;
+}
+
+#menu ul li {
+  list-style: none;
+  font-size: 1.8rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 8px;
+  font-size: 1.8rem;
+  border-top: 1px solid #135e4d33;
+}
+
+#menu ul li a {
+  display: block;
+  text-decoration: none;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
+  text-align: center;
+}
+
+#menu ul li a:hover {
+  background-color: #135e4d00;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
+}
+
+#menu.visible {
+  -webkit-animation: 0.5s slideRight ease-in forwards;
+          animation: 0.5s slideRight ease-in forwards;
+  -webkit-transition-delay: 0;
+          transition-delay: 0;
+}
+
+#menu.invisible {
+  -webkit-animation: 1s slideLeft ease-out forwards;
+          animation: 1s slideLeft ease-out forwards;
+  -webkit-transition-delay: 0;
+          transition-delay: 0;
+}
+
+/* Animations pour le menu slide */
+@keyframes slideRight {
+  from {
+    left: -25%;
+  }
+  to {
+    left: 0%;
+  }
+}
+
+@-webkit-keyframes slideRight {
+  from {
+    left: -25%;
+  }
+  to {
+    left: 0%;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -25%;
+  }
+}
+
+@-webkit-keyframes slideLeft {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -25%;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  #menu {
+    left: -50%;
+    width: 50%;
+  }
+  #menu-burger.clicked {
+    position: fixed;
+  }
+  #main-block,
+  #second-block {
+    padding: 4em 2em;
+  }
+  /* Animations pour le menu slide */
+  @keyframes slideRight {
+    from {
+      left: -50%;
+    }
+    to {
+      left: 0%;
+    }
+  }
+  @-webkit-keyframes slideRight {
+    from {
+      left: -50%;
+    }
+    to {
+      left: 0%;
+    }
+  }
+  @keyframes slideLeft {
+    from {
+      left: 0%;
+    }
+    to {
+      left: -50%;
+    }
+  }
+  @-webkit-keyframes slideLeft {
+    from {
+      left: 0%;
+    }
+    to {
+      left: -50%;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #menu-burger {
+    top: 1em;
+    right: 2em;
+    z-index: 9999;
+  }
+  #menu {
+    left: -100%;
+    width: 100%;
+  }
+  #second-block #google-maps {
+    width: 100%;
+    margin-right: 0;
+  }
+  #second-block #contact-form {
+    width: 100%;
+    margin-top: 2em;
+  }
+  /* Animations pour le menu slide */
+  @keyframes slideRight {
+    from {
+      left: -100%;
+    }
+    to {
+      left: 0%;
+    }
+  }
+  @-webkit-keyframes slideRight {
+    from {
+      left: -100%;
+    }
+    to {
+      left: 0%;
+    }
+  }
+  @keyframes slideLeft {
+    from {
+      left: 0%;
+    }
+    to {
+      left: -100%;
+    }
+  }
+  @-webkit-keyframes slideLeft {
+    from {
+      left: 0%;
+    }
+    to {
+      left: -100%;
+    }
+  }
 }
 /*# sourceMappingURL=main.css.map */

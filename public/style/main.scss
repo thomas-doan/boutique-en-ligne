@@ -13,17 +13,16 @@
 "components/caroussel",
 "components/card";
 // 4. Layout-related sections
-@import
-'layout/header',
-'layout/form',
-'layout/footer',
-'layout/panier',
-'layout/sidebarre';
-
+@import "layout/header",
+"layout/form",
+"layout/footer",
+"layout/panier",
+"layout/sidebarre";
 // 5. Page-specific styles
-@import
-'pages/home',
-'pages/boutique',
-'pages/adminIndex',
-'pages/creerArticle';
-"pages/livraison";
+@import "pages/home",
+"pages/boutique",
+"pages/adminIndex",
+"pages/creerArticle",
+"pages/livraison",
+"pages/adminComment",
+"pages/menuAdminSlider";

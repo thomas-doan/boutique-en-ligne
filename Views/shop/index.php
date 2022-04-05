@@ -1,38 +1,37 @@
-
 <section class="hero">
-<img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
-<div class="CTA">
-    <h1>Kawa</h1>
-    <h2>Une boutique dédier aux amateurs de café</h2>
-    <button><a href="./boutique/all">Découvrir ></a></button>
-</div>
+    <img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
+    <div class="CTA">
+        <h1>Kawa</h1>
+        <h2>Une boutique dédier aux amateurs de café</h2>
+        <button><a href="./boutique/all">Découvrir ></a></button>
+    </div>
 </section>
 <article class="homeProposition">
     <section class="caroussel caroussel--home">
         <div class="caroussel__element">
-            <?php for($i = 0; $i <=$selectNumberofCard;$i++):?>
-            <?php $cards->printCard($cards->getDataByid($bestArticle[$i]['fk_id_article']))?>
+            <?php for ($i = 0; $i <= $selectNumberofCard; $i++) : ?>
+                <?php $cards->printCard($cards->getDataByid($bestArticle[$i]['fk_id_article'])) ?>
             <?php endfor; ?>
         </div>
     </section>
 
     <section class="lastProduct">
-        <?php $cards->printCard($cards->getDataByid($lastidProduct))?>
-        <img style="width : 80px;"src=".\public\assets\pictures\kawa_icon_new.svg" alt="">
+        <?php $cards->printCard($cards->getDataByid($lastidProduct)) ?>
+        <img style="width : 80px;" src=".\public\assets\pictures\kawa_icon_new.svg" alt="">
     </section>
 </article>
 <h2>Comment aimez vous boire votre café ?</h2>
 <article class="containerCard">
-    
-    
+
+
     <section class="cardChoice">
         <a href="./boutique/all?selection=1">
             <img src="public\assets\pictures\kawa_img_card1.jpg" alt="">
             <p>Un deca sans pression</p>
         </a>
     </section>
-    
-    
+
+
     <section class="cardChoice">
         <a href="./boutique/all?selection=2">
             <img src="public\assets\pictures\kawa_img_card2.jpg" alt="">
@@ -66,7 +65,7 @@
             <img src="public\assets\pictures\kawa_img_card6.jpg" alt="">
             <p>Un café en accord avec la nature</p>
         </a>
-        </section>
+    </section>
 
     <section class="cardChoice">
         <a href="./boutique/Grain">

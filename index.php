@@ -1,8 +1,10 @@
 <?php session_start();
 // error_reporting(0);
 
-/* use App\Controllers\Security;
+use App\Controllers\Security;
 use Exceptions\NotFoundException;
+
+require_once 'app/Controllers/Security.php';
 
 //Control d'accée à l'url
 $urlControlUser = $_SERVER['REQUEST_URI'];
@@ -35,12 +37,7 @@ if ($pathControl[2] == 'profil' && empty($_SESSION['user'])) {
 if (($pathControl[2] == 'connexion' && !empty($_SESSION['user'])) || ($pathControl[2] == 'inscription' && !empty($_SESSION['user']))) {
     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="../boutique-en-ligne/"</SCRIPT>'; //force la direction 
 }
- */
 
-use App\Controllers\Security;
-use Exceptions\NotFoundException;
-
-require_once 'app/Controllers/Security.php';
 //Sécurité de tout les formulaire Get|POST
 $securityAll = new Security();
 if (isset($_GET)) {

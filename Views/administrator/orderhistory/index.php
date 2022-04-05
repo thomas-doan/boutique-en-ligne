@@ -24,16 +24,18 @@
         <?php unset($_SESSION['flash']) ?>
     <?php endif; ?>
 
-
+    <label>
+        <h2>Commande en attente : <?= $nb['nb'] ?></h2>
+    </label>
     <?php
 
-    var_dump($livraison);
+
     foreach ($livraison as $value) {
 
         if ($value['etat_livraison'] == "en attente confirmation") {
 
     ?>
-            <label> Commande en attente : <?= $nb['nb'] ?> </label>
+
 
             <form action="" method="post">
 
@@ -47,14 +49,22 @@
             </form>
 
 
+    <?php }
+    } ?>
+    <label>
+        <h2>Commandes passées : </h2>
+    </label>
+
+    <?php
 
 
-        <?php }
+    foreach ($livraison as $value) {
+
 
         if ($value['etat_livraison'] == "confirme") {
-        ?>
+    ?>
 
-            <label> Commandes passées : </label>
+
 
             <form action="" method="post">
 

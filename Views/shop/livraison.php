@@ -1,6 +1,8 @@
   <?php
     require_once './app/Controllers/ShoppingCartController.php';
-
+    if (!isset($_SESSION['user'])) {
+        header('Location: /boutique-en-ligne/connexion');
+    }
 
     $controller = new App\Controllers\ShoppingCartController();
 
@@ -14,6 +16,7 @@
     $controller->delivery();
     $controller->index();
     extract($controller->index());
+
     ?>
 
   <?php if (isset($_SESSION['flash'])) : ?>

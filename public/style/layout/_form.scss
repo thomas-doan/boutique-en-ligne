@@ -23,9 +23,12 @@
     }
 }
 
-.formLivraison {
+.containerMain {
     width: 100%;
     background-color: rgb(249, 247, 244);
+}
+
+.formLivraison {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

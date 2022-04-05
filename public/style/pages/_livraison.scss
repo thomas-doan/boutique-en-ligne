@@ -17,14 +17,12 @@
     padding-left: 4rem;
     padding-right: 4rem;
     img {
-        max-width: 150px;
-        height: 100%;
-        max-height: 150px;
+        width: 125px;
         border-radius: 4px;
     }
     a {
         margin-top: 1rem;
-        margin-bottom: 1rem;
+        /*  margin-bottom: 1rem; */
         padding-left: 6.2rem;
     }
 }
@@ -37,17 +35,23 @@
     background-color: rgb(249, 247, 244);
     margin-bottom: 1rem;
     display: flex;
+    width: 100%;
 }
 
 .resume {
     margin: 0.5rem;
-    padding: 2rem;
+    padding-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     flex-direction: column;
     align-content: center;
     border-radius: 4px;
 }
 
-.titi {
+.resume div {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

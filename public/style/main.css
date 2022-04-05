@@ -505,9 +505,12 @@ h1 {
   outline: none;
 }
 
-.formLivraison {
+.containerMain {
   width: 100%;
   background-color: #f9f7f4;
+}
+
+.formLivraison {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1244,15 +1247,13 @@ h1 {
 }
 
 .resumeOrder img {
-  max-width: 150px;
-  height: 100%;
-  max-height: 150px;
+  width: 125px;
   border-radius: 4px;
 }
 
 .resumeOrder a {
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  /*  margin-bottom: 1rem; */
   padding-left: 6.2rem;
 }
 
@@ -1266,11 +1267,16 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
 }
 
 .resume {
   margin: 0.5rem;
-  padding: 2rem;
+  padding-top: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -1280,7 +1286,8 @@ h1 {
   border-radius: 4px;
 }
 
-.titi {
+.resume div {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

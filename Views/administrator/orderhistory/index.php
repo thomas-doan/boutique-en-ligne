@@ -27,6 +27,7 @@
 
     <?php
 
+    var_dump($livraison);
     foreach ($livraison as $value) {
 
         if ($value['etat_livraison'] == "en attente confirmation") {

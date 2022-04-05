@@ -22,6 +22,8 @@ class AdminOrderController extends Controller
 
         $livraison = $this->modelNumCommande->getAllOrderbyIdUser();
 
+
+
         $nb = $this->modelNumCommande->countWaitingValidate();
 
         $this->view('administrator/orderhistory/index', compact('title', 'livraison', 'nb'));

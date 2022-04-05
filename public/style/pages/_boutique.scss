@@ -1,7 +1,10 @@
 .navCatégories{
     width: 100%;
+    background-color: #135e4c;
+    padding: 8px;
+    color: white;
+
     & ul{
-        margin: 16px;
         display: flex;
         justify-content: space-evenly;
         & li a{
@@ -16,8 +19,10 @@
 
 .moreRecherche{
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
     display: flex;
     flex-direction: column;
+    padding: 16px;
     & a{
        align-self: center;
     }
@@ -59,10 +64,12 @@
         }
         & > input{
             background-color: #135e4c;
-            padding: 4px 16px;
+            padding: 8px 32px;
             border: none;
+            font-size: 1.5rem;
             border-radius: 4px;
             color: white;
+            margin: 8px;
             &:hover{
                 background-color: #1d3f36;
             }
@@ -136,7 +143,9 @@
     }
     .moreRecherche{
         grid-column: 1 / 6;
-        box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, 0.185);
+        box-shadow: 
+        -10px 10px 0px 10px rgb(255, 255, 255),
+        5px 10px 10px -2px rgba(0, 0, 0, 0.185);
 
         & > a{
             display: none;

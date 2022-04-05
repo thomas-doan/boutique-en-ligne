@@ -17,9 +17,12 @@
         "layout/_form.scss",
         "layout/_footer.scss",
         "layout/_panier.scss",
+        "layout/_sidebarre.scss",
         "pages/_home.scss",
         "pages/_boutique.scss",
         "pages/_livraison.scss"
+        "pages/_adminIndex.scss",
+        "pages/_creerArticle.scss"
     ],
     "names": [],
     "file": "main.css"

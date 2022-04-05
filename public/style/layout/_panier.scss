@@ -121,7 +121,7 @@
     overflow: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     &:target{
-      width: 100vw;
+      width: 100%;
       z-index: 99;
       padding: 64px 32px 64px 32px; /* Place content 60px from the top */
     }

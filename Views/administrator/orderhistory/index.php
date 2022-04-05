@@ -10,7 +10,7 @@
     <?php unset($_SESSION['flash']) ?>
 <?php endif; ?>
 
-
+<label> Commande en attente : <?= $nb['nb'] ?> </label>
 <?php
 
 foreach ($livraison as $value) {
@@ -18,7 +18,7 @@ foreach ($livraison as $value) {
     if ($value['etat_livraison'] == "en attente confirmation") {
 
 ?>
-        <label> Commande en attente : <?= $nb['nb'] ?> </label>
+        
 
         <form action="" method="post">
 

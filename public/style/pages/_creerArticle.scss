@@ -1,10 +1,15 @@
 .mainAndSideAdmin{
     display: flex;
+    height: 100%;
 }
 .mainAdmin{
     padding: 16px;
     width: 100%;
-
+    display: flex;
+    flex-direction: column;
+    & > H1{
+        font-size: 2.5rem;
+    }
     & form{
         display: flex;
         flex-direction: column;
@@ -239,7 +244,7 @@ border-radius: 4px;
     
 }
 .renduArticle + div {
-    a{
+    & a{
         display: block;
         padding: 4px 16px;
         margin: 8px 0px;
@@ -266,6 +271,63 @@ border-radius: 4px;
         color: #135e4c;
         text-decoration: underline;
     }
+}
+
+@media only screen and (min-device-width : 1024px){
+    .mainAdmin{
+        & form[name = info_article_pincipal]{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            & fieldset:first-child{
+                min-width: 320px;
+                width: 50%;
+            }
+            & fieldset:nth-child(2){
+                width: 100%;
+                order: -1;
+            }
+            & fieldset:nth-child(3){
+                width: 50%;
+            }
+        }
+    }
+    .selectstronger{
+        width: 300px;
+    }
+    #liste_provenence, #addProvenence{
+        width: 300px;
+    }
+
+    .renduArticle{
+        max-width: 720px;
+        padding: 16px;
+        background-color: white;
+        border-radius: 4px;
+        align-self: center;
+    }
+    .renduArticle > div:nth-child(2)
+    {
+        display: flex;
+        & img{
+            width: 50%;
+        }
+        & > div{
+            padding-left: 16px;
+        }
+    }
+    .renduArticle + div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        & a{
+        width: 400px;
+        align-self: center;
+        }
+    }
+
 }
 /**
 #1d3f36

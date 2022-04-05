@@ -75,7 +75,7 @@ html {
 
 body {
   width: 100%;
-  height: 200vh;
+  height: 100%;
   font-family: century-gothic, sans-serif;
   color: #424242;
   background-color: #f3f8f6;
@@ -774,7 +774,7 @@ h1 {
 
 .sideBarreAcount {
   width: 100%;
-  height: 92vh;
+  height: auto;
   padding: 32px;
   display: none;
   -webkit-box-orient: vertical;
@@ -784,19 +784,27 @@ h1 {
   background-color: rgba(255, 255, 255, 0.95);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
+  position: -webkit-sticky;
+  position: sticky;
 }
 
-.sideBarreAcount h1 {
+.sideBarreAcount div {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 32px;
+}
+
+.sideBarreAcount div h1 {
   margin-bottom: 16px;
   font-size: 2.3rem;
 }
 
-.sideBarreAcount ul {
+.sideBarreAcount div ul {
   width: 100%;
   border-top: 1px solid #135e4c;
 }
 
-.sideBarreAcount ul li {
+.sideBarreAcount div ul li {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -811,19 +819,19 @@ h1 {
   font-size: 1.8rem;
 }
 
-.sideBarreAcount ul li a, .sideBarreAcount ul li i {
+.sideBarreAcount div ul li a, .sideBarreAcount div ul li i {
   color: #135e4c;
 }
 
-.sideBarreAcount ul li:hover {
+.sideBarreAcount div ul li:hover {
   background-color: #135e4d15;
 }
 
-.sideBarreAcount ul li:hover a {
+.sideBarreAcount div ul li:hover a {
   background-color: #135e4d00;
 }
 
-.sideBarreAcount ul li:not(li:first-child) {
+.sideBarreAcount div ul li:not(li:first-child) {
   border-top: 1px solid #135e4d33;
 }
 
@@ -1339,11 +1347,23 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 100%;
 }
 
 .mainAdmin {
   padding: 16px;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.mainAdmin > H1 {
+  font-size: 2.5rem;
 }
 
 .mainAdmin form {
@@ -1652,6 +1672,80 @@ h1 {
   text-align: center;
   color: #135e4c;
   text-decoration: underline;
+}
+
+@media only screen and (min-device-width: 1024px) {
+  .mainAdmin form[name=info_article_pincipal] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .mainAdmin form[name=info_article_pincipal] fieldset:first-child {
+    min-width: 320px;
+    width: 50%;
+  }
+  .mainAdmin form[name=info_article_pincipal] fieldset:nth-child(2) {
+    width: 100%;
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
+  }
+  .mainAdmin form[name=info_article_pincipal] fieldset:nth-child(3) {
+    width: 50%;
+  }
+  .selectstronger {
+    width: 300px;
+  }
+  #liste_provenence, #addProvenence {
+    width: 300px;
+  }
+  .renduArticle {
+    max-width: 720px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 4px;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  .renduArticle > div:nth-child(2) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .renduArticle > div:nth-child(2) img {
+    width: 50%;
+  }
+  .renduArticle > div:nth-child(2) > div {
+    padding-left: 16px;
+  }
+  .renduArticle + div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .renduArticle + div a {
+    width: 400px;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
 }
 
 /**

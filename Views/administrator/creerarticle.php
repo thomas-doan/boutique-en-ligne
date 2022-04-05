@@ -1,15 +1,17 @@
 <article class="mainAndSideAdmin">
 <section class="sideBarreAcount">
+    <div>
         <h3>Admin</h3>
         <ul>
-            <li><a href="./partie1">Creer un Article ></a></li>
-            <li><a href="../modifierArticle/liste">Modifier un articles ></a></li>
-            <li><a href="../gestiondestock">Gestion des stocks ></a></li>
-            <li><a href="">Historique de commande ></a></li>
-            <li><a href="">Gestion de livraison ></a></li>
-            <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
+            <li><a href="./partie1">Creer un Article</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../modifierArticle/liste">Modifier un articles</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../gestiondestock">Gestion des stocks</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="">Historique de commande</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="">Gestion de livraison</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a><i class="fa-solid fa-angle-right"></i></li>
             <li><a href="../../profil/deconnexion">Se deconnecter</a></li>
         </ul>
+    </div>
     </section>
     <article class="mainAdmin">
         <h1>Creer un Article</h1>
@@ -73,8 +75,8 @@
                     <input class="form__text" type="number" name="sku" id="sku" value="<?= $Admin_function->coverup_form('sku')?>">
                     <label for="fournisseur">Nom du fournisseur:</label>
                     <input class="form__text" type="text" name="fournisseur" id="fournisseur" value="<?= $Admin_function->coverup_form('fournisseur')?>">
-                    <input type="submit" name="etape1" value="Passer à l'étape suivante">
                 </fieldset>
+                <input class="ctaCreatProduct" type="submit" name="etape1" value="Passer à l'étape suivante">
             </form>
         <?php endif ; ?>
 
@@ -204,7 +206,7 @@
                     </div>
                 </fieldset>
 
-                <input class="ctaCreatProduct"type="submit" name="etape2" value="Visualiser le résultat">
+                <input class="ctaCreatProduct" type="submit" name="etape2" value="Visualiser le résultat">
                 </form>
                 
         <?php endif ; ?>

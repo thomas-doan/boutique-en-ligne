@@ -153,4 +153,13 @@ class ShoppingCartController extends Controller
             }
         }
     }
+
+    public function delivery()
+    {
+        if (isset($_POST['goDelivery'])) {
+            /*  header('location: ./livraison'); */
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="/boutique-en-ligne/livraison" </SCRIPT>'; //force la direction
+
+        }
+    }
 }

@@ -1,17 +1,19 @@
-<?php var_dump($_POST)?>
-<section>
+<article class="mainAndSideAdmin">
+<section class="sideBarreAcount">
+    <div>
     <h3>Admin</h3>
-    <ul>
-        <li><a href="../creerArticle/partie1">Creer un Article ></a></li>
-        <li><a href="../modifierArticle/liste">Modifier un articles ></a></li>
-        <li><a href="../gestiondestock">Gestion des stocks ></a></li>
-        <li><a href="">Historique de commande ></a></li>
-        <li><a href="">Gestion de livraison ></a></li>
-        <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
-        <li><a href="../../profil/deconnexion">Se deconnecter</a></li>
-    </ul>
+        <ul>
+            <li><a href="../creerArticle/partie1">Creer un Article ></a></li>
+            <li><a href="../modifierArticle/liste">Modifier un articles ></a></li>
+            <li><a href="../gestiondestock">Gestion des stocks ></a></li>
+            <li><a href="">Historique de commande ></a></li>
+            <li><a href="">Gestion de livraison ></a></li>
+            <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
+            <li><a href="../../profil/deconnexion">Se deconnecter</a></li>
+        </ul>
+    </div>
 </section>
-
+<section>
     <h3>Modification d'articles</h3>
 
     <?php if (isset($_SESSION['flash'])) : ?>
@@ -28,6 +30,7 @@
     <?php endif;?>
 
 <?php if($param == 'liste'):?>
+<section class="formSearchUpdateProduct">
 <form action="" method="GET">
     <fieldset>
         <legend>Recherche avancée</legend>
@@ -48,6 +51,7 @@
         </select>
         <input type="submit" value='appliquer'>
 </form>
+</section>
 
 <table>
     <thead>
@@ -68,6 +72,7 @@
     </tbody>
 </table>
 <?php endif;?>
+</section>
 
 <?php if($param !== 'liste'):?>
     <a href="./liste">Revenir à la liste</a>
@@ -171,3 +176,4 @@
         </fieldset>
     </form>
 <?php endif;?>
+</article>

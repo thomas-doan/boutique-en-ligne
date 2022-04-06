@@ -53,7 +53,6 @@ class PaymentController extends Controller
             if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
-
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
                 $_SESSION['quantityPayment'][$id_article][0] = $value;
                 $_SESSION['quantityPayment'][$id_article][1] = $titre_article;
@@ -212,14 +211,11 @@ class PaymentController extends Controller
                 'payment_method_types' => ['card'],
                 ['payment_method' => 'pm_card_visa'],
             ]);
-            if(empty($intent))
-            {
+            if (empty($intent)) {
                 $intent = 'importe stripe';
-            }
-            else{
+            } else {
                 $intent['client_secret'];
             }
-            
         }
     }
 

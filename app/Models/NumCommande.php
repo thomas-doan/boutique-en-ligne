@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-
-
-
 class NumCommande extends Model
 
 {
@@ -17,8 +14,6 @@ class NumCommande extends Model
     protected $tva;
     protected $prix_sans_tva;
     protected $prix_avec_tva;
-
-
 
 
     public function orderInsert($db, $donnees)
@@ -79,6 +74,7 @@ articles.titre_article
         $query->execute($executearray);
 
         $result = $query->fetchall();
+
 
         return $result;
     }

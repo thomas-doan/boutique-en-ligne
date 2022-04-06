@@ -1,16 +1,46 @@
 html {
-  scroll-behavior: smooth;
-  overflow-y: none;
+    scroll-behavior: smooth;
+    overflow-y: none;
 }
 
 body {
-  width: 100%;
-  height: 200vh;
-  font-family: century-gothic, sans-serif;
-  color: #424242;
-  background-color: #f3f8f6;
+    width: 100%;
+    height: 100%;
+    font-family: century-gothic, sans-serif;
+    color: #424242;
+    background-color: #f3f8f6;
 }
 
 h1 {
-  font-family: "DM Serif Display", serif;
+    font-family: "DM Serif Display", serif;
+}
+
+.layoutContainertable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.layoutContainertable div:nth-child(1) {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    padding: 5rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    border-radius: 4px;
+}
+
+.layoutContainertable article {
+    display: flex;
+    flex-direction: column;
+}
+
+.layoutContainertable input {
+    border: none;
+    border-bottom: 1px solid #135e4d33;
+}
+
+.layoutContainertable button {
+    margin: 0.5rem;
 }

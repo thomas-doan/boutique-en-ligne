@@ -22,6 +22,8 @@ class AdminOrderController extends Controller
 
         $livraison = $this->modelNumCommande->getAllOrderbyIdUser();
 
+
+
         $nb = $this->modelNumCommande->countWaitingValidate();
 
         $this->view('administrator/orderhistory/index', compact('title', 'livraison', 'nb'));
@@ -38,7 +40,7 @@ class AdminOrderController extends Controller
                 ->setEtat_livraison($etat_livraison);
             $this->model->update($modelHydrate, compact('id_livraison', 'etat_livraison'));
             $_SESSION['flash']['sucess'] = "La commande est validée !";
-            header('location: ./validercommande');
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./validercommande" </SCRIPT>'; //force la direction
             exit();
         }
     }

@@ -54,8 +54,10 @@
     <?php
 
     foreach ($comments as $key => $comment) {
+
         $NbrOfIndex = count($comment);
         $NbrOfIndex = $NbrOfIndex - 8;
+
     ?>
         <section>
             <h3><?= $comment['prenom'] . ' ' . $comment['nom'] ?> <?php if ($comment['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
@@ -76,7 +78,7 @@
             </form>
         </section>
         <?php
-        for ($i = 0; $i < $NbrOfIndex; $i++) {
+        for ($i = 0; $i <= $NbrOfIndex; $i++) {
             if ($comment['fk_id_commentaire'] == $comment['id_commentaire']) {
 
         ?>

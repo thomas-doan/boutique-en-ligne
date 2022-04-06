@@ -30,6 +30,7 @@ class LivraisonController extends Controller
 
         if ($this->adressCheck()) {
             $adress = $this->adressCheck();
+
             return $this->view('shop.livraison', compact('title', 'info_user', 'adress'));
         } else {
             return $this->view('shop.livraison', compact('title', 'info_user'));
@@ -59,8 +60,9 @@ class LivraisonController extends Controller
         foreach ($adresse as $key => $value) {
             $resultat[$value['id_adresse']] = $value;
         }
-
-        return $resultat;
+        if (isset($resultat)) {
+            return $resultat;
+        }
     }
 
     public function getAdress()
@@ -69,7 +71,7 @@ class LivraisonController extends Controller
         if (isset($_POST['id_adresse'])) {
             $_SESSION['select_adress'] = $_POST['id_adresse'];
 
-            header("location: ./livraison");
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>';
         }
     }
 
@@ -87,25 +89,51 @@ class LivraisonController extends Controller
             $code_postal = Security::control($_POST['code_postal']);
             $telephone = Security::control($_POST['telephone']);
 
-            if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
 
-                $_SESSION['validate']['email'] = $email;
-                $_SESSION['validate']['nom'] = $nom;
-                $_SESSION['validate']['prenom'] = $prenom;
-                $_SESSION['validate']['nom_adresse'] = $nom_adresse;
-                $_SESSION['validate']['ville'] = $ville;
-                $_SESSION['validate']['pays'] = $pays;
-                $_SESSION['validate']['voie'] = $voie;
-                $_SESSION['validate']['voie_sup'] = $voie_sup;
-                $_SESSION['validate']['code_postal'] = $code_postal;
-                $_SESSION['validate']['telephone'] = $telephone;
 
-                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction
-                exit();
+            if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($telephone) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
+
+                /*       if (!preg_match("~^[0-9]{5}$~", $code_postal) || !preg_match("~^[0-9]{10}$~", $telephone)) {
+                    $_SESSION['flash']['erreur_insert_livraison'] = "des chiffres sont demandés pour le code postal ou telephone.";
+                }  */
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $_SESSION['flash']['erreur_insert_livraison'] = "Mauvais format d'email.";
+                }
+
+                if (preg_match("~^[0-9]{5}$~", $code_postal) && preg_match("~^[0-9]{10}$~", $telephone)) {
+                    $_SESSION['validate']['email'] = $email;
+                    $_SESSION['validate']['nom'] = $nom;
+                    $_SESSION['validate']['prenom'] = $prenom;
+                    $_SESSION['validate']['nom_adresse'] = $nom_adresse;
+                    $_SESSION['validate']['ville'] = $ville;
+                    $_SESSION['validate']['pays'] = $pays;
+                    $_SESSION['validate']['voie'] = $voie;
+                    $_SESSION['validate']['voie_sup'] = $voie_sup;
+                    $_SESSION['validate']['code_postal'] = $code_postal;
+                    $_SESSION['validate']['telephone'] = $telephone;
+
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction  
+                } else {
+                    $_SESSION['flash']['erreur_insert_livraison'] = "code postal ou telephone incorrect.";
+                }
+
+
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>'; //force la direction
+
             } else {
                 $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";
-                header('location: ./livraison');
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>'; //force la direction
+
             }
+        }
+    }
+
+    public function back()
+    {
+        if (isset($_POST['back'])) {
+            /*  header('location: ./livraison'); */
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./commande" </SCRIPT>'; //force la direction
+
         }
     }
 }

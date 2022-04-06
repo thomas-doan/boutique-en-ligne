@@ -1,177 +1,259 @@
-<h1>tag CRUD</h1>
+      <div class="containerMain">
 
-<?php if (isset($_SESSION['flash'])) : ?>
-    <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-        <div><?= $message; ?></div>
-    <?php endforeach; ?>
-<?php endif; ?>
 
-<?php if (isset($_SESSION['flash'])) :  ?>
-    <?php unset($_SESSION['flash']) ?>
-<?php endif; ?>
-<form method="post" name="crudComment">
-    <label> Créer un commentaire</label>
-    <input name="commentaire" placeholder="Votre commentaire" type="text">
+          <article id="menu">
+              <section>
+                  <h1>Admin</h1>
+                  <ul>
+                      <li><a href="./creerArticle/partie1">Creer un Article</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./modifierArticle/liste">Modifier un articles</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./gestiondestock">Gestion des stocks</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./validercommande"> Gestion de commande</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./categorie">Gestion des categories</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./tag">Gestion des tags</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./commentaire">Gestion des commentaires</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="./gestionUtilisateur/liste">Gestion des utilisateurs</a><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="../profil/deconnexion">Se deconnecter</a></li>
+                  </ul>
+              </section>
+          </article>
+          <div id="header">
+              <div id="menu-burger">
+                  <div class="bar1"></div>
+                  <div class="bar2"></div>
+                  <div class="bar3"></div>
+              </div>
+          </div>
 
-    <input list="articles" type="text">
-    <datalist id="articles">
-        <?php foreach ($articles as $article) {
-        ?>
+          <div class="layoutContainertable commentAdmin">
 
-            <option value="<?= $article['titre_article'] ?>">
-                <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
+              <div>
+                  <article>
+                      <h1>Admin commentaires : </h1>
 
-            <?php } ?>
+                      <?php if (isset($_SESSION['flash'])) : ?>
+                          <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                              <div><?= $message; ?></div>
+                          <?php endforeach; ?>
+                      <?php endif; ?>
 
-    </datalist>
-    <button name="create_comment" type="submit"> Créer un commentaire </button>
+                      <?php if (isset($_SESSION['flash'])) :  ?>
+                          <?php unset($_SESSION['flash']) ?>
+                      <?php endif; ?>
+                      <form method="post" name="crudComment">
+                          <label> Créer un commentaire</label>
 
-</form>
-<h3>Commentaire des admins : </h3>
+                          <textarea name="commentaire" placeholder="Votre commentaire"></textarea>
 
-<?php foreach ($comment as $value) {
+                          <input list="articles" type="text" placeholder="choisir article">
+                          <datalist id="articles">
+                              <?php foreach ($articles as $article) {
+                                ?>
 
-    if ($value['role'] == 'Admin' && $value['check_admin'] == 0) { ?>
+                                  <option value="<?= $article['titre_article'] ?>">
+                                      <input name="id_article" value="<?= $article['id_article'] ?>" type="hidden">
 
-        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> le : <?= $value['date'] ?> </label>
+                                  <?php } ?>
 
-        <form action="" method="post">
+                          </datalist>
+                          <button class="form__button" name="create_comment" type="submit"> Créer </button>
 
-            <input name="id_commentaire" value="<?= $value['id_commentaire'] ?>" type="hidden">
-            <input name="comment" value="<?= $value['commentaire'] ?>" type="text">
-            <button> <a href="../produit/<?= $value['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <button name="update_comment" type="submit"> Modifier commentaire </button>
-            <button name="delete_comment" type="submit"> X </button>
-            <button name="validateCom" type="submit" value="<?= $value['check_admin'] ?>"> Valider commentaire </button>
-        </form>
+                      </form>
+                      <h3>Commentaire des admins : </h3>
 
-<?php }
-} ?>
-<?php
+                      <?php foreach ($comment as $value) {
 
-foreach ($answers as $answer) {
-    if ($answer['role'] == 'Admin' && $answer['check_admin'] == 0) {
-?>
+                            if ($value['role'] == 'Admin' && $value['check_admin'] == 0) { ?>
 
-        <label> Commentaire : de <?= $answer['prenom'] ?> <?= $answer['nom'] ?> sur le commentaire <?= $answer['reponse_au_com'] ?> : <?= $answer['date'] ?> </label>
+                              <div class="containerInfo">
 
-        <form action="" method="post">
+                                  <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> le : <?= $value['date'] ?> </label>
 
-            <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
-            <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
+                                  <form action="" method="post">
 
+                                      <input name="id_commentaire" value="<?= $value['id_commentaire'] ?>" type="hidden">
 
-            <button> <a href="../produit/<?= $answer['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <button name="update_answer_comment" type="submit"> Modifier commentaire </button>
-            <button name="delete_answer_comment" type="submit"> X </button>
-            <button name="validateAnswerCom" type="submit" value="<?= $answer['check_admin'] ?>"> Valider commentaire </button>
+                                      <input name="comment" value="<?= $value['commentaire'] ?>" type="text">
+                                      <div>
 
-        </form>
-<?php
-    }
-} ?>
+                                          <button class="form__button"> <a href="../produit/<?= $value['fk_id_article'] ?>">Voir l'article </a></button>
 
-<h3>Commentaire d'utilisateur des 3 dernières semaines : </h3>
+                                          <button class="form__button" name="update_comment" type="submit"> modifier </button>
 
-<?php
+                                          <button class="form__button" name="validateCom" type="submit" value="<?= $value['check_admin'] ?>"> V </button>
+                                          <button class="form__button" name="delete_comment" type="submit"> X </button>
 
+                                      </div>
 
-foreach ($commentCommunityManag as $valueTime) {
 
-    if ($valueTime['role'] == 'Utilisateurs'  && $valueTime['check_admin'] == 0) { ?>
+                                  </form>
+                              </div>
+                      <?php }
+                        } ?>
+                      <?php
 
+                        foreach ($answers as $answer) {
+                            if ($answer['role'] == 'Admin' && $answer['check_admin'] == 0) {
+                        ?>
+                              <div class="containerInfo">
 
-        <label> Commentaire : de <?= $valueTime['prenom'] ?> <?= $valueTime['nom'] ?> article <?= $valueTime['titre_article'] ?> le : <?= $valueTime['date'] ?> </label>
+                                  <label> Commentaire : de <?= $answer['prenom'] ?> <?= $answer['nom'] ?> sur le commentaire <?= $answer['reponse_au_com'] ?> : <?= $answer['date'] ?> </label>
 
-        <form action="" method="post">
+                                  <form action="" method="post">
 
-            <input name="id_commentaire" value="<?= $valueTime['id_commentaire'] ?>" type="hidden">
-            <input name="comment" value="<?= $valueTime['commentaire'] ?>" type="text">
+                                      <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
+                                      <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
 
-            <button name="validateCom" type="submit" value="<?= $valueTime['check_admin'] ?>"> Valider commentaire </button>
-            <button name="delete_comment" type="submit"> X </button>
+                                      <div>
 
-            <button> <a href="../produit/<?= $valueTime['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <textarea name="answerComAdmin" placeholder="Votre réponse."></textarea>
+                                          <button class="form__button"> <a href="../produit/<?= $answer['fk_id_article'] ?>">Voir l'article </a></button>
 
+                                          <button class="form__button" name="update_answer_comment" type="submit"> modifier </button>
 
+                                          <button class="form__button" name="validateAnswerCom" type="submit" value="<?= $answer['check_admin'] ?>"> V </button>
 
-            <input name="fk_id_article" value="<?= $valueTime['fk_id_article'] ?>" type="hidden">
-            <button name="subAnswerComAdmin" type="submit"> Répondre au commentaire </button>
+                                          <button class="form__button" name="delete_answer_comment" type="submit"> X </button>
+                                      </div>
+                                  </form>
+                              </div>
+                      <?php
+                            }
+                        } ?>
 
+                      <h3>Commentaire d'utilisateur des 3 dernières semaines : </h3>
 
+                      <?php
 
-        </form>
-<?php }
-} ?>
-<h3>Réponses des utilisateurs : </h3>
-<?php
+                        foreach ($commentCommunityManag as $valueTime) {
 
-foreach ($answersCommunityManag as $answerTime) {
+                            if ($valueTime['role'] == 'Utilisateurs'  && $valueTime['check_admin'] == 0) { ?>
 
-    if ($answerTime['role'] == 'Utilisateurs'  && $answerTime['check_admin'] == 0) { ?>
+                              <div class="containerInfo">
 
+                                  <label> Commentaire : de <?= $valueTime['prenom'] ?> <?= $valueTime['nom'] ?> article : <?= $valueTime['titre_article'] ?> le : <?= $valueTime['date'] ?> </label>
 
-        <label> Commentaire : de <?= $answerTime['prenom'] ?> <?= $answerTime['nom'] ?> sur le commentaire <?= $answerTime['reponse_au_com'] ?> le : <?= $answerTime['date'] ?> </label>
 
-        <form action="" method="post">
+                                  <form action="" method="post">
 
-            <input name="id_reponse_com" value="<?= $answerTime['id_reponse_com'] ?>" type="hidden">
-            <input name="answer" value="<?= $answerTime['commentaire'] ?>" type="text">
+                                      <input name="id_commentaire" value="<?= $valueTime['id_commentaire'] ?>" type="hidden">
+                                      <input name="comment" value="<?= $valueTime['commentaire'] ?>" type="text">
+                                      <textarea name="answerComAdmin" placeholder="Votre réponse."></textarea>
 
-            <button name="validateAnswerCom" type="submit" value="<?= $answerTime['check_admin'] ?>"> Valider commentaire </button>
-            <button name="delete_answer_comment" type="submit"> X </button>
+                                      <div>
 
-            <button> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <textarea name="answerAdmin" placeholder="Votre réponse."></textarea>
 
+                                          <button class="form__button"> <a href="../produit/<?= $valueTime['fk_id_article'] ?>">Voir l'article </a></button>
 
 
+                                          <input name="fk_id_article" value="<?= $valueTime['fk_id_article'] ?>" type="hidden">
 
-            <input name="fk_id_commentaire" value="<?= $answerTime['fk_id_commentaire'] ?>" type="hidden">
-            <button name="subAnswerAdmin" type="submit"> Répondre au commentaire </button>
+                                          <button class="form__button" name="subAnswerComAdmin" type="submit"> Répondre </button>
 
-        </form>
-<?php }
-} ?>
+                                          <button class="form__button" name="validateCom" type="submit" value="<?= $valueTime['check_admin'] ?>"> V </button>
+                                          <button class="form__button" name="delete_comment" type="submit"> X </button>
+                                      </div>
 
-<h3>Commentaire des utilisateurs signalés : </h3>
-<?php foreach ($comment as $value) {
-    if ($value['role'] == 'Utilisateurs' && $value['signaler'] == 1) { ?>
+                                  </form>
 
+                              </div>
+                      <?php }
+                        } ?>
+                      <h3>Réponses des utilisateurs : </h3>
+                      <?php
 
-        <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> : le : <?= $answer['date'] ?></label>
+                        foreach ($answersCommunityManag as $answerTime) {
 
-        <form action="" method="post">
+                            if ($answerTime['role'] == 'Utilisateurs'  && $answerTime['check_admin'] == 0) { ?>
 
-            <input name="id_commentaire" value="<?= $value['id_commentaire'] ?>" type="hidden">
-            <input name="comment" value="<?= $value['commentaire'] ?>" type="text">
-            <button> <a href="../produit/<?= $value['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <button name="signaler" type="submit" value="<?= $value['id_commentaire'] ?>"> Modifier signalement </button>
+                              <div class="containerInfo">
 
-            <button name="delete_comment" type="submit"> X </button>
+                                  <label> Commentaire tototototo : de <?= $answerTime['prenom'] ?> <?= $answerTime['nom'] ?> sur le commentaire <?= $answerTime['reponse_au_com'] ?> le : <?= $answerTime['date'] ?> </label>
 
-        </form>
-<?php }
-} ?>
+                                  <form action="" method="post">
 
-<?php
+                                      <input name="id_reponse_com" value="<?= $answerTime['id_reponse_com'] ?>" type="hidden">
+                                      <input name="answer" value="<?= $answerTime['commentaire'] ?>" type="text">
+                                      <textarea name="answerAdmin" placeholder="Votre réponse."></textarea>
 
-foreach ($answers as $answer) {
-    if ($answer['role'] == 'Utilisateurs' && $answer['signaler'] == 1) { ?>
+                                      <div>
 
+                                          <button class="form__button"> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article </a></button>
 
-        <label> Commentaire : de <?= $answer['prenom'] ?> <?= $answer['nom'] ?> sur le commentaire <?= $answer['reponse_au_com'] ?> </label>
+                                          <button class="form__button" name="subAnswerAdmin" type="submit"> Répondre </button>
 
-        <form action="" method="post">
+                                          <button class="form__button" name="validateAnswerCom" type="submit" value="<?= $answerTime['check_admin'] ?>"> V </button>
 
-            <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
-            <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
-            <button> <a href="../produit/<?= $answer['fk_id_article'] ?>">Voir l'article associé</a></button>
-            <button name="reportAnswer" type="submit" value="<?= $answer['id_reponse_com'] ?>"> Modifier signalement </button>
+                                          <button class="form__button" name="delete_answer_comment" type="submit"> X </button>
 
-            <button name="delete_answer_comment" type="submit"> X </button>
+                                          <input name="fk_id_commentaire" value="<?= $answerTime['fk_id_commentaire'] ?>" type="hidden">
 
-        </form>
-<?php }
-} ?>
+                                      </div>
+
+                                  </form>
+                              </div>
+
+                      <?php }
+                        } ?>
+
+                      <h3>Commentaire des utilisateurs signalés : </h3>
+                      <?php foreach ($comment as $value) {
+                            if ($value['role'] == 'Utilisateurs' && $value['signaler'] == 1) { ?>
+                              <div class="containerInfo">
+
+                                  <label> Commentaire : de <?= $value['prenom'] ?> <?= $value['nom'] ?> article <?= $value['titre_article'] ?> : le : <?= $answer['date'] ?></label>
+
+                                  <form action="" method="post">
+
+                                      <input name="id_commentaire" value="<?= $value['id_commentaire'] ?>" type="hidden">
+                                      <input name="comment" value="<?= $value['commentaire'] ?>" type="text">
+
+                                      <div>
+
+                                          <button class="form__button"> <a href="../produit/<?= $value['fk_id_article'] ?>">Voir l'article </a></button>
+
+                                          <button class="form__button" name="signaler" type="submit" value="<?= $value['id_commentaire'] ?>"> Modifier signalement </button>
+
+                                          <button class="form__button" name="delete_comment" type="submit"> X </button>
+                                      </div>
+
+                                  </form>
+
+                              </div>
+
+                      <?php }
+                        } ?>
+
+                      <?php
+
+                        foreach ($answers as $answer) {
+                            if ($answer['role'] == 'Utilisateurs' && $answer['signaler'] == 1) { ?>
+
+                              <div class="containerInfo">
+
+                                  <label> Commentaire : de <?= $answer['prenom'] ?> <?= $answer['nom'] ?> sur le commentaire <?= $answer['reponse_au_com'] ?> </label>
+
+                                  <form action="" method="post">
+
+                                      <input name="id_reponse_com" value="<?= $answer['id_reponse_com'] ?>" type="hidden">
+                                      <input name="answer" value="<?= $answer['commentaire'] ?>" type="text">
+
+                                      <div>
+
+                                          <button class="form__button"> <a href="../produit/<?= $answer['fk_id_article'] ?>">Voir l'article </a></button>
+
+                                          <button class="form__button" name="reportAnswer" type="submit" value="<?= $answer['id_reponse_com'] ?>"> Modifier signalement </button>
+
+                                          <button class="form__button" name="delete_answer_comment" type="submit"> X </button>
+                                      </div>
+
+
+                                  </form>
+                              </div>
+                      <?php }
+                        } ?>
+
+                  </article>
+              </div>
+
+          </div>
+      </div>

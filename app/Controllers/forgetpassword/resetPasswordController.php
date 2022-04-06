@@ -30,8 +30,19 @@ class resetPasswordController extends Controller
 
             if (empty($reponse) || empty($mdp)) {
                 $_SESSION['flash']['remplir'] = "Oups ! Veuillez remplir tout les champs";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
             } elseif ($mdp != $mdpConfirm) {
                 $_SESSION['flash']['mdp'] = "Oups ! Vos mots de passe doivent être similaires !";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
+
+            }
+
+            if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.]{6,12}$/', $mdp)) {
+                $_SESSION['flash']['remplir'] =
+                    "Peut contenir des lettres et des nombres,
+                    Doit contenir au moins 1 chiffre et 1 lettre,
+Peut contenir l'un de ces caractères: !@#$%.,
+Doit être de 6 à 12 caractères";
             } else {
                 $email = $_SESSION['reset']['email'];
                 $argument = ['email'];
@@ -44,15 +55,17 @@ class resetPasswordController extends Controller
                         ->setPassword($password);
                     $id_utilisateur = (int)$checkUser[0]['id_utilisateur'];
                     $this->model->update($user, compact('id_utilisateur', 'password'));
-                    header('Location: ./connexion');
-                    exit();
+
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
+
                 } else {
 
                     $_SESSION['flash']['erreur'] = "Oups ! La réponse est fausse !";
                 }
             }
-            header('Location: ./resetpassword');
-            exit();
+
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
+
         }
     }
 }

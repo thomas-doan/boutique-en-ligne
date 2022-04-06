@@ -1,29 +1,33 @@
-<article class="form">
-
-    <section class="alert">
-        <?php if (isset($_SESSION['flash'])) : ?>
-            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-                <div><?= $message; ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['flash'])) :  ?>
-            <?php unset($_SESSION['flash']) ?>
-        <?php endif; ?>
-    </section>
+    <?php if (isset($_SESSION['user'])) {
+        header('Location: /boutique-en-ligne');
+    } ?>
 
 
-    <form action="#" method="post" class="form__container">
-        <h1 class="form__title">Votre email </h1>
+    <div class="containerMain">
+        <div class="layoutContainertable">
+            <div>
 
-        <div class="form__field">
-            <label class="form__label" for="email">Email : </label>
-            <input class="form__text" type="text" id="email" name="emailVerify">
+                <article>
+                    <h1>Votre email </h1>
+
+                    <?php if (isset($_SESSION['flash'])) : ?>
+                        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                            <div><?= $message; ?></div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['flash'])) :  ?>
+                        <?php unset($_SESSION['flash']) ?>
+                    <?php endif; ?>
+
+                    <form action="#" method="post">
+
+                        <label for="email">Email : </label>
+                        <input type="text" id="email" name="emailVerify">
+                        <input class="form__button" type="submit" name="submit" value="verification email">
+                    </form>
+
+                </article>
+            </div>
         </div>
-        <div class="form__field">
-            <input class="form__button" type="submit" name="submit" value="verification email">
-        </div>
-
-    </form>
-
-</article>
+    </div>

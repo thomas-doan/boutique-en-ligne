@@ -2020,17 +2020,17 @@ h1 {
       flex-wrap: wrap;
 }
 
-textarea {
-  border: none;
-  background-color: #f9f7f4;
+.commentAdmin button,
+.commentAdmin input,
+.commentAdmin textarea,
+.commentAdmin div,
+.commentAdmin h3 {
+  margin: 0.5rem;
 }
 
-.commentAdmin button,
-input,
-textarea,
-div,
-h3 {
-  margin: 0.5rem;
+.commentAdmin textarea {
+  border: none;
+  background-color: #f9f7f4;
 }
 
 .updateUser table {

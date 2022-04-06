@@ -4,15 +4,16 @@
     flex-wrap: wrap;
 }
 
-textarea {
-    border: none;
-    background-color: rgb(249, 247, 244);
-}
-
-.commentAdmin button,
-input,
-textarea,
-div,
-h3 {
-    margin: 0.5rem;
+.commentAdmin {
+    button,
+    input,
+    textarea,
+    div,
+    h3 {
+        margin: 0.5rem;
+    }
+    textarea {
+        border: none;
+        background-color: rgb(249, 247, 244);
+    }
 }

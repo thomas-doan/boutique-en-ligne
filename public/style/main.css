@@ -716,6 +716,7 @@ h1 {
 }
 
 .sidenav:target {
+  overflow-y: scroll;
   width: 100%;
   z-index: 99;
   padding: 64px 32px 64px 32px;
@@ -1907,9 +1908,18 @@ h1 {
   color: #531616;
 }
 
+.containerUpdateProduct input:last-child {
+  background-color: #135e4c;
+  color: white;
+  border-radius: 0px 4px 4px 0px;
+  border: none;
+  padding: 4px 8px 4px 8px;
+}
+
 .ctaUpdateProduct {
   background-color: #135e4c;
   color: white;
+  max-width: 150px;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;

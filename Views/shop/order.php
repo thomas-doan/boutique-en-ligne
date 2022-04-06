@@ -28,4 +28,5 @@
 
    <form action="" method="post">
        <input name="submit" type="submit" value="Valider">
+       <input name="back" type="submit" value="retour">
    </form>

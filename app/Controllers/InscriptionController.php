@@ -49,14 +49,18 @@ class InscriptionController extends Controller
 
             if ($checkEmail == TRUE) {
                 $_SESSION['flash']['erreur'] = "Oups ! L'email n'est pas disponible";
-                header('location: ./inscription');
+                // header('location: ./inscription');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./inscription\" </SCRIPT>"; //force la direction
+
                 $erreur = true;
             } elseif ($erreur) {
                 $_SESSION['flash']['erreur'] = "Oups ! Vous devez remplir tout les champs !";
-                header('location: ./inscription');
+                // header('location: ./inscription');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./inscription\" </SCRIPT>"; //force la direction
             } elseif ($password != $mdpConfirm) {
                 $_SESSION['flash']['erreur'] = "Oups ! Vos mots de passe doivent être similaires !";
-                header('location: ./inscription');
+                // header('location: ./inscription');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./inscription\" </SCRIPT>"; //force la direction
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $reponse = password_hash($reponse, PASSWORD_DEFAULT);

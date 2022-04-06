@@ -1,8 +1,10 @@
 <?php session_start();
-error_reporting(0);
+// error_reporting(0);
 
 use App\Controllers\Security;
 use Exceptions\NotFoundException;
+
+require_once 'app/Controllers/Security.php';
 
 //Control d'accée à l'url
 $urlControlUser = $_SERVER['REQUEST_URI'];
@@ -36,9 +38,6 @@ if (($pathControl[2] == 'connexion' && !empty($_SESSION['user'])) || ($pathContr
     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="../boutique-en-ligne/"</SCRIPT>'; //force la direction 
 }
 
-
-
-require_once 'app/Controllers/Security.php';
 //Sécurité de tout les formulaire Get|POST
 $securityAll = new Security();
 if (isset($_GET)) {
@@ -52,6 +51,9 @@ require('vendor/autoload.php');
 
 
 define('VIEWS', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '404.php');
+
+define('REDIRECT', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'shop' . DIRECTORY_SEPARATOR . 'livraison.php');
+
 
 function error($param)
 {
@@ -392,20 +394,6 @@ $router->map(
 ----------------------------- PARCOURS PANIER ----------------------------- */
 
 
-//Commande
-$router->map(
-    'GET/POST',
-    '/commande',
-    function () {
-        $controller = new App\Controllers\OrderController();
-        $controller->index();
-        $controller->orderResume();
-        $controller->validate();
-    },
-    'commande'
-);
-
-
 
 //livraison
 $router->map(
@@ -417,6 +405,7 @@ $router->map(
         $controller->fieldCheck();
         $controller->adressCheck();
         $controller->getAdress();
+        $controller->back();
     },
     'livraison'
 );

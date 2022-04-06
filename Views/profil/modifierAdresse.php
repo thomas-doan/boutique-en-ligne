@@ -9,49 +9,73 @@
         <li><a href="./deconnexion">Se deconnecter</a></li>
     </ul>
 </section>
-<?php if (isset($_SESSION['flash'])) : ?>
-        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-            <div><?= $message; ?></div>
-        <?php endforeach; ?>
-    <?php endif; ?>
 
-    <?php if (isset($_SESSION['flash'])) :  ?>
-        <?php unset($_SESSION['flash']) ?>
-    <?php endif; ?>
-<article>
-    <form action="" method="post">
-        <label for="nomAdresse">Nom de l'enregistrement : </label>
-        <input type="text" id="nomAdresse" name="nomAdresse" aria-required="true" value="<?= $allInfoById[0]['nom_adresse'] ?>">
+<article class="form">
+    <section class="alert">
+        <?php if (isset($_SESSION['flash'])) : ?>
+            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                <p class="alert__message"><?= $message; ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-        <h2>Destinataire</h2>
+        <?php if (isset($_SESSION['flash'])) :  ?>
+            <?php unset($_SESSION['flash']) ?>
+        <?php endif; ?>
+    </section>
 
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" aria-required="true">
+    <form action="" method="post" class="form__container">
+        <h2 class="form__title">Destinataire</h2>
 
-        <label for="prenom">Prenom :</label>
-        <input type="text" id="prenom" name="prenom" aria-required="true">
+        <div class="form__field">
+            <label class="form__label" for="nomAdresse">Nom de l'enregistrement : </label>
+            <input class="form__text" type="text" id="nomAdresse" name="nomAdresse" aria-required="true" value="<?= $allInfoById[0]['nom_adresse'] ?>">
+        </div>
 
-        <h2>Adresse</h2>
+        <div class="form__field">
+            <label class="form__label" for="nom">Nom :</label>
+            <input class="form__text" type="text" id="nom" name="nom" aria-required="true">
+        </div>
 
-        <label for="libelle">Libellé : </label>
-        <input type="text" id="libelle" name="libelle" aria-required="true" value="<?= $allInfoById[0]['voie'] ?>">
+        <div class="form__field">
+            <label class="form__label" for="prenom">Prenom :</label>
+            <input class="form__text" type="text" id="prenom" name="prenom" aria-required="true">
+        </div>
 
-        <label for="voieSup">Voie Sup : </label>
-        <input type="text" id="voieSup" name="voieSup" aria-required="true" value="<?= $allInfoById[0]['voie_sup'] ?>">
+        <h2 class="form__title">Adresse</h2>
 
-        <label for="codePostal">Code Postal : </label>
-        <input type="text" id="codePostal" name="codePostal" aria-required="true" value="<?= $allInfoById[0]['code_postal'] ?>">
+        <div class="form__field">
+            <label class="form__label" for="libelle">Libellé : </label>
+            <input class="form__text" type="text" id="libelle" name="libelle" aria-required="true" value="<?= $allInfoById[0]['voie'] ?>">
+        </div>
 
-        <label for="ville">Ville : </label>
-        <input type="text" id="ville" name="ville" aria-required="true" value="<?= $allInfoById[0]['ville'] ?>">
+        <div class="form__field">
+            <label class="form__label" for="voieSup">Voie Sup : </label>
+            <input class="form__text" type="text" id="voieSup" name="voieSup" aria-required="true" value="<?= $allInfoById[0]['voie_sup'] ?>">
+        </div>
 
-        <label for="pays">Pays : </label>
-        <input type="text" id="pays" name="pays" aria-required="true" value="<?= $allInfoById[0]['pays'] ?>">
+        <div class="form__field">
+            <label class="form__label" for="codePostal">Code Postal : </label>
+            <input class="form__text" type="text" id="codePostal" name="codePostal" aria-required="true" value="<?= $allInfoById[0]['code_postal'] ?>">
+        </div>
 
-        <label for="telephone">Telephone : </label>
-        <input type="tel" id="telephone" name="telephone" aria-required="true" value="<?= $allInfoById[0]['telephone'] ?>">
+        <div class="form__field">
+            <label class="form__label" for="ville">Ville : </label>
+            <input class="form__text" type="text" id="ville" name="ville" aria-required="true" value="<?= $allInfoById[0]['ville'] ?>">
+        </div>
 
-        <input type="submit" name="modifier" value="modifier">
-        <input type="submit" name="supprimer" value="supprimer">
+        <div class="form__field">
+            <label class="form__label" for="pays">Pays : </label>
+            <input class="form__text" type="text" id="pays" name="pays" aria-required="true" value="<?= $allInfoById[0]['pays'] ?>">
+        </div>
+
+        <div class="form__field">
+            <label class="form__label" for="telephone">Telephone : </label>
+            <input class="form__text" type="tel" id="telephone" name="telephone" aria-required="true" value="<?= $allInfoById[0]['telephone'] ?>">
+        </div>
+
+        <div class="form__field--row">
+            <input class="form__button form__button--update" type="submit" name="modifier" value="modifier">
+            <input class="form__button form__button--update" type="submit" name="supprimer" value="supprimer">
+        </div>
     </form>
 </article>

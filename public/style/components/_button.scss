@@ -1,25 +1,30 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
-
 .form__button {
-  // border-top: none;
-  // border-left: none;
-  // border-right: none;
-  // border-bottom: solid 1px black;
-  border: none;
-  background-color: #135e4c;
-  color: white;
-  cursor: pointer;
+    // border-top: none;
+    // border-left: none;
+    // border-right: none;
+    // border-bottom: solid 1px black;
+    border: none;
+    background-color: #135e4c;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    font-size: 20px;
+    padding: 8px 24px;
+    border-radius: 4px;
+    &:hover {
+        background-color: #1d3f36;
+    }
+}
 
-  outline: none;
-  transition: 0.4s ease-in-out;
-  font-size: 20px;
+.submit {
+    margin-top: 2rem;
+}
 
-  padding: 8px 24px;
-  border-radius: 4px;
-
-  &:hover {
-    background-color: #1d3f36;
-  }
+.adress {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

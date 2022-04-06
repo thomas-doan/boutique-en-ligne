@@ -18,14 +18,12 @@ class MainController extends Controller
         $bestArticle = $model->bestProduct();
         $cards = new CardCompenent;
         $lastidProduct = $model->lastProductById()['id_article'];
-        if(count($bestArticle)>8)
-        {
+        if (count($bestArticle) > 8) {
             $selectNumberofCard = 4;
-        }
-        else $selectNumberofCard = (count($bestArticle)-1);
+        } else $selectNumberofCard = (count($bestArticle) - 1);
 
-        
 
-        return $this->view('shop.index', compact('title', 'bestArticle','cards','lastidProduct','selectNumberofCard'));
+
+        return $this->view('shop.index', compact('title', 'bestArticle', 'cards', 'lastidProduct', 'selectNumberofCard'));
     }
 }

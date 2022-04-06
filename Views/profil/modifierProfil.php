@@ -9,8 +9,7 @@
         <li><a href="./deconnexion">Se deconnecter</a></li>
     </ul>
 </section>
-<article>
-    <h1>Modifier mon Profil</h1>
+<article class="form">
 
     <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -22,17 +21,27 @@
         <?php unset($_SESSION['flash']) ?>
     <?php endif; ?>
 
-    <form action="#" method="post">
+    <form class="form__container" action="#" method="post">
 
-        <label for="email">Email : </label>
-        <input type="text" id="email" name="email" value="<?= $_SESSION['user']['email'] ?>">
+        <h1 class="form__title">Modifier mon Profil</h1>
 
-        <label for="nom">Nom : </label>
-        <input type="text" id="nom" name="nom" value="<?= $_SESSION['user']['nom'] ?>">
+        <div class="form__field">
+            <label for="email" class="form__label">Email : </label>
+            <input class="form__text" type="text" id="email" name="email" value="<?= $_SESSION['user']['email'] ?>">
+        </div>
 
-        <label for="prenom">Prenom : </label>
-        <input type="text" id="prenom" name="prenom" value="<?= $_SESSION['user']['prenom'] ?>">
+        <div class="form__field">
+            <label for="nom" class="form__label">Nom : </label>
+            <input class="form__text" type="text" id="nom" name="nom" value="<?= $_SESSION['user']['nom'] ?>">
+        </div>
 
-        <input type="submit" name="submit" value="Modifier">
+        <div class="form__field">
+            <label for="prenom" class="form__label">Prenom : </label>
+            <input class="form__text" type="text" id="prenom" name="prenom" value="<?= $_SESSION['user']['prenom'] ?>">
+        </div>
+
+        <div class="form__field">
+            <input class="form__button" type="submit" name="submit" value="Modifier">
+        </div>
     </form>
 </article>

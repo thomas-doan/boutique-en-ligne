@@ -1,13 +1,15 @@
 <article>
-    <?php if (isset($_SESSION['flash'])) : ?>
-        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-            <div><?= $message; ?></div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <section class="alert">
+        <?php if (isset($_SESSION['flash'])) : ?>
+            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                <div><?= $message; ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-    <?php if (isset($_SESSION['flash'])) :  ?>
-        <?php unset($_SESSION['flash']) ?>
-    <?php endif; ?>
+        <?php if (isset($_SESSION['flash'])) :  ?>
+            <?php unset($_SESSION['flash']) ?>
+        <?php endif; ?>
+    </section>
     <section>
         <h1><?= ucfirst(@$_SESSION['user']['prenom']) . ' ' . ucfirst(@$_SESSION['user']['nom']); ?></h1>
         <p><?= @$_SESSION['user']['email'] ?></p>

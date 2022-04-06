@@ -573,6 +573,10 @@ h1 {
   font-size: 12px;
 }
 
+.test {
+  color: blue;
+}
+
 .footer {
   height: 100px;
 }

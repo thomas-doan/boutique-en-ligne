@@ -117,8 +117,6 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
 .layoutContainertable input {
@@ -1995,6 +1993,10 @@ form {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.updateUser table {
+  width: 35vw;
 }
 
 /* Header */

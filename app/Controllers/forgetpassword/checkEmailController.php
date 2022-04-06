@@ -34,6 +34,7 @@ class checkEmailController extends Controller
 
             if (empty($email)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez remplir tout les champs";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./checkemail" </SCRIPT>'; //force la direction
             } else {
 
                 $argument = ['email'];

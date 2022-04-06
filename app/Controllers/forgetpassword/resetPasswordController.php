@@ -30,8 +30,10 @@ class resetPasswordController extends Controller
 
             if (empty($reponse) || empty($mdp)) {
                 $_SESSION['flash']['remplir'] = "Oups ! Veuillez remplir tout les champs";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
             } elseif ($mdp != $mdpConfirm) {
                 $_SESSION['flash']['mdp'] = "Oups ! Vos mots de passe doivent être similaires !";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
             } else {
                 $email = $_SESSION['reset']['email'];
                 $argument = ['email'];

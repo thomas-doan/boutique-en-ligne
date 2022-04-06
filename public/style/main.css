@@ -1984,8 +1984,7 @@ h3 {
   margin: 0.5rem;
 }
 
-.resetPassword article,
-form {
+.resetPassword form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

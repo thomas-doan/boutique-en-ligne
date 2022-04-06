@@ -4,7 +4,7 @@
 
 
       <div class="containerMain">
-          <div class="layoutContainertable">
+          <div class="layoutContainertable resetPassword">
               <div>
 
 

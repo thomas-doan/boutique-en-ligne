@@ -1887,6 +1887,7 @@ h1 {
   padding: 2rem;
   padding-left: 4rem;
   background-color: white;
+  border-radius: 4px;
 }
 
 .resumeOrder {
@@ -1905,6 +1906,7 @@ h1 {
   padding-top: 2rem;
   padding-left: 4rem;
   padding-right: 4rem;
+  border-radius: 4px;
 }
 
 .resumeOrder img {
@@ -1969,6 +1971,8 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 textarea {
@@ -2246,6 +2250,10 @@ h3 {
 }
 
 .formField.paiement button {
+  margin: 1rem;
+}
+
+.layoutContainertable.orderHistory form {
   margin: 1rem;
 }
 

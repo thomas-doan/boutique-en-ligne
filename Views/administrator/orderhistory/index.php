@@ -25,7 +25,7 @@
                </div>
            </div>
 
-           <div class="layoutContainertable">
+           <div class="layoutContainertable orderHistory">
 
                <div>
                    <article>

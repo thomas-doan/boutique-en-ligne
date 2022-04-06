@@ -42,7 +42,8 @@
                       <?php endif; ?>
                       <form method="post" name="crudComment">
                           <label> Créer un commentaire</label>
-                          <input name="commentaire" placeholder="Votre commentaire" type="text">
+
+                          <textarea name="commentaire" placeholder="Votre commentaire"></textarea>
 
                           <input list="articles" type="text" placeholder="choisir article">
                           <datalist id="articles">
@@ -172,21 +173,20 @@
 
                                       <input name="id_reponse_com" value="<?= $answerTime['id_reponse_com'] ?>" type="hidden">
                                       <input name="answer" value="<?= $answerTime['commentaire'] ?>" type="text">
+                                      <textarea name="answerAdmin" placeholder="Votre réponse."></textarea>
 
                                       <div>
 
+                                          <button class="form__button"> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article </a></button>
+
+                                          <button class="form__button" name="subAnswerAdmin" type="submit"> Répondre </button>
 
                                           <button class="form__button" name="validateAnswerCom" type="submit" value="<?= $answerTime['check_admin'] ?>"> V </button>
 
                                           <button class="form__button" name="delete_answer_comment" type="submit"> X </button>
 
-                                          <button class="form__button"> <a href="../produit/<?= $answerTime['fk_id_article'] ?>">Voir l'article </a></button>
-
-                                          <textarea name="answerAdmin" placeholder="Votre réponse."></textarea>
-
                                           <input name="fk_id_commentaire" value="<?= $answerTime['fk_id_commentaire'] ?>" type="hidden">
 
-                                          <button class="form__button" name="subAnswerAdmin" type="submit"> Répondre </button>
                                       </div>
 
                                   </form>

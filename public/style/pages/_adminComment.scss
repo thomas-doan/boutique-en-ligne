@@ -1,12 +1,11 @@
-.containerInfo {
-    form {
-        display: flex;
-        flex-direction: column;
-    }
-    textarea {
-        border: none;
-        background-color: rgb(249, 247, 244);
-    }
+.layoutContainertable.commentAdmin form {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    border: none;
+    background-color: rgb(249, 247, 244);
 }
 
 .commentAdmin button,

@@ -80,9 +80,9 @@
 
                                           <button class="form__button" name="update_comment" type="submit"> modifier </button>
 
+                                          <button class="form__button" name="validateCom" type="submit" value="<?= $value['check_admin'] ?>"> V </button>
                                           <button class="form__button" name="delete_comment" type="submit"> X </button>
 
-                                          <button class="form__button" name="validateCom" type="submit" value="<?= $value['check_admin'] ?>"> V </button>
                                       </div>
 
 

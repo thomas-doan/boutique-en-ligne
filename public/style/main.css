@@ -69,7 +69,7 @@ a:visited {
 }
 
 h1 {
-  font-size: 2.3rem;
+  font-size: 3.2rem;
 }
 
 html {
@@ -86,7 +86,7 @@ body {
 }
 
 h1 {
-  font-family: "DM Serif Display", serif;
+  font-family: 'Playfair Display 600', serif;
 }
 
 .layoutContainertable {
@@ -2518,14 +2518,6 @@ h1 {
   background-color: rgba(224, 95, 95, 0.15);
   border: rgba(83, 22, 22, 0.312) 1px solid;
   color: #531616;
-}
-
-.containerUpdateProduct input:last-child {
-  background-color: #135e4c;
-  color: white;
-  border-radius: 0px 4px 4px 0px;
-  border: none;
-  padding: 4px 8px 4px 8px;
 }
 
 .ctaUpdateProduct {

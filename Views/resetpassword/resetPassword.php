@@ -4,11 +4,11 @@
 
 
       <div class="containerMain">
-          <div class="layoutContainertable resetPassword">
+          <div class="layoutContainertable ">
               <div>
 
 
-                  <article>
+                  <article class="resetPassword">
                       <h1>Votre email </h1>
 
                       <?php if (isset($_SESSION['flash'])) : ?>

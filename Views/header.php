@@ -2,7 +2,7 @@
 <nav class="nav">
 
     <!-- <section class="nav__list"> -->
-    <a class="nav__link" href="/boutique-en-ligne/">
+    <a class="nav__link" href="/boutique-en-ligne/boutique/all">
         <img class="nav__logo" style="height:40px" src="/boutique-en-ligne/public/assets/pictures/kawa_logo_color.svg" alt="revenir à l'accuil principal">
     </a>
 

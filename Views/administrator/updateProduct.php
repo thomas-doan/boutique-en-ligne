@@ -185,31 +185,3 @@
     </section>
 </section>
 </article>
-
-            <fieldset>
-                <p>Filtres selectionnés : </p>
-                <?php if ($tagOfProduct) : ?>
-                    <?php foreach ($tagOfProduct as $key => $value) : ?>
-                        <button type="submit" name="delettag" value="<?= $value['fk_id_tag'] ?>">&#10006; <?= $value['nom_tag'] ?></button>
-                <?php endforeach;
-                endif; ?>
-
-                <legend>Tags</legend>
-                <p>Ajouter des tags :</p>
-
-                <label for="liste_tag">Liste des tags :</label>
-                <input list="all_tag" name="tag" id="liste_tag">
-                <datalist id="all_tag">
-                    <?php
-                    foreach ($allTags as $value) {
-                    ?>
-                        <option value="<?= $value['nom_tag'] ?>"><?= $value['nom_tag'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </datalist>
-                <input type="submit" name="addTag" value="ajouter">
-            </fieldset>
-        </form>
-    <?php endif; ?>
-</article>

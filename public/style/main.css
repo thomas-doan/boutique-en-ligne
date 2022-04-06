@@ -68,6 +68,10 @@ a:visited {
   color: inherit;
 }
 
+h1 {
+  font-size: 2.3rem;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-y: none;
@@ -78,11 +82,12 @@ body {
   height: 100%;
   font-family: century-gothic, sans-serif;
   color: #424242;
-  background-color: #f3f8f6;
+  background-color: #f9f7f4;
 }
 
 h1 {
   font-family: "DM Serif Display", serif;
+  font-size: 2.3rem;
 }
 
 @font-face {
@@ -1360,6 +1365,8 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .mainAdmin > H1 {
@@ -1754,4 +1761,158 @@ h1 {
 #145a48
 #135e4c
 */
+.mainUpdateProduct {
+  padding: 32px;
+  width: 100%;
+}
+
+.mainUpdateProduct table {
+  width: 100%;
+}
+
+.mainUpdateProduct table tr td {
+  padding: 4px 0px;
+  border-top: #135e4c15 1px solid;
+  background-color: rgba(255, 255, 255, 0.33);
+}
+
+.mainUpdateProduct table tr td button {
+  background-color: #135e4c;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.mainUpdateProduct table tr td button:hover {
+  background-color: #1d3f36;
+}
+
+.mainUpdateProduct table tr td:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.formSearchUpdateProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border: 1px solid #135e4c15;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.formSearchUpdateProduct form {
+  margin-top: auto;
+}
+
+.formSearchUpdateProduct form fieldset {
+  border: none;
+}
+
+.formSearchUpdateProduct form fieldset legend {
+  font-weight: bold;
+}
+
+.formSearchUpdateProduct form label {
+  display: hidden;
+}
+
+.formSearchUpdateProduct form button {
+  background-color: #135e4c;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.formSearchUpdateProduct form input, .formSearchUpdateProduct form select {
+  border: 1px solid #135e4c33;
+  border-radius: 4px 0px 0px 4px;
+  padding: 4px 0px;
+}
+
+.containerUpdateProduct hr {
+  margin: 8px 0px;
+  opacity: 0.33;
+}
+
+.containerUpdateProduct form fieldset {
+  border: none;
+  background-color: #ffffff95;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.containerUpdateProduct form fieldset legend {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.containerUpdateProduct .infoProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.containerUpdateProduct .infoProduct textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+  resize: none;
+}
+
+.containerUpdateProduct .infoProduct textarea:focus {
+  outline: solid 1px #135e4c;
+}
+
+.containerUpdateProduct .infoProduct label {
+  margin-top: 8px;
+}
+
+.containerUpdateProduct form[id=categorie] button {
+  display: inline-block;
+  margin: 4px 0px;
+  padding: 4px 8px;
+  border-radius: 16px;
+}
+
+.containerUpdateProduct form[id=categorie] button:not(.buttonDelete) {
+  background-color: #135e4c15;
+  border: #135e4c 1px solid;
+  color: #135e4c;
+}
+
+.containerUpdateProduct form[id=categorie] .buttonDelete {
+  background-color: rgba(224, 95, 95, 0.15);
+  border: rgba(83, 22, 22, 0.312) 1px solid;
+  color: #531616;
+}
+
+.ctaUpdateProduct {
+  background-color: #135e4c;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin: 8px;
+}
 /*# sourceMappingURL=main.css.map */

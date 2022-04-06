@@ -34,6 +34,15 @@ class resetPasswordController extends Controller
             } elseif ($mdp != $mdpConfirm) {
                 $_SESSION['flash']['mdp'] = "Oups ! Vos mots de passe doivent être similaires !";
                 echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./resetpassword" </SCRIPT>'; //force la direction
+
+            }
+
+            if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.]{6,12}$/', $mdp)) {
+                $_SESSION['flash']['remplir'] =
+                    "Peut contenir des lettres et des nombres,
+                    Doit contenir au moins 1 chiffre et 1 lettre,
+Peut contenir l'un de ces caractères: !@#$%.,
+Doit être de 6 à 12 caractères";
             } else {
                 $email = $_SESSION['reset']['email'];
                 $argument = ['email'];

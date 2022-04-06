@@ -76,7 +76,7 @@
 
 
                    <?php if ($param !== "liste") : ?>
-                       <?php var_dump($_POST) ?>
+
                        <h1>Données de l'user</h1>
                        <form action="" method="post">
                            <?php foreach ($userInfos[0] as $key => $userInfo) : ?>

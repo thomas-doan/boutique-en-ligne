@@ -1984,6 +1984,10 @@ h3 {
   margin: 0.5rem;
 }
 
+.updateUser table {
+  width: 35vw;
+}
+
 .updateUser form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2239,6 +2243,10 @@ h3 {
       left: -100%;
     }
   }
+}
+
+.formField.paiement button {
+  margin: 1rem;
 }
 
 .resetPassword article {

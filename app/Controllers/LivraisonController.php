@@ -93,28 +93,32 @@ class LivraisonController extends Controller
 
             if (!empty($email) && !empty($nom) && !empty($prenom) && !empty($nom_adresse) && !empty($telephone) && !empty($ville) && !empty($pays) && !empty($voie) && !empty($code_postal) && !empty($email)) {
 
-                if (gettype($code_postal) !== "integer" && gettype($telephone) !== "integer") {
-                    $_SESSION['flash']['erreur_insert_livraison'] = "des chiffres sont demandés.";
-                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>';
-                }
-
+                /*       if (!preg_match("~^[0-9]{5}$~", $code_postal) || !preg_match("~^[0-9]{10}$~", $telephone)) {
+                    $_SESSION['flash']['erreur_insert_livraison'] = "des chiffres sont demandés pour le code postal ou telephone.";
+                }  */
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $_SESSION['flash']['erreur_insert_livraison'] = "Mauvais format d'email.";
-                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>';
                 }
 
-                $_SESSION['validate']['email'] = $email;
-                $_SESSION['validate']['nom'] = $nom;
-                $_SESSION['validate']['prenom'] = $prenom;
-                $_SESSION['validate']['nom_adresse'] = $nom_adresse;
-                $_SESSION['validate']['ville'] = $ville;
-                $_SESSION['validate']['pays'] = $pays;
-                $_SESSION['validate']['voie'] = $voie;
-                $_SESSION['validate']['voie_sup'] = $voie_sup;
-                $_SESSION['validate']['code_postal'] = $code_postal;
-                $_SESSION['validate']['telephone'] = $telephone;
+                if (preg_match("~^[0-9]{5}$~", $code_postal) && preg_match("~^[0-9]{10}$~", $telephone)) {
+                    $_SESSION['validate']['email'] = $email;
+                    $_SESSION['validate']['nom'] = $nom;
+                    $_SESSION['validate']['prenom'] = $prenom;
+                    $_SESSION['validate']['nom_adresse'] = $nom_adresse;
+                    $_SESSION['validate']['ville'] = $ville;
+                    $_SESSION['validate']['pays'] = $pays;
+                    $_SESSION['validate']['voie'] = $voie;
+                    $_SESSION['validate']['voie_sup'] = $voie_sup;
+                    $_SESSION['validate']['code_postal'] = $code_postal;
+                    $_SESSION['validate']['telephone'] = $telephone;
 
-                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction  
+                } else {
+                    $_SESSION['flash']['erreur_insert_livraison'] = "code postal ou telephone incorrect.";
+                }
+
+
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./livraison" </SCRIPT>'; //force la direction
 
             } else {
                 $_SESSION['flash']['erreur_insert_livraison'] = "remplir l'ensemble des champs livraison !";

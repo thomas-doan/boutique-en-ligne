@@ -9,7 +9,7 @@
     <div class="homeContainer">
 
 
-        <article class="introHome">
+        <article data-aos="fade-right" data-aos-duration="3000" class="introHome">
             <section>
                 <img id="fleche" src=".\public\img\icone_fleche.png" alt="icone fleche" />
                 <p>

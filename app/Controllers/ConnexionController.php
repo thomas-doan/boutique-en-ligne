@@ -62,9 +62,8 @@ class ConnexionController extends Controller
                         exit();
                     }
                 } else {
-                    $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est inccorecte";
+                    $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est incorrect";
                     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
-
                 }
             }
         }

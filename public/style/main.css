@@ -86,7 +86,7 @@ body {
 }
 
 h1 {
-  font-family: 'Playfair Display 600', serif;
+  font-family: "Playfair Display 600", serif;
 }
 
 .layoutContainertable {
@@ -151,6 +151,11 @@ h1 {
 
 .form__button:hover {
   background-color: #1d3f36;
+}
+
+.form__button--product {
+  padding: 8px 10px;
+  font-size: 12px;
 }
 
 .submit {
@@ -2527,5 +2532,138 @@ h1 {
   border: none;
   border-radius: 4px;
   margin: 8px;
+}
+
+.product {
+  padding: 24px;
+  margin: 24px;
+  background-color: white;
+}
+
+.product__image {
+  height: 250px;
+  width: 400px;
+}
+
+.product__heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product__title {
+  padding: 12px;
+  font-size: 32px;
+  color: #135e4c;
+  font-weight: bold;
+}
+
+.product .like {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.product .like__button {
+  border: none;
+}
+
+.product .like__number {
+  position: relative;
+  bottom: 5px;
+}
+
+.details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 8px;
+  height: 250px;
+}
+
+.details span {
+  color: #135e4c;
+  font-weight: 800;
+}
+
+.details .price {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.comment-preview__link {
+  text-decoration: underline;
+  color: #135e4c;
+}
+
+.payement {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: auto;
+  width: 100%;
+}
+
+.price {
+  font-weight: 900;
+}
+
+.comment {
+  padding: 24px;
+  margin: 24px;
+  background-color: white;
+}
+
+.comment__title {
+  padding: 12px;
+  font-size: 32px;
+  color: #135e4c;
+  font-weight: bold;
+}
+
+.comment__commentary {
+  border-bottom: 1px solid black;
+  padding: 12px;
+}
+
+.comment__commentary span {
+  color: red;
+}
+
+.comment__commentary h3 {
+  padding: 12px;
+  font-size: 16px;
+  color: #135e4c;
+  font-weight: bold;
+}
+
+.comment__commentary p:last-child {
+  font-size: 12px;
+}
+
+.comment__answer {
+  background-color: red;
 }
 /*# sourceMappingURL=main.css.map */

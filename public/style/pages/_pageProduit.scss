@@ -1,0 +1,113 @@
+.product {
+  //   background-color: rgb(204, 204, 219);
+  padding: 24px;
+  margin: 24px;
+  background-color: white;
+
+  &__image {
+    height: 250px;
+    width: 400px;
+  }
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    padding: 12px;
+    font-size: 32px;
+    color: #135e4c;
+    font-weight: bold;
+  }
+
+  .like {
+    display: flex;
+
+    &__button {
+      border: none;
+    }
+
+    &__number {
+      position: relative;
+      bottom: 5px;
+    }
+  }
+}
+
+.details {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  height: 250px;
+
+  span {
+    color: #135e4c;
+    font-weight: 800;
+  }
+
+  .price {
+    align-self: flex-end;
+  }
+}
+
+.comment-preview {
+  //   background-color: steelblue;
+
+  &__link {
+    text-decoration: underline;
+    color: #135e4c;
+  }
+}
+
+.payement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  width: 100%;
+}
+
+.price {
+  font-weight: 900;
+}
+
+.comment {
+  padding: 24px;
+  margin: 24px;
+  background-color: white;
+
+  &__title {
+    padding: 12px;
+    font-size: 32px;
+    color: #135e4c;
+    font-weight: bold;
+  }
+
+  &__commentary {
+    border-bottom: 1px solid black;
+    padding: 12px;
+
+    span {
+      color: red;
+    }
+
+    h3 {
+      padding: 12px;
+      font-size: 16px;
+      color: #135e4c;
+      font-weight: bold;
+    }
+
+    p:last-child {
+      font-size: 12px;
+    }
+  }
+
+  &__answer {
+    background-color: red;
+  }
+}

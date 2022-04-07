@@ -49,25 +49,21 @@ class ConnexionController extends Controller
                     $_SESSION['user']['role'] = $user->getRole();
                     // var_dump($user);
                     // header('Location: ./profil');
-                    if(isset($_SESSION['referer']))
-                    {
-                        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$_SESSION['referer'].'" </SCRIPT>'; //force la direction
+                    if (isset($_SESSION['referer'])) {
+                        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $_SESSION['referer'] . '" </SCRIPT>'; //force la direction
                         // unset($_SESSION['referer']);
                         exit();
-                    }
-                    elseif(explode('/',$_SESSION['reload'])[4]!=='inscription')
-                    {
-                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$_SESSION['reload'].'" </SCRIPT>'; //force la direction
-                    unset($_SESSION['reload']);
-                    exit();
-                    }
-                    else{
+                    } elseif (explode('/', $_SESSION['reload'])[4] !== 'inscription') {
+                        echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $_SESSION['reload'] . '" </SCRIPT>'; //force la direction
+                        unset($_SESSION['reload']);
+                        exit();
+                    } else {
                         echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./profil" </SCRIPT>'; //force la direction
-                    exit();
+                        exit();
                     }
                 } else {
-                    $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est inccorecte";
-                    header('Location: ./connexion');
+                    $_SESSION['flash']['erreur'] = "Oups ! Le mot de passe ou l'email est incorrect";
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
                 }
             }
         }

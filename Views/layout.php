@@ -15,13 +15,16 @@ if (session_status() === PHP_SESSION_NONE) {
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/gij8hzs.css">
     <link rel="stylesheet" href="/boutique-en-ligne/public/style/main.css">
     <script type="text/javaScript" src="/boutique-en-ligne/public/js/menuAdmin.js"></script>
     <script type="text/javaScript" src="/boutique-en-ligne/public/js/panier.js"></script>
     <script type="text/javaScript" src="/boutique-en-ligne/public/js/search.js"></script>
+    <script type="text/javaScript" src="/boutique-en-ligne/public/js/carousel.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <title><?= $title ?></title>
 </head>
@@ -37,6 +40,12 @@ if (session_status() === PHP_SESSION_NONE) {
     <footer>
         <?php require_once 'footer.php'; ?>
     </footer>
+
+    <script>
+        AOS.init({
+            duration: 2000,
+        })
+    </script>
 </body>
 
 </html>

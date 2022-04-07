@@ -30,7 +30,7 @@ extract($controller->index());
 <?php endif; ?>
 
 
-<div class="containerMain">
+<div class="containerMain paiment">
 
   <article class="formLivraison paiement" action="" method="post">
 

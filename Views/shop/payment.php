@@ -19,8 +19,6 @@ $controller->totalPrice();
 $controller->delivery();
 $controller->index();
 extract($controller->index());
-
-var_dump($_SESSION['validate']);
 ?>
 
 <?php if (isset($_SESSION['flash'])) : ?>

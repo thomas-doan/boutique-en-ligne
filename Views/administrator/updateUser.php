@@ -10,7 +10,7 @@
                             <li><a href="../categorie">Gestion des categories</a><i class="fa-solid fa-angle-right"></i></li>
                             <li><a href="../tag">Gestion des tags</a><i class="fa-solid fa-angle-right"></i></li>
                             <li><a href="../commentaire">Gestion des commentaires</a><i class="fa-solid fa-angle-right"></i></li>
-                            <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a><i class="fa-solid fa-angle-right"></i></li>
+                            <li><a href="">Gestion des utilisateurs</a><i class="fa-solid fa-angle-right"></i></li>
                             <li><a href="../profil/deconnexion">Se deconnecter</a></li>
                         </ul>
                     </div>

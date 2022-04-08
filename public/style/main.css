@@ -1009,6 +1009,7 @@ footer {
 .sideBarreAcount {
   width: 100%;
   height: auto;
+  min-height: 85vh;
   padding: 32px;
   display: none;
   -webkit-box-orient: vertical;

@@ -4,6 +4,9 @@ if (!isset($_SESSION['user'])) {
   header('Location: /boutique-en-ligne/connexion');
 }
 
+if (!isset($_SESSION['validate'])) {
+  header('Location: /boutique-en-ligne/connexion');
+}
 $controller = new App\Controllers\ShoppingCartController();
 
 $controller->upValue();
@@ -16,7 +19,6 @@ $controller->totalPrice();
 $controller->delivery();
 $controller->index();
 extract($controller->index());
-
 ?>
 
 <?php if (isset($_SESSION['flash'])) : ?>

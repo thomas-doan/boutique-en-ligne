@@ -14,7 +14,10 @@ class CardCompenent extends Product
 
     public function getDataByid($id_article)
     {
-        return $this->getProductForCardbyID($id_article);
+        $retourCard = $this->getProductForCardbyID($id_article);
+
+        return $retourCard;
+
     }
 
     public function printCard(array $dataProduct)

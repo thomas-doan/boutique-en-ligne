@@ -400,7 +400,7 @@ $router->map(
     'GET/POST',
     '/livraison',
     function () {
-        $controller = new App\Controllers\LivraisonController();
+        $controller = new App\Controllers\pathToOrder\LivraisonController();
         $controller->index();
         $controller->fieldCheck();
         $controller->adressCheck();
@@ -415,12 +415,24 @@ $router->map(
     'GET/POST',
     '/paiement',
     function () {
-        $controller = new App\Controllers\PaymentController();
+        $controller = new App\Controllers\pathToOrder\PaymentController();
         $controller->index();
         $controller->payment();
         $controller->stripe();
     },
     'paiement'
+);
+
+
+//Paiement
+$router->map(
+    'GET/POST',
+    '/paiementResume',
+    function () {
+        $controller = new App\Controllers\pathToOrder\PaymentResumeController();
+        $controller->index();
+    },
+    'paiementResume'
 );
 
 $match = $router->match();

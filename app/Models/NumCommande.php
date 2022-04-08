@@ -60,12 +60,11 @@ livraison.ville, livraison.voie, livraison.voie_sup, livraison.code_postal,
 livraison.prenom,livraison.nom_adresse,livraison.telephone,livraison.nom, livraison.email, 
 livraison.fk_id_num_commande, livraison.pays, livraison.etat_livraison, livraison.id_livraison,
 
-articles.titre_article
+c1.titre_article
 
             FROM num_commande 
             INNER JOIN commandes AS c1 ON c1.fk_id_num_commande = num_commande.id_num_commande 
             INNER JOIN livraison ON livraison.fk_id_num_commande = num_commande.id_num_commande
-            INNER JOIN articles ON articles.id_article = c1.fk_id_article
             $stringWhere;
            "
         );

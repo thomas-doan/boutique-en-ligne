@@ -22,9 +22,9 @@ class HistoriqueController extends Controller
     public function getOrder()
     {
         $model = new NumCommande();
-        $argument = ['fk_id_utilisateur'];
-        $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
-        $order = $model->getAllOrderbyIdUser($fk_id_utilisateur);
+        $argument = ['fk_id_utilisateurs'];
+        $fk_id_utilisateurs = $_SESSION['user']['id_utilisateur'];
+        $order = $model->find($argument, compact('fk_id_utilisateurs'));
         return $order;
     }
 }

@@ -10,22 +10,33 @@
     </ul>
 </section>
 <article>
+    <?php foreach ($order_resume as $key => $order) { ?>
+
+        <section>
+            <h1>Commande N°<?= $order['fk_id_num_commande'] ?></h1>
+            <p>Livrée le <?= $order['date'] ?></p>
+
+            <p>Adresse de livraison : </p>
+
+            <p><?= $order['voie'] ?></p>
+            <p><?= $order['voie_sup'] ?></p>
+            <p><?= $order['code_postal'] . ' ' . $order['ville'] ?></p>
+        </section>
+    <?php break;
+    } ?>
     <section>
-        <h1>Commande N°<?= $order['fk_id_num_commande'] ?></h1>
-        <p>Livrée le <?= $order['date'] ?></p>
-        <p>Adresse de livraison : </p>
-        <p><?= $order['voie'] ?></p>
-        <p><?= $order['voie_sup'] ?></p>
-        <p><?= $order['code_postal'] . ' ' . $order['ville'] ?></p>
+        <?php foreach ($order_resume as $key => $order) { ?>
+            <h2>Articles <?= $key + 1 ?></h2>
+
+            <p><?= $order['titre_article'] ?></p>
+            <p><?= $order['nb_article'] ?></p>
+            <p><?= $order['prix_article'] ?> € ttc</p>
     </section>
-    <section>
-        <h2>Articles</h2>
-        <p><?= $order['titre_article'] ?></p>
-        <p><?= $order['nb_article'] ?></p>
-        <p><?= $order['prix_article'] ?> €</p>
-    </section>
-    <section>
-        <h2>Prix total</h2>
-        <p><?= $order['prix_avec_tva'] ?> €</p>
-    </section>
+<?php } ?>
+
+<section>
+    <h2>Prix total</h2>
+    <p>Nombre total d'articles : <?= $order['total_produit'] ?> </p>
+    <p><?= $order['prix_avec_tva'] ?> € ttc</p>
+</section>
 </article>

@@ -9,8 +9,10 @@
 "base/animations",
 "base/fonts";
 // 3. Components
-@import "components/button", "components/caroussel", "components/card",
-  "components/errorPopup";
+@import "components/button",
+"components/caroussel",
+"components/card",
+"components/errorPopup";
 // 4. Layout-related sections
 @import "layout/header",
 "layout/form",
@@ -30,5 +32,6 @@
 "pages/adminOrder",
 "pages/resetPassword",
 "pages/historiqueCommande",
-'pages/updateProduct',
-'pages/updatesku';
+"pages/updateProduct",
+"pages/resumePayment",
+"pages/updatesku";

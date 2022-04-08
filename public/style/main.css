@@ -2727,7 +2727,7 @@ footer {
 
 .containerMain.paiment {
   width: 100vw;
-  height: 80vh;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3044,6 +3044,36 @@ footer {
 
 .buttonDelete:hover {
   background-color: #690a0a;
+}
+
+.containerMain.paiment {
+  height: 100%;
+  background-color: blue;
+}
+
+.formField.paimentResume {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.formField.paimentResume div {
+  margin: 2%;
+}
+
+.formField.paimentResume h1 {
+  text-align: center;
+}
+
+.formField.paimentResume .form__button {
+  margin: 5%;
 }
 
 .tableEmergencyRestock {

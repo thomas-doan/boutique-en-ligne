@@ -1,3 +1,14 @@
+
+<div id="deleteProduct">
+            <div>
+                <h3>Attention</h3>
+                <p>Êtes-vous sur de vouloir supprimer l'article ?</p>
+                <form action="" method="POST">
+                <a href="">annuler</a>
+                <button class="buttonDelete" type="submit" name="deleteProductAdmin" value="on">Supprimer l'article</button>
+                </form>
+            </div>
+        </div>
 <article class="mainAndSideAdmin">
 <section class="sideBarreAcount">
     <div>
@@ -77,8 +88,12 @@
 
 
 <?php if($param !== 'liste'):?>
+
     <section class="containerUpdateProduct">
-        <a href="./liste">Revenir à la liste</a>
+        <div class="firstButtonUpdateProduct">
+        <a href="./liste"><i class="fa-solid fa-arrow-left"></i>Revenir à la liste</a>
+        <a class="buttonDelete" href="#deleteProduct">supprimer</a>
+        </div>
         <form action="#formProduct" method="post" name="info_article_pincipal" enctype="multipart/form-data">
             <fieldset>
                 <legend>Modifier l'image</legend>

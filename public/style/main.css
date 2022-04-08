@@ -2784,6 +2784,16 @@ footer {
   width: 100%;
 }
 
+.mainUpdateProduct .firstButtonUpdateProduct {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .mainUpdateProduct table {
   width: 100%;
 }
@@ -2934,6 +2944,76 @@ footer {
   border: none;
   border-radius: 4px;
   margin: 8px;
+}
+
+#deleteProduct {
+  display: none;
+}
+
+#deleteProduct:target {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 99;
+  background-color: #00000066;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow-y: hidden;
+}
+
+#deleteProduct:target > div {
+  width: 90%;
+  max-width: 400px;
+  padding: 16px;
+  border: #135e4c15 1px solid;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 10px 0px #00000015;
+          box-shadow: 2px 2px 10px 0px #00000015;
+  background-color: white;
+}
+
+#deleteProduct:target > div form {
+  margin-top: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#deleteProduct:target a {
+  padding: 5px 16px;
+  border-radius: 4px;
+  background-color: #b8b8b8;
+  border: #135e4c15 1px solid;
+}
+
+#deleteProduct:target a:hover {
+  background-color: #888787;
+}
+
+.buttonDelete {
+  padding: 4px 8px;
+  background-color: #930d0d;
+  color: white !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+}
+
+.buttonDelete:hover {
+  background-color: #690a0a;
 }
 
 .tableEmergencyRestock {

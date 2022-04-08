@@ -400,9 +400,9 @@ h1 {
   color: #1d3f36;
 }
 
-.card:hover {
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+.card:hover .card__picture {
+  -webkit-filter: brightness(30%);
+          filter: brightness(30%);
 }
 
 .alert {
@@ -2828,6 +2828,7 @@ footer {
   padding: 16px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.95);
+  margin: 16px 0px;
 }
 
 .formSearchUpdateProduct form {
@@ -2933,5 +2934,13 @@ footer {
   border: none;
   border-radius: 4px;
   margin: 8px;
+}
+
+.tableEmergencyRestock {
+  background-color: white;
+  border: #135e4c15 1px solid;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 16px 0px;
 }
 /*# sourceMappingURL=main.css.map */

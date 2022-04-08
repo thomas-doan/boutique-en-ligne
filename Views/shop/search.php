@@ -9,7 +9,7 @@ echo "<pre>";
 /* echo $_GET['recherche']; */
 echo "<br>";
 
-var_dump($resultat);
+
 echo "</pre>";
 
 ?>

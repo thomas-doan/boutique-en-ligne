@@ -1,5 +1,5 @@
 <?=$style?>
-<?php var_dump($_GET['recherche']);?>
+
 <nav class="navCatégories">
     <ul>
         <li><a id="all" href="./all">Tous</a></li>

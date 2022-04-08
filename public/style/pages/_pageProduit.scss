@@ -16,7 +16,7 @@
   }
 
   &__title {
-    padding: 12px;
+    padding: 12px 0;
     font-size: 32px;
     color: #135e4c;
     font-weight: bold;
@@ -51,6 +51,7 @@
 
   .price {
     align-self: flex-end;
+    color: #135e4c;
   }
 }
 
@@ -186,7 +187,7 @@
   }
 
   &__image {
-    height: 100%;
+    height: 300px;
     width: 400px;
   }
 

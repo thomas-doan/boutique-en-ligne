@@ -5,16 +5,28 @@
 <!-- <?php var_dump($CatOfProduct); ?> -->
 <!-- <?php var_dump($likes); ?> -->
 
+<section class="alert">
+        <?php if (isset($_SESSION['flash'])) : ?>
+            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                <p class="alert__message"><?= $message; ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['flash'])) :  ?>
+            <?php unset($_SESSION['flash']) ?>
+        <?php endif; ?>
+    </section>
+
 <article class="product">
 
-    <?php if (isset($_SESSION['flash'])) : ?>
+    <!-- <?php if (isset($_SESSION['flash'])) : ?>
         <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
             <div><?= $message; ?></div>
         <?php endforeach; ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['flash'])) :  ?>
         <?php unset($_SESSION['flash']) ?>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
     
     <img class="product__image" src="../public/assets/pictures/pictures_product/<?= $product[0]['image_article'] ?>" alt="Image du produit">

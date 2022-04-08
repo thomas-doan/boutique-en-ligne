@@ -113,10 +113,10 @@ class Product extends Model
 
     public function bestProduct()
     {
-        $req = "SELECT `fk_id_article`, count(`fk_id_article`) AS `nb_vente`
-        FROM `commandes`
-        GROUP BY `fk_id_article`
-        ORDER BY `nb_vente` DESC";
+        $req = "SELECT `fk_id_article`, count(`fk_id_article`) AS `nb_vente` 
+        FROM `commandes` INNER JOIN `articles` 
+        ON `commandes`.fk_id_article = `articles`.id_article 
+        GROUP BY `fk_id_article` ORDER BY `nb_vente` DESC;";
         $query = $this->requete($req);
         return $query->fetchAll();
     }

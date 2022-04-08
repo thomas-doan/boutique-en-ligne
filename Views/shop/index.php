@@ -1,5 +1,5 @@
     <section class="hero" data-aos="fade-zoom-in" data-aos-duration="3000" data-aos-delay="200">
-        <img style="width:100%;" src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
+        <img src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
         <div class="CTA">
             <h1 data-aos="fade-left" data-aos-duration="4000">Kawa</h1>
             <h2 data-aos="fade-up" data-aos-duration="3000" data-aos-delay="1000">Une boutique dédier aux amateurs de café</h2>

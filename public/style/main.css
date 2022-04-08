@@ -1114,15 +1114,17 @@ footer {
 }
 
 .hero img:first-child {
+  width: 100%;
   position: absolute;
-  top: 0;
-  right: 0;
   min-height: 400px;
   min-width: 836px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .CTA {
-  width: 80%;
+  width: 60%;
   z-index: 1;
   color: white;
   font-family: "DM Serif Display", serif;
@@ -1137,8 +1139,8 @@ footer {
 }
 
 .CTA button {
-  width: 10vw;
-  height: 10vh;
+  width: 20%;
+  height: 50%;
   background-color: #135e4c;
   color: white;
   border: none;
@@ -1162,10 +1164,6 @@ footer {
     -webkit-box-pack: end;
         -ms-flex-pack: end;
             justify-content: end;
-  }
-  .CTA {
-    width: 33%;
-    margin-right: 15%;
   }
 }
 
@@ -1451,10 +1449,6 @@ footer {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .CTA button {
-    width: 20%;
-    height: 40%;
-  }
   .cardChoice {
     width: calc((100vw / 4) - 32px);
   }
@@ -1482,6 +1476,9 @@ footer {
 }
 
 @media only screen and (max-device-width: 768px) {
+  .scrollHorizontal::-webkit-scrollbar {
+    width: 0;
+  }
   .cardChoice {
     width: calc((100vw / 4) - 32px);
   }
@@ -1490,33 +1487,26 @@ footer {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .CTA button {
-    width: 60px;
-  }
   .cardChoice {
     width: calc((100vw / 4) - 32px);
   }
-  #img1 {
-    width: 30vw;
-    height: 15vh;
+  .CTA {
+    width: 60%;
   }
-  #img2 {
-    width: 30vw;
-    height: 15vh;
+  .CTA button {
+    width: 50%;
   }
-  #img3 {
-    width: 30vw;
-    height: 15vh;
+  .hero {
+    min-height: 290px;
+    width: 100vw;
+  }
+  .hero img:first-child {
+    min-height: 290px;
+    min-width: 536px;
   }
 }
 
 @media only screen and (max-device-width: 600px) {
-  .CTA button {
-    width: 50px;
-  }
-  .CTA button:hover {
-    width: 70%;
-  }
   .homeContainer {
     margin-right: 0;
     margin-left: 0;
@@ -1533,14 +1523,11 @@ footer {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    width: calc(8 * 50vh);
+    width: calc(8 * 90%);
     overflow-x: scroll;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-  }
-  .scrollHorizontal::-webkit-scrollbar {
-    width: 0;
   }
   .cardChoice {
     width: 80vw;
@@ -1574,6 +1561,22 @@ footer {
         -ms-grid-row-align: center;
         align-self: center;
     height: 30vh;
+  }
+  .CTA {
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (max-device-width: 320px) {
+  .CTA button {
+    width: 60%;
+  }
+  .hero {
+    min-height: 280px;
+  }
+  .hero img:first-child {
+    min-height: 290px;
+    min-width: 536px;
   }
 }
 

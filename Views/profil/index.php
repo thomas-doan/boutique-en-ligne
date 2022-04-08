@@ -25,11 +25,11 @@
             <li><a href="profil/deconnexion">Se deconnecter</a></li>
         </ul>
     </section>
-    <?php if($notifAdresse !== null):?>
-    <section>
-        <p><?=$notifAdresse?></p>
-        <a href="profil/adresse">Enregistrer une adresse ></a>
-    </section>
-    <?php endif;?>
+    <?php if ($notifAdresse !== null) : ?>
+        <section>
+            <p><?= $notifAdresse ?></p>
+            <a href="profil/adresse">Enregistrer une adresse ></a>
+        </section>
+    <?php endif; ?>
 
 </article>

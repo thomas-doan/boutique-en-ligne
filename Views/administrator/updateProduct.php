@@ -1,14 +1,16 @@
 
+<?php if(empty($_POST['deleteProductAdmin'])):?>
 <div id="deleteProduct">
             <div>
                 <h3>Attention</h3>
                 <p>Êtes-vous sur de vouloir supprimer l'article ?</p>
-                <form action="" method="POST">
+                <form action="#" method="POST">
                 <a href="">annuler</a>
                 <button class="buttonDelete" type="submit" name="deleteProductAdmin" value="on">Supprimer l'article</button>
                 </form>
             </div>
         </div>
+<?php endif;?>
 <article class="mainAndSideAdmin">
 <section class="sideBarreAcount">
     <div>

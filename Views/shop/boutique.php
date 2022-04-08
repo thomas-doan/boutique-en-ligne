@@ -1,4 +1,5 @@
 <?=$style?>
+<?php var_dump($_GET['recherche']);?>
 <nav class="navCatégories">
     <ul>
         <li><a id="all" href="./all">Tous</a></li>
@@ -114,9 +115,9 @@
         ?>
         </section>
 
-        <form class="boutiquePagination"action="" method="get">
+        <form class="boutiquePagination" action="" method="get">
             <?php if(isset($_GET['recherche'])):?>
-            <input type="hidden" name="recherche" value=<?=$urlGet?>>
+            <input type="hidden" name="recherche" value="<?=$urlGet?>">
             <?php endif;?>
             <?php if($firstProduct > 8):?>
             <button type="submit" name="page" value="<?=(($firstProduct-8)-8)?>"><i class="fa-solid fa-angle-left"></i> </button>

@@ -51,6 +51,12 @@ class AdminUpdateProductController extends Controller
         if ($id_article !== 'liste') {
 
             $product = $this->Product->find(['id_article'], [':id_article' => $id_article])[0];
+
+            if(!empty($_POST['deleteProductAdmin'])&& $_POST['deleteProductAdmin'] == 'on'){
+                $this->Product->delete([':id_article' => $id_article]);
+                $product = null;
+            }
+
             if ($product == null) {
                 header('location: ./liste');
                 exit;

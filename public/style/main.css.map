@@ -31,7 +31,8 @@
         "pages/_adminOrder.scss",
         "pages/_resetPassword.scss",
         "pages/_historiqueCommande.scss",
-        "pages/_updateProduct.scss"
+        "pages/_updateProduct.scss",
+        "pages/_updatesku.scss"
     ],
     "names": [],
     "file": "main.css"

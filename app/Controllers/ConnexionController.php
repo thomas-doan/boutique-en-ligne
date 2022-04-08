@@ -28,6 +28,8 @@ class ConnexionController extends Controller
 
             if (empty($email) || empty($mdp)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez remplir tout les champs";
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./connexion" </SCRIPT>'; //force la direction
+
             } else {
 
                 $argument = ['email'];

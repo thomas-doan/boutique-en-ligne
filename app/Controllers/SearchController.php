@@ -17,8 +17,6 @@ class SearchController extends Controller
 
         $resultat = $model->find_article($titre_article);
 
-        var_dump($resultat);
-        die;
         $title = "Kawa - Search";
 
         /*   $this->view('shop.recherche', compact('resultat')); */

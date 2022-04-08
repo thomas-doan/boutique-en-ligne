@@ -53,7 +53,7 @@
                                              <input name="nom_categorie" value="<?= $value['nom_categorie'] ?>" type="text">
                                              <input name="section" value="<?= $value['section'] ?>" type="text">
                                              <button class="form__button" name="update_cat" type="submit"> Modifier</button>
-                                             <button class="form__button" name="delete_cat" type="submit"> X </button>
+                                             <button class="form__button--delete" name="delete_cat" type="submit"> X </button>
                                          </form>
 
                                      <?php } ?>

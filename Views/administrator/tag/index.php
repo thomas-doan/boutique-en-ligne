@@ -48,7 +48,7 @@
                                      <input name="nom_tag" class="form__label" value="<?= $value['nom_tag'] ?>" type="text">
 
                                      <button class="form__button" name="update_tag" type="submit"> Modifier </button>
-                                     <button class="form__button" name="delete_tag" type="submit"> X </button>
+                                     <button class="form__button--delete" name="delete_tag" type="submit"> X </button>
                                  </form>
 
                              <?php } ?>

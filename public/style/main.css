@@ -1129,11 +1129,11 @@ footer {
 }
 
 .CTA H1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 3vw, 6rem);
 }
 
 .CTA H2 {
-  font-size: 2.3rem;
+  font-size: clamp(2rem, 3vw, 6rem);
 }
 
 .CTA button {
@@ -1497,23 +1497,14 @@ footer {
     width: calc((100vw / 4) - 32px);
   }
   #img1 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     width: 30vw;
     height: 15vh;
   }
   #img2 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     width: 30vw;
     height: 15vh;
   }
   #img3 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     width: 30vw;
     height: 15vh;
   }
@@ -1555,38 +1546,32 @@ footer {
     width: 80vw;
   }
   #img1 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     width: 90vw;
     -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
         align-self: center;
     height: 30vh;
   }
   #img2 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     width: 90vw;
     -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
         align-self: center;
     height: 30vh;
   }
   #img3 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     width: 90vw;
     -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
         align-self: center;
     height: 30vh;
   }

@@ -42,7 +42,7 @@
 
                     </div>
                 </div>
-                <div id="img1" class="card" data-aos="zoom-out" data-aos-duration="3000" data-aos-delay="2000" data-aos-offset="0">
+                <div id="img1" class="card" data-aos="zoom-out" data-aos-duration="3000" data-aos-delay="5000" data-aos-offset="0">
                     <div class="imgBx">
                         <img src=".\public\assets\pictures\voyage_cafe.jpeg">
                     </div>

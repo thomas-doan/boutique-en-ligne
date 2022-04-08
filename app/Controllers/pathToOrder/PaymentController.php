@@ -2,7 +2,7 @@
 
 
 
-namespace App\Controllers;
+namespace App\Controllers\pathToOrder;
 
 use Exception;
 use Throwable;
@@ -54,21 +54,25 @@ class PaymentController extends Controller
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
+                $image_article = $checkQuantity[$key][0]["image_article"];
                 $_SESSION['quantityPayment'][$id_article][0] = $value;
                 $_SESSION['quantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['quantityPayment'][$id_article][2] = $prix_article;
+                $_SESSION['quantityPayment'][$id_article][3] = $image_article;
             }
 
             if (($checkQuantity[$key][0]["sku"] - $value) < 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
+                $image_article = $checkQuantity[$key][0]["image_article"];
 
                 // si commande 5 articles mais 3 en bdd, actualisation de nbr d'unité. 
                 $_SESSION['quantite'][$key] = $checkQuantity[$key][0]["sku"];
                 $_SESSION['halfQuantityPayment'][$id_article][0] = $checkQuantity[$key][0]["sku"];
                 $_SESSION['halfQuantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['halfQuantityPayment'][$id_article][2] = $prix_article;
+                $_SESSION['halfQuantityPayment'][$id_article][3] = $image_article;
             }
 
             if ($checkQuantity[$key][0]["sku"] == 0) {
@@ -222,10 +226,10 @@ class PaymentController extends Controller
     public function payment()
     {           /*         $this->stripe($this->totalPrice()); */
         if (isset($_POST['submit'])) {
-            $db = DBConnection::getPDO();
+
             /*     $this->stripe(); */
             try {
-
+                $db = DBConnection::getPDO();
                 $db->beginTransaction();
                 $this->checkQuantity();
                 $getIdNumCommande = $this->insertNumCommande($db);
@@ -233,10 +237,19 @@ class PaymentController extends Controller
                 $this->insertLivraison($getIdNumCommande, $db);
                 $this->insertCommandes($getIdNumCommande, $db);
                 $db->commit();
+                unset($_SESSION['validate']);
+                unset($_SESSION['quantite']);
+                unset($_SESSION['prix']);
+                $_SESSION['num_commande'] = $getIdNumCommande;
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiementResume" </SCRIPT>'; //force la direction
+
             } catch (Exception $e) {
                 $db->rollBack();
                 echo "Failed: " . $e->getMessage();
             }
+
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction
+
         }
     }
 }

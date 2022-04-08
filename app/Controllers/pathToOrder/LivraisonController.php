@@ -1,12 +1,14 @@
 <?php
 
 
-namespace App\Controllers;
+namespace App\Controllers\pathToOrder;
 
 
+use App\Models\Adresses;
 use App\Models\Articles;
 use App\Models\Utilisateurs;
-use App\Models\Adresses;
+use App\Controllers\Security;
+use App\Controllers\Controller;
 
 
 class LivraisonController extends Controller

@@ -16,9 +16,10 @@
         <?php unset($_SESSION['flash']) ?>
     <?php endif; ?>
 
-
+    
     <img class="product__image" src="../public/assets/pictures/pictures_product/<?= $product[0]['image_article'] ?>" alt="Image du produit">
 
+    <div class="test">
     <div class="product__heading">
     <h1 class="product__title"><?= $product[0]['titre_article'] ?></h1>
 
@@ -59,6 +60,7 @@
             <p class="price"><?= $product[0]['prix_article'] ?>€</p>
         </div>
     </div>
+    </div>
 </article>
 
 
@@ -79,18 +81,20 @@
             <p><?= $comment['date'] ?></p>
         </section>
 
-        <section>
-            <form action="" method="POST">
+        <section class="separator">
+            <form class="form-reply" action="" method="POST">
                 <?php if ($comment['signaler'] == 0) { ?>
                     <input type="hidden" value="<?= $comment['id_commentaire'] ?>" name="signalement">
-                    <button type="submit" name="signaler" value="1">Signaler</button>
+                    <button class="signal" type="submit" name="signaler" value="1">Signaler</button>
                 <?php  } ?>
 
                 <input type="hidden" id="comment" name="id_commentaire" value="<?= $comment['id_commentaire'] ?>">
 
-                <input type="text" id="comment" name="comment" placeholder="Répondre au commentaire" value="">
-                <input type="submit" name="submitAnswer" value="répondre">
+                <input class="form-reply-text" type="text" id="comment" name="comment" placeholder="Répondre au commentaire" value="">
+                <input class="form__button form__button--product form__button--reply" type="submit" name="submitAnswer" value="répondre">
             </form>
+
+            <hr>
         </section>
 
         <?php
@@ -98,7 +102,7 @@
             if ($comment['fk_id_commentaire'] == $comment['id_commentaire']) {
 
         ?>
-                <section>
+                <section class="reply">
 
                     <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?> <?php if ($comment[$i]['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
                     <p> commentaire : <?= $comment[$i]['reponse_assoc'] ?></p>
@@ -106,7 +110,7 @@
                     <form action="" method="POST">
                         <?php if ($comment[$i]['signaler'] == 0) { ?>
                             <input type="hidden" value="<?= $comment[$i]['id_reponse_com'] ?>" name="idReportAnswer">
-                            <button type="submit" name="reportAnswer" value="1">Signaler</button>
+                            <button type="submit" name="reportAnswer" value="1" class="signal">Signaler</button>
                         <?php  } ?>
                     </form>
                 </section>
@@ -121,11 +125,11 @@
 
 
 
-    <section>
+    <section class="response">
         <form action="" method="POST">
             <label for="comment" style="display: none">Ecrire un commentaire</label>
-            <input class="test" type="text" id="comment" name="com" placeholder="Laissez votre commentaire ...">
-            <input class="form__button form__button--product" type="submit" name="submit" value="Ecrire un commentaire">
+            <input class="form-reply-text" class="test" type="text" id="comment" name="com" placeholder="Laissez votre commentaire ...">
+            <input class="form__button form__button--product send-answer" type="submit" name="submit" value="Ecrire un commentaire">
         </form>
     </section>
     </div>

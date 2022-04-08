@@ -158,6 +158,10 @@ h1 {
   font-size: 12px;
 }
 
+.form__button--reply {
+  width: 72px;
+}
+
 .submit {
   margin-top: 2rem;
 }
@@ -2637,23 +2641,16 @@ h1 {
 }
 
 .comment__title {
-  padding: 12px;
   font-size: 32px;
   color: #135e4c;
   font-weight: bold;
 }
 
-.comment__commentary {
-  border-bottom: 1px solid black;
-  padding: 12px;
-}
-
 .comment__commentary span {
-  color: red;
+  color: rgba(224, 95, 95, 0.589);
 }
 
 .comment__commentary h3 {
-  padding: 12px;
   font-size: 16px;
   color: #135e4c;
   font-weight: bold;
@@ -2664,6 +2661,102 @@ h1 {
 }
 
 .comment__answer {
-  background-color: red;
+  background-color: rgba(224, 95, 95, 0.589);
+}
+
+.form-reply {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form-reply-text {
+  border: none;
+  background-color: #f9f7f4;
+  width: 80%;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.form-reply-button {
+  width: 50%;
+}
+
+.reply h3 {
+  color: #135e4c;
+}
+
+.signal {
+  width: 64px;
+  border: none;
+  background-color: rgba(224, 95, 95, 0.589);
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.separator {
+  padding: 12px 0;
+  gap: 12px;
+}
+
+.separator form {
+  margin-bottom: 12px;
+}
+
+.separator form input {
+  margin-top: 12px;
+}
+
+.response form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.response input {
+  margin: 6px 0;
+}
+
+.response .send-answer {
+  width: 156px;
+}
+
+@media only screen and (min-width: 1280px) {
+  .product {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .test {
+    padding: 0 48px;
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3;
+  }
+  __image {
+    height: 100%;
+    width: 400px;
+  }
+  .payement {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin: auto;
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=main.css.map */

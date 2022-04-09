@@ -18,7 +18,6 @@ class ShoppingCartController extends Controller
 
     public function index()
     {
-
         $articles = $this->modelArticle->findAll();
         $title = "panier";
         return compact('articles', 'title'/* , 'totalQuantity' */);
@@ -40,6 +39,7 @@ class ShoppingCartController extends Controller
                 $_SESSION['quantite'] = [];
                 $_SESSION['prix'] = [];
 
+
                 // assignation valeur
 
                 $prix_article =  (float) $_POST['prix_article'];
@@ -47,7 +47,14 @@ class ShoppingCartController extends Controller
                 $_SESSION['quantite'][$id_article] = 1;
                 $_SESSION['prix'][$id_article] = $prix_article;
             }
+
+            $_SESSION['productAddInShop']['sucess'] = "Le produit est ajouté au panier !";
+
+
+
             header('refresh: 0');
+            header('refresh: 0');
+            exit();
         }
     }
 
@@ -72,7 +79,6 @@ class ShoppingCartController extends Controller
             }
 
             header('refresh: 0');
-            exit();
         }
     }
 
@@ -87,7 +93,6 @@ class ShoppingCartController extends Controller
             $_SESSION['quantite'][$id_article] = $_SESSION['quantite'][$id_article] - $down;
 
             header('refresh: 0');
-            exit();
         }
     }
 
@@ -97,7 +102,6 @@ class ShoppingCartController extends Controller
             unset($_SESSION['quantite'][(int) $_POST['id_article']]);
             unset($_SESSION['prix'][(int) $_POST['id_article']]);
             header('refresh: 0');
-            exit();
         }
     }
 
@@ -152,6 +156,15 @@ class ShoppingCartController extends Controller
                     }
                 }
             }
+        }
+    }
+
+    public function delivery()
+    {
+        if (isset($_POST['goDelivery'])) {
+            /*  header('location: ./livraison'); */
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="/boutique-en-ligne/livraison" </SCRIPT>'; //force la direction
+
         }
     }
 }

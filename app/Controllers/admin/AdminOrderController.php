@@ -2,10 +2,11 @@
 
 namespace App\Controllers\admin;
 
-use App\Controllers\Controller;
+use App\Models\Commandes;
 
 use App\Models\Livraison;
 use App\Models\NumCommande;
+use App\Controllers\Controller;
 
 class AdminOrderController extends Controller
 {
@@ -14,6 +15,7 @@ class AdminOrderController extends Controller
     {
         $this->model = new Livraison();
         $this->modelNumCommande = new NumCommande();
+        $this->modelCommande = new Commandes();
     }
 
     public function index()
@@ -21,10 +23,27 @@ class AdminOrderController extends Controller
         $title = "Admin commande en attente - Kawa";
 
         $livraison = $this->modelNumCommande->getAllOrderbyIdUser();
+        $ResumeOrder = $this->modelNumCommande->ResumeOrderAdmin();
+
 
         $nb = $this->modelNumCommande->countWaitingValidate();
 
-        $this->view('administrator/orderhistory/index', compact('title', 'livraison', 'nb'));
+        $this->view('administrator/orderhistory/index', compact('title', 'livraison', 'nb', 'ResumeOrder'));
+    }
+
+    public function indexResume($id)
+    {
+        $title = "Admin résumé commande - Kawa";
+        $resume = $this->resumeOrder($id);
+
+        $this->view('administrator/orderhistory/resume', compact('title', 'resume'));
+    }
+
+    public function resumeOrder($id)
+    {
+        $resultat = $this->modelCommande->getInfoCommande($id);
+
+        return $resultat;
     }
 
     public function update()
@@ -38,7 +57,7 @@ class AdminOrderController extends Controller
                 ->setEtat_livraison($etat_livraison);
             $this->model->update($modelHydrate, compact('id_livraison', 'etat_livraison'));
             $_SESSION['flash']['sucess'] = "La commande est validée !";
-            header('location: ./validercommande');
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./validercommande" </SCRIPT>'; //force la direction
             exit();
         }
     }

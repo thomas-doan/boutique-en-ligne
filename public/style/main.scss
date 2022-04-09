@@ -1,30 +1,37 @@
 @charset "UTF-8";
-
-// 1. Configuration and helpers (functions, variables, mixins)
-@import
-  'abstracts/variables',
-  'abstracts/functions',
-  'abstracts/mixins';
-
+// Configuration and helpers (functions, variables, mixins)
+@import "utils/variables",
+"utils/functions",
+"utils/mixins";
 // 2. Base stuff
-@import
-  'base/animations',
-  'base/fonts',
-  'base/reset';
-
+@import "base/reset",
+"base/base",
+"base/animations",
+"base/fonts";
 // 3. Components
-@import
-  'components/button';
-
+@import "components/button",
+"components/caroussel",
+"components/card",
+"components/errorPopup";
 // 4. Layout-related sections
-@import
-  'layout/header',
-  'layout/footer';
-
+@import "layout/header",
+"layout/form",
+"layout/footer",
+"layout/panier",
+"layout/sidebarre";
 // 5. Page-specific styles
-@import
-  'pages/home';
-
-// 5. Vendors
-@import
-  'vendors/...';
+@import "pages/home",
+"pages/boutique",
+"pages/adminIndex",
+"pages/creerArticle",
+"pages/livraison",
+"pages/adminComment",
+"pages/adminUserUpdate",
+"pages/menuAdminSlider",
+"pages/payment",
+"pages/adminOrder",
+"pages/resetPassword",
+"pages/historiqueCommande",
+"pages/updateProduct",
+"pages/resumePayment",
+"pages/updatesku";

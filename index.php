@@ -1,8 +1,27 @@
 <?php session_start();
+// error_reporting(0);
+
+use App\Controllers\Security;
+use Exceptions\NotFoundException;
+
+require_once 'app/Controllers/Security.php';
 
 //Control d'accée à l'url
 $urlControlUser = $_SERVER['REQUEST_URI'];
 $pathControl = explode('/', $urlControlUser);
+if ($pathControl[2] !== 'connexion') {
+    if ($pathControl[2] !== 'inscription') {
+        $_SERVER['HTTP_REFERER'] = $_SERVER['REQUEST_URI'];
+    }
+}
+// if($pathControl[2]=='admin' && $_SESSION['user']['role']!=='Admin')
+// {
+// if(isset($_SESSION['user']))
+// {
+// // echo 'redirection';
+//     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="'.$pathControl[0].'/'.$pathControl[1].'/profil" </SCRIPT>'; //force la direction
+// exit();
+// }
 if ($pathControl[2] == 'admin' && $_SESSION['user']['role'] !== 'Admin') {
     if (isset($_SESSION['user'])) {
         // echo 'redirection';
@@ -15,11 +34,10 @@ if ($pathControl[2] == 'admin' && $_SESSION['user']['role'] !== 'Admin') {
 if ($pathControl[2] == 'profil' && empty($_SESSION['user'])) {
     echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . $pathControl[0] . '/' . $pathControl[1] . '/connexion" </SCRIPT>'; //force la direction 
 }
+if (($pathControl[2] == 'connexion' && !empty($_SESSION['user'])) || ($pathControl[2] == 'inscription' && !empty($_SESSION['user']))) {
+    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="../boutique-en-ligne/"</SCRIPT>'; //force la direction 
+}
 
-use App\Controllers\Security;
-use Exceptions\NotFoundException;
-
-require_once 'app/Controllers/Security.php';
 //Sécurité de tout les formulaire Get|POST
 $securityAll = new Security();
 if (isset($_GET)) {
@@ -33,6 +51,9 @@ require('vendor/autoload.php');
 
 
 define('VIEWS', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '404.php');
+
+define('REDIRECT', __DIR__ . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'shop' . DIRECTORY_SEPARATOR . 'livraison.php');
+
 
 function error($param)
 {
@@ -277,6 +298,16 @@ $router->map(
 
 );
 
+$router->map(
+    'GET|POST',
+    '/admin/detail/[i:id]',
+    function ($id) {
+        $controller = new App\Controllers\admin\AdminOrderController();
+        $controller->indexResume($id);
+    },
+
+);
+
 // CRUD Category
 $router->map(
     'GET',
@@ -373,31 +404,18 @@ $router->map(
 ----------------------------- PARCOURS PANIER ----------------------------- */
 
 
-//Commande
-$router->map(
-    'GET/POST',
-    '/commande',
-    function () {
-        $controller = new App\Controllers\OrderController();
-        $controller->index();
-        $controller->orderResume();
-        $controller->validate();
-    },
-    'commande'
-);
-
-
 
 //livraison
 $router->map(
     'GET/POST',
     '/livraison',
     function () {
-        $controller = new App\Controllers\LivraisonController();
+        $controller = new App\Controllers\pathToOrder\LivraisonController();
         $controller->index();
         $controller->fieldCheck();
         $controller->adressCheck();
         $controller->getAdress();
+        $controller->back();
     },
     'livraison'
 );
@@ -407,12 +425,24 @@ $router->map(
     'GET/POST',
     '/paiement',
     function () {
-        $controller = new App\Controllers\PaymentController();
+        $controller = new App\Controllers\pathToOrder\PaymentController();
         $controller->index();
         $controller->payment();
         $controller->stripe();
     },
     'paiement'
+);
+
+
+//Paiement
+$router->map(
+    'GET/POST',
+    '/paiementResume',
+    function () {
+        $controller = new App\Controllers\pathToOrder\PaymentResumeController();
+        $controller->index();
+    },
+    'paiementResume'
 );
 
 $match = $router->match();

@@ -77,7 +77,6 @@ class AdminCreateProductController extends Controller
                     $_SESSION['nouvelarticle']['tag'][$idNewTag] = $_POST['tag'];
                 }
 
-                var_dump($_SESSION['nouvelarticle']['tag']);
                 $allTags = $this->Product->getAlltag();
             }
 

@@ -1,0 +1,19 @@
+.containerMain.paiment {
+    height: 100%;
+    background-color: blue;
+}
+
+.formField.paimentResume {
+    div {
+        margin: 2%;
+    }
+    h1 {
+        text-align: center;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .form__button {
+        margin: 5%;
+    }
+}

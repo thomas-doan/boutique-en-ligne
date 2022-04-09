@@ -50,7 +50,7 @@ class PaymentController extends Controller
             $selection = ['sku', 'titre_article', 'prix_article'];
             $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'), $selection);
 
-            if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
+            /*         if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
@@ -59,7 +59,7 @@ class PaymentController extends Controller
                 $_SESSION['quantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['quantityPayment'][$id_article][2] = $prix_article;
                 $_SESSION['quantityPayment'][$id_article][3] = $image_article;
-            }
+            } */
 
             if (($checkQuantity[$key][0]["sku"] - $value) < 0 && ($checkQuantity[$key][0]["sku"] - $value) != 0) {
 

@@ -32,13 +32,25 @@ class ModifierPasswordController extends Controller
 
             if (empty($ancienMdp) || empty($nouveauMdp) || empty($confirmMdp)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez renseigner tout les champs !";
-                header('location: ./modifierMotdePasse');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./modifierMotdePasse\" </SCRIPT>"; //force la direction
+
+
+            } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.]{6,12}$/', $confirmMdp) || !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%.]{6,12}$/', $nouveauMdp)) {
+                $_SESSION['flash']['erreur'] =
+                    "Peut contenir des lettres et des nombres,
+                    Doit contenir au moins 1 chiffre et 1 lettre,
+                    Peut contenir l'un de ces caractères: !@#$%.,
+                    Doit être de 6 à 12 caractères";
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./modifierMotdePasse\" </SCRIPT>"; //force la direction
+
             } elseif (!password_verify(@$ancienMdp, @$checkUser[0]['password'])) {
                 $_SESSION['flash']['erreur'] = "Oups ! Veuillez renseigner votre mdp actuel !";
-                header('location: ./modifierMotdePasse');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./modifierMotdePasse\" </SCRIPT>"; //force la direction
+
             } elseif ($nouveauMdp !== $confirmMdp) {
                 $_SESSION['flash']['erreur'] = "Oups ! Les mdp ne match pas !";
-                header('location: ./modifierMotdePasse');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./modifierMotdePasse\" </SCRIPT>"; //force la direction
+
             } else {
 
                 // $updateMdp = $model;
@@ -57,7 +69,8 @@ class ModifierPasswordController extends Controller
 
                 $_SESSION['user']['password'] = $model->getPassword();
                 $_SESSION['flash']['sucess'] = "Bravo votre changement a bien été effectué";
-                header('Location: ../profil');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"../profil\" </SCRIPT>"; //force la direction
+
                 exit();
             }
         }

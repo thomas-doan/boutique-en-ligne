@@ -50,7 +50,7 @@ class PaymentController extends Controller
             $selection = ['sku', 'titre_article', 'prix_article'];
             $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'), $selection);
 
-            if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
+            /*         if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
@@ -59,9 +59,9 @@ class PaymentController extends Controller
                 $_SESSION['quantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['quantityPayment'][$id_article][2] = $prix_article;
                 $_SESSION['quantityPayment'][$id_article][3] = $image_article;
-            }
+            } */
 
-            if (($checkQuantity[$key][0]["sku"] - $value) < 0) {
+            if (($checkQuantity[$key][0]["sku"] - $value) < 0 && ($checkQuantity[$key][0]["sku"] - $value) != 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
@@ -75,12 +75,12 @@ class PaymentController extends Controller
                 $_SESSION['halfQuantityPayment'][$id_article][3] = $image_article;
             }
 
-            if ($checkQuantity[$key][0]["sku"] == 0) {
+            /*       if ($checkQuantity[$key][0]["sku"] == 0) {
                 $_SESSION['noStock'][$id_article][1] = $titre_article;
 
                 unset($_SESSION['quantite'][$id_article]);
                 unset($_SESSION['prix'][$id_article]);
-            }
+            } */
         }
     }
 
@@ -136,14 +136,22 @@ class PaymentController extends Controller
                     $nb_article = $value1;
                     (float) $prix_article = $value2;
                     $fk_id_article = $key1;
+                    $id_article = $key1;
+                    $argument = ['id_article'];
+                    $article = $this->modelArticle->find($argument, compact('id_article'));
+                    $titre_article = $article[0]['titre_article'];
+
+
+
                     (float) $prix_commande = ($prix_article * $nb_article);
                     $modelHydrate = $this->modelCommandes
                         ->setFk_id_num_commande($fk_id_num_commande)
                         ->setFk_id_article($fk_id_article)
                         ->setNb_article($nb_article)
                         ->setPrix_article($prix_article)
-                        ->setPrix_commande($prix_commande);
-                    $this->modelCommandes->createTransaction($modelHydrate, compact('fk_id_num_commande', 'fk_id_article', 'nb_article', 'prix_article', 'prix_commande'), $connexion);
+                        ->setPrix_commande($prix_commande)
+                        ->setTitre_article($titre_article);
+                    $this->modelCommandes->createTransaction($modelHydrate, compact('fk_id_num_commande', 'fk_id_article', 'nb_article', 'prix_article', 'prix_commande', 'titre_article'), $connexion);
                 }
             }
         }

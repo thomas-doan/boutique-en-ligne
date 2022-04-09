@@ -15,17 +15,16 @@ class CommandeController extends Controller
         $title = "Commande";
         $idCommande = $id_commande;
 
-        $order = $this->getOrderInfo($idCommande);
+        $order_resume = $this->getOrderInfo($idCommande);
 
-        if ($_SESSION['user']['role'] == 'Admin' || $order['fk_id_utilisateurs'] == $_SESSION['user']['id_utilisateur']) {
-            echo 'ok';
+        if ($_SESSION['user']['role'] == 'Admin' || $order_resume[0]['fk_id_utilisateurs'] == $_SESSION['user']['id_utilisateur']) {
         } else {
             $_SESSION['flash'] = 'Ce numero de commande ne correspond à aucune de vos commandes';
             $order = null;
         }
 
         // $allInfoById = $this->getCommandeById($idCommande);
-        return $this->view('profil.commande', compact('title', 'order'));
+        return $this->view('profil.commande', compact('title', 'order_resume'));
     }
 
     public function getOrderInfo($id_commande)

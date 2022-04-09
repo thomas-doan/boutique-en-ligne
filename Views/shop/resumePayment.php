@@ -51,4 +51,5 @@
         <?php
         unset($_SESSION['halfQuantityPayment']);
         unset($_SESSION['num_commande']);
+        unset($_SESSION['totalQuantity']);
         ?>

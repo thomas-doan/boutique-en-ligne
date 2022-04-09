@@ -26,7 +26,7 @@
     } ?>
     <section>
         <?php foreach ($order_resume as $key => $order) { ?>
-            <h2>Articles <?= $key + 1 ?></h2>
+            <h2>Article <?= $key + 1 ?></h2>
 
             <p><?= $order['titre_article'] ?></p>
             <p><?= $order['nb_article'] ?></p>

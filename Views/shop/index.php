@@ -2,7 +2,7 @@
     <img src=".\public\assets\pictures\kawa_img_hero_desktop.jpeg" alt="hero">
     <div class="CTA">
         <h1 data-aos="fade-left" data-aos-duration="4000">Kawa</h1>
-        <h2 data-aos="fade-up" data-aos-duration="3000" data-aos-delay="1000">Une boutique dédier aux amateurs de café</h2>
+        <h2 data-aos="fade-up" data-aos-duration="3000" data-aos-delay="1000">Une boutique dédiée aux amateurs de café</h2>
         <a href="./boutique/all"> <button data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="3000"> Découvrir</button> </a>
     </div>
 </section>
@@ -13,7 +13,7 @@
         <section>
             <img id="fleche" src=".\public\img\icone_fleche.png" alt="icone fleche" />
             <p>
-                Passionnés de café, c’est après avoir réalisé plusieurs voyages aux Bresil, Hawai,
+                Passionnés de café, c’est après avoir réalisés plusieurs voyages aux Bresil, Hawai,
                 Kenya que nous avons découvert des cafés d'exceptions.
                 Devant la méconnaissance de café riche et singulier, nous avons décidé de créer Kawa afin de rendre ses grains d'exceptions accessibles.
             </p>

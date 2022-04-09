@@ -1734,6 +1734,11 @@ footer {
           flex-direction: column;
 }
 
+.boutiqueMain h1 {
+  margin-top: 2%;
+  text-align: center;
+}
+
 .boutiqueMain .boutique {
   width: 316px;
   display: -webkit-box;
@@ -3160,6 +3165,11 @@ footer {
   border-radius: 4px;
   padding: 8px;
   margin: 16px 0px;
+}
+
+.containerProduit {
+  margin-right: 10%;
+  margin-left: 10%;
 }
 
 .product {

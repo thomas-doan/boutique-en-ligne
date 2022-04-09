@@ -2,10 +2,6 @@
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
 .form__button {
-  // border-top: none;
-  // border-left: none;
-  // border-right: none;
-  // border-bottom: solid 1px black;
   border: none;
   background-color: #135e4c;
   color: white;
@@ -13,20 +9,33 @@
   outline: none;
   transition: 0.4s ease-in-out;
   font-size: 20px;
-  padding: 8px 24px;
   border-radius: 4px;
+  padding: 8px 24px;
   &:hover {
     background-color: #1d3f36;
   }
-
   &--product {
     padding: 8px 10px;
     font-size: 12px;
   }
-
   &--reply {
+
     width: 72px;
   }
+    &--delete{
+        border: none;
+        background-color: #920f0f;
+        color: white;
+        cursor: pointer;
+        outline: none;
+        transition: 0.4s ease-in-out;
+        font-size: 20px;
+        padding: 8px 24px;
+        border-radius: 4px;
+    &:hover {
+        background-color: #6c0b0b;
+    }
+    }
 }
 
 .submit {

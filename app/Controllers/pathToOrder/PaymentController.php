@@ -2,7 +2,7 @@
 
 
 
-namespace App\Controllers;
+namespace App\Controllers\pathToOrder;
 
 use Exception;
 use Throwable;
@@ -50,33 +50,37 @@ class PaymentController extends Controller
             $selection = ['sku', 'titre_article', 'prix_article'];
             $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'), $selection);
 
-            if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
+            /*         if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
+                $image_article = $checkQuantity[$key][0]["image_article"];
                 $_SESSION['quantityPayment'][$id_article][0] = $value;
                 $_SESSION['quantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['quantityPayment'][$id_article][2] = $prix_article;
-            }
+                $_SESSION['quantityPayment'][$id_article][3] = $image_article;
+            } */
 
-            if (($checkQuantity[$key][0]["sku"] - $value) < 0) {
+            if (($checkQuantity[$key][0]["sku"] - $value) < 0 && ($checkQuantity[$key][0]["sku"] - $value) != 0) {
 
                 $titre_article = $checkQuantity[$key][0]["titre_article"];
                 $prix_article = $checkQuantity[$key][0]["prix_article"];
+                $image_article = $checkQuantity[$key][0]["image_article"];
 
                 // si commande 5 articles mais 3 en bdd, actualisation de nbr d'unité. 
                 $_SESSION['quantite'][$key] = $checkQuantity[$key][0]["sku"];
                 $_SESSION['halfQuantityPayment'][$id_article][0] = $checkQuantity[$key][0]["sku"];
                 $_SESSION['halfQuantityPayment'][$id_article][1] = $titre_article;
                 $_SESSION['halfQuantityPayment'][$id_article][2] = $prix_article;
+                $_SESSION['halfQuantityPayment'][$id_article][3] = $image_article;
             }
 
-            if ($checkQuantity[$key][0]["sku"] == 0) {
+            /*       if ($checkQuantity[$key][0]["sku"] == 0) {
                 $_SESSION['noStock'][$id_article][1] = $titre_article;
 
                 unset($_SESSION['quantite'][$id_article]);
                 unset($_SESSION['prix'][$id_article]);
-            }
+            } */
         }
     }
 
@@ -132,14 +136,22 @@ class PaymentController extends Controller
                     $nb_article = $value1;
                     (float) $prix_article = $value2;
                     $fk_id_article = $key1;
+                    $id_article = $key1;
+                    $argument = ['id_article'];
+                    $article = $this->modelArticle->find($argument, compact('id_article'));
+                    $titre_article = $article[0]['titre_article'];
+
+
+
                     (float) $prix_commande = ($prix_article * $nb_article);
                     $modelHydrate = $this->modelCommandes
                         ->setFk_id_num_commande($fk_id_num_commande)
                         ->setFk_id_article($fk_id_article)
                         ->setNb_article($nb_article)
                         ->setPrix_article($prix_article)
-                        ->setPrix_commande($prix_commande);
-                    $this->modelCommandes->createTransaction($modelHydrate, compact('fk_id_num_commande', 'fk_id_article', 'nb_article', 'prix_article', 'prix_commande'), $connexion);
+                        ->setPrix_commande($prix_commande)
+                        ->setTitre_article($titre_article);
+                    $this->modelCommandes->createTransaction($modelHydrate, compact('fk_id_num_commande', 'fk_id_article', 'nb_article', 'prix_article', 'prix_commande', 'titre_article'), $connexion);
                 }
             }
         }
@@ -222,10 +234,10 @@ class PaymentController extends Controller
     public function payment()
     {           /*         $this->stripe($this->totalPrice()); */
         if (isset($_POST['submit'])) {
-            $db = DBConnection::getPDO();
+
             /*     $this->stripe(); */
             try {
-
+                $db = DBConnection::getPDO();
                 $db->beginTransaction();
                 $this->checkQuantity();
                 $getIdNumCommande = $this->insertNumCommande($db);
@@ -233,10 +245,19 @@ class PaymentController extends Controller
                 $this->insertLivraison($getIdNumCommande, $db);
                 $this->insertCommandes($getIdNumCommande, $db);
                 $db->commit();
+                unset($_SESSION['validate']);
+                unset($_SESSION['quantite']);
+                unset($_SESSION['prix']);
+                $_SESSION['num_commande'] = $getIdNumCommande;
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiementResume" </SCRIPT>'; //force la direction
+
             } catch (Exception $e) {
                 $db->rollBack();
                 echo "Failed: " . $e->getMessage();
             }
+
+            echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="./paiement" </SCRIPT>'; //force la direction
+
         }
     }
 }

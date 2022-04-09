@@ -1,9 +1,12 @@
 <?php
 require_once './app/Controllers/ShoppingCartController.php';
 if (!isset($_SESSION['user'])) {
-  header('Location: /boutique-en-ligne/connexion');
+  header('Location: /boutique-en-ligne/');
 }
 
+if (!isset($_SESSION['validate'])) {
+  header('Location: /boutique-en-ligne/');
+}
 $controller = new App\Controllers\ShoppingCartController();
 
 $controller->upValue();
@@ -16,7 +19,6 @@ $controller->totalPrice();
 $controller->delivery();
 $controller->index();
 extract($controller->index());
-
 ?>
 
 <?php if (isset($_SESSION['flash'])) : ?>
@@ -35,7 +37,15 @@ extract($controller->index());
   <article class="formLivraison paiement" action="" method="post">
 
     <div class="formField paiement">
+      <?php if (isset($_SESSION['flash'])) : ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+          <div><?= $message; ?></div>
+        <?php endforeach; ?>
+      <?php endif; ?>
 
+      <?php if (isset($_SESSION['flash'])) :  ?>
+        <?php unset($_SESSION['flash']) ?>
+      <?php endif; ?>
 
       <h1> Paiement de la commande : </h1>
       <form method="post" action="">
@@ -50,10 +60,10 @@ extract($controller->index());
 
       </form>
       <a href="./livraison"> <button class="form__button">retour</button></a>
-      <div id="errors"></div>
+      <!--      <div id="errors"></div>
       <script src="https://js.stripe.com/v3/"></script>
       <script src="https://code.jquery.com/jquery-2.0.2.min.js"></script>
-      <script src="script.js"></script>
+      <script src="script.js"></script> -->
 
     </div>
 

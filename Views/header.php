@@ -1,4 +1,5 @@
 <?php require 'app/Controllers/headerController.php' ?>
+
 <nav class="nav">
 
     <!-- <section class="nav__list"> -->
@@ -6,9 +7,10 @@
         <img class="nav__logo" style="height:40px" src="/boutique-en-ligne/public/assets/pictures/kawa_logo_color.svg" alt="revenir à l'accuil principal">
     </a>
 
-            <a href="#mySidenav" class="nav__link" onclick="openNav()">
-                <i class="nav__icon fa-solid fa-cart-shopping"></i>
-            </a>
+    <a href="#mySidenav" class="nav__link" onclick="openNav()">
+        <i class="nav__icon fa-solid fa-cart-shopping"></i>
+        <?php if (isset($_SESSION['totalQuantity']) && $_SESSION['totalQuantity'] !== 0) { ?> <?= $_SESSION['totalQuantity'] ?> <?php } ?>
+    </a>
 
     <a class="nav__link" href="<?= $userPath ?>"><?= $iconUser ?></a>
 

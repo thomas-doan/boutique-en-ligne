@@ -1,14 +1,29 @@
+
+<?php if(empty($_POST['deleteProductAdmin'])):?>
+<div id="deleteProduct">
+            <div>
+                <h3>Attention</h3>
+                <p>Êtes-vous sur de vouloir supprimer l'article ?</p>
+                <form action="#" method="POST">
+                <a href="">annuler</a>
+                <button class="buttonDelete" type="submit" name="deleteProductAdmin" value="on">Supprimer l'article</button>
+                </form>
+            </div>
+        </div>
+<?php endif;?>
 <article class="mainAndSideAdmin">
 <section class="sideBarreAcount">
     <div>
-    <h1>Admin</h1>
+        <h1>Admin</h1>
         <ul>
-            <li><a href="../creerArticle/partie1">Creer un Article ></a></li>
-            <li><a href="../modifierArticle/liste">Modifier un articles ></a></li>
-            <li><a href="../gestiondestock">Gestion des stocks ></a></li>
-            <li><a href="">Historique de commande ></a></li>
-            <li><a href="">Gestion de livraison ></a></li>
-            <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a></li>
+            <li><a href="../creerArticle/partie1">Creer un Article</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="">Modifier un articles</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../gestiondestock">Gestion des stocks</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../validercommande"> Gestion de commande</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../categorie">Gestion des categories</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../tag">Gestion des tags</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../commentaire">Gestion des commentaires</a><i class="fa-solid fa-angle-right"></i></li>
+            <li><a href="../gestionUtilisateur/liste">Gestion des utilisateurs</a><i class="fa-solid fa-angle-right"></i></li>
             <li><a href="../../profil/deconnexion">Se deconnecter</a></li>
         </ul>
     </div>
@@ -77,8 +92,12 @@
 
 
 <?php if($param !== 'liste'):?>
+
     <section class="containerUpdateProduct">
-        <a href="./liste">Revenir à la liste</a>
+        <div class="firstButtonUpdateProduct">
+        <a href="./liste"><i class="fa-solid fa-arrow-left"></i>Revenir à la liste</a>
+        <a class="buttonDelete" href="#deleteProduct">supprimer</a>
+        </div>
         <form action="#formProduct" method="post" name="info_article_pincipal" enctype="multipart/form-data">
             <fieldset>
                 <legend>Modifier l'image</legend>

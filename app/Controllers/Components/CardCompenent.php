@@ -14,7 +14,10 @@ class CardCompenent extends Product
 
     public function getDataByid($id_article)
     {
-        return $this->getProductForCardbyID($id_article);
+        $retourCard = $this->getProductForCardbyID($id_article);
+
+        return $retourCard;
+
     }
 
     public function printCard(array $dataProduct)
@@ -45,7 +48,7 @@ class CardCompenent extends Product
                 <h4><?=$dataProduct['prix_article']?>€</h4>
                 </div>
                 <p><?=$dataProduct['presentation_article']?></p>
-                <?php if($dataProduct['sku']!==0):?>
+                <?php if($dataProduct['sku']!=0):?>
                     <form action="" method="post">
                     <label for="addBasket"></label>
                     <input type="hidden" name="id_article" value="<?=$dataProduct['id_article']?>"></input>

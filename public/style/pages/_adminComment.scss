@@ -4,13 +4,12 @@
     flex-wrap: wrap;
 }
 
-
-.commentAdmin  {
-    & button,
+.commentAdmin {
+    button,
     input,
     textarea,
     div,
-    h3{
+    h3 {
         margin: 0.5rem;
     }
     textarea {

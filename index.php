@@ -298,6 +298,16 @@ $router->map(
 
 );
 
+$router->map(
+    'GET|POST',
+    '/admin/detail/[i:id]',
+    function ($id) {
+        $controller = new App\Controllers\admin\AdminOrderController();
+        $controller->indexResume($id);
+    },
+
+);
+
 // CRUD Category
 $router->map(
     'GET',
@@ -400,7 +410,7 @@ $router->map(
     'GET/POST',
     '/livraison',
     function () {
-        $controller = new App\Controllers\LivraisonController();
+        $controller = new App\Controllers\pathToOrder\LivraisonController();
         $controller->index();
         $controller->fieldCheck();
         $controller->adressCheck();
@@ -415,12 +425,24 @@ $router->map(
     'GET/POST',
     '/paiement',
     function () {
-        $controller = new App\Controllers\PaymentController();
+        $controller = new App\Controllers\pathToOrder\PaymentController();
         $controller->index();
         $controller->payment();
         $controller->stripe();
     },
     'paiement'
+);
+
+
+//Paiement
+$router->map(
+    'GET/POST',
+    '/paiementResume',
+    function () {
+        $controller = new App\Controllers\pathToOrder\PaymentResumeController();
+        $controller->index();
+    },
+    'paiementResume'
 );
 
 $match = $router->match();

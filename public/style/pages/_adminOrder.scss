@@ -1,3 +1,27 @@
-.layoutContainertable.orderHistory form {
-    margin: 1rem;
+/* .containerMain.orderHistory {} */
+
+.layoutContainertable.orderHistory {
+    h2,
+    h1,
+    a {
+        text-align: center;
+    }
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 5%;
+        p,
+        button {
+            text-align: center;
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem;
+    }
 }

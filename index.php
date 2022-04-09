@@ -298,6 +298,16 @@ $router->map(
 
 );
 
+$router->map(
+    'GET|POST',
+    '/admin/detail/[i:id]',
+    function ($id) {
+        $controller = new App\Controllers\admin\AdminOrderController();
+        $controller->indexResume($id);
+    },
+
+);
+
 // CRUD Category
 $router->map(
     'GET',

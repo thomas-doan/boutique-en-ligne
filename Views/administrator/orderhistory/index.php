@@ -15,31 +15,30 @@
             </ul>
         </div>
     </section>
-    <div class="containerMain">
+    <div class="containerMain orderHistory">
 
-        <div class="containerMain">
+        <div class="layoutContainertable orderHistory">
 
+            <div>
+                <article>
 
-            <div class="layoutContainertable orderHistory">
+                    <h1>Valider les commandes</h1>
 
-                <div>
-                    <article>
+                    <?php if (isset($_SESSION['flash'])) : ?>
+                        <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+                            <div><?= $message; ?></div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
 
-                        <h1>Valider les commandes</h1>
+                    <?php if (isset($_SESSION['flash'])) :  ?>
+                        <?php unset($_SESSION['flash']) ?>
+                    <?php endif; ?>
 
-                        <?php if (isset($_SESSION['flash'])) : ?>
-                            <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-                                <div><?= $message; ?></div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                    <label>
+                        <h2>Commande en attente : <?= $nb['nb'] ?></h2>
+                    </label>
 
-                        <?php if (isset($_SESSION['flash'])) :  ?>
-                            <?php unset($_SESSION['flash']) ?>
-                        <?php endif; ?>
-
-                        <label>
-                            <h2>Commande en attente : <?= $nb['nb'] ?></h2>
-                        </label>
+                    <section>
                         <?php
 
                         foreach ($livraison as $value) {
@@ -55,14 +54,15 @@
                                     <p>Prix total : <?= $value['prix_avec_tva'] ?>€</p>
                                     <p>Par <?= $value['prenom'] ?> <?= $value['nom'] ?> email : <?= $value['email'] ?> </p>
                                     <input name="id_livraison" class="form__label" value="<?= $value['id_livraison'] ?>" type="hidden">
-                                    <button class="form__button" name="submit" type="submit"> Valider la commande </button>
+                                    <button class="form__button" name="submit" type="submit"> Valider </button>
                                 </form>
                         <?php }
                         } ?>
-                        <label>
-                            <h2>Commandes passées : </h2>
-                        </label>
-
+                    </section>
+                    <label>
+                        <h2>Commandes passées : </h2>
+                    </label>
+                    <section>
                         <?php
 
                         foreach ($livraison as $value) {
@@ -70,21 +70,22 @@
                             if ($value['etat_livraison'] == "confirme") {
                         ?>
 
-                                <form action="" method="post">
+                                <p>Num Commande : <?= $value['fk_id_num_commande'] ?></p>
+                                <p>Date : <?= $value['date'] ?></p>
+                                <p>Nombre total d'articles : <?= $value['total_produit'] ?></p>
+                                <p>Prix total : <?= $value['prix_avec_tva'] ?>€</p>
+                                <p>Par <?= $value['prenom'] ?> <?= $value['nom'] ?> email : <?= $value['email'] ?> </p>
+                                <a href="./detail/<?= $value['fk_id_num_commande'] ?>"><button class="form__button"> Voir Détail </button></a>
 
-                                    <p>Num Commande : <?= $value['fk_id_num_commande'] ?></p>
-                                    <p>Date : <?= $value['date'] ?></p>
-                                    <p>Nombre total d'articles : <?= $value['total_produit'] ?></p>
-                                    <p>Prix total : <?= $value['prix_avec_tva'] ?>€</p>
-                                    <p>Par <?= $value['prenom'] ?> <?= $value['nom'] ?> email : <?= $value['email'] ?> </p>
-
-                                </form>
-
-                        <?php }
+                        <?php  }
                         } ?>
-                    </article>
-                </div>
+
+                    </section>
+
+
+                </article>
             </div>
         </div>
+
 
 </article>

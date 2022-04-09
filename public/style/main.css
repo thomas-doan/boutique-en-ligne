@@ -2748,8 +2748,50 @@ footer {
   margin: 1rem;
 }
 
+/* .containerMain.orderHistory {} */
+.layoutContainertable.orderHistory h2,
+.layoutContainertable.orderHistory h1,
+.layoutContainertable.orderHistory a {
+  text-align: center;
+}
+
+.layoutContainertable.orderHistory section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 5%;
+}
+
+.layoutContainertable.orderHistory section p,
+.layoutContainertable.orderHistory section button {
+  text-align: center;
+}
+
 .layoutContainertable.orderHistory form {
-  margin: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 2rem;
 }
 
 .resetPassword article {

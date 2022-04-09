@@ -147,6 +147,7 @@
   background-color: rgba(224, 95, 95, 0.589);
   border-radius: 4px;
   padding: 4px;
+  transform: scale(0.8);
 }
 
 .separator {
@@ -187,8 +188,8 @@
   }
 
   &__image {
-    height: 300px;
-    width: 400px;
+    height: auto;
+    width: 100%;
   }
 
   .payement {

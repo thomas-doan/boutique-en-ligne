@@ -1,5 +1,5 @@
 <!-- <?php var_dump($_SESSION); ?> -->
-<!-- <?php var_dump($product); ?> -->
+ <!-- <?php var_dump($product); ?> -->
 <!-- <?php var_dump($categories); ?> -->
 <!-- <?php var_dump($comments); ?> -->
 <!-- <?php var_dump($CatOfProduct); ?> -->
@@ -34,27 +34,30 @@
     <div class="test">
     <div class="product__heading">
     <h1 class="product__title"><?= $product[0]['titre_article'] ?></h1>
-
-        <div class="like">
-            <form class="like__form" action="#like" method="post">
-                <button class="like__button" type="submit" name="like" id="like"><img class="like__icon" src="../public/img/Icon_Like-test.png" alt="Icon like"></button>
-            </form>
-            <p class="like__number"><?= $likes ?></p>
-        </div>
-
+    
+    <div class="like">
+        <form class="like__form" action="#like" method="post">
+            <button class="like__button" type="submit" name="like" id="like"><img class="like__icon" src="../public/img/Icon_Like-test.png" alt="Icon like"></button>
+        </form>
+        <p class="like__number"><?= $likes ?></p>
     </div>
     
-    <div class="details">
-        <ul class="details__list">
-            <li class="details__item"><span>Provenence : </span><?= $CatOfProduct['origin'][0]['nom_categorie'] ?></li>
-            <li class="details__data"><span>Type : </span><?= $CatOfProduct['variete'][0]['nom_categorie'] ?></li>
-            <li class="details__item"><span>Saveur :</span>
-                <?php foreach ($CatOfProduct['flavor'] as $key => $flavors) : ?>
-                    <?= $flavors['nom_categorie'] ?>
-                <?php endforeach; ?>
-                <!-- <?php implode(',', $CatOfProduct['flavor']); ?> -->
-            </li>
-        </ul>
+</div>
+
+<div class="details">
+    <ul class="details__list">
+        <li class="details__item"><span>Provenence : </span><?= $CatOfProduct['origin'][0]['nom_categorie'] ?></li>
+        <li class="details__data"><span>Type : </span><?= $CatOfProduct['variete'][0]['nom_categorie'] ?></li>
+        <li class="details__item"><span>Saveur :</span>
+        <?php foreach ($CatOfProduct['flavor'] as $key => $flavors) : ?>
+            <?= $flavors['nom_categorie'] ?>
+            <?php endforeach; ?>
+            <!-- <?php implode(',', $CatOfProduct['flavor']); ?> -->
+        </li>
+    </ul>
+    <p><?= $product[0]['description_article'] ?></p>
+    <p><?= $product[0]['fournisseur'] ?></p>
+    <p><?= $product[0]['conditionnement'] ?></p>
         
         
         <section class="comment-preview">

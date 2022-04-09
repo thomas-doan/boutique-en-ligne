@@ -2697,6 +2697,8 @@ h1 {
   background-color: rgba(224, 95, 95, 0.589);
   border-radius: 4px;
   padding: 4px;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
 }
 
 .separator {
@@ -2743,8 +2745,8 @@ h1 {
             flex: 3;
   }
   __image {
-    height: 300px;
-    width: 400px;
+    height: auto;
+    width: 100%;
   }
   .payement {
     display: -webkit-box;

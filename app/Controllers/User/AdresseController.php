@@ -27,7 +27,8 @@ class AdresseController extends Controller
             $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
             if (empty($nom_adresse) || empty($ville) || empty($voie) || empty($code_postal) || empty($telephone) || empty($pays)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Vous devez remplir tout les champs !";
-                header('Location: ./adresse');
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./adresse\" </SCRIPT>"; //force la direction
+
                 exit();
             } else {
                 $adress = $model
@@ -40,7 +41,9 @@ class AdresseController extends Controller
                     ->setPays($pays)
                     ->setFk_id_utilisateur($_SESSION['user']['id_utilisateur']);
                 $model->create($adress, compact('nom_adresse', 'ville', 'voie', 'voie_sup', 'code_postal', 'telephone', 'pays', 'fk_id_utilisateur'));
-                header('Location: ./adresse');
+
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./adresse\" </SCRIPT>"; //force la direction
+
             }
         }
         return $this->view('profil.Adresse', compact('title', 'userAdress'));

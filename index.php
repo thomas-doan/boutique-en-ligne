@@ -126,6 +126,7 @@ $router->map(
     function () {
         $controller = new App\Controllers\User\ProfilController();
         $controller->index();
+        $controller->updateProfil();
     },
 );
 
@@ -139,7 +140,7 @@ $router->map(
     },
 );
 
-$router->map(
+/* $router->map(
     'GET|POST',
     '/profil/modifierProfil',
     function () {
@@ -147,7 +148,7 @@ $router->map(
         $controller->index();
         $controller->updateProfil();
     },
-);
+); */
 
 $router->map(
     'GET|POST',

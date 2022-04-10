@@ -128,7 +128,7 @@ abstract class Model
 
         if ($selection == Null) {
 
-            $req = "SELECT * FROM $this->table WHERE $liste_champs";
+            $req = "SELECT * FROM $this->table WHERE $liste_champs FOR UPDATE";
 
 
             // On exécute la requête 
@@ -145,7 +145,7 @@ abstract class Model
             // $liste_selections = implode(',', $selections);
         }
 
-        $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs";
+        $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs FOR UPDATE";
 
         // On exécute la requête 
         return $this->requeteTransaction($req, $db, $donnees)->fetchAll();

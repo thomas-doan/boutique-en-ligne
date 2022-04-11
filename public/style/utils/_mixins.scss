@@ -1,0 +1,10 @@
+@mixin alignColumn($type) {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: $type;
+    align-items: $type;
+    flex-flow: column wrap;
+}

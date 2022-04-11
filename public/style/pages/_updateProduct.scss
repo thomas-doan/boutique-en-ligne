@@ -1,0 +1,217 @@
+.mainUpdateProduct{
+    padding: 32px;
+    width: 100%;
+
+    & .firstButtonUpdateProduct{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    & table{
+        width: 100%;
+        
+        & tr{
+
+            & td{
+                padding: 4px 0px;
+                border-top: #135e4c15 1px solid;
+                background-color: rgba(255, 255, 255, 0.33);
+
+                & button{
+                    background-color: #135e4c;
+                    color: white;
+                    border: none;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    &:hover{
+                        background-color: #1d3f36;
+                    }
+                }
+            }
+
+            & td:last-child{
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
+.formSearchUpdateProduct{
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    border: 1px solid #135e4c15;
+    padding: 16px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.95);
+    margin: 16px 0px;
+
+    & form {
+        margin-top: auto;
+        & fieldset{
+            border: none;
+
+            & legend{
+                font-weight: bold;
+            }
+        }
+        & label{
+            display: hidden;
+        }
+        & button{
+            background-color: #135e4c;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 0px 4px 4px 0px;
+        }
+        & input, select{
+            border: 1px solid #135e4c33;
+            border-radius: 4px 0px 0px 4px;
+            padding: 4px 0px;
+        }
+    }
+    
+}
+
+.containerUpdateProduct{
+
+    & hr{
+        margin: 8px 0px;
+        opacity: 0.33;
+    }
+    & form{
+
+        & fieldset{
+            border: none;
+            background-color: #ffffff95;
+            padding: 8px;
+            margin-bottom: 16px;
+
+            & legend{
+                font-weight: bold;
+                font-size: 1.6rem;
+            }
+        }
+    }
+
+    & .infoProduct{
+        display: flex;
+        flex-direction: column;
+
+        & textarea{
+            width: 100%;
+            height: 120px;
+            border-radius: 4px;
+            background-color: white;
+            border: none;
+            box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+            resize: none;
+            
+            &:focus{
+                outline: solid 1px #135e4c;
+            }
+        }
+
+        & label{
+            margin-top: 8px;
+        }
+    }
+
+    & form[id = categorie]{
+        button{
+            display: inline-block;
+            margin: 4px 0px;
+            padding: 4px 8px;
+            border-radius: 16px;
+            &:not(.buttonDelete){
+                background-color: #135e4c15;
+                border: #135e4c 1px solid;
+                color: #135e4c;
+            }
+            
+        }
+        .buttonDelete{
+            background-color: rgba(224, 95, 95, 0.15);
+            border: rgba(83, 22, 22, 0.312) 1px solid;
+            color : rgb(83, 22, 22) !important;
+        }
+    }
+
+    // & input:last-child{
+    //     background-color: #135e4c;
+    //     color: white;
+    //     border-radius: 0px 4px 4px 0px;
+    //     border: none;
+    //     padding: 4px 8px 4px 8px;
+
+    // }
+}
+
+.ctaUpdateProduct{
+    background-color: #135e4c;
+    color: white;
+    max-width: 150px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    margin: 8px;
+}
+
+#deleteProduct{
+    display: none;
+
+    &:target{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 99;
+        background-color: #00000066;
+        backdrop-filter: blur(2px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-y: hidden;
+
+        & > div{
+            width: 90%;
+            max-width: 400px;
+            padding: 16px;
+            border: #135e4c15 1px solid;
+            border-radius: 4px;
+            box-shadow: 2px 2px 10px 0px #00000015;
+            background-color: white;
+
+            & form{
+                margin-top: 8px;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        & a{
+            padding: 5px 16px;
+            border-radius: 4px;
+            background-color: rgb(184, 184, 184);
+            border: #135e4c15 1px solid;
+
+            &:hover{
+                background-color: rgb(136, 135, 135);
+            }
+        }
+    }
+
+}
+.buttonDelete{
+    padding: 4px 8px;
+    background-color: rgb(147, 13, 13);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+
+    &:hover{
+        background-color: rgb(105, 10, 10);
+    }
+}

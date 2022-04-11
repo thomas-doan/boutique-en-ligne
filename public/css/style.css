@@ -1,0 +1,130 @@
+form {
+    display: flex;
+}
+
+form>* {
+    padding: 1rem;
+}
+
+.boutique {
+    display: flex;
+    max-width: 1280px;
+    flex-wrap: wrap;
+}
+
+.card {
+    overflow: hidden;
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    box-shadow: 1px 2px 8px 2px rgba(0, 0, 0, 0.171);
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    overflow-wrap: break-word;
+    transition: 0.3s;
+}
+
+.picture {
+    width: 100%;
+    height: 230px;
+    transition: 0.3s;
+}
+
+.logonostock {
+    position: absolute;
+    width: 300px;
+    z-index: 1;
+    top: -100px;
+    right: 0;
+}
+
+.info{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.info_titre{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+.info form{
+    align-self: end;
+    margin: 0;
+    padding: 0;
+    margin-top: auto;
+    z-index: 3;
+}
+.info form label{
+    font-size: 1.3rem;
+    color: #135e4c;
+}
+/* .info form:hover button i{
+    color: #1d3f36;
+} */
+.info form button{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.logoAb {
+    position: absolute;
+    width: 300px;
+    z-index: 2;
+    top: 0;
+    right: 0;
+}
+
+.card div {
+    width: 100%;
+}
+
+.card:hover .picture {
+    filter: brightness(30%);
+}
+
+.card:hover .logoAb {
+    display: none;
+}
+.card h4:first-child{
+    color: #135e4c;
+}
+
+.card:hover .inOver {
+    width: 300px;
+    height: 400px;
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.card:hover .inOver p {
+    color: aliceblue;
+    align-self: center;
+    text-align: center;
+}
+.card button{
+    background-color:  white;
+    color: #135e4c;
+    border: none;
+    margin: 8px;
+}
+
+/**
+#1d3f36
+#19453b
+#145a48
+#135e4c
+*/

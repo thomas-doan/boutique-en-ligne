@@ -1,0 +1,29 @@
+/* footer {
+    height: 100px;
+} */
+
+.footerAboutUs {
+    background-color: rgb(18, 94, 76);
+    align-self: center;
+    padding: 32px 16px 64px 16px;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 25vh;
+    ///parralax///
+    & h3 {
+        padding-left: 5vw;
+        font-size: clamp(1rem, 2.5vw, 2.3rem);
+    }
+    & p {
+        padding-right: 5vw;
+        font-size: clamp(1rem, 2.5vw, 2rem);
+        width: min-content;
+    }
+    & i {
+        font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+}

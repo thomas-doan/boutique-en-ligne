@@ -1,0 +1,28 @@
+.containerResumePayment {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .formLivraison.paiementResume {
+        height: 100%;
+    }
+    .formField.paimentResume {
+        div {
+            margin: 2%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        a {
+            cursor: pointer;
+            width: 4%;
+        }
+    }
+}

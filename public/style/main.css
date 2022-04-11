@@ -3084,7 +3084,7 @@ h1 {
 .containerUpdateProduct form[id=categorie] .buttonDelete {
   background-color: rgba(224, 95, 95, 0.15);
   border: rgba(83, 22, 22, 0.312) 1px solid;
-  color: #531616;
+  color: #531616 !important;
 }
 
 .ctaUpdateProduct {
@@ -3157,7 +3157,7 @@ h1 {
 .buttonDelete {
   padding: 4px 8px;
   background-color: #930d0d;
-  color: white !important;
+  color: white;
   font-weight: bold;
   border: none;
   border-radius: 4px;

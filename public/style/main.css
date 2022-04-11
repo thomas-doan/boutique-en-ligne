@@ -3227,6 +3227,29 @@ h1 {
   bottom: 5px;
 }
 
+.product__title {
+  padding: 12px 0;
+  font-size: 32px;
+  color: #135e4c;
+  font-weight: bold;
+}
+
+.product .like {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.product .like__button {
+  width: 15px;
+  border: none;
+}
+
+.product .like__number {
+  position: relative;
+  bottom: 5px;
+}
+
 .details {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3444,6 +3467,10 @@ h1 {
 .mainProfil form {
   background-color: white;
   padding: 5%;
+}
+
+.title__profil {
+  color: #135e4c;
 }
 
 .order {

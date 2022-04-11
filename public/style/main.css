@@ -2890,7 +2890,7 @@ h1 {
 }
 
 .historique__field {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 16px;
 }
@@ -3430,8 +3430,14 @@ h1 {
   padding: 32px 0;
 }
 
+.mainProfil form {
+  background-color: white;
+  padding: 5%;
+}
+
 .order {
   height: 80vh;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

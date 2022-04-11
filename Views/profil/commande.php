@@ -1,4 +1,4 @@
-<article class="mainAndSideAdmin">
+<article class="mainAndSideAdmin commande">
     <section class="sideBarreAcount">
         <div>
             <h2>Profil</h2>

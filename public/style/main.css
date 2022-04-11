@@ -74,7 +74,7 @@ h1 {
 
 html {
   scroll-behavior: smooth;
-  overflow-y: none;
+  overflow-x: none;
 }
 
 body {
@@ -787,7 +787,7 @@ footer {
       align-self: center;
   padding: 32px 16px 64px 16px;
   background-image: url("../assets/pictures/footer_photo.jpeg");
-  width: 100vw;
+  width: 100%;
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;

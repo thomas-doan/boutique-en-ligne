@@ -354,6 +354,16 @@ h1 {
   height: 230px;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .card__logonostock {
@@ -426,9 +436,9 @@ h1 {
   color: #1d3f36;
 }
 
-.card:hover .card__picture {
-  -webkit-filter: brightness(30%);
-          filter: brightness(30%);
+.card:hover {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.33);
+          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.33);
 }
 
 .alert {
@@ -624,6 +634,12 @@ h1 {
     position: initial;
     border-radius: 0 0 0 0;
   }
+}
+
+#notifOne {
+  color: #135e4d;
+  font-size: 1rem;
+  margin-top: -15px;
 }
 
 .form {
@@ -1884,7 +1900,8 @@ footer {
 .sideBarreAdmin {
   width: 100%;
   min-width: 400px;
-  height: 92vh;
+  height: auto;
+  min-height: 92vh;
   padding: 32px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3204,7 +3221,6 @@ footer {
 }
 
 .product__image {
-  height: 250px;
   width: 400px;
 }
 
@@ -3269,6 +3285,11 @@ footer {
   -ms-flex-item-align: end;
       align-self: flex-end;
   color: #135e4c;
+}
+
+.item__grain {
+  display: inline-block;
+  width: 20px;
 }
 
 .comment-preview__link {

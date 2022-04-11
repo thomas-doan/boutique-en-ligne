@@ -15,6 +15,23 @@
         position: relative;
         bottom: 5px;
     }
+    &__title {
+        padding: 12px 0;
+        font-size: 32px;
+        color: #135e4c;
+        font-weight: bold;
+    }
+    .like {
+        display: flex;
+        &__button {
+            width: 15px;
+            border: none;
+        }
+        &__number {
+            position: relative;
+            bottom: 5px;
+        }
+    }
 }
 
 .details {
@@ -31,12 +48,18 @@
     .price {
         align-self: flex-end;
         color: #135e4c;
+        font-size: 2rem;
     }
 }
 
 .item__grain {
     display: inline-block;
-    width: 20px;
+    width: 15px;
+    &--none{
+        display: inline-block;
+        width: 15px;
+        opacity: 0.5;
+    }
 }
 
 .comment-preview {

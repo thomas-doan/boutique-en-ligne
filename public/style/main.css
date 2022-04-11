@@ -1641,7 +1641,7 @@ h1 {
   position: relative;
 }
 
-.lastProduct img:last-child {
+.lastProduct .vignette {
   width: 80px;
   position: absolute;
   top: -16px;
@@ -3254,11 +3254,18 @@ h1 {
   -ms-flex-item-align: end;
       align-self: flex-end;
   color: #135e4c;
+  font-size: 2rem;
 }
 
 .item__grain {
   display: inline-block;
-  width: 20px;
+  width: 15px;
+}
+
+.item__grain--none {
+  display: inline-block;
+  width: 15px;
+  opacity: 0.5;
 }
 
 .comment-preview__link {

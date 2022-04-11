@@ -53,7 +53,10 @@
                         <?php for ($i=0; $i < 5; $i++) { 
                             if($i < intval($CatOfProduct['strong'][0]['nom_categorie']))
                             { ?>
-                                <img class="item__grain" src="../public/assets/pictures/kawa_icon_strong.png" alt="graine de café">
+                                <img class="item__grain" src="../public/assets/pictures/kawa_icon_strong.svg" alt="graine de café">
+                           <?php }
+                           else{ ?>
+                            <img class="item__grain--none" src="../public/assets/pictures/kawa_icon_strong.svg" alt="graine de café">
                            <?php }
                         } ?>
                     </li>

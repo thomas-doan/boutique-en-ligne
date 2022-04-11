@@ -7,7 +7,7 @@
                 <li><a href="/../boutique-en-ligne/profil/modifierMotdePasse">Modifier mon mot de passe</a><i class="fa-solid fa-angle-right"></i></li>
                 <li><a href="">Adresse de livraison</a><i class="fa-solid fa-angle-right"></i></li>
                 <li><a href="/../boutique-en-ligne/profil/historiqueCommande">Historique de commande</a><i class="fa-solid fa-angle-right"></i></li>
-                <li><a href="/../boutique-en-ligne/deconnexion">Se deconnecter</a></li>
+                <li><a href="/../boutique-en-ligne/profil/deconnexion">Se deconnecter</a></li>
             </ul>
         </div>
     </section>

@@ -3471,7 +3471,7 @@ h1 {
 
 .order {
   height: 80vh;
-  width: 100%;
+  width: calc(100% - 450px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

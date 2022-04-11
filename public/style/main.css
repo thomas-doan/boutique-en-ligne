@@ -618,6 +618,12 @@ h1 {
   }
 }
 
+#notifOne {
+  color: #135e4d;
+  font-size: 1rem;
+  margin-top: -15px;
+}
+
 .form {
   overflow-x: hidden;
   display: -webkit-box;
@@ -1876,7 +1882,8 @@ footer {
 .sideBarreAdmin {
   width: 100%;
   min-width: 400px;
-  height: 92vh;
+  height: auto;
+  min-height: 92vh;
   padding: 32px;
   display: -webkit-box;
   display: -ms-flexbox;

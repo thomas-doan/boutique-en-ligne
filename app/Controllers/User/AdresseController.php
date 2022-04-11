@@ -10,12 +10,33 @@ class AdresseController extends Controller
 {
     protected $model;
 
+    public function __construct()
+    {
+        $this->model = new Adresses();
+    }
+
     public function index()
     {
-        $model = new Adresses();
+
         $title = "Adresse de livraison";
         $userAdress = $this->getAdress();
 
+
+
+        return $this->view('profil.Adresse', compact('title', 'userAdress'));
+    }
+
+    public function getAdress()
+    {
+        $model = new Adresses();
+        $argument = ['fk_id_utilisateur'];
+        $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
+        $userAdress = $model->find($argument, compact('fk_id_utilisateur'));
+        return $userAdress;
+    }
+
+    public function create()
+    {
         if (isset($_POST['submit'])) {
             $nom_adresse = $_POST['nomAdresse'];
             $ville = $_POST['ville'];
@@ -31,30 +52,27 @@ class AdresseController extends Controller
 
                 exit();
             } else {
-                $adress = $model
-                    ->setNom_adresse($nom_adresse)
-                    ->setVille($ville)
-                    ->setVoie($voie)
-                    ->setVoie_sup($voie_sup)
-                    ->setCode_postal($code_postal)
-                    ->setTelephone($telephone)
-                    ->setPays($pays)
-                    ->setFk_id_utilisateur($_SESSION['user']['id_utilisateur']);
-                $model->create($adress, compact('nom_adresse', 'ville', 'voie', 'voie_sup', 'code_postal', 'telephone', 'pays', 'fk_id_utilisateur'));
+                if (preg_match("~^[0-9]{5}$~", $code_postal) && preg_match("~^[0-9]{10}$~", $telephone)) {
 
-                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./adresse\" </SCRIPT>"; //force la direction
+                    $adress =
+                        $this->model
+                        ->setNom_adresse($nom_adresse)
+                        ->setVille($ville)
+                        ->setVoie($voie)
+                        ->setVoie_sup($voie_sup)
+                        ->setCode_postal($code_postal)
+                        ->setTelephone($telephone)
+                        ->setPays($pays)
+                        ->setFk_id_utilisateur($_SESSION['user']['id_utilisateur']);
+                    $this->model->create($adress, compact('nom_adresse', 'ville', 'voie', 'voie_sup', 'code_postal', 'telephone', 'pays', 'fk_id_utilisateur'));
 
+                    echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./adresse\" </SCRIPT>"; //force la direction
+                } else {
+                    $_SESSION['flash']['erreur_insert_livraison'] = "code postal ou telephone incorrect.";
+                    echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./adresse\" </SCRIPT>"; //force la direction
+
+                }
             }
         }
-        return $this->view('profil.Adresse', compact('title', 'userAdress'));
-    }
-
-    public function getAdress()
-    {
-        $model = new Adresses();
-        $argument = ['fk_id_utilisateur'];
-        $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
-        $userAdress = $model->find($argument, compact('fk_id_utilisateur'));
-        return $userAdress;
     }
 }

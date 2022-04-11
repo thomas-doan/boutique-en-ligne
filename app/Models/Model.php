@@ -110,6 +110,48 @@ abstract class Model
         return $this->requete($req, $donnees)->fetchAll();
     }
 
+    public function findTransaction(array $criteres, array $donnees, $db, ?array $selection = Null)
+    {
+
+        // Récupére la valeur
+        $champs = [];
+
+        // On boucle pour éclater le tableau
+        foreach ($criteres as $valeur) {
+
+            $champs[] = "$valeur = :$valeur";
+            // valeur = valeur associé à l'index
+
+        }
+        // On transforme le tableau champs en une string
+        $liste_champs = implode(' AND ', $champs);
+
+        if ($selection == Null) {
+
+            $req = "SELECT * FROM $this->table WHERE $liste_champs FOR UPDATE";
+
+
+            // On exécute la requête 
+            return $this->requeteTransaction($req, $db, $donnees)->fetchAll();
+        } else {
+
+            $liste_selections = implode(', ', $selection);
+
+
+            // $selections[] = "$valeur";
+            // valeur = valeur associé à l'index
+
+            // On transforme le tableau champs en une string
+            // $liste_selections = implode(',', $selections);
+        }
+
+        $req = "SELECT $liste_selections FROM $this->table WHERE $liste_champs FOR UPDATE";
+
+        // On exécute la requête 
+        return $this->requeteTransaction($req, $db, $donnees)->fetchAll();
+    }
+
+
 
     /**
      * Methode qui permet de récupérer tout les enregistrements d'une table

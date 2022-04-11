@@ -36,7 +36,7 @@ class PaymentController extends Controller
     }
 
 
-    public function checkQuantity()
+    public function checkQuantity($db)
     {
 
         $checkQuantity = [];
@@ -48,7 +48,7 @@ class PaymentController extends Controller
             $id_article = $key;
             $argument = ['id_article'];
             $selection = ['sku', 'titre_article', 'prix_article'];
-            $checkQuantity[$id_article] = $this->modelArticle->find($argument, compact('id_article'), $selection);
+            $checkQuantity[$id_article] = $this->modelArticle->findTransaction($argument, compact('id_article'), $db, $selection);
 
             /*         if (($checkQuantity[$key][0]["sku"] - $value) >= 0) {
 
@@ -239,7 +239,7 @@ class PaymentController extends Controller
             try {
                 $db = DBConnection::getPDO();
                 $db->beginTransaction();
-                $this->checkQuantity();
+                $this->checkQuantity($db);
                 $getIdNumCommande = $this->insertNumCommande($db);
                 $this->updateQuantity($db);
                 $this->insertLivraison($getIdNumCommande, $db);

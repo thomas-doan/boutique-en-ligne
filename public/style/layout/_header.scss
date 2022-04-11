@@ -79,6 +79,7 @@
     cursor: pointer;
     // background-color: hsla(0, 0%, 100%, 0.95);
     background-color: transparent;
+    transition: 0.3s ease-in-out;
 
     &:hover {
       color: #135e4df5;

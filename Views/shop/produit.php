@@ -1,6 +1,6 @@
 
 <div class="containerProduit">
-    <section class="alert">
+    <section class="alert alert--success">
         <?php if (isset($_SESSION['flash'])) : ?>
             <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
                 <p class="alert__message"><?= $message; ?></p>

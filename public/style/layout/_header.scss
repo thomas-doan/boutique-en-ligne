@@ -112,6 +112,26 @@
   z-index: 10;
   z-index: 110;
 
+  label {
+    display: none;
+  }
+
+  &__search {
+    width: 80%;
+    min-height: 50px;
+    background-color: #135e4d33;
+    border: none;
+    // border-radius: 4px;
+    // opacity: 0.3;
+    font-size: 24px;
+    padding: 0 0 0 24px;
+  }
+
+  button:nth-child(3) {
+    background-color: #135e4d33;
+    // border-radius: 4px;
+  }
+
   .close {
     position: absolute;
     top: 10px;
@@ -144,4 +164,16 @@
     position: initial;
     border-radius: 0 0 0 0;
   }
+
+  // .active {
+  //   top: -85%;
+  // }
+
+  // .container {
+  //   align-items: flex-end;
+  // }
+
+  // .container__search {
+  //   margin-bottom: 100px;
+  // }
 }

@@ -22,7 +22,7 @@
         <button class="close" value="close"><img src="/boutique-en-ligne/public/img/close_icon.png" alt=""></button>
         <form class="nav__search" action="/boutique-en-ligne/boutique/all" method="GET">
             <label for="site-search">Search the site:</label>
-            <input type="search" name="recherche" aria-label="Search through site content" class="ss">
+            <input type="search" name="recherche" aria-label="Search through site content" class="container__search" placeholder="Search ...">
             <button class="nav__link">
                 <i class="nav__icon fas fa-search"></i>
             </button>

@@ -575,6 +575,23 @@ h1 {
   z-index: 110;
 }
 
+.container label {
+  display: none;
+}
+
+.container__search {
+  width: 80%;
+  min-height: 50px;
+  background-color: #135e4d33;
+  border: none;
+  font-size: 24px;
+  padding: 0 0 0 24px;
+}
+
+.container button:nth-child(3) {
+  background-color: #135e4d33;
+}
+
 .container .close {
   position: absolute;
   top: 10px;

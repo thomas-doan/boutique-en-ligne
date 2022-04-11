@@ -124,14 +124,14 @@
 
             <section class="cardChoice">
                 <a href="./boutique/Dosette">
-                    <img src="public\assets\pictures\kawa_img_card4.jpg" alt="">
+                    <img src="public\assets\pictures\kawa_img_card4.png" alt="">
                     <p>La Dosette douceur du matin</p>
                 </a>
             </section>
 
             <section class="cardChoice">
                 <a href="./boutique/all?recherche=Afrique">
-                    <img src="public\assets\pictures\kawa_img_card5.jpg" alt="">
+                    <img src="public\assets\pictures\pexels-efecan-efe-8200210.jpg" alt="">
                     <p>J'aime découvrir des nouvelles saveurs</p>
                 </a>
             </section>
@@ -152,7 +152,7 @@
 
             <section class="cardChoice">
                 <a href="./boutique/all?recherche=Equilibré">
-                    <img src="public\assets\pictures\kawa_img_card8.png" alt="">
+                    <img src="public\assets\pictures\kawa_img_card8.jpg" alt="">
                     <p>Un café légé et équilibré</p>
                 </a>
             </section>

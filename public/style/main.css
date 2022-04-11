@@ -536,8 +536,16 @@ h1 {
   background-color: transparent;
 }
 
+.nav__link:hover {
+  color: #135e4df5;
+}
+
 .nav button {
   border: none;
+}
+
+.nav button:hover {
+  color: #135e4dc5;
 }
 
 .nav input {
@@ -3412,6 +3420,10 @@ footer {
     margin: auto;
     width: 100%;
   }
+}
+
+.test {
+  fill: #135e4c;
 }
 
 .mainProfil {

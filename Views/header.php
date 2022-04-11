@@ -9,7 +9,7 @@
 
     <a href="#mySidenav" class="nav__link" onclick="openNav()">
         <i class="nav__icon fa-solid fa-cart-shopping"></i>
-        <?php if (isset($_SESSION['totalQuantity']) && $_SESSION['totalQuantity'] !== 0) { ?> <?= $_SESSION['totalQuantity'] ?> <?php } ?>
+        <div class="notifPanier"><?php if (isset($_SESSION['totalQuantity']) && $_SESSION['totalQuantity'] !== 0) { ?> <?= $_SESSION['totalQuantity'] ?> <?php } ?></div>
     </a>
 
     <a class="nav__link" href="<?= $userPath ?>"><?= $iconUser ?></a>

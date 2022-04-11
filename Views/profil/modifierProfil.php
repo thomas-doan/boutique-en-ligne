@@ -1,7 +1,7 @@
 <article class="mainAndSideAdmin">
     <section class="sideBarreAcount">
         <div>
-            <h2>Profil</h2>
+            <h1>Profil</h1>
             <ul>
                 <li><a href="">Modifier mon profil</a><i class="fa-solid fa-angle-right"></i></li>
                 <li><a href="/../boutique-en-ligne/profil/modifierMotdePasse">Modifier mon mot de passe</a><i class="fa-solid fa-angle-right"></i></li>

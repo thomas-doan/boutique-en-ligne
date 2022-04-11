@@ -8,7 +8,6 @@
                 <li><a href="/../boutique-en-ligne/profil/adresse">Adresse de livraison</a><i class="fa-solid fa-angle-right"></i></li>
                 <li><a href="">Historique de commande</a><i class="fa-solid fa-angle-right"></i></li>
                 <li><a href="/../boutique-en-ligne/deconnexion">Se deconnecter</a></li>
-
             </ul>
         </div>
     </section>

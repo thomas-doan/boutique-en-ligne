@@ -3227,6 +3227,29 @@ h1 {
   bottom: 5px;
 }
 
+.product__title {
+  padding: 12px 0;
+  font-size: 32px;
+  color: #135e4c;
+  font-weight: bold;
+}
+
+.product .like {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.product .like__button {
+  width: 15px;
+  border: none;
+}
+
+.product .like__number {
+  position: relative;
+  bottom: 5px;
+}
+
 .details {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3437,7 +3460,7 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
+  width: calc(100% - 450px);
   padding: 32px 0;
 }
 

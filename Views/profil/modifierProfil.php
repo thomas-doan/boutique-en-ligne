@@ -10,12 +10,6 @@
                 <li><a href="/../boutique-en-ligne/deconnexion">Se deconnecter</a></li>
             </ul>
         </div>
-        <?php if ($notifAdresse !== null) : ?>
-            <section>
-                <p><?= $notifAdresse ?></p>
-                <a href="./adresse">Enregistrer une adresse ></a>
-            </section>
-        <?php endif; ?>
     </section>
 
 

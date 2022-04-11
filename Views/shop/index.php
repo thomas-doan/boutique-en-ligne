@@ -124,7 +124,7 @@
 
             <section class="cardChoice">
                 <a href="./boutique/Dosette">
-                    <img src="public\assets\pictures\kawa_img_card4.png" alt="">
+                    <img src="public\assets\pictures\kawa_img_card4.jpg" alt="">
                     <p>La Dosette douceur du matin</p>
                 </a>
             </section>

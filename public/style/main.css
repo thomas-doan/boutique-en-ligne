@@ -546,8 +546,16 @@ h1 {
   background-color: transparent;
 }
 
+.nav__link:hover {
+  color: #135e4df5;
+}
+
 .nav button {
   border: none;
+}
+
+.nav button:hover {
+  color: #135e4dc5;
 }
 
 .nav input {
@@ -3435,6 +3443,10 @@ footer {
   }
 }
 
+.test {
+  fill: #135e4c;
+}
+
 .mainProfil {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3495,5 +3507,34 @@ footer {
 .order hr {
   margin: 8px 0px;
   opacity: 0.33;
+}
+
+.main404 {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: century-gothic, sans-serif;
+}
+
+.main404 img {
+  width: 60%;
+  max-width: 620px;
+}
+
+.main404 h1 {
+  color: #135e4c;
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */

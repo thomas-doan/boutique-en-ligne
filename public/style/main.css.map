@@ -36,7 +36,8 @@
         "pages/_updatesku.scss",
         "pages/_pageProduit.scss",
         "pages/_profil.scss",
-        "pages/_commande.scss"
+        "pages/_commande.scss",
+        "pages/_page404.scss"
     ],
     "names": [],
     "file": "main.css"

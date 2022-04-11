@@ -79,10 +79,18 @@
     cursor: pointer;
     // background-color: hsla(0, 0%, 100%, 0.95);
     background-color: transparent;
+
+    &:hover {
+      color: #135e4df5;
+    }
   }
 
   button {
     border: none;
+
+    &:hover {
+      color: #135e4dc5;
+    }
   }
 
   input {

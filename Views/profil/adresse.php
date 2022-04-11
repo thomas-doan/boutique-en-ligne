@@ -28,12 +28,14 @@
 
         <section>
 
-            <?php for ($i = 0; $i <= 2; $i++) : ?>
+            <?php
+
+            for ($i = 0; $i <= 2; $i++) : ?>
                 <?php if (isset($userAdress[$i])) : ?>
                     <p><?= $userAdress[$i]['nom_adresse'] ?></p>
                     <button class="form__button form__button--update"><a href="./adresse/modifierAdresse/<?= $userAdress[$i]['id_adresse'] ?>">Modifier</a></button><br>
                 <?php else : ?>
-                    <a class="form__link" href="./adresse/creerAdresse">Nouvelle adresse</a>
+                    <a class="form__link">Adresse disponible N° <?= $i + 1 ?></a>
                 <?php endif; ?>
             <?php endfor; ?>
 

@@ -812,7 +812,6 @@ footer {
   padding: 32px 16px 64px 16px;
   background-image: url("../assets/pictures/footer_photo.jpeg");
   width: 100%;
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3224,36 +3223,7 @@ footer {
   width: 400px;
 }
 
-.product__heading {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.product__title {
-  padding: 12px 0;
-  font-size: 32px;
-  color: #135e4c;
-  font-weight: bold;
-}
-
-.product .like {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.product .like__button {
-  border: none;
-}
-
-.product .like__number {
+.product__number {
   position: relative;
   bottom: 5px;
 }

@@ -3469,6 +3469,10 @@ h1 {
   padding: 5%;
 }
 
+.title__profil {
+  color: #135e4c;
+}
+
 .order {
   height: 80vh;
   width: calc(100% - 450px);

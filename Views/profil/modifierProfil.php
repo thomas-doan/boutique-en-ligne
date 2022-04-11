@@ -31,7 +31,7 @@
 
             <form class="form__container" action="#" method="post">
 
-                <h1 class="form__title">Modifier mon Profil</h1>
+                <h1 class="form__title title__profil">Modifier mon Profil</h1>
 
                 <div class="form__field">
                     <label for="email" class="form__label">Email : </label>

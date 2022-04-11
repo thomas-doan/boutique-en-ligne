@@ -13,7 +13,7 @@
     </section>
 
     <article class="form">
-        <h1>Adresse de Livraison</h1>
+        <h1 class="title__profil">Adresse de Livraison</h1>
         <section class="alert">
             <?php if (isset($_SESSION['flash'])) : ?>
                 <?php foreach ($_SESSION['flash'] as $type => $message) : ?>

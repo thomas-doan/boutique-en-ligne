@@ -27,7 +27,7 @@
         </section>
 
         <form class="form__container" action="#" method="post">
-            <h1 class="form__title">Modifier mot de passe</h1>
+            <h1 class="form__title title__profil">Modifier mot de passe</h1>
 
             <div class="form__field">
                 <label class="form__label" for="ancienMdp">Ancien mot de passe : </label>

@@ -9,7 +9,6 @@
     margin: 24px;
     background-color: white;
     &__image {
-        height: 250px;
         width: 400px;
     }
     &__heading {
@@ -50,6 +49,10 @@
         align-self: flex-end;
         color: #135e4c;
     }
+}
+.item__grain{
+    display: inline-block;
+    width: 20px;
 }
 
 .comment-preview {

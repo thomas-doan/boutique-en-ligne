@@ -802,16 +802,16 @@ h1 {
   outline: none;
 }
 
-footer {
-  height: 100px;
-}
-
+/* footer {
+    height: 100px;
+} */
 .footerAboutUs {
+  background-color: #125e4c;
   -ms-flex-item-align: center;
       align-self: center;
   padding: 32px 16px 64px 16px;
-  background-image: url("../assets/pictures/footer_photo.jpeg");
   width: 100%;
+  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -825,12 +825,7 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: absolute;
   height: 25vh;
-  background-position: bottom;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .footerAboutUs h3 {

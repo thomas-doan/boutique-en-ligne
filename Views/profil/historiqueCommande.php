@@ -22,11 +22,11 @@
 
                 <section class="historique__fieldState">
                     <ul>
-                        <li>N°<?= $order['id_num_commande'] ?></li>
-                        <li><?= $order['date'] ?></li>
+                        <li>N°<?= $order['id_num_commande'] ?>&nbsp;</li>
+                        <li> <?= $order['date'] ?></li>
                         <li><?= $order['prix_avec_tva'] ?> €</li>
 
-                        <li><a href="./historiqueCommande/commande/<?= $order['id_num_commande'] ?>">Details > </a></li>
+                        <li>&nbsp;<a href="./historiqueCommande/commande/<?= $order['id_num_commande'] ?>">Details > </a></li>
                     </ul>
                 </section>
 

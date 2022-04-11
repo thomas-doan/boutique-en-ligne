@@ -544,10 +544,20 @@ h1 {
           justify-content: center;
   cursor: pointer;
   background-color: transparent;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.nav__link:hover {
+  color: #135e4df5;
 }
 
 .nav button {
   border: none;
+}
+
+.nav button:hover {
+  color: #135e4dc5;
 }
 
 .nav input {
@@ -794,15 +804,14 @@ h1 {
   outline: none;
 }
 
-footer {
-  height: 100px;
-}
-
+/* footer {
+    height: 100px;
+} */
 .footerAboutUs {
+  background-color: #125e4c;
   -ms-flex-item-align: center;
       align-self: center;
   padding: 32px 16px 64px 16px;
-  background-image: url("../assets/pictures/footer_photo.jpeg");
   width: 100%;
   color: white;
   display: -webkit-box;
@@ -818,12 +827,7 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: absolute;
   height: 25vh;
-  background-position: bottom;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .footerAboutUs h3 {
@@ -1275,7 +1279,7 @@ footer {
 }
 
 .cardChoice {
-  width: calc((100vw / 2) - 16px);
+  width: calc((100% / 2) - 16px);
   margin: 16px;
   border-radius: 4px;
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
@@ -1283,6 +1287,7 @@ footer {
   overflow: hidden;
   -webkit-transition: 0.7s;
   transition: 0.7s;
+  background-color: white;
 }
 
 .cardChoice a img {
@@ -1478,7 +1483,8 @@ footer {
 
 @media only screen and (min-device-width: 768px) {
   .cardChoice {
-    width: calc((100vw / 4) - 32px);
+    width: calc((100% / 4) - 32px);
+    background-color: white;
   }
 }
 
@@ -2888,7 +2894,7 @@ footer {
 }
 
 .historique__field {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 16px;
 }
@@ -3216,37 +3222,7 @@ footer {
   width: 400px;
 }
 
-.product__heading {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.product__title {
-  padding: 12px 0;
-  font-size: 32px;
-  color: #135e4c;
-  font-weight: bold;
-}
-
-.product .like {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.product .like__button {
-  width: 15px;
-  border: none;
-}
-
-.product .like__number {
+.product__number {
   position: relative;
   bottom: 5px;
 }
@@ -3443,6 +3419,10 @@ footer {
   }
 }
 
+.test {
+  fill: #135e4c;
+}
+
 .mainProfil {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3461,8 +3441,14 @@ footer {
   padding: 32px 0;
 }
 
+.mainProfil form {
+  background-color: white;
+  padding: 5%;
+}
+
 .order {
   height: 80vh;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3503,5 +3489,34 @@ footer {
 .order hr {
   margin: 8px 0px;
   opacity: 0.33;
+}
+
+.main404 {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: century-gothic, sans-serif;
+}
+
+.main404 img {
+  width: 60%;
+  max-width: 620px;
+}
+
+.main404 h1 {
+  color: #135e4c;
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */

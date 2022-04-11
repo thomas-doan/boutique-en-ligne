@@ -11,10 +11,9 @@
     &__image {
         width: 400px;
     }
-    &__heading {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    &__number {
+        position: relative;
+        bottom: 5px;
     }
     &__title {
         padding: 12px 0;
@@ -52,7 +51,8 @@
         font-size: 2rem;
     }
 }
-.item__grain{
+
+.item__grain {
     display: inline-block;
     width: 15px;
     &--none{
@@ -193,4 +193,8 @@
         margin: auto;
         width: 100%;
     }
+}
+
+.test {
+    fill: #135e4c;
 }

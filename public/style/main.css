@@ -74,7 +74,7 @@ h1 {
 
 html {
   scroll-behavior: smooth;
-  overflow-y: none;
+  overflow-x: none;
 }
 
 body {
@@ -575,6 +575,23 @@ h1 {
   z-index: 110;
 }
 
+.container label {
+  display: none;
+}
+
+.container__search {
+  width: 80%;
+  min-height: 50px;
+  background-color: #135e4d33;
+  border: none;
+  font-size: 24px;
+  padding: 0 0 0 24px;
+}
+
+.container button:nth-child(3) {
+  background-color: #135e4d33;
+}
+
 .container .close {
   position: absolute;
   top: 10px;
@@ -770,7 +787,7 @@ footer {
       align-self: center;
   padding: 32px 16px 64px 16px;
   background-image: url("../assets/pictures/footer_photo.jpeg");
-  width: 100vw;
+  width: 100%;
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;

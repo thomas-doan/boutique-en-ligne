@@ -25,6 +25,7 @@
     .like {
         display: flex;
         &__button {
+            width: 15px;
             border: none;
         }
         &__number {
@@ -48,6 +49,7 @@
     .price {
         align-self: flex-end;
         color: #135e4c;
+        font-size: 2rem;
     }
 }
 .item__grain{

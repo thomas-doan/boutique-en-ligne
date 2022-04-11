@@ -91,7 +91,7 @@
 
         <section class="lastProduct">
             <?php $cards->printCard($cards->getDataByid($lastidProduct)) ?>
-            <img style="width : 80px;" src=".\public\assets\pictures\kawa_icon_new.svg" alt="">
+            <img class="vignette" src=".\public\assets\pictures\kawa_icon_new.svg" alt="">
         </section>
     </article>
     <h2 class="home_title">Comment aimez vous boire votre café ?</h2>

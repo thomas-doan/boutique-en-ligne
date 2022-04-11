@@ -1635,7 +1635,7 @@ footer {
   position: relative;
 }
 
-.lastProduct img:last-child {
+.lastProduct .vignette {
   width: 80px;
   position: absolute;
   top: -16px;
@@ -3242,6 +3242,7 @@ footer {
 }
 
 .product .like__button {
+  width: 15px;
   border: none;
 }
 
@@ -3277,6 +3278,7 @@ footer {
   -ms-flex-item-align: end;
       align-self: flex-end;
   color: #135e4c;
+  font-size: 2rem;
 }
 
 .item__grain {

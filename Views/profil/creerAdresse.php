@@ -1,8 +1,8 @@
 <section>
     <img src="../public/img/Icon_Profil-test.png" alt="profil picture">
-    <h2>Profil</h2>
+    <h1>Profil</h1>
     <ul>
-        <li><a href="./modifierProfil">Modifier mon profil</a></li>
+        <li><a href="./Profil">Modifier mon profil</a></li>
         <li><a href="./modifierMotdePasse">Modifier mon mot de passe</a></li>
         <li><a href="./adresse">Adresse de livraison</a></li>
         <li><a href="./historiqueCommande">Historique de commande</a></li>

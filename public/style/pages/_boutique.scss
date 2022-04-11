@@ -82,6 +82,10 @@
 }
 
 .boutiqueMain {
+    h1 {
+        margin-top: 2%;
+        text-align: center;
+    }
     display: flex;
     flex-direction: column;
     & .boutique {

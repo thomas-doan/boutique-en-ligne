@@ -46,7 +46,7 @@ class ModifierAdresseController extends Controller
             if (empty($nom_adresse) || empty($ville) || empty($voie) || empty($voie_sup) || empty($code_postal) || empty($telephone) || empty($pays)) {
                 $_SESSION['flash']['erreur'] = "Oups ! Il faut renseigner des nouvelles informations !";
                 // header('location: ./modifierProfil');
-                header("Refresh:0");
+                echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./$id\" </SCRIPT>"; //force la direction
                 exit;
             }
 
@@ -60,7 +60,8 @@ class ModifierAdresseController extends Controller
                 ->setPays($pays);
 
             $model->update($newAdresse, compact('id_adresse', 'nom_adresse', 'ville', 'voie', 'voie_sup', 'code_postal', 'telephone', 'pays'));
-            header("Refresh:0");
+            echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"./$id\" </SCRIPT>"; //force la direction
+
         }
     }
 
@@ -71,7 +72,8 @@ class ModifierAdresseController extends Controller
 
         if (isset($_POST['supprimer'])) {
             $deleteAdresse = $model->delete(compact('id_adresse'));
-            header('location: ../../adresse');
+            echo "<SCRIPT LANGUAGE=\"JavaScript\"> document.location.href=\"/../boutique-en-ligne/profil/adresse\" </SCRIPT>"; //force la direction
+
         }
     }
 }

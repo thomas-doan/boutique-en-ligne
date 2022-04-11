@@ -1,19 +1,28 @@
-.containerMain.paiment {
+.containerResumePayment {
+    margin-top: 10%;
+    margin-bottom: 10%;
     height: 100%;
-    background-color: blue;
-}
-
-.formField.paimentResume {
-    div {
-        margin: 2%;
-    }
-    h1 {
-        text-align: center;
-    }
     display: flex;
     flex-direction: column;
     align-items: center;
-    .form__button {
-        margin: 5%;
+    justify-content: center;
+    .formLivraison.paiementResume {
+        height: 100%;
+    }
+    .formField.paimentResume {
+        div {
+            margin: 2%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        a {
+            cursor: pointer;
+            width: 4%;
+        }
     }
 }

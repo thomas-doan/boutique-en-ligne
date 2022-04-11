@@ -9,10 +9,8 @@
 "base/animations",
 "base/fonts";
 // 3. Components
-@import "components/button",
-"components/caroussel",
-"components/card",
-"components/errorPopup";
+@import "components/button", "components/caroussel", "components/card",
+  "components/errorPopup";
 // 4. Layout-related sections
 @import "layout/header",
 "layout/form",
@@ -20,18 +18,9 @@
 "layout/panier",
 "layout/sidebarre";
 // 5. Page-specific styles
-@import "pages/home",
-"pages/boutique",
-"pages/adminIndex",
-"pages/creerArticle",
-"pages/livraison",
-"pages/adminComment",
-"pages/adminUserUpdate",
-"pages/menuAdminSlider",
-"pages/payment",
-"pages/adminOrder",
-"pages/resetPassword",
-"pages/historiqueCommande",
-"pages/updateProduct",
-"pages/resumePayment",
-"pages/updatesku";
+@import "pages/home", "pages/boutique", "pages/adminIndex", "pages/creerArticle",
+  "pages/livraison", "pages/adminComment", "pages/adminUserUpdate",
+  "pages/menuAdminSlider", "pages/payment", "pages/adminOrder",
+  "pages/resetPassword", "pages/historiqueCommande", "pages/updateProduct",
+  "pages/resumePayment", "pages/updatesku", "pages/pageProduit", "pages/profil",
+  "pages/commande","pages/page404";

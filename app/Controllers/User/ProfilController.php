@@ -2,8 +2,9 @@
 
 namespace App\Controllers\User;
 
-use App\Controllers\Controller;
+use App\Models\Utilisateurs;
 
+use App\Controllers\Controller;
 use App\Controllers\User\AdresseController;
 
 class ProfilController extends Controller
@@ -12,7 +13,7 @@ class ProfilController extends Controller
 
     public function __construct()
     {
-        $this->adresse = new AdresseController;
+        $this->adresse = new AdresseController();
     }
 
     public function index()

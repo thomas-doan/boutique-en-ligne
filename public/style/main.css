@@ -544,6 +544,8 @@ h1 {
           justify-content: center;
   cursor: pointer;
   background-color: transparent;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .nav__link:hover {
@@ -1277,7 +1279,7 @@ h1 {
 }
 
 .cardChoice {
-  width: calc((100vw / 2) - 16px);
+  width: calc((100% / 2) - 16px);
   margin: 16px;
   border-radius: 4px;
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
@@ -1285,6 +1287,7 @@ h1 {
   overflow: hidden;
   -webkit-transition: 0.7s;
   transition: 0.7s;
+  background-color: white;
 }
 
 .cardChoice a img {
@@ -1480,7 +1483,8 @@ h1 {
 
 @media only screen and (min-device-width: 768px) {
   .cardChoice {
-    width: calc((100vw / 4) - 32px);
+    width: calc((100% / 4) - 32px);
+    background-color: white;
   }
 }
 

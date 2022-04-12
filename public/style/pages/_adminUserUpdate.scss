@@ -1,8 +1,61 @@
 .updateUser table {
-    width: 35vw;
+  width: 35vw;
 }
 
 .updateUser form {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and(max-width: 820px) {
+  .hidde {
+    display: none;
+  }
+  .mainUpdateProduct {
+    padding: 0px;
+  }
+}
+
+// .admin__button {
+//   background-color: #135e4c;
+// }
+
+.user-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+  width: 100%;
+  background-color: white;
+  margin: 24px 0;
+
+  form {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+  }
+  input {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid black;
+    align-self: flex-start;
+  }
+
+  label {
+    align-self: flex-start;
+    font-weight: 800;
+    color: #1d3f36;
+  }
+
+  select {
+    align-self: flex-start;
+  }
+}
+
+.user-cta {
+  display: flex;
+  margin: 12px 12px;
 }

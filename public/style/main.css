@@ -189,13 +189,20 @@ h1 {
   outline: none;
   -webkit-transition: 0.4s ease-in-out;
   transition: 0.4s ease-in-out;
-  font-size: 20px;
-  padding: 8px 24px;
+  font-size: 16px;
+  padding: 2px 2px;
   border-radius: 4px;
 }
 
 .form__button--delete:hover {
   background-color: #6c0b0b;
+}
+
+@media screen and (min-width: 1024px) {
+  .form__button--delete {
+    font-size: 20px;
+    padding: 8px 24px;
+  }
 }
 
 .submit {

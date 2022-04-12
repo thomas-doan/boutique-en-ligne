@@ -73,9 +73,11 @@
                         <label class="content__label" for="addBasket"></label>
                         <input type="hidden" name="id_article" value="<?= $product[0]['id_article'] ?>"></input>
                         <input type="hidden" name="prix_article" value="<?= $product[0]['prix_article'] ?>"></input>
-                        <?php if ($product[0]['sku'] !== 0) { ?>
+                        <?php if ($product[0]['sku'] > 0) { ?>
                             <input class="form__button form__button--product" type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >">
-                        <?php   } ?>
+                        <?php   } else { ?>
+                            <p class="form__button form__button--delete"> Produit en rupture.</p>
+                        <?php } ?>
                     </form>
                     <p class="price"><?= $product[0]['prix_article'] ?>€</p>
                 </div>

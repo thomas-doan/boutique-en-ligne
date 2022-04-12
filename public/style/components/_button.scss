@@ -2,53 +2,60 @@
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
 .form__button {
-  border: none;
-  background-color: #135e4c;
-  color: white;
-  cursor: pointer;
-  outline: none;
-  transition: 0.4s ease-in-out;
-  font-size: 20px;
-  border-radius: 4px;
-  padding: 8px 24px;
-  &:hover {
-    background-color: #1d3f36;
-  }
-  &--product {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-  &--reply {
-    width: 72px;
-  }
-
-  &--user {
-    padding: 8px;
-    margin: 0 6px;
-    font-size: 8px;
-  }
-
-  &--delete {
     border: none;
-    background-color: #920f0f;
+    background-color: #135e4c;
     color: white;
     cursor: pointer;
     outline: none;
     transition: 0.4s ease-in-out;
     font-size: 20px;
-    padding: 8px 24px;
     border-radius: 4px;
+    padding: 8px 24px;
     &:hover {
-      background-color: #6c0b0b;
+        background-color: #1d3f36;
     }
-  }
+    &--product {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    &--reply {
+        width: 72px;
+    }
+    &--user {
+        padding: 8px;
+        margin: 0 6px;
+        font-size: 8px;
+    }
+    &--delete {
+        border: none;
+        background-color: #920f0f;
+        color: white;
+        cursor: pointer;
+        outline: none;
+        transition: 0.4s ease-in-out;
+        font-size: 16px;
+        padding: 2px 2px;
+        border-radius: 4px;
+        &:hover {
+            background-color: #6c0b0b;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .form__button {
+        &--delete {
+            font-size: 20px;
+            padding: 8px 24px;
+        }
+    }
 }
 
 .submit {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
 
 .adress {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

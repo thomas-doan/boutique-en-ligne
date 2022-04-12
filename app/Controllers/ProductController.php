@@ -111,13 +111,13 @@ class ProductController extends Controller
                         ->setDate($date);
                     $this->AnswerCom->create($modelHydrate, compact('commentaire', 'fk_id_commentaire', 'fk_id_utilisateur', 'date'));
                     $_SESSION['flash']['sucess'] = "Votre  réponse est postée.";
-                    header("location: ./$id_article");
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
                     exit();
                 }
 
                 if (empty($commentaire)) {
                     $_SESSION['flash']['error'] = "Vous devez remplir le champs.";
-                    header("location: ./$id_article");
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
                     exit();
                 }
             }
@@ -161,7 +161,7 @@ class ProductController extends Controller
                 $commentaire = $_POST['com'];
                 if (!$commentaire) {
                     $_SESSION['flash']['error'] = "Il faut écrire du contenu pour laisser un commentaire.";
-                    header("location: ./$id_article");
+                    echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
                     exit();
                 } else {
                     $fk_id_article = $id_article;
@@ -176,7 +176,7 @@ class ProductController extends Controller
 
                 $_SESSION['flash']['sucess'] = "Commentaire posté.";
 
-                header("location: ./$id_article");
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
                 exit();
             }
         }

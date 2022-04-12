@@ -81,6 +81,7 @@
             </fieldset>
 
             <input type="submit" name="filtre" value="Filtrer">
+            <input class="form__button form__button--delete" type="submit" name="resetFilter" value="Reset">
         </form>
     </section>
     <div class="boutiqueMain">

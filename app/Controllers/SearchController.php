@@ -10,6 +10,7 @@ class SearchController extends Controller
 
     public function index()
     {
+
         $titre_article = $_GET['recherche'];
 
 

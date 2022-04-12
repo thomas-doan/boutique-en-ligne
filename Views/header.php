@@ -23,12 +23,14 @@
         <form class="nav__search" action="/boutique-en-ligne/boutique/all" method="GET">
             <label for="site-search">Search the site:</label>
             <input type="search" name="recherche" aria-label="Search through site content" class="container__search" placeholder="Search ...">
+            <input name="filterDelete" type="hidden" value="true">
+
             <button class="nav__link">
                 <i class="nav__icon fas fa-search"></i>
             </button>
         </form>
     </div>
-
+    <!--     <?php var_dump($_SESSION['filter']); ?> -->
     <!-- </section> -->
 
 </nav>

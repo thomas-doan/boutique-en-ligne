@@ -32,6 +32,7 @@ class ProductController extends Controller
         $this->addComment($id_article);
 
         $CatOfProduct = array(
+            'principale' => $this->Categories->selectMainCatOfProduct($id_article),
             'variete' => $this->Categories->getSectionCatByIdProduct($id_article, 'VARIÉTÉ'),
             'specificite' => $this->Categories->getSectionCatByIdProduct($id_article, 'SPÉCIFICITÉ'),
             'flavor' => $this->Categories->getSectionCatByIdProduct($id_article, 'SAVEUR'),

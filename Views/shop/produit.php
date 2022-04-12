@@ -40,6 +40,8 @@
 
             <div class="details">
                 <ul class="details__list">
+                    <li class="details__item"><span>Categorie : </span> <b><?= $CatOfProduct['principale']['nom_categorie'] ?></b></li>
+
                     <li class="details__item"><span>Provenence : </span><?= $CatOfProduct['origin'][0]['nom_categorie'] ?></li>
                     <li class="details__data"><span>Type : </span><?= $CatOfProduct['variete'][0]['nom_categorie'] ?></li>
                     <li class="details__item"><span>Saveur :</span>

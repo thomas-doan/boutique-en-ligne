@@ -39,9 +39,15 @@
             bottom: 5px;
         }
     }
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
 }
 
-.details {
+.product__heading .details {
     display: flex;
     align-items: flex-start;
     justify-content: center;

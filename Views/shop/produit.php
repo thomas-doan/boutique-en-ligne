@@ -1,4 +1,3 @@
-
 <div class="containerProduit">
     <section class="alert alert--success">
         <?php if (isset($_SESSION['flash'])) : ?>
@@ -50,14 +49,12 @@
                         <!-- <?php implode(',', $CatOfProduct['flavor']); ?> -->
                     </li>
                     <li class="details__item"><span>Force :</span>
-                        <?php for ($i=0; $i < 5; $i++) { 
-                            if($i < intval($CatOfProduct['strong'][0]['nom_categorie']))
-                            { ?>
+                        <?php for ($i = 0; $i < 5; $i++) {
+                            if ($i < intval($CatOfProduct['strong'][0]['nom_categorie'])) { ?>
                                 <img class="item__grain" src="../public/assets/pictures/kawa_icon_strong.svg" alt="graine de café">
-                           <?php }
-                           else{ ?>
-                            <img class="item__grain--none" src="../public/assets/pictures/kawa_icon_strong.svg" alt="graine de café">
-                           <?php }
+                            <?php } else { ?>
+                                <img class="item__grain--none" src="../public/assets/pictures/kawa_icon_strong.svg" alt="graine de café">
+                        <?php }
                         } ?>
                     </li>
                 </ul>
@@ -76,7 +73,9 @@
                         <label class="content__label" for="addBasket"></label>
                         <input type="hidden" name="id_article" value="<?= $product[0]['id_article'] ?>"></input>
                         <input type="hidden" name="prix_article" value="<?= $product[0]['prix_article'] ?>"></input>
-                        <input class="form__button form__button--product" type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >">
+                        <?php if ($product[0]['sku'] !== 0) { ?>
+                            <input class="form__button form__button--product" type="submit" id="addBasket" name="add" value="AJOUTER AU PANIER >">
+                        <?php   } ?>
                     </form>
                     <p class="price"><?= $product[0]['prix_article'] ?>€</p>
                 </div>

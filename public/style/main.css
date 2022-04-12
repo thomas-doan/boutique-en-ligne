@@ -683,7 +683,6 @@ h1 {
       -ms-flex-flow: column wrap;
           flex-flow: column wrap;
   margin: 0 auto;
-  padding: 50px;
 }
 
 .form__container {
@@ -3573,7 +3572,7 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: calc(100% - 450px);
+  width: 100%;
   padding: 32px 0;
 }
 
@@ -3582,13 +3581,19 @@ h1 {
   padding: 5%;
 }
 
+@media screen and (min-width: 820px) {
+  .mainProfil {
+    width: calc(100% - 450px);
+  }
+}
+
 .title__profil {
   color: #135e4c;
 }
 
 .order {
   height: 80vh;
-  width: calc(100% - 450px);
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3629,6 +3634,12 @@ h1 {
 .order hr {
   margin: 8px 0px;
   opacity: 0.33;
+}
+
+@media screen and (min-width: 820px) {
+  .order {
+    width: calc(100% - 450px);
+  }
 }
 
 .main404 {

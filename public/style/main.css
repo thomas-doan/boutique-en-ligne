@@ -3509,6 +3509,10 @@ h1 {
   color: #135e4c;
 }
 
+.reply span {
+  color: rgba(224, 95, 95, 0.589);
+}
+
 .signal {
   width: 64px;
   border: none;

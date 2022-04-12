@@ -126,7 +126,7 @@
             ?>
                     <section class="reply">
 
-                        <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?> <?php if ($comment[$i]['signaler'] == 1) { ?> Commentaire signalé ! <?php } ?></h3>
+                        <h3> réponse par : <?= $comment[$i]['reponse_nom'] . ' ' . $comment[$i]['reponse_prenom'] ?> <?php if ($comment[$i]['signaler'] == 1) { ?> <span>: Commentaire signalé !</span> <?php } ?></h3>
                         <p> commentaire : <?= $comment[$i]['reponse_assoc'] ?></p>
                         <p> date : <?= $comment[$i]['reponse_date'] ?></p>
                         <form action="" method="POST">

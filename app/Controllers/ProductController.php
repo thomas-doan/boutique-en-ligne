@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers;
 
-use App\Models\Categories;
-use App\Models\Product;
-use App\Models\Commentaires;
-use App\Models\Like;
-use App\Models\Reponse_com;
+use App\models\Categories;
+use App\models\Product;
+use App\models\Commentaires;
+use App\models\Like;
+use App\models\Reponse_com;
 
 class ProductController extends Controller
 {
@@ -88,9 +88,7 @@ class ProductController extends Controller
         if (isset($_POST['submitAnswer'])) {
             if (!isset($_SESSION['user'])) {
                 $_SESSION['flash']['sucess'] = "Connectez-vous pour commenter.";
-                /*  header("location: ./$id_article"); */
-
-                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
+                echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>';
                 exit();
             }
 
@@ -156,6 +154,13 @@ class ProductController extends Controller
     {
         if (isset($_POST['submit'])) {
 
+            if (!isset($_SESSION['user'])) {
+                $_SESSION['flash']['sucess'] = "Connectez-vous pour commenter.";
+                header("Refresh:0");
+                exit();
+            }
+
+
             if (isset($_SESSION['user'])) {
                 $fk_id_utilisateur = $_SESSION['user']['id_utilisateur'];
                 $commentaire = $_POST['com'];
@@ -177,7 +182,7 @@ class ProductController extends Controller
                 $_SESSION['flash']['sucess'] = "Commentaire posté.";
 
                 echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="' . "./$id_article" . '" </SCRIPT>'; //force la direction
-                exit();
+
             }
         }
     }

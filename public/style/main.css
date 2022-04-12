@@ -3320,8 +3320,15 @@ h1 {
 }
 
 .containerProduit {
-  margin-right: 10%;
-  margin-left: 10%;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+@media only screen and (min-device-width: 600px) {
+  .containerProduit {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
 }
 
 .product {

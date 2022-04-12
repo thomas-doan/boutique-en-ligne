@@ -175,6 +175,12 @@ h1 {
   width: 72px;
 }
 
+.form__button--user {
+  padding: 8px;
+  margin: 0 6px;
+  font-size: 8px;
+}
+
 .form__button--delete {
   border: none;
   background-color: #920f0f;
@@ -864,7 +870,8 @@ h1 {
   font-size: clamp(1.5rem, 2.5vw, 2.5rem);
 }
 
-.poductPanier, .footerPanier {
+.poductPanier,
+.footerPanier {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1051,8 +1058,8 @@ h1 {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-  -webkit-transition: margin-left .5s;
-  transition: margin-left .5s;
+  -webkit-transition: margin-left 0.5s;
+  transition: margin-left 0.5s;
   padding: 20px;
 }
 
@@ -1091,6 +1098,12 @@ h1 {
 @media screen and (min-device-width: 1024px) {
   .sidenav:target {
     width: 450px;
+  }
+}
+
+@media screen and (max-device-width: 1024px) {
+  .sidenav:target {
+    width: 100%;
   }
 }
 
@@ -1914,7 +1927,7 @@ h1 {
 */
 .sideBarreAdmin {
   width: 100%;
-  min-width: 400px;
+  min-width: 320px;
   height: auto;
   min-height: 92vh;
   padding: 32px;
@@ -2557,6 +2570,79 @@ h1 {
           flex-direction: column;
 }
 
+@media screen and (max-width: 820px) {
+  .hidde {
+    display: none;
+  }
+  .mainUpdateProduct {
+    padding: 0px;
+  }
+}
+
+.user-data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 80vh;
+  width: 100%;
+  background-color: white;
+  margin: 24px 0;
+}
+
+.user-data form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.user-data input {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid black;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.user-data label {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  font-weight: 800;
+  color: #1d3f36;
+}
+
+.user-data select {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.user-cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 12px 12px;
+}
+
 /* Header */
 #header {
   background-size: cover;
@@ -3016,7 +3102,8 @@ h1 {
   border-radius: 0px 4px 4px 0px;
 }
 
-.formSearchUpdateProduct form input, .formSearchUpdateProduct form select {
+.formSearchUpdateProduct form input,
+.formSearchUpdateProduct form select {
   border: 1px solid #135e4c33;
   border-radius: 4px 0px 0px 4px;
   padding: 4px 0px;
@@ -3068,20 +3155,20 @@ h1 {
   margin-top: 8px;
 }
 
-.containerUpdateProduct form[id=categorie] button {
+.containerUpdateProduct form[id="categorie"] button {
   display: inline-block;
   margin: 4px 0px;
   padding: 4px 8px;
   border-radius: 16px;
 }
 
-.containerUpdateProduct form[id=categorie] button:not(.buttonDelete) {
+.containerUpdateProduct form[id="categorie"] button:not(.buttonDelete) {
   background-color: #135e4c15;
   border: #135e4c 1px solid;
   color: #135e4c;
 }
 
-.containerUpdateProduct form[id=categorie] .buttonDelete {
+.containerUpdateProduct form[id="categorie"] .buttonDelete {
   background-color: rgba(224, 95, 95, 0.15);
   border: rgba(83, 22, 22, 0.312) 1px solid;
   color: #531616 !important;
@@ -3165,6 +3252,15 @@ h1 {
 
 .buttonDelete:hover {
   background-color: #690a0a;
+}
+
+@media screen and (max-width: 820px) {
+  .hidde {
+    display: none;
+  }
+  .mainUpdateProduct--low {
+    padding: 0px;
+  }
 }
 
 .containerResumePayment {

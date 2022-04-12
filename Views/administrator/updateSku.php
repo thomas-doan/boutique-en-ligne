@@ -15,6 +15,7 @@
             </ul>
         </div>
     </section>
+    
     <article class="mainUpdateProduct">
     <h1>Gestion de Stock</h1>
     <article class="tableEmergencyRestock">
